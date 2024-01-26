@@ -1,0 +1,1199 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Register</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Register</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <br>
+                <h3>Sign Up</h3>
+                <p>Sign in With</p>
+                <div>
+                    <button class="btn btn-facebook" (click)="socialSignIn('facebook')"><span
+                            class="fa fa-facebook-f"></span>&nbsp;Facebook</button>&nbsp;
+                    <button class="btn btn-google" (click)="socialSignIn('google')"><span
+                            class="fa fa-google-plus"></span>&nbsp;Google</button>&nbsp;
+                    <button class="btn btn-twitter maginBottom10" (click)="socialSignIn('linkedin')"><span
+                            class="fa fa-linkedin"></span>&nbsp;Linkedin</button>
+                </div>
+                <br>
+                <form class="login-form" [formGroup]="registerForm" (ngSubmit)="register()" id="simpleForm">
+                    <p>Registering as :</p>
+                    <div class="checkbox form-group">
+                        <p><input type="checkbox" id="role_1" value="a buyer on WeCoOwn">&nbsp;A buyer on WeCoOwn<br>
+                            <input type="checkbox" id="role_2" value="a seller on WePropertyowners">&nbsp;A seller on
+                            WePropertyowners<br>
+                            <input type="checkbox" id="role_3" value="a community member on WeHomeowners">&nbsp;A
+                            community member on WeHomeowners<br>
+                            <input type="checkbox" id="role_4" value="a community member on WeBusinessowners">&nbsp;A
+                            community member on WeBusinessowners
+                        </p>
+                    </div>
+                    <div class="alert alert-success register-success dispNone">
+                        <!-- <button type="button" class="close" data-dismiss="alert" [routerLink]="['/login']" >×</button> -->
+                        You have successfully registered. Please verify your email address. After verification you'll be
+                        able to login to your account.
+                    </div>
+                    <div class="alert alert-danger register-danger dispNone"></div>
+                    <div class="form-group">
+                        <label>First Name : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" placeholder="First Name"
+                            formControlName="firstname" id="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" placeholder="Last Name"
+                            formControlName="lastname" id="lastname" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="form-group">
+                        <label>Username : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" placeholder="Username"
+                            formControlName="username" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="email" placeholder="Email Address"
+                            formControlName="email" id="email">
+                    </div>               
+                    <div class="form-group">
+                        <label>Password : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="password" placeholder="Password"
+                            formControlName="password" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="password" placeholder="Confirm Password"
+                            formControlName="confirm_password" id="confirm_password">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" value="WePo property seller" id="accept-terms">&nbsp;<a href="#"
+                            data-toggle="modal" data-target="#terms-modal">I accept Terms
+                            of Use and the General Privacy Policy of WeCoOwn</a>
+                    </div>
+                    <!-- <input type="hidden" formControlName="ip_address" id="ip_address" [(ngModel)]="getIpaddress" > -->
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="formSubmit" type="submit">Sign Up</button>
+                    </div>
+                    <div><label>Already have an account? <a href="/login"> Sign in</a></label></div>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="">
+               <br>
+                <h3>Sign Up</h3>               
+                <p>Sign in With</p>
+                <div>
+                    <button class="btn btn-facebook"><span class="fa fa-facebook-f"></span>&nbsp;Facebook</button>&nbsp;
+                    <button class="btn btn-google"><span class="fa fa-google-plus"></span>&nbsp;Google</button>&nbsp;
+                    <button class="btn btn-twitter"><span class="fa fa-twitter"></span>&nbsp;Twitter</button>
+                </div>
+                <br>
+                <form class="login-form" [formGroup]="registerForm" (ngSubmit)="register()">
+                    <p>Registering as :</p>
+                    <div class="checkbox form-group">
+                        <p><input type="checkbox" id="role_1" value="a buyer on WeCoOwn">&nbsp;a buyer on WeCoOwn&nbsp;&nbsp;          
+                            <input type="checkbox" id="role_2" value="a seller on WePropertyowners">&nbsp;a seller on WePropertyowners&nbsp;&nbsp;        
+                            <input type="checkbox" id="role_3" value="a community member on WeHomeowners">&nbsp;a community member on WeHomeowners&nbsp;&nbsp;
+                            <input type="checkbox" id="role_4" value="a community member on WeBusinessowners">&nbsp;a community member on WeBusinessowners
+                        </p>
+                    </div>                  
+                        <div class="form-group col-md-4">
+                            <label>Username : <span class="red">*</span></label><br>
+                            <input class="form-control CheckForm" type="text" placeholder="Username" formControlName="username" id="username">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Email Address : <span class="red">*</span></label><br>
+                            <input class="form-control CheckForm" type="email" placeholder="Email Address" formControlName="email" id="email">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Password : <span class="red">*</span></label><br>
+                            <input class="form-control CheckForm" type="password" placeholder="Password" formControlName="password" id="password">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Confirm Password : <span class="red">*</span></label><br>
+                            <input class="form-control CheckForm" type="password" placeholder="Confirm Password"
+                                formControlName="confirm_password" id="confirm_password">
+                        </div>                   
+                    <div class="">
+                        <input type="checkbox" value="WePo property seller" id="accept-terms">&nbsp;<a href="#" data-toggle="modal" data-target="#terms-modal">I accept Terms
+                            of Use, Privacy Policy & California Privacy</a>
+                    </div>
+                    <br>
+                    <div class="">
+                        <button class="btn btn-primary" type="submit">Sign Up</button>
+                    </div>
+                    <div><label>Already have an account? <a href="/register"> Sign in</a></label></div>
+                </form>
+            </div>
+        </div> -->
+    </section>
+    <br>
+</div>
+
+<!-- Modal -->
+<div id="terms-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="nav nav-tabs">
+                    <li><a class="ColorWhite btn btn-primary" style="color: white !important;" href="#abc" role="button"
+                            data-toggle="tab">Terms of Use</a></li>&nbsp;
+                    <li><a class="ColorWhite btn btn-primary" style="color: white !important;" href="#bca"
+                            data-toggle="tab" role="button">General Privacy Policy</a></li>&nbsp;
+                </ul>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="abc">
+                        <h2>Terms &amp; Conditions</h2>
+                        <section class="entry-content text-justify">
+                            <h4>Acceptance of Terms</h4>
+                            <p>WeCoOwn, Inc. (“WeCoOwn”) makes this Web Site (the “Site”), including all information, documents,
+                                communications, files, text, graphics, software, and products available through the Site (collectively, the
+                                “Materials”) and all services operated by WeCoOwn through WeCoOwn and third parties through the Site
+                                (collectively, the “Services”), available for your use subject to the terms and conditions set forth in this
+                                document and any changes to this document that WeCoOwn may publish from time to time (collectively, the
+                                “Terms of Use”).</p>
+                            <p>By accessing or using this Site in any way, including, without limitation, use of any of the Services,
+                                downloading or uploading of any Materials, or merely browsing the Site, you agree to and are bound by the
+                                Terms of Use.</p>
+                            <p>WeCoOwn reserves the right to change the Terms of Use and other guidelines or rules posted on the Site from
+                                time to time at its sole discretion, and will provide notice of material changes on the home page of the
+                                Site. Your continued use of the Site, or any Materials or Services accessible through it, after such notice
+                                has been posted constitutes your acceptance of the changes. Your use of the Site will be subject to the most
+                                current version of the Terms of Use, rules, and guidelines posted on the Site at the time of such use. You
+                                should periodically check the “Terms of Use” link on the Site’s home page to view the then current terms. If
+                                you breach any of the Terms of Use, your authorization to use this Site automatically terminates, and any
+                                Materials downloaded or printed from the Site in violation of the Terms of Use must be immediately
+                                destroyed.</p>
+                            <h4>Defined Terms </h4>
+                            <p> One of the Services offered through this Site is a collaboration and file-sharing service. Information,
+                                materials, files, communications, and documents that are posted by users in conjunction with the service are
+                                referred to collectively as “Content”. The group of persons among which the collaboration and file sharing
+                                takes place is referred to herein as the “Work Group.” All other user-supplied information, materials,
+                                files, communications, and documents, excluding the Content, are referred to collectively as “User Content.”
+                                WeCoOwn Content means all Materials provided by WeCoOwn. Content, User Content, and WeCoOwn Content may have
+                                different restrictions and conditions associated with them.</p>
+                            <h4>Types of Users.</h4>
+                            <p> Please be aware that certain activities on this Site, may be available only to persons who are covered under
+                                a paid or trial subscription agreement with WeCoOwn (“Subscribers’”) and persons invited by Subscribers to
+                                participate in such activities.</p>
+                            <h4>Intellectual Property; Limited License to Users</h4>
+                            <p> The Materials and Services on this Site, as well as their selection and arrangement, are protected by
+                                copyright, trademark, patent, and or other intellectual property laws, and any unauthorized use of the
+                                Materials or Services at this Site may violate such laws and the Terms of Use. Except as expressly provided
+                                herein, WeCoOwn and its suppliers do not grant any express or implied rights to use the Materials and
+                                Services. You agree not to copy, republish, frame, download, transmit, modify, rent, lease loan, sell,
+                                assign, distribute, license, sub-license, reverse engineer, or create derivative works based on the Site,
+                                its Materials, or its Services or their selection and arrangement, except as expressly authorized herein. In
+                                addition, you agree not to use any data mining, robots, or similar data gathering and extraction methods in
+                                connection with the Site.</p>
+                            <h4>Refund Policy</h4>
+                            <p> Due to the nature of our products and services we do not give refunds for any reason. Our products are
+                                downloaded, or sent digitally, and our services involve allowing access to privately secured areas of our
+                                website.</p>
+                            <h4>Use of Services </h4>
+                            <p>When using Services on this Site that are offered by WeCoOwn, you shall be subject to any posted guidelines,
+                                rules, or licenses applicable to such Services and to the Terms of Use. Such guidelines, rules, or licenses
+                                may contain terms and conditions in addition to those in the Terms of Use. In addition to the Materials and
+                                Services offered by WeCoOwn, this Site also makes available materials, information, and services provided by
+                                third parties (collectively, the “Third-Party Services”). The Third-Party Services are governed by separate
+                                license agreements that accompany such services. WeCoOwn offers no guarantees and assumes no responsibility
+                                or liability of any type with respect to the Third-Party Services, including any liability resulting from
+                                incompatibility between the Third-Party Services and the Materials and Services offered by WeCoOwn. You
+                                agree that you will not hold WeCoOwn responsible or liable with respect to the Third-Party Services or seek
+                                to do so. The services and accompanying documentation that is made available to download from this Site is
+                                the copyrighted and for patented work of WeCoOwn and for its suppliers. Use of the services is governed by
+                                the terms of the license agreement that accompanies or is included with such services. Such terms are
+                                available for review and are incorporated herein by this reference. You will not be able to download or
+                                install any services that is accompanied by or includes a license agreement unless you agree to the terms of
+                                such license agreement. If you do not agree to such terms, you will not be able to use the services. Absent
+                                a license agreement that accompanies the services, use of the services will be governed by the Terms of Use.
+                                You agree that you will not de-compile, reverse engineer, or otherwise attempt to discover the source code
+                                of the software used for the services available on the Site.</p>
+                            <p>Use of WeCoOwn Content and User Content Except as indicated to the contrary elsewhere on this Site, you may
+                                view, download, and print the WeCoOwn Content and User Content available on this Site subject to the
+                                following conditions:</p>
+                            <p>1.The WeCoOwn content and User Content may be used solely for personal, informational, and internal purposes.
+                            </p>
+                            <p>2. The WeCoOwn content and User content may not be modified or altered in any way.</p>
+                            <p>3. The WeCoOwn content and User content on the Site may not be distributed or sold, rented, leased or
+                                licensed to others.</p>
+                            <p>4. You may not remove any copyright or other proprietary notices contained in the WeCoOwn Content or User
+                                Content.</p>
+                            <p>5. WeCoOwn reserves the right to revoke the authorization to view, download, and print the WeCoOwn Content
+                                and User Content available on this Site at any time, and any such use shall be discontinued immediately upon
+                                notice from WeCoOwn.</p>
+                            <p>6. The rights granted to you constitute a license and not a transfer of title.</p>
+                            <h4>Exceptions </h4>
+                            <p>Various sections of the Site, showcase the work of business owners and entrepreneurs. Such works belong to
+                                their creators, may be protected by copyright or other proprietary laws, and are for display purposes only.
+                                Accordingly, you may not download or print these works unless there is a notice associated with the work
+                                expressly permitting such uses. The rights specified above to view, download, and print the WeCoOwn Content
+                                and User Content available on this Site are not applicable to the design or layout of this Site. Elements of
+                                this Site are protected by other laws and may not be copied or imitated in whole or in part.</p>
+                            <h4>Submission Materials</h4>
+                            <p> When submitting materials to WeCoOwn, it’s partners, vendors, employees, managers, shareholders, directors,
+                                and for any other affiliated party of WeCoOwn, for the purpose of “shopping” WeCoOwn’s services, or hiring
+                                WeCoOwn to perform certain services, you grant all rights to the materials sent, whether sent by email,
+                                website transmission, snail mail, fax, or hard copy delivery via courier, or hand delivery. In the event
+                                WeCoOwn is not engaged to perform services these materials WILL NOT be returned and WeCoOwn is NOT
+                                responsible for the dissemination of these materials.</p>
+                            <h4>Trademark Information.</h4>
+                            <p> The trademarks, logos, and service marks displayed on this Site are the property of WeCoOwn or other third
+                                parties. You are not permitted to use the Marks without the prior written consent of WeCoOwn or such third
+                                party that may own the Marks. WeCoOwn and the WeCoOwn logo are trademarks of WeCoOwn. License to WeCoOwn for
+                                User Content Certain Services offered through this Site accommodate or require User Content. Depending upon
+                                the nature of the Service, by submitting User Content to this Site, you grant WeCoOwn one of the following
+                                types of licenses:</p>
+                            <p>1. For User Content that is the result of your creative efforts and which is intended to be displayed on the
+                                Site, such as examples of work you have had done using WeCoOwn services, you grant WeCoOwn a worldwide,
+                                royalty-free, non-exclusive license to modify (for purposes of formatting, maintenance, or Site
+                                administration only) and reproduce such User Content. You also grant WeCoOwn the right to distribute and
+                                publicly display and perform such User Content for the purpose for which such User Content was submitted to
+                                the Site. This license will be in effect until such User Content is removed from the Site. If you submit
+                                User Content, you acknowledge that such content may be modified and annotated, and WeCoOwn may display the
+                                User Content together with such modifications and annotations solely for purposes of the service. You
+                                acknowledge and agree that any User Content you submit to WeCoOwn, such as business plans or offering
+                                memorandums, may be downloaded by users of this Site.</p>
+                            <p>2. For User Content such as comments to any WeCoOwn Forums, bug reports, piracy reports, or product
+                                suggestions, you grant WeCoOwn and the users of this Site an unrestricted, worldwide, irrevocable license to
+                                use, reproduce, display, perform, modify, transmit, and distribute such User Content, and you also agree
+                                that WeCoOwn is free to use any ideas, concepts, know-how, or techniques that you send us for any purpose
+                                without any compensation to you. However, we will not release your name or otherwise publicize the fact that
+                                you submitted such User Content to us unless: (a) you grant us permission to do so; (b) we first notify you
+                                that the User Content you submit to a particular part of the Site will be published or otherwise used with
+                                your name on it; (c) we have a good faith belief that we are required to do so bylaw and for in response to
+                                a subpoena or court order; or (d) we believe it necessary in order to protect the rights of WeCoOwn or
+                                others.</p>
+                            <h4>License to WeCoOwn for Content</h4>
+                            <p> For Content that is intended to be accessible only to members of your Work Group, you grant WeCoOwn the
+                                right to copy, display, distribute, and otherwise use such Content in connection with operation of the
+                                Conferencing service. You agree that WeCoOwn may access and/or disclose such Content if WeCoOwn has a good
+                                faith belief that it must do so to (a) perform system administration, such as diagnosing and correcting
+                                problems, or testing any aspect of the Conferencing service; or responding to a valid court order or
+                                subpoena: (c) comply with legislation or regulations, including, without limitation, the Digital Millennium
+                                Copyright Act; (d) investigate complaints; or (e) protect WeCoOwn or others from liability or damages.
+                                WeCoOwn has no obligation to retain Content once the applicable subscription agreement has expired or
+                                terminated, and you agree that WeCoOwn shall not be liable for any failure to store Content after such
+                                expiration or termination.</p>
+                            <h4>Prohibited Communications</h4>
+                            <p> You may submit only User Content or Content to the Site that is (a) owned by you, (b) submitted with the
+                                express permission of the owner or within the scope of the license to such content, or (c) in the public
+                                domain. You are prohibited from posting or transmitting to or from this Site any unlawful, threatening,
+                                harassing, libelous, offensive, defamatory, obscene, or pornographic materials, or other materials that
+                                would violate any law or the rights of others, including, without limitation, laws against copyright
+                                infringement, and rights of privacy and publicity. Violation of these restrictions may result in denial of
+                                or limitations on access by you to this Site.</p>
+                            <p>User Conduct In using the Site, including all Services and Materials available through it, you agree: not to
+                                disrupt or interfere with any other user’s enjoyment of the Site or affiliated or linked sites; not to
+                                upload, post, or otherwise transmit through the Site any viruses or other harmful, disruptive, or
+                                destructive files; not to create a false identity; not to use or attempt to use another’s account, password,
+                                service, or system without authorization from WeCoOwn; not to access or attempt to access any Content which
+                                you are not authorized to access; not to disrupt or interfere with the security of, or otherwise cause harm
+                                to, the Site, or any Services, Materials, system resources, accounts, passwords, servers, or networks
+                                connected to or accessible through the Site or any affiliated or linked sites.</p>
+                            <p>Managing Content and Communications Although it is not our intention to do so, WeCoOwn reserves the right, in
+                                its sole discretion, to delete or remove User Content from the Site and to restrict, suspend, or terminate
+                                your access to all or part of this Site, at any time if we have cause to do so (including, without
+                                limitation, our good faith belief that you have violated the Terms of Use) without prior notice or
+                                liability. In addition, WeCoOwn reserves the right to delete or remove Content if the relevant subscription
+                                has expired or lapsed or if WeCoOwn has a good faith belief that the user posting such Content has violated
+                                these Terms of Use, or any law or regulation, or that such deletion or removal is necessary to comply with
+                                the law or to protect the rights of WeCoOwn or others.</p>
+                            <p>WeCoOwn may, but is not obligated to, monitor or review (i) any areas on the Site where users transmit or
+                                post User Content, including but not limited to areas where Services are available, or chat rooms, bulletin
+                                boards, or other user forums: and (ii) the substance of any User Content. To the maximum extent permitted by
+                                law, WeCoOwn will have no liability related to User Content or Content arising under the laws of copyright,
+                                libel, privacy, obscenity, or otherwise. WeCoOwn also disclaims all liability with respect to the misuse,
+                                loss, modification, or unavailability of any User Content or Content.</p>
+                            <p>Use and Protection of Account Number and Password You are responsible for maintaining the confidentiality of
+                                your account number, account name, and for password, if applicable. You are responsible for damages
+                                resulting from all uses of your account number, account name, and or password, whether actually or expressly
+                                authorized by you, unless access to your account number, account name, and/or password was obtained through
+                                no fault or negligence of your own.</p>
+                            <h4>WARRANTIES AND DISCLAIMERS.</h4>
+                            <p>EXCEPT AS EXPRESSLY PROVIDED OTHERWISE IN A WRITTEN AGREEMENT BETWEEN YOU AND WeCoOwn OR YOU AND A THIRD
+                                PARTY WITH RESPECT TO SUCH PARTY’S MATERIALS OR SERVICES, THIS SITE, AND ALL MATERIALS AND SERVICES
+                                ACCESSIBLE THROUGH THIS SITE, ARE PROVIDED ‘AS IS’ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+                                INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+                                PURPOSE, OR THE WARRANTY OF NON-INFRINGEMENT.</p>
+                            <p>WITHOUT LIMITING THE FOREGOING, WeCoOwn MAKES NO WARRANTY THAT (i)THE SERVICES AND MATERIALS WILL MEET YOUR
+                                REQUIREMENTS: (ii) THE SERVICES AND MATERIALS WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE: (iii)
+                                THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE SERVICES OR MATERIALS WILL BE EFFECTIVE, ACCURATE, OR
+                                RELIABLE: (iv) THE QUALITY OF ANY PRODUCTS, SERVICES, OR MATERIALS PURCHASED OR ACCESSIBLE BY YOU THROUGH
+                                THE SITE WILL MEET YOUR EXPECTATIONS: AND (v) ANY ERRORS IN THE SOFTWARE OBTAINED FROM OR USED THROUGH THE
+                                SITE, OR ANY DEFECTS IN THE SITE, ITS SERVICES, OR MATERIALS, WILL BE CORRECTED.</p>
+                            <p>THIS SITE COULD INCLUDE TECHNICAL OR OTHER MISTAKES, INACCURACIES, OR TYPOGRAPHICAL ERRORS. WeCoOwn MAY MAKE
+                                CHANGES TO THE MATERIALS AND SERVICES AT THIS SITE, INCLUDING THE PRICES AND DESCRIPTIONS OF ANY PRODUCTS
+                                LISTED HEREIN, AT ANY TIME WITHOUT NOTICE. THE MATERIALS OR SERVICES AT THIS SITE MAY BE OUT OF DATE, AND
+                                WeCoOwn MAKES NO COMMITMENT TO UPDATE SUCH MATERIALS OR SERVICES.</p>
+                            <p>YOU UNDERSTAND AND ACKNOWLEDGE THAT (i) WeCoOwn DOES NOT CONTROL, ENDORSE. OR ACCEPT RESPONSIBILITY FOR ANY
+                                CONTENT, PRODUCTS, OR SERVICES OFFERED BY THIRD PARTIES THROUGH THE SITE, INCLUDING, WITHOUT LIMITATION,
+                                THIRD-PARTY VENDORS AND THIRD PARTIES ACCESSIBLE THROUGH LINKS ON THE SITES [ii] WeCoOwn MAKES NO
+                                REPRESENTATION OR WARRANTIES WHATSOEVER ABOUT ANY SUCH THIRD PARTIES, THEIR CONTENT, PRODUCTS, OR SERVICES:
+                                [iii] ANY DEALINGS YOU MAY HAVE WITH SUCH THIRD PARTIES ARE AT YOUR OWN RISKS AND (iv) WeCoOwn SHALL NOT BE
+                                LIABLE OR RESPONSIBLE FOR ANY CONTENT, PRODUCTS, OR SERVICES OFFERED BY THIRD PARTIES.</p>
+                            <p>THE USE OF THE SERVICES OR THE DOWNLOADING OR OTHER USE OF ANY MATERIALS THROUGH THE SITE IS DONE AT YOUR OWN
+                                DISCRETION AND RISK AND WITH YOUR AGREEMENT THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR
+                                COMPUTER SYSTEM, LOSS OF DATA, OR OTHER HARM THAT RESULTS FROM SUCH ACTIVITIES. WeCoOwn ASSUMES NO LIABILITY
+                                FOR ANY COMPUTER VIRUS OR OTHER SIMILAR SOFIWARE CODE THAT IS DOWN LOADED TO YOUR COMPUTER FROM THE SITE OR
+                                IN CONNECTION WITH ANY SERVICES OR MATERIALS OFFERED THROUGH THE SITE. NO ADVICE OR INFORMATION, WHETH ER
+                                ORAL OR WRITTEN, OBTAIN ED BY YOU FROM WeCoOwn OR THROUGH OR FROM THE SITE SHALL CREATE ANY WARRANTY NOT
+                                EXPRESSLY STATED IN THE TERMS OF USE.</p>
+                            <p>International Users This Site can be accessed from countries around the world and may contain references to
+                                WeCoOwn products, services, and programs that are not available in your country. These references do not
+                                imply that WeCoOwn intends to announce such products, services, or programs in your country. The Site is
+                                controlled, operated, and administered by WeCoOwn from its offices within the United States of America.
+                                WeCoOwn makes no representation that the Site, or the Services or Materials available through it, are
+                                appropriate or available for use at other locations outside the United States, and access to the Site from
+                                territories where the Site or any of its Services or Materials are illegal is prohibited. If you access the
+                                Site from a location outside the United States, you are responsible for compliance with all local laws. See
+                                the section on export control laws, below, for further information.</p>
+                            <h4>Personal Information and Privacy</h4>
+                            <p> Except as set forth in the Terms of Use, your personal information will be deemed to be confidential. With
+                                the exception of Content and certain types of User Content, any non-personal information or material sent to
+                                WeCoOwn will generally be deemed to NOT be confidential. You understand and agree that we may disclose
+                                information about you if we have a good faith belief that we are required to do so by law or legal process,
+                                to respond to claims, or to protect the rights, property, or safety of WeCoOwn or others.</p>
+                            <h4>LIMITATION OF LIABILITY</h4>
+                            <p>IN NO EVENT, INCLUDING, WITHOUT LIMITATION, NEGLIGENCE, SHALL WeCoOwn, ITS SUBSIDIARIES, AFFILIATES, AGENTS,
+                                OFFICERS, DIRECTORS, EMPLOYEES, PARTNERS, OR SUPPLIERS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY SPECIAL,
+                                PUNITIVE, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER, INCLUDING,
+                                WITHOUT LIMITATION, THOSE RESULTING FROM LOSS OF USE, DATA, OR PROFITS, WHETHER OR NOT WeCoOwn HAS BEEN
+                                ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, AND ON ANY THEORY OF LIABILITY, ARISING OUT OF OR IN CONNECTION
+                                WITH THE USE OF OR THE INABILITY TO USE THIS SITE, ITS SERVICES, OR MATERIALS, THE STATEMENTS OR ACTIONS OF
+                                ANY THIRD PARTY ON OR THROUGH THE SITE, ANY DEALINGS WITH VENDORS OR OTHER THIRD PARTIES, ANY UNAUTHORIZED
+                                ACCESS TO OR ALTERATION OF YOUR TRANSMISSIONS OR DATA, ANY IN FORMATION THAT IS SENT OR RECEIVED OR NOT SENT
+                                OR RECEIVED, ANY FAILURE TO STORE OR LOSS OF DATA, FILES, OR OTHER CONTENT, ANY SERVICES AVAILABLE THROUGH
+                                THE SITE THAT ARE DELAYED OR INTERRUPTED, OR ANY WEB SITE REFER ENCED OR LINKED TO FROM THIS SITE.</p>
+                            <p>Indemnity and Liability You agree to indemnify and hold WeCoOwn, and its subsidiaries, affiliates, officers,
+                                agents, co-branders or other partners, and employees, harmless from any claim or demand, including
+                                reasonable attorneys’ fees, made by any third party due to or arising out of content you submit, post to, or
+                                transmit through the Site (including, without limitation, any User Content, Content or computer viruses),
+                                your use of the Site, your connection to the Site, your violation of the Terms of Use, or your violation of
+                                any rights of another person or entity.</p>
+                            <h4>Governing Law and Jurisdiction</h4>
+                            <p> This Site (excluding linked sites) is controlled by WeCoOwn from its offices within the State of California,
+                                United States of America. By accessing this Site, you and WeCoOwn agree that all matters relating to your
+                                access to, or use of, this Site shall be governed by the statutes and laws of the State of California,
+                                without regard to the conflicts of laws principles thereof.</p>
+                            <h4>General</h4>
+                            <p> The Terms of Use and other rules, guidelines, licenses, and disclaimers posted on the Site constitute the
+                                entire agreement between WeCoOwn and you with respect to your use of the Site. If for any reason a court of
+                                competent jurisdiction finds any provision of the Terms of Use, or portion thereof, to be unenforceable,
+                                that provision shall be enforced to the maximum extent permissible so as to effect the intent of the parties
+                                as reflected by that provision, and the remainder of the Terms of Use shall continue in full force and
+                                effect. Any failure by WeCoOwn to enforce or exercise any provision of the Terms of Use or related right
+                                shall not constitute a waiver of that right or provision. The section titles used in the Terms of Use are
+                                purely for convenience and carry with them no legal or contractual effect.</p>
+                        </section>
+                    </div>
+                    <div class="tab-pane" id="bca">
+                        <section class="text-justify">
+                            <h2>General Privacy Policy</h2>
+                            <h3>Our Privacy Policy</h3>
+                            <p>
+                                When you share information with us, for example by creating a Account, we can make those
+                                services even
+                                better – to show you more relevant search results and ads, to help you connect with
+                                people or to make
+                                sharing with others quicker and easier. As you use our services, we want you to be clear
+                                how we’re using
+                                information and the ways in which you can protect your privacy.
+                            </p>
+                            <p> Our Privacy Policy explains: What information we collect and why we collect it. How we
+                                use that information.
+                                The choices we offer, including how to access and update information. We’ve tried to
+                                keep it as simple as
+                                possible, but if you’re not familiar with terms like cookies, IP addresses, pixel tags
+                                and browsers, then
+                                read about these key terms first. Your privacy matters to WeCoOwn so if you have any
+                                questions contact us.
+                            </p>
+                            <p> All processing of personal data within WeCoOwn is in accordance with applicable data
+                                protection legislation
+                                in correspondence with General Data Protection Regulation (GDPR), California Consumer
+                                Privacy Act (CCPA) and
+                                Lei Geral de Proteção de Dados Pessoais (LGPD)
+                            </p>
+                            <h4>INFORMATION WE COLLECT</h4>
+                            <p> There are three general categories of information we collect.</p>
+                            <h4> Information You Give to Us.</h4>
+                            <p>
+                                We ask for and collect the following personal information about you when you use the
+                                WeCoOwnPlatform. This
+                                information is necessary for the adequate performance of the contract between you and us
+                                and to allow us to
+                                comply with our legal obligations. Without it, we may not be able to provide you with
+                                all the requested
+                                services.
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● Account Information :</strong> When you sign up for an WeCoOwn Account, we
+                                    require certain
+                                    information such as your first name, last name, email address, and phone number.
+                                </li>
+                                <li>
+                                    <strong>● Profile and Listing Information :</strong> To use certain features of the
+                                    WeCoOwn Platform (such
+                                    as booking or creating a Listing), we may ask you to provide additional information,
+                                    which may include
+                                    your address, nationality, and a profile picture.
+                                </li>
+                                <li>
+                                    <strong>● Identity Verification Information :</strong> To help create and maintain a
+                                    trusted environment,
+                                    we may collect identity verification information (such as images of your government
+                                    issued ID, passport,
+                                    national ID card, or driving license, as permitted by applicable laws) or other
+                                    authentication
+                                    information. To learn more about providing identification on WeCoOwn, send an E-mail
+                                    to
+                                    info@wecoown.com.
+                                </li>
+                                <li>
+                                    <strong>● Communications with WeCoOwn and other Members :</strong> When you
+                                    communicate with WeCoOwn or
+                                    use the WeCoOwn Platform to communicate with other Members, we collect information
+                                    about your
+                                    communication and any information you choose to provide.
+                                </li>
+                            </ul>
+                            <h4>Information you choose to give us.</h4>
+                            <p>
+                                You may choose to provide us with additional personal information in order to obtain a
+                                better user
+                                experience
+                                when using WeCoOwn Platform. This additional information will be processed based on our
+                                legitimate interest
+                                or
+                                when applicable, your consent.
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● Additional Profile Information : </strong> You may choose to provide
+                                    additional information as part of your
+                                    WeCoOwn
+                                </li>
+                                <li>
+                                    <strong>● Profile (such as gender, preferred language(s), city, and a personal
+                                        description) : </strong> Some of this
+                                    information as
+                                    indicated in your Account settings is part of your public profile page, and will be
+                                    publicly visible to
+                                    others.
+                                </li>
+                                <li>
+                                    <strong>● Address Book Contact Information : </strong>You may choose to import your
+                                    address book contacts or enter your
+                                    contacts’
+                                    information manually to access certain features of the WeCoOwnPlatform, like
+                                    inviting them to use
+                                    WeCoOwn.
+                                </li>
+                                <li>
+                                    <strong> ● Other Information : </strong>
+                                    You may otherwise choose to provide us information when you fill in a form, update
+                                    or add
+                                    information to your WeCoOwn Account, respond to surveys, post to community forums,
+                                    participate in
+                                    promotions,
+                                    communicate with our customer care team, share your experience with us, or use other
+                                    features of the
+                                    WeCoOwn
+                                    Platform.
+                                </li>
+                            </ul>
+                            <h4>
+                                Information We Automatically Collect from Your Use of the WeCoOwn Platform and Payment
+                                Services.
+                            </h4>
+                            <p>
+                                When you use the WeCoOwn Platform and the Payment Services, we automatically collect
+                                personal information
+                                about
+                                the services you use and how you use them. This information is necessary for the
+                                adequate performance of the
+                                contract between you and us, to enable us to comply with legal obligations and given our
+                                legitimate interest
+                                in
+                                being able to provide and improve the functionalities of the WeCoOwn Platform and
+                                Payment Services.
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● Geo-location Information : </strong>
+                                    When you use certain features of the WeCoOwn Platform, we may collect information
+                                    about your precise or approximate location as determined through data such as your
+                                    IP address or mobile device’s
+                                    GPS to offer you an improved user experience. Most mobile devices allow you to
+                                    control or disable the use of
+                                    location services for applications in the device’s settings menu. WeCoOwn may also
+                                    collect this information even
+                                    when you are not using the app if this connection is enabled through your settings
+                                    or device permissions.
+                                </li>
+                                <li>
+                                    <strong>● Usage Information : </strong>
+                                    We collect information about your interactions with the WeCoOwn Platform such as the
+                                    pages
+                                    or content you view, your searches for Listings, bookings you have made, and other
+                                    actions on the WeCoOwn
+                                    Platform.
+                                </li>
+                                <li>
+                                    <strong>● Log Data and Device Information : </strong>
+                                    We automatically collect log data and device information when you access
+                                    and
+                                    use the WeCoOwn Platform, even if you have not created an WeCoOwn Account or logged
+                                    in. That information
+                                    includes, among other things: details about how you’ve used the WeCoOwn Platform
+                                    (including if you clicked
+                                    on
+                                    links to third party applications), IP address, access dates and times, hardware and
+                                    software information,
+                                    device information, device event information, unique identifiers, crash data, cookie
+                                    data, and the pages
+                                    you’ve
+                                    viewed or engaged with before or after using the WeCoOwn Platform.
+                                </li>
+                                <li>
+                                    <strong> ● Cookies and Similar Technologies : </strong>
+                                    We use cookies and other similar technologies when you use our platform,
+                                    use
+                                    our mobile app, or engage with our online ads or email communications. We may
+                                    collect certain information by
+                                    automated means using technologies such as cookies, web beacons, pixels, browser
+                                    analysis tools, server
+                                    logs,
+                                    and mobile identifiers. In many cases the information we collect using cookies and
+                                    other tools is only used
+                                    in a
+                                    non-identifiable without reference to personal information. For example, we may use
+                                    information we collect
+                                    to
+                                    better understand website traffic patterns and to optimize our website experience.
+                                    In some cases we
+                                    associate
+                                    the information we collect using cookies and other technology with your personal
+                                    information. Our business
+                                    partners may also use these tracking technologies on the WeCoOwn Platform or engage
+                                    others to track your
+                                    behavior on our behalf.
+                                </li>
+                                <li>
+                                    <strong>● Pixels and SDKs : </strong>
+                                    Third parties, including Facebook, may use cookies, web beacons, and other storage
+                                    technologies to collect or receive information from our websites and elsewhere on
+                                    the internet and use that
+                                    information to provide measurement services and target ads. For apps, that third
+                                    parties, including
+                                    Facebook,
+                                    may collect or receive information from your app and other apps and use that
+                                    information to provide
+                                    measurement
+                                    services and targeted ads. Users can opt-out of the collection and use of
+                                    information for ad targeting by
+                                    updating their Facebook account ad settings and by contacting For more information
+                                    on our use of these
+                                    technologies, see our Cookie Policy.
+                                </li>
+                                <li>
+                                    <strong> ● Do Not Track Signals : </strong>
+                                    While you may disable the usage of cookies through your browser settings, the
+                                    WeCoOwn
+                                    Platform currently does not respond to a “Do Not Track” signal in the HTTP header
+                                    from your browser or
+                                    mobile
+                                    application due to lack of standardization regarding how that signal should be
+                                    interpreted.
+                                </li>
+                                <li>
+                                    <strong> ● Payment Transaction Information : </strong>
+                                    WeCoOwn Payments collects information related to your payment
+                                    transactions
+                                    through the WeCoOwn Platform, including the payment instrument used, date and time,
+                                    payment amount, payment
+                                    instrument expiration date and billing postcode, PayPal email address, IBAN
+                                    information, your address and
+                                    other
+                                    related transaction details. This information is necessary for the adequate
+                                    performance of the contract
+                                    between
+                                    you and WeCoOwn Payments and to allow the provision of the Payment Services.
+                                </li>
+                            </ul>
+                            <h4>
+                                Information We Collect from Third Parties.
+                            </h4>
+                            <p>
+                                WeCoOwn and WeCoOwn Payments may collect information, including personal information,
+                                that others provide
+                                about
+                                you when they use the WeCoOwn Platform and the Payment Services, or obtain information
+                                from other sources
+                                and
+                                combine that with information we collect through the WeCoOwn Platform and the Payment
+                                Services. We do not
+                                control, supervise or respond for how the third parties providing your information
+                                process your Personal
+                                Information, and any information request regarding the disclosure of your personal
+                                information to us should
+                                be
+                                directed to such third parties.
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong> ● Third Party Services : </strong>
+                                    If you link, connect, or login to your WeCoOwn Account with a third party
+                                    service (e.g.
+                                    Google, Facebook, WeChat), the third party service may send us information such as
+                                    your registration,
+                                    friends
+                                    list, and profile information from that service. This information varies and is
+                                    controlled by that
+                                    service or as
+                                    authorized by you via your privacy settings at that service.
+                                </li>
+                                <li>
+                                    <strong>● Your References : </strong>
+                                    If someone has written a reference for you, it will be published on your WeCoOwn
+                                    public
+                                    profile page with your consent. To learn more, contact info@wecoown.com
+                                </li>
+                                <li>
+                                    <strong> ● Background Information : </strong>
+                                    For Members in the United States, to the extent permitted by applicable laws,
+                                    WeCoOwn
+                                    and WeCoOwn Payments may obtain reports from public records of criminal convictions
+                                    or sex offender
+                                    registrations. For Members outside of the United States, to the extent permitted by
+                                    applicable laws and
+                                    with
+                                    your consent where required, WeCoOwn and WeCoOwn Payments may obtain the local
+                                    version of police,
+                                    background or
+                                    registered sex offender checks. We may use your information, including your full
+                                    name and date of birth,
+                                    to
+                                    obtain such reports.
+                                </li>
+                                <li>
+                                    <strong>● Enterprise Product Invitations and Account Management : </strong>
+                                    Organizations that use our Enterprise products
+                                    (such a
+                                    WeCoOwn for work and programs with property managers and owners) may submit personal
+                                    information to
+                                    facilitate
+                                    account management and invitations to use enterprise products.
+                                </li>
+                                <li>
+                                    <strong>● Referrals : </strong>
+                                    If you are invited to WeCoOwn, the person who invited you may submit personal
+                                    information
+                                    about you
+                                    such as your email address or other contact information.
+                                </li>
+                                <li>
+                                    <strong>● Other Sources : </strong>
+                                    To the extent permitted by applicable law, we may receive additional information
+                                    about
+                                    you,
+                                    such as demographic data or information to help detect fraud and safety issues, from
+                                    third party service
+                                    providers and/or partners, and combine it with information we have about you. For
+                                    example, we may
+                                    receive
+                                    background check results (with your consent where required) or fraud warnings from
+                                    service providers
+                                    like
+                                    identity verification services for our fraud prevention and risk assessment efforts.
+                                    We may receive
+                                    information
+                                    about you and your activities on and off the WeCoOwn Platform through partnerships,
+                                    or about your
+                                    experiences
+                                    and interactions from our partner ad networks.
+                                </li>
+                            </ul>
+                            <h3>
+                                HOW WE USE INFORMATION WE COLLECT
+                            </h3>
+                            <p>
+                                We may use, store, and process personal information to (1) provide, understand, improve,
+                                and develop the
+                                WeCoOwn
+                                Platform, (2) create and maintain a trusted and safer environment (such as to comply
+                                with our legal
+                                obligations
+                                and ensure compliance with WeCoOwn Policies) and (3) provide, personalize, measure, and
+                                improve our
+                                advertising
+                                and marketing.
+                            </p>
+                            <h4>
+                                Provide, Improve, and Develop the WeCoOwn Platform.
+                            </h4>
+                            <p>
+                                We may use the personal information to provide, improve, and develop the WeCoOwn
+                                Platform such as to:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> enable you to access and use the WeCoOwn Platform,
+                                </li>
+                                <li>
+                                    <strong>● </strong> enable you to communicate with other Members,
+                                </li>
+                                <li>
+                                    <strong>● </strong> operate, protect, improve, and optimize the WeCoOwn Platform and
+                                    experience, such as by performing
+                                    analytics
+                                    and conducting research,
+                                </li>
+                                <li>
+                                    <strong>● </strong> provide customer service,
+                                </li>
+                                <li>
+                                    <strong>● </strong> send you service or support messages, updates, security alerts,
+                                    and account notifications,
+                                </li>
+                                <li>
+                                    <strong>● </strong> if you provide us with your contacts’ information, we may
+                                    process this information: (i) to facilitate
+                                    your
+                                    referral invitations, (ii) send your requests for references, (iii) for fraud
+                                    detection and prevention,
+                                    and (iv)
+                                    for any purpose you authorize at the time of collection,
+                                </li>
+                                <li>
+                                    <strong>● </strong> to operate, protect, improve, and optimize the WeCoOwn Platform
+                                    and experience, and personalize and
+                                    customize
+                                    your experience (such as making Listing suggestions, ranking search results), and
+                                    facilitate claims with
+                                    our
+                                    Host Guarantee, Host Protection Insurance, Experience Protection Insurance or other
+                                    similar host
+                                    protection
+                                    programs, we conduct profiling based on your interactions with the WeCoOwn Platform,
+                                    your search and
+                                    booking
+                                    history, your profile information and preferences, and other content you submit to
+                                    the WeCoOwn Platform,
+                                    and
+                                </li>
+                                <li>
+                                    <strong>● </strong> enable your use of our enterprise products.
+                                </li>
+                            </ul>
+                            <p>
+                                We process this personal information for these purposes given our legitimate interest in
+                                improving the
+                                WeCoOwn
+                                Platform and our Members’ experience with it, and where it is necessary for the adequate
+                                performance of the
+                                contract with you.
+                            </p>
+                            <h4>
+                                Create and Maintain a Trusted and Safer Environment. We may use the personal information
+                                to create and
+                                maintain
+                                a trusted and safer environment such as to:
+                            </h4>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> detect and prevent fraud, spam, abuse, security incidents, and
+                                    other harmful activity,
+                                </li>
+                                <li>
+                                    <strong>● </strong> conduct security investigations and risk assessments,
+                                </li>
+                                <li>
+                                    <strong>● </strong> verify or authenticate information or identifications provided
+                                    by you (such as to verify your
+                                    Accommodation
+                                    address or compare your identification photo to another photo you provide),
+                                </li>
+                                <li>
+                                    <strong>● </strong> conduct checks against databases and other information sources,
+                                    including background or police checks,
+                                    to the
+                                    extent permitted by applicable laws and with your consent where required,
+                                </li>
+                                <li>
+                                    <strong>● </strong> comply with our legal obligations,
+                                </li>
+                                <li>
+                                    <strong>● </strong> Resolve any disputes with any of our Members and enforce our
+                                    agreements with third parties,
+                                </li>
+                                <li>
+                                    <strong>● </strong> enforce our Terms of Service and other policies, and
+                                </li>
+                                <li>
+                                    <strong>● </strong> in connection with the activities above, we may conduct
+                                    profiling based on your interactions with the
+                                    WeCoOwn
+                                    Platform, your profile information and other content you submit to the WeCoOwn
+                                    Platform, and information
+                                    obtained from third parties. In limited cases, automated processes may restrict or
+                                    suspend access to the
+                                    WeCoOwn
+                                    Platform if such processes detect activity that we think poses a safety or other
+                                    risk to the WeCoOwn
+                                    Platform,
+                                    our community, or third parties. If you challenge the decisioning based on the
+                                    automated process, please
+                                    contact
+                                    us as provided in the Contact Us section below.
+                                </li>
+                            </ul>
+                            <p>
+                                We process this personal information for these purposes given our legitimate interest in
+                                protecting the
+                                WeCoOwn
+                                Platform, to measure the adequate performance of our contract with you, and to comply
+                                with applicable laws.
+                                Provide, Personalize, Measure, and Improve our Advertising and Marketing. We may use the
+                                personal
+                                information to
+                                provide, personalize, measure, and improve our advertising and marketing such as to:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> send you promotional messages, marketing, advertising, and other
+                                    information that may be of interest
+                                    to you
+                                    based on your preferences (including information about WeCoOwn or partner campaigns
+                                    and services) and
+                                    social
+                                    media advertising through social media platforms such as Facebook or Google),
+                                </li>
+                                <li>
+                                    <strong>● </strong> personalize, measure, and improve our advertising,
+                                </li>
+                                <li>
+                                    <strong>● </strong> Administer referral programs, rewards, surveys, sweepstakes,
+                                    contests, or other promotional activities
+                                    or
+                                    events sponsored or managed by WeCoOwn or its third party partners,
+                                </li>
+                                <li>
+                                    <strong>● </strong> conduct profiling on your characteristics and preferences (based
+                                    on the information you provide to us,
+                                    your
+                                    interactions with the WeCoOwn Platform, information obtained from third parties, and
+                                    your search and
+                                    booking
+                                    history) to send you promotional messages, marketing, advertising and other
+                                    information that we think
+                                    may be of
+                                    interest to you,
+                                </li>
+                                <li>
+                                    <strong>● </strong> enrolling in an email subscription will not affect the frequency
+                                    of administrative emails that we may
+                                    send in
+                                    connection with any WeCoOwn Account. No fee is charged for sending promotional
+                                    emails to you, but
+                                    third-party
+                                    data rates may apply. Note that you may not be able to take advantage of certain
+                                    promotions if you do
+                                    not have
+                                    an WeCoOwn Account, and
+                                </li>
+                                <li>
+                                    <strong>● </strong> invite you to events and relevant opportunities (for example,
+                                    when you share your Host story, we may
+                                    use the
+                                    information provided to reach out to you to invite you to relevant events).
+                                </li>
+                            </ul>
+                            <p>
+                                We will process your personal information for the purposes listed in this section given
+                                our legitimate
+                                interest
+                                in undertaking marketing activities to offer you products or services that may be of
+                                your interest.
+                            </p>
+                            <h4>
+                                How the Payments Data Controller uses the Personal Information Collected.
+                            </h4>
+                            <p>
+                                We may use the personal information as a part of Payment services such as to:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> Enable you to access and use the Payment Services.
+                                </li>
+                                <li>
+                                    <strong>● </strong> Detect and prevent fraud, abuse, security incidents, and other
+                                    harmful activity.
+                                </li>
+                                <li>
+                                    <strong>● </strong> Conduct security investigations and risk assessments.
+                                </li>
+                                <li>
+                                    <strong>● </strong> Conduct checks against databases and other information sources.
+                                </li>
+                                <li>
+                                    <strong>● </strong> Comply with legal obligations (such as anti-money laundering
+                                    regulations).
+                                </li>
+                                <li>
+                                    <strong>● </strong> Enforce the Payment Terms and other payment policies.
+                                </li>
+                                <li>
+                                    <strong>● </strong> With your consent, send you promotional messages, marketing,
+                                    advertising, and other information that
+                                    may be of
+                                    interest to you based on your preferences.
+                                </li>
+                            </ul>
+                            <p>
+                                The Payments Data Controller processes this personal information given its legitimate
+                                interest in improving
+                                the
+                                Payment Services and its users’ experience with it, and where it is necessary for the
+                                adequate performance
+                                of
+                                the contract with you and to comply with applicable laws.
+                            </p>
+                            <h3>YOUR RIGHTS</h3>
+                            <p>
+                                Consistent with applicable law, you may exercise any of the rights described in this
+                                section before your
+                                applicable WeCoOwn Data Controller and Payments Data Controller. See here for
+                                information on data subject
+                                rights
+                                requests and how to submit a request. . Please note that we may ask you to verify your
+                                identity and request
+                                before taking further action on your request.
+                            </p>
+                            <h4>
+                                Managing Your Information.
+                            </h4>
+                            <p>
+                                You may access and update some of your information through your Account settings. If you
+                                have chosen to
+                                connect
+                                your WeCoOwn Account to a third-party application, like Facebook or Google, you can
+                                change your settings and
+                                remove permission for the app by changing your Account settings. You are responsible for
+                                keeping your
+                                personal
+                                information up-to-date.
+                            </p>
+                            <h4>
+                                Rectification of Inaccurate or Incomplete Information.
+                            </h4>
+                            <p>
+                                You have the right to ask us to correct inaccurate or incomplete personal information
+                                about you (and which
+                                you
+                                cannot update yourself within your WeCoOwn Account).
+                            </p>
+                            <h4>
+                                Data Access and Portability.
+                            </h4>
+                            <p>
+                                In some jurisdictions, applicable law may entitle you to request certain copies of your
+                                personal information
+                                held by us. You may also be entitled to request copies of personal information that you
+                                have provided to us
+                                in a
+                                structured, commonly used, and machine-readable format and/or request us to transmit
+                                this information to
+                                another
+                                service provider (where technically feasible).
+                            </p>
+                            <h4>
+                                Data Retention and Erasure.
+                            </h4>
+                            <p>
+                                We generally retain your personal information for as long as is necessary for the
+                                performance of the
+                                contract
+                                between you and us and to comply with our legal obligations. In certain jurisdictions,
+                                you can request to
+                                have
+                                all your personal information deleted entirely." Please note that if you request the
+                                erasure of your
+                                personal
+                                information:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> We may retain some of your personal information as necessary for
+                                    our legitimate business interests,
+                                    such as
+                                    fraud detection and prevention and enhancing safety. For example, if we suspend an
+                                    WeCoOwn Account for
+                                    fraud or
+                                    safety reasons, we may retain certain information from that WeCoOwn Account to
+                                    prevent that Member from
+                                    opening
+                                    a new WeCoOwn Account in the future.
+                                </li>
+                                <li>
+                                    <strong>● </strong> We may retain and use your personal information to the extent
+                                    necessary to comply with our legal
+                                    obligations.
+                                    For example, WeCoOwn and WeCoOwn Payments may keep some of your information for tax,
+                                    legal reporting and
+                                    auditing obligations.
+
+                                </li>
+                                <li>
+                                    <strong>● </strong> Information you have shared with others (e.g., Reviews, forum
+                                    postings) may continue to be publicly
+                                    visible on
+                                    the WeCoOwn Platform, even after your WeCoOwn Account is cancelled. However,
+                                    attribution of such
+                                    information to
+                                    you will be removed. Additionally, some copies of your information (e.g., log
+                                    records) may remain in our
+                                    database, but are disassociated from personal identifiers.
+
+                                </li>
+                                <li>
+                                    <strong>● </strong> Because we maintain the WeCoOwn Platform to protect from
+                                    accidental or malicious loss and destruction,
+                                    residual copies of your personal information may not be removed from our backup
+                                    systems for a limited
+                                    period of
+                                    time.
+
+                                </li>
+                            </ul>
+                            <h4>
+                                Withdrawing Consent and Restriction of Processing.
+                            </h4>
+                            <p>
+                                If we are processing your personal information based on your consent you may withdraw
+                                your consent at any
+                                time
+                                by changing your Account settings or by sending a communication to WeCoOwn specifying
+                                which consent you are
+                                withdrawing. Please note that the withdrawal of your consent does not affect the
+                                lawfulness of any
+                                processing
+                                activities based on such consent before its withdrawal. Additionally, in some
+                                jurisdictions, applicable law
+                                may
+                                give you the right to limit the ways in which we use your personal information, in
+                                particular where (i) you
+                                contest the accuracy of your personal information; (ii) the processing is unlawful and
+                                you oppose the
+                                erasure of
+                                your personal information; (iii) we no longer need your personal information for the
+                                purposes of the
+                                processing,
+                                but you require the information for the establishment, exercise or defence of legal
+                                claims; or (iv) you have
+                                objected to the processing pursuant to Section 6.6 and pending the verification whether
+                                the legitimate
+                                grounds
+                                of WeCoOwn override your own.
+                            </p>
+                            <h4>
+                                Objection to Processing.
+                            </h4>
+                            <p>
+                                In some jurisdictions, applicable law may entitle you to require WeCoOwn and WeCoOwn
+                                Payments not to process
+                                your personal information for certain specific purposes (including profiling) where such
+                                processing is based
+                                on
+                                legitimate interest. If you object to such processing WeCoOwn and/or WeCoOwn Payments
+                                will no longer process
+                                your personal information for these purposes unless we can demonstrate compelling
+                                legitimate grounds for
+                                such
+                                processing or such processing is required for the establishment, exercise or defence of
+                                legal claims.
+                                Where your personal information is processed for direct marketing purposes, you may, at
+                                any time ask WeCoOwn
+                                to
+                                cease processing your data for these direct marketing purposes by sending an e-mail to
+                                info@WeCoOwn.com.
+                            </p>
+                            <h3>
+                                HOW WE SAFEGUARD PERSONAL INFORMATION
+                            </h3>
+                            <p>
+                                We use administrative, technical and physical safeguards to protect the security and
+                                confidentiality of
+                                personally identifiable information that we receive, including computer files and
+                                documents that contain the
+                                information. Our standards are designed to:
+                            </p>
+                            <ul>
+                                <li>
+                                    <strong>● </strong> Protect the security and confidentiality of the information;
+                                </li>
+                                <li>
+                                    <strong>● </strong> Protect against anticipated threats or hazards to the security
+                                    or integrity of the information; and
+                                </li>
+                                <li>
+                                    <strong>● </strong> Protect against unauthorized access to or use of the information
+                                    that could result in substantial harm
+                                    or
+                                    inconvenience to an individual, such as a borrower, consumer, or employee.
+                                </li>
+                            </ul>
+                            <p>
+                                We restrict access to personally identifiable information to those who need to know the
+                                information for our
+                                business purposes. We follow a corporate records retention program that requires us to
+                                destroy information
+                                we no
+                                longer need for our business or reasonable archival purposes. We destroy, erase, or make
+                                unreadable such
+                                information prior to disposal as required by applicable law. Our policies and our
+                                agreements with third
+                                parties
+                                require appropriate security and confidentiality standards to protect the
+                                confidentiality of personally
+                                identifiable information (including Website Visitor Information) and prohibit its
+                                unlawful disclosure.
+                            </p>
+                            <p>
+                                We strive to maintain a high standard of security and privacy. However, no information
+                                can be guaranteed to
+                                be
+                                completely secure, and we make no such warranty or guarantee.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

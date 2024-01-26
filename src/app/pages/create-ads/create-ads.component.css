@@ -1,0 +1,47 @@
+
+/* for property image */
+.textareaDes{
+    height: 210px;
+}
+.dropzone {
+    width: 100%;
+    height: 210px;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .dropzone input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .dropzone button {
+      color: white;    
+      width: 183px;
+      height: 44px;
+      border: none;
+      border-radius: 21px;
+      background-color: rgba(255, 0, 0, 0.637);
+      padding: 8px 16px;
+    }
+  
+    .dropzone h5 {
+      color: white;    
+      width: 183px;
+      height: 44px;
+      border-radius: 21px;
+      background-color: rgba(255, 0, 0, 0.637);
+      padding: 8px 16px;
+    }
+  .single-files{
+      padding: 10px;
+  }
+  .files-list{
+      padding: 0;
+  }

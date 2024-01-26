@@ -1,0 +1,91 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Create Ads</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Ads</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <div class="text-center">
+        <br>
+        <label class="checkContainer">Banner Ad
+            <input type="radio" checked="checked" name="radio" id="">
+            <span class="checkmark"></span>&nbsp;&nbsp;
+        </label>
+        <label class="checkContainer">Side Bar Ad
+            <input type="radio" name="radio" id="i_like_search">
+            <span class="checkmark"></span>&nbsp;&nbsp;
+        </label>
+        <label class="checkContainer">Posting Ad
+            <input type="radio" name="radio" id="i_like_search">
+            <span class="checkmark"></span>&nbsp;&nbsp;
+        </label>
+        <label class="checkContainer">Vender Resource
+            <input type="radio" name="radio" id="i_like_search">
+            <span class="checkmark"></span>
+        </label><br><br>
+    </div>
+    <div id="banner-div">
+        <h4>How do you want your ad to look?</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Description : </label><br>
+                <div class="form-group">
+                    <textarea class="form-control textareaDes"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Image / Video : <span class="red">*</span></label><br>
+                <div class="form-group">
+                    <div class="dropzone form-control float-right" id="fullImageBox">
+                        <input type="file" #fileDropRef id="fileDropRef"  formControlName="property_photos"
+                            (change)="onFileDropped($event.target.files)" style="float: right;" multiple
+                            accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                        <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                        <p>Drag and drop files here</p>
+                        <p>Or</p>
+                        <button for="fileDropRef">Browse for files</button>
+                    </div>
+                    <div class="form-control float-right files-list">
+                        <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                            <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                            <div class="info">
+                                <p class="name">{{ file?.name}}</p>
+                            </div>
+                            <div class="float-right">
+                                &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                    (click)="delteFile(i)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Headline : </label><br>
+                <input class="form-control" placeholder="Headline">
+            </div>
+            <div class="col-md-6">
+                <label>Url for button click : </label><br>
+                <input class="form-control" placeholder="Url for button click">
+            </div>
+            <div class="col-md-6">
+                <label>Category : </label><br>
+                <select class="form-control">
+                    <option>
+                        hgvbn
+                    </option>
+                    <input  placeholder="Url for button click">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

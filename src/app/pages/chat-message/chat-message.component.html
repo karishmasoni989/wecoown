@@ -1,0 +1,136 @@
+
+<!-- <div id="loader"></div> -->
+
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="container">
+
+    <!-- Page header start -->
+    <!-- Page header end -->
+
+    <!-- Content wrapper start -->
+    <div class="content-wrapper">
+        <div *ngIf="noChat == true">No chats</div>
+        <!-- Row start -->
+        <div *ngIf="noChat == false" class="row gutters">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="card m-0">
+
+                    <!-- Row start -->
+                    <div class="row no-gutters">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                            <div class="users-container">
+                                <!-- <div class="chat-search-box">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-info">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="verticalScroll">
+                                    <ul class="users" *ngFor="let chatCol of listAllC; let o = index">
+                                        <li class="person contacts_all" id="contact_number_{{o}}" data-chat="person1" (click)="openchatBox(o)">
+                                            <div *ngIf="userIDDDD == chatCol.start_chat_user_id._id">
+                                                <div class="user">
+                                                    <img src="{{ chatCol.receiver_user.profile_pic.length != 0 ? chatCol.receiver_user.profile_pic[0].src : '../../../assets/images/user1.png' }}" alt="" onerror="this.src='../../../assets/images/user1.png'">
+                                                </div>
+                                                <p class="name-time">
+                                                    <span class="name">{{chatCol.receiver_user.firstname}} {{chatCol.receiver_user.lastname}}</span>
+                                                </p>
+                                                <span class="dot hide" id="count_number_{{chatCol.chat_id}}"></span>
+                                            </div>
+
+                                            <div *ngIf="userIDDDD == chatCol.receiver_user._id">
+                                                <div class="user">
+                                                    <img src="{{ chatCol.start_chat_user_id.profile_pic.length != 0 ? chatCol.start_chat_user_id.profile_pic[0].src : '../../../assets/images/user1.png' }}" alt="" onerror="this.src='../../../assets/images/user1.png'">
+                                                </div>
+                                                <p class="name-time">
+                                                    <span class="name">{{chatCol.start_chat_user_id.firstname}} {{chatCol.start_chat_user_id.lastname}}</span>
+                                                </p>
+                                                <span class="dot hide" id="count_number_{{chatCol.chat_id}}"></span>
+                                            </div>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                            <div class="chat_box_top">
+                                <div class="selected-user">
+                                    <span>Property Category: <span class="property_name">{{ currentPropertyName }}</span></span> 
+                               </div>
+                               <div *ngFor="let iteratorloop of listChatByChatID; let j = index;">
+                                <div class="chat-container" id="chat_box_{{ iteratorloop.chat_id }}">
+                                    <ul class="chat-box chatContainerScroll">
+                                        <div class="chat_foorloop" *ngFor="let chat of iteratorloop.messages; let i = index;">
+                                            <li class="chat-left" id="chat_message_{{chat._id}}" *ngIf="userIDDDD == chat.recevier_id._id">
+                                        
+                                                <div class="chat-text">{{ chat.message }}</div>
+                                                <div class="chat-hour">{{chat.created_at | date:'hh:mm a'}} 
+                                                </div>
+                                            </li>
+        
+                                            
+                                            <li class="chat-right" id="chat_message_{{chat._id}}" *ngIf="userIDDDD == chat.sender_id._id">
+                                                <i *ngIf="chat.read == true" class="fa fa-check-circle" aria-hidden="true"></i>
+                                                <div class="chat-hour">{{chat.created_at | date:'hh:mm a'}} </div>
+                                                <div class="chat-text">{{ chat.message }}</div>
+                                                
+                                            </li>
+                                        </div>
+
+                                        <div *ngIf="toShowUnreadBanner == true" class="unread_messages">Unread Messsages</div>
+                                        <div class="chat_foorloop" *ngFor="let unread of unreadCurrentchat">
+                                            <li class="chat-left" id="chat_message_{{unread._id}}" *ngIf="userIDDDD == unread.recevier_id._id">
+                                        
+                                                <div class="chat-text">{{ unread.message }}</div>
+                                                <div class="chat-hour">{{unread.created_at | date:'hh:mm a'}} 
+                                                </div>
+                                            </li>
+        
+                                            
+                                            <li class="chat-right" id="chat_message_{{unread._id}}" *ngIf="userIDDDD == unread.sender_id._id">
+                                                <i *ngIf="unread.read == true" class="fa fa-check-circle" aria-hidden="true"></i>
+                                                <div class="chat-hour">{{ unread.created_at | date:'hh:mm a'}} </div>
+                                                <div class="chat-text">{{ unread.message }}</div>
+                                                
+                                            </li>
+                                        </div>
+                                    </ul>
+                                    <div class="form-group mt-3 mb-0">
+                                        <textarea id="reply_textarea_{{ iteratorloop.chat_id }}" class="form-control" (keyup.enter)="submitReply()" rows="3" placeholder="Type your message here..."></textarea>
+                                        <button class="btn btn-primary submitMessage" (click)="submitReply()"><i class="fa fa-paper-plane"></i></button>
+                                    </div>
+                                </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Row end -->
+
+    </div>
+    <!-- Content wrapper end -->
+
+</div>

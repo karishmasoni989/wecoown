@@ -1,0 +1,781 @@
+<div id="loader"></div>
+<section class="Section-color-grey">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 paddingTop20">
+            <div class="text-center">
+                <img alt="Image is loading" class="thumnail-img"
+                    src="{{ getMemberData.profile_pic.length != 0 ? (baseURLofAPi+getMemberData.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                    width="100%">
+                <button class="btn btn-secondary edit-pencil edit-profile-camera" data-toggle="modal"
+                    data-target="#update-profile-pic-modal"><i class="fa fa-camera"></i></button>
+                <h3>{{getMemberData.firstname}} {{getMemberData.lastname}}</h3>
+                <button class="btn btn-primary marginBottom10 marginRight5 display-none" id="public-timeline-btn"
+                    (click)="publicTimeline()">Publish Timeline</button>
+                <button class="btn btn-primary marginBottom10 marginRight5 display-none" id="hide-timeline-btn"
+                    (click)="hideTimeline()">Hide Timeline</button>
+                <button class="btn btn-primary marginBottom10" data-toggle="modal"
+                    data-target="#social-link-modal">Social Media Links</button>
+                <div class="socialIcons">
+                    <a *ngIf="getMemberData.facebook_link !=''" href="{{getMemberData.facebook_link}}" target="_blank">
+                        <span class="fa fa-facebook-f facebook-social"></span>
+                    </a>
+                    <a *ngIf="getMemberData.twitter_link !=''" href="{{getMemberData.twitter_link}}" target="_blank">
+                        <span class="fa fa-twitter"></span>
+                    </a>
+                    <a *ngIf="getMemberData.linkedin_link !=''" href="{{getMemberData.linkedin_link}}" target="_blank">
+                        <span class="fa fa-linkedin"></span>
+                    </a>
+                    <a *ngIf="getMemberData.instagram_link !=''" href="{{getMemberData.instagram_link}}"
+                        target="_blank">
+                        <span class="fa fa-instagram"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 paddRight0">
+            <div class="row">
+                <div class="col-md-8 padding0 marginRight15">
+                    <div class="col-md-12 coverrr">
+                        <img alt="Image is loading" class="banner-img"
+                            src="{{ getMemberData.cover_pic.length != 0 ? (baseURLofAPi+getMemberData.cover_pic[0].src) : '../../../assets/images/no-image.jpg' }}"
+                            width="100%">
+                    </div>
+                    <div class="search-container">
+                        <button class="btn btn-secondary edit-pencil" data-toggle="modal"
+                            data-target="#update-cover-pic-modal"><i class="fa fa-camera"></i>&nbsp;Edit Cover
+                            Photo</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#create-post-modal">Create
+                                a Post</button>
+                            <button class="btn btn-primary float-right" data-toggle="modal"
+                                data-target="#upload-photos-modal">Upload Photos</button>
+                        </div>
+                    </div>
+                    <!-- <div class="card marginTop15 AllPost" id="third-div">
+                        <div class="card-header"><strong>Posts</strong></div>
+                        <div class="card-body">
+                            <h4 class="dispNone notFoundPost">No item found!</h4>
+                            <div class="borderPadding" *ngFor="let buyerData of getMyPostData">
+                                <h5>Category Name : {{buyerData.category}}</h5>
+                                <span *ngFor="let allPostImage of buyerData.property_photos; let L=count; let i = index">
+                                    <img alt="Image is loading" *ngIf="L == 1" class="like-comment-div" src="{{ allPostImage.src }}"
+                                        alt="No Image" width="100%" height="350px">
+                                    <a *ngIf="L == 2" href="javascript:void(0);"
+                                        (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                        data-target="#showOnePostPhotosModal">
+                                        <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="350px"
+                                            src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                            attr.data-slide-to="{{i}}">
+                                    </a>
+                                    <span *ngIf="L == 3">
+                                        <a *ngIf="i <= 1" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                                src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                                attr.data-slide-to="{{i}}">
+                                        </a>
+                                        <a *ngIf="i == 2" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="100%" height="200px"
+                                                src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                                attr.data-slide-to="{{i}}">
+                                        </a>
+                                    </span>
+                                    <a *ngIf="L == 4" href="javascript:void(0);"
+                                        (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                        data-target="#showOnePostPhotosModal">
+                                        <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                            src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                            attr.data-slide-to="{{i}}">
+                                    </a>
+                                    <span *ngIf="L > 4">
+                                        <a *ngIf="i <= 2" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                                src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                                attr.data-slide-to="{{i}}">
+                                        </a>
+                                        <a href="javascript:void(0);" *ngIf="i == 3"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor Fourth-image-opacity"
+                                                width="50%" height="200px" src="{{ allPostImage.src }}"
+                                                data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                            <span class="More-Images-post">+{{L - (i + 1)}}</span>
+                                        </a>
+                                    </span>
+                                </span>
+                                <p class="text-justify">{{buyerData.property_desciption}}</p>
+                                <p *ngIf='buyerData.url_property !=""'>URL : <a
+                                        href="{{buyerData.url_property}}">{{buyerData.url_property}}</a></p>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#delete-post-modal"
+                                    (click)="deletePost(buyerData._id)">Delete
+                                    Post</button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="card marginTop15 AllPost" id="third-div">
+                        <div class="card-header"><strong>Posts</strong></div>
+                        <div class="card-body">
+                            <h4 class="dispNone notFoundPost">No item found!</h4>
+                            <div class="borderPadding" *ngFor="let buyerData of getMyPostData">
+                                <h5>Category Name : {{buyerData.category}}</h5>
+                                <span *ngFor="let task of getPostMediaData | keyvalue; let i = index;">
+                                    <span *ngIf="task.key === buyerData._id">
+                                        <span *ngFor="let allPostImage of task.value; let L=count; let i = index">
+                                            <img alt="Image is loading" *ngIf="L == 1" class="like-comment-div" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                alt="No Image" width="100%" height="350px">
+                                            <a *ngIf="L == 2" href="javascript:void(0);"
+                                                (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                data-toggle="modal" data-target="#like-comment-property-photo-modal">
+                                                                                               
+                                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                                        height="250px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                
+                                            </a>
+                                            <span *ngIf="L == 3">
+                                                <a *ngIf="i <= 1" href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                </a>
+                                                <a *ngIf="i == 2" href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="100%"
+                                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                </a>
+                                            </span>
+                                            <a *ngIf="L == 4" href="javascript:void(0);"
+                                                (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                data-toggle="modal" data-target="#like-comment-property-photo-modal">
+                                                <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                                    height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                    data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                            </a>
+                                            <span *ngIf="L > 4">
+                                                <a *ngIf="i <= 2" href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                </a>
+                                                <a href="javascript:void(0);" *ngIf="i == 3"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor Fourth-image-opacity"
+                                                        width="50%" height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                                    <span class="More-Images-post">+{{L - (i + 1)}}</span>
+                                                </a>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>   
+                                <div class="like-comment-div">
+                                    <button *ngIf="!checkProduct(buyerData._id, '1')"
+                                        class="btn width-Like UnlikeBtnn fa fa-thumbs-o-up"
+                                        (click)="toggleNamedColor($event,buyerData._id, 1);">
+                                        &nbsp;Like</button>
+                                    <button *ngIf="checkProduct(buyerData._id, '1')"
+                                        class="btn width-Like fb-btn-like likeBUtton fa fa-thumbs-up"
+                                        (click)="toggleNamedColor($event,buyerData._id, 1);">
+                                        &nbsp;Like</button>                                   
+                                    <button class="btn width-comment" data-toggle="modal"
+                                        data-target="#like-comment-modal"
+                                        (click)="getPostDataAndLike(buyerData._id)"><i
+                                            class="fa fa-comment-o"></i>&nbsp;Comment</button>
+                                    <button class="btn width-share"><i class="fa fa-share"></i>&nbsp;Share</button>
+                                </div>
+
+                                <!-- <img alt="Image is loading" src="../../../assets/images/home3.jpg" width="100%" height="350px">  -->
+
+                                <p class="text-justify">{{buyerData.property_desciption}}</p>
+                                <p *ngIf='buyerData.url_property !=""'>URL : <a
+                                        href="{{buyerData.url_property}}">{{buyerData.url_property}}</a></p>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#delete-post-modal"
+                                    (click)="deletePost(buyerData._id)">Delete
+                                    Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 padding0 marginTop15">
+                    <div class="card">
+                        <div class="card-header"><strong>Introduction</strong>
+                            <button class="btn btn-secondary float-right edit-pencil" data-toggle="modal"
+                                data-target="#update-bio-modal"><i class="fa fa-pencil"></i></button>
+                        </div>
+                        <div class="card-body text-justify">
+                            <p>{{getMemberData.bio}}</p>
+                        </div>
+                    </div>
+                    <div class="card marginTop15">
+                        <div class="card-header">
+                            <a class="colorBlack" href="javascript:void(0);" data-toggle="modal"
+                                data-target="#showUploadedPhotosModal"><strong>Photos</strong></a>
+                            <a href="javascript:void(0);" data-toggle="modal" class="float-right"
+                                data-target="#showUploadedPhotosModal"><strong>See All</strong></a>
+                        </div>
+                        <div class="card-body" data-toggle="modal" data-target="#showUploadedPhotosModal">
+                            <a href="javascript:void(0);" data-toggle="modal"
+                                data-target="#showUploadedPhotosmodal"
+                                *ngFor='let ImgSrc of AllUploadedPhotos; let i = index'>
+                                <img alt="Image is loading" *ngIf='i < 4' class="padding3 hover-shadow cursor" width="50%" height="100px"
+                                    src="{{baseURLofAPi+ImgSrc.src}}" data-target="#carouselExample" attr.data-slide-to="{{i}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+    </div>
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="update-profile-pic-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Profile Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone profile-pic-success"></div>
+            <div class="alert alert-danger dispNone profile-pic-Danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-center">
+                    <img alt="Image is loading" class="profile-img"
+                        src="{{ getMemberData.profile_pic.length != 0 ? (baseURLofAPi+getMemberData.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                        width="50px">
+                    <p><input type="file" id="profilePicInput" class="marginTop15 widthOfInput"
+                            (change)="profilePhotosDropped($event.target.files)" single title=""></p>
+                    <p>{{profilePhotoName}}</p>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="submitProfilePic()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="update-cover-pic-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Cover Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone cover-pic-success"></div>
+            <div class="alert alert-danger dispNone cover-pic-Danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <img alt="Image is loading" class=""
+                    src="{{ getMemberData.cover_pic.length != 0 ? (baseURLofAPi+getMemberData.cover_pic[0].src) : '../../../assets/images/no-image.jpg' }}"
+                    width="100%" height="350px">
+                <p class="text-center"><input type="file" id="coverPicInput" class="marginTop15 widthOfInput"
+                        (change)="coverPhotosDropped($event.target.files)" single title=""></p>
+                <p class="text-center">{{coverPhotoName}}</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="submitCoverPic()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="update-bio-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Introduction</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone bio-success"></div>
+            <div class="alert alert-danger dispNone bio-Danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <textarea rows="7" class="form-control" id="bio"
+                    placeholder="Introduction">{{getMemberData.bio}}</textarea>
+                <input type="checkbox" id="check-Intro-public" [checked]="getMemberData.intro_public == 'Yes'">
+                <span><strong>&nbsp;Do you want your introduction to be visible to public?</strong></span>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="submitBio()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="social-link-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Social Links</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone social-link-success"></div>
+            <div class="alert alert-danger dispNone social-link-Danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p class="red">Example : https://www.example.com/</p>
+                <label>Facebook Link :</label><br>
+                <input class="form-control" type="text" placeholder="Facebook Link"
+                    value="{{getMemberData.facebook_link}}" id="facebook_link">
+                <label>Twitter Link :</label><br>
+                <input class="form-control" type="text" placeholder="Twitter Link"
+                    value="{{getMemberData.twitter_link}}" id="twitter_link">
+                <label>Linkedin Link :</label><br>
+                <input class="form-control" type="text" placeholder="Linkedin Link"
+                    value="{{getMemberData.linkedin_link}}" id="linkedin_link">
+                <label>Instagram Link :</label><br>
+                <input class="form-control" type="text" placeholder="Instagram Link"
+                    value="{{getMemberData.instagram_link}}" id="instagram_link">
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="submitSocialLinks()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="create-post-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create a post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="alert alert-success CreatePost-Success dispNone"></div>
+            <div class="alert alert-danger CreatePost-Danger dispNone"></div>
+            <form [formGroup]="CreatePostForm" (ngSubmit)="submitCreatePostForm()" enctype="multipart/form-data">
+                <div class="modal-body email-scroll">
+                    <p>Please fill in the details your property : </p>
+                    <div class="row">
+                        <div class="form-grou col-md-12">
+                            <label>Category : <span class="red">*</span></label>
+                            <select class="form-control col-md-9 float-right" id="category-create-post"
+                                formControlName="category">
+                                <option value="">Select Category</option>
+                                <option *ngFor="let categoryAll of categoryArray" value="{{categoryAll.category_name}}">
+                                    {{categoryAll.category_name}}
+                                </option>
+                            </select>
+                            <!-- <input class="form-control col-md-9 float-right" id="category" value=""
+                                formControlName="category"> -->
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Property Description : <span class="red">*</span></label>
+                            <textarea class="form-control col-md-9 float-right" id="property_desciption"
+                                placeholder="Property Description" rows="5"
+                                formControlName="property_desciption"></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>URL of Property (if any) :</label>
+                            <input class="form-control col-md-9 float-right" placeholder="" id="url_property"
+                                placeholder="URL of Property (if any)" formControlName="url_property">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Property Photos : <span class="red">*</span></label>
+                            <div class="dropzone form-control col-md-9 float-right" id="fullImageBox">
+                                <input type="file" #fileDropRef id="fileDropRef" formControlName="property_photos"
+                                    (change)="onFileDropped($event.target.files)" style="float: right;" multiple
+                                    accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                                <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                                <p>Drag and drop files here</p>
+                                <p>Or</p>
+                                <button for="fileDropRef">Browse for files</button>
+                            </div>
+                            <div class="form-control col-md-9 float-right files-list">                                
+                                <p *ngIf="files.length > 0">&nbsp;&nbsp;Please check on 1 checbox to be make photo as a cover photo : <br></p>                             
+                                <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                    <input type="checkbox" name="cover" class="MakeCoverPhotoPost" value="{{i}}" (click)="getCheckedValCo()"/>
+                                    <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                    <div class="info">
+                                        <p class="name">{{ file?.name}}</p>
+                                    </div>
+                                    <div class="float-right">
+                                        &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                            (click)="delteFile(i)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- user logged in Modal footer -->
+                <div class="modal-footer float-right">
+                    <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="upload-photos-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Photos</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!--user logged in Modal body -->
+            <div class="alert alert-success uploadPhotos-Success dispNone"></div>
+            <div class="alert alert-danger uploadPhotos-Danger dispNone"></div>
+            <form [formGroup]="UploadPhotosForm" (ngSubmit)="submitUploadPhotosForm()" enctype="multipart/form-data">
+                <div class="modal-body email-scroll">
+                    <div class="row">
+                        <div class="form-grou col-md-12">
+                            <label>Category : <span class="red">*</span></label>
+                            <select class="form-control col-md-9 float-right" id="category-upload-photos"
+                                formControlName="category">
+                                <option value="">Select Category</option>
+                                <option *ngFor="let categoryAll of categoryArray" value="{{categoryAll.category_name}}">
+                                    {{categoryAll.category_name}}
+                                </option>
+                            </select>
+                            <!-- <input class="form-control col-md-9 float-right" id="category"
+                                value="" readonly formControlName="category"> -->
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Property Photos : <span class="red">*</span></label>
+                            <div class="dropzone form-control col-md-9 float-right" id="fullImageBox">
+                                <input type="file" #fileUploadPhoto id="fileUploadPhoto"
+                                    formControlName="property_photos"
+                                    (change)="onUploadPhotosDropped($event.target.files)" style="float: right;" multiple
+                                    accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                                <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                                <p>Drag and drop files here</p>
+                                <p>Or</p>
+                                <button for="fileUploadPhoto">Browse for files</button>
+                            </div>
+                            <div class="form-control col-md-9 float-right files-list">
+                                <div class="single-files disFlex" *ngFor='let file of uploadPhotosfiles; let i = index'>
+                                    <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                    <div class="info">
+                                        <p class="name">{{ file?.name}}</p>
+                                    </div>
+                                    <div class="float-right">
+                                        &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                            (click)="deleteUploadPhotos(i)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- user logged in Modal footer -->
+                <div class="modal-footer float-right">
+                    <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="delete-post-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-success postDelete-success dispNone"></div>
+                <p class="">Are you sure you want to delete this post?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="confirmDeletePost()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- the modal -->
+<div class="modal fade" id="showUploadedPhotosModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Photos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                        <span class="fa fa-angle-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-comment-modal">
+    <div class="modal-dialog modal-lg" *ngIf="getOnePostData">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone send-comment-success"></div> -->
+            <div class="alert alert-danger dispNone send-comment-danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-md-7">
+                        <img alt="Image is loading" src="{{ baseURLofAPi+getOnePostData.cover_photo[0].src}}" width="100%" height="400px">
+                    </div>
+                    <div class="col-md-5">
+                        <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                        <!-- <p class="text-justify">{{getOnePostData.property_desciption}}</p> -->
+                        <!-- <button class="btn width-Like  likeBtn2 display-none"
+                        (click)="removePostLikeShare(1, buyerData._id)"></button> -->
+                  
+                        <span data-toggle="modal" data-target="#like-of-post-user">
+                            <a href="javascript:void(0);"><i class="fa fa-thumbs-up LikeInModal"></i></a>&nbsp;{{getLikeCount}}</span>
+                        <span class="fb-btn-like float-right">{{getCommentCount}} Comments</span><br>
+
+                        <div class="form-control comment-box maginTop10">
+                            <div id="comment-show-box">
+                                <div *ngFor="let commentText of getCommentPostData;">
+                                    <span class="spanCommentSection">
+                                    <img alt="Image is loading" class="border-radious50 float-left"
+                                        src="{{ commentText.user_id.profile_pic.length != 0 ? (baseURLofAPi+commentText.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">&nbsp;
+                                    <span class="divSender float-left">
+                                        <strong><a href="">{{ commentText.user_id.firstname }}&nbsp;{{ commentText.user_id.lastname }}</a></strong>
+                                        {{commentText.comment_text}}
+                                    </span></span>
+                                </div>
+                                <div id="appendMessage"></div>
+                            </div>
+                            <textarea class="form-control" id="send-comment-post" placeholder="write a comment"
+                                rows="3"></textarea>
+                            <button class="btn btn-primary send-comment"
+                                (click)="postLikeShare(2, getOnePostData._id)">Send</button>
+                        </div>
+                        <!-- <p *ngIf='getOnePostData.url_property !=""'>URL : 
+                            <a href="{{getOnePostData.url_property}}">{{getOnePostData.url_property}}</a>
+                        </p> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-comment-property-photo-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone send-comment-success"></div> -->
+            <div class="alert alert-danger dispNone send-comment-danger"></div>
+            <!-- Modal body data-ride="carousel"-->
+            <div class="modal-body ">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div id="carousel-one-post" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner">
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carousel-one-post" role="button" data-slide="prev">
+                                <span class="fa fa-angle-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-one-post" role="button" data-slide="next">
+                                <span class="fa fa-angle-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5" *ngIf="getOnePostData">
+                        <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                        <!-- <p class="text-justify">{{getOnePostData.property_desciption}}</p> -->
+                        <button *ngIf="!checkProductMedia(getOnePostData._id,getCurrentMediaPhotoID, '1')"
+                            class="btn width-Like UnlikeBtnn fa fa-thumbs-o-up"
+                            (click)="toggledMediaColor($event,getOnePostData._id,getCurrentMediaPhotoID, 1);">
+                            &nbsp;Like</button>
+                        <button *ngIf="checkProductMedia(getOnePostData._id,getCurrentMediaPhotoID, '1')"
+                            class="btn width-Like fb-btn-like likeBUtton fa fa-thumbs-up"
+                            (click)="toggledMediaColor($event,getOnePostData._id,getCurrentMediaPhotoID, 1);">
+                            &nbsp;Like</button>
+                        <span class="" data-toggle="modal" data-target="#like-of-mediapost-user"><a
+                                href="javascript:void(0);"><i
+                                    class="fa fa-thumbs-up LikeInModal"></i></a>&nbsp;{{getMediaLikeCount}}</span>
+                        <span class="fb-btn-like float-right">{{getMediaCommentCount}} Comments</span><br>
+                        <div class="form-control comment-box maginTop10">
+                            <div id="comment-show-box">
+                                <div *ngFor="let commentText of getMediaCommentPostData;">
+                                    <span class="spanCommentSection">
+                                    <img alt="Image is loading" class="border-radious50 float-left"
+                                        src="{{ commentText.user_id.profile_pic.length != 0 ? (baseURLofAPi+commentText.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">&nbsp;
+                                    <span class="divSender float-left">
+                                        <strong><a href="">{{ commentText.user_id.firstname }}&nbsp;{{ commentText.user_id.lastname }}</a></strong>
+                                        {{commentText.comment_text}}
+                                    </span></span>
+                                </div>
+                                <div id="appendMessageMedia"></div>
+                            </div>
+                            <textarea class="form-control" id="send-media-comment-post" placeholder="write a comment"
+                                rows="3"></textarea>
+                            <button class="btn btn-primary send-comment"
+                                (click)="MediapostLikeShare(2, getOnePostData._id, getCurrentMediaPhotoID)">Send</button>
+                        </div>
+                        <!-- <p *ngIf='getOnePostData.url_property !=""'>URL : 
+                            <a href="{{getOnePostData.url_property}}">{{getOnePostData.url_property}}</a>
+                        </p> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-of-mediapost-user" *ngIf="getMediaLikeCount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Like of Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div *ngFor="let lke of getMediaLikePostData">
+                    <img alt="Image is loading" class="border-radious50 float-left"
+                        src="{{ lke.user_id.profile_pic.length != 0 ? (baseURLofAPi+lke.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                        width="30px">&nbsp;
+                    <span class="divSender float-left">
+                        <strong>{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</strong>
+                        <!-- <strong><a href="">{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</a></strong> -->
+                    </span>
+                </div>
+                <!-- <div id="media-like-data-list"></div> -->
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-of-post-user" *ngIf="getLikeCount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Like of Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let lke of getLikePostData">
+                <img alt="Image is loading" class="border-radious50 float-left"
+                    src="{{ lke.user_id.profile_pic.length != 0 ? (baseURLofAPi+lke.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                    width="30px">&nbsp;
+                <span class="divSender float-left">
+                    <strong>{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</strong>
+                    <!-- <strong><a href="">{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</a></strong> -->
+                </span>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
