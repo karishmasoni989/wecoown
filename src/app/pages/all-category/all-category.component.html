@@ -1,0 +1,63 @@
+<!-- middle section -->
+<section class="wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+                <p class=" sectionPadding">{{'Select a category below and search for buyer\'s postings' | translateString | async}}</p>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+     
+    </div>
+    
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</section>
+<section class="entry-content" id="first-section-buyer">
+    <div class="row rowoftable" *ngFor="let allBuyer of allBuyerData, let i= index">
+        <div  class="col-md-4">
+           <a href="javascript:void(0);" (click)="goToCategoryName(allBuyer.category_name)" ><img alt="{{'Image is loading' | translateString | async}}" class="borderRadius10" src="{{ baseURLofAPi+allBuyer.banner_image.src }}" alt="{{'No Image' | translateString | async}}" width="100%" height="270px"></a> 
+            <!-- <img alt="Image is loading" src="{{ allBuyer.banner_image[0] != undefined ? allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}" alt="No Image" width="100%" height="200px"> -->
+            <!-- <div *ngFor="let photos of allBuyer.property_photos; let i = index">            
+                <img alt="Image is loading" *ngIf="allBuyer.property_photos == []" alt="No Image" width="100%" src="../../../assets/images/default.jpg" height="200px">  
+                <img alt="Image is loading" *ngIf="i == 0" alt="No Image" width="100%" src="../../../assets/images/no image.png" height="200px">  
+            </div> -->
+           
+            <!-- <img alt="Image is loading" routerLink="/categories/{{draftperfdata}}" class="img" 
+            src="{{(prod.images[0] != undefined ? prod.images[0].src : 'assets/icon/error.jpg') || 'assets/icon/error.jpg'}}"> -->
+        </div>
+        <div class="col-md-8">
+            <h3>{{'allBuyer.category_name' | translateString | async}}</h3>
+           <p class="desc text-justify">{{'allBuyer.description' | translateString | async}}</p>               
+           <button class="btn btn-primary" (click)="goToCategoryName(allBuyer.category_name)" >{{'Search More' | translateString | async}}</button> 
+        </div>       
+    </div>   
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{'Modal Heading' | translateString | async}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+         {{' Modal body..' | translateString | async}}
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">{{'Close' | translateString | async}}</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,81 @@
+.allPortfolio-box {
+  border: 1px solid #dae0e5;
+  border-radius: 0px 0px 5px 5px;
+  padding: 20px;
+  background: white;
+  margin-bottom: 20px;
+}
+
+.edit-pencil {
+  float: right;
+  right: 80px;
+  top: 353px;
+  position: absolute;
+}
+
+.widthOfInput {
+  width: 100px;
+  margin-top: 15px;
+}
+
+.page {
+  color: black;
+}
+
+.height300 {
+  height: 300px;
+  border-radius: 5px;
+}
+
+.bg-box-listing {
+  height: 135px;
+  max-height: auto;
+  overflow: hidden;
+  /* margin-bottom: 30px; */
+}
+
+.Padding-1rem {
+  padding: 1rem;
+}
+
+/* for show pupose in card */
+.showPUrposeCard {
+  margin-bottom: 0;
+  display: flow-root;
+}
+
+.padding5 {
+  padding: 5px;
+}
+
+.padding15 {
+  padding: 15px;
+}
+
+/* share button of listing */
+.btnShareListing {
+  background: #007bff;
+  color: white;
+  position: absolute;
+  right: 15px;
+  padding: 4px 8px;
+}
+
+.btnSoldOutListing {
+  left: 15px;
+  font-weight: 600;
+  background: red;
+  padding: 4px 8px;
+  color: white;
+  position: absolute;
+}
+
+/* .backGrey{
+    background-color: #f4f4f4;
+  } */
+@media screen and (max-width: 495px) {
+  .img-divvv {
+    height: 300px;
+    overflow: hidden;
+  }
+}

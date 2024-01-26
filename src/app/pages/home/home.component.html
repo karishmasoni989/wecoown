@@ -1,0 +1,183 @@
+<!-- middle section -->
+<section class="wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center line-height-intial">
+                <p class="ColorWhite sectionPadding">{{'List or Find Real Estate Properties & Personal Assets' | translateString | async}}</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="alert alert-danger BuyerDanger dispNone"></div>
+            <!-- <form [formGroup]="buyerForm" (ngSubmit)="submitBuyerForm()"> -->
+            <div>
+                <!-- <ul class="search-types" ng-class="searchTypeClass">
+                    <li class="search-types--for-sale">
+                        <h2>
+                            <button type="button" class="for-sale-button" ng-click="toggleSearchType('forSale')"
+                                title="Search for Commercial Real Estate for Sale">
+                                <span>For Sale</span>
+                            </button>
+                        </h2>
+                    </li>
+                    <li class="search-types--for-lease">
+                        <h2>
+                            <button type="button" class="for-lease-button" ng-click="toggleSearchType('forLease')"
+                                title="Search for Commercial Real Estate for Lease">
+                                <span>For Lease</span>
+                            </button>
+                        </h2>
+                    </li>
+                </ul> -->
+                <!-- <div class="search-container">
+                    <select id="category">
+                        <option value="">Select Property Type</option>
+                        <option *ngFor="let item of propertyType" value="{{item.property_type}}">{{item.property_type}}
+                        </option>
+                    </select>
+                    <input type="text" placeholder="Keywords">
+                    <button type="submit">Search</button>
+                </div>   -->
+                
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#for-sale-menu"><button type="button" class="for-sale-button" ng-click="toggleSearchType('forSale')"
+                        title="Search for Commercial Real Estate for Sale">
+                        <span>{{'For Sale' | translateString | async}}</span>
+                    </button></a></li>
+                    <li><a data-toggle="tab" href="#for-lease-menu"> <button type="button" class="for-lease-button" ng-click="toggleSearchType('forLease')"
+                        title="Search for Commercial Real Estate for Lease">
+                        <span>{{'For Lease' | translateString | async}}</span>
+                    </button></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="for-sale-menu" class="tab-pane active show">
+                        <div class="search-container">
+                            <select id="sale-category">
+                                <option value="">{{'Select Property Type' | translateString | async}}</option>
+                                <option *ngFor="let item of propertyType" value="{{item.property_type}}">{{item.property_type | translateString | async}}
+                                </option>
+                            </select>
+                            <input type="text" placeholder="{{'Keywords' | translateString | async}}" id="sale-keywords">
+                            <button type="submit" (click)="goToSearch(1)">{{'Search' | translateString | async}}</button>
+                        </div>  
+                    </div>
+                    <div id="for-lease-menu" class="tab-pane">
+                        <div class="search-container">
+                            <select id="lease-category">
+                                <option value="">{{'Select Property Type' | translateString | async}}</option>
+                                <option *ngFor="let item of propertyType" value="{{item.property_type}}">{{item.property_type | translateString | async}}
+                                </option>
+                            </select>
+                            <input type="text" placeholder="{{'Keywords' | translateString | async}}" id="lease-keywords">
+                            <button type="submit" (click)="goToSearch(2)">{{'Search' | translateString | async}}</button>
+                        </div>  
+                    </div>                  
+                </div>
+            </div>
+            <!-- </form> -->
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</section>
+<section class="rowPadding">
+    <div class="row paddingTopBottom ">
+        <div class="col-md-6">
+            <h2 class="homeHeading">{{'Welcome to WePropertyowners' | translateString | async}}!</h2>
+            <!-- <h3 class="home-sub-heading">We are WeCoOwn</h3> -->
+            <br>
+            <div class="row buttonWidthSame">
+                <div class="col-md-12">
+                    <!-- <p class="text-justify">Share consumption via property co-ownership with family, friends or members
+                        of our networking platform. Post a picture on your timeline of your desired cars, planes,
+                        yachts, artworks, wine, collectibles or real estate properties to
+                        buy. Wait for other like-minded potential co-owners to find out about your interests. They may
+                        contact you through our listing platform for you to buy, enjoy, rent out to earn income and
+                        manage the booking of these properties together.
+                        Existing property owners can also list their properties for sale or lease on the platform. The
+                        basic social membership with posting and listing privileges is free to all!
+                    </p> -->
+                    <p class="text-justify">
+                        {{'WePropertyowners (WePo) is a comprehensive global listing platform for physical real estate
+                        properties,
+                        personal assets, and tokenized crypto-assets that current owners can either sell in whole via
+                        traditional
+                        ways or in part via fractional share ownership of their properties and assets. New and existing
+                        owners may
+                        also lease their properties and assets to generate income. Sale proceeds and lease income could
+                        be
+                        denominated in traditional fiat currencies or cryptocurrencies based on decisions made via a
+                        decentralized
+                        peer-to-peer (P2P) basis.' | translateString | async}}
+                    </p>
+                    <p class="text-justify">
+                        {{'Buyers could not only search and find the properties and assets that they would like to rent or
+                         buy alone.
+                         Through the affiliated' | translateString | async}} <a href="javascript:void(0);" (click)="goToWeCoown()">WeCoOwn (WeCo)</a> {{'website buyers can also post a picture on their timeline
+                         of their
+                         desired cars, planes, yachts, artworks, wine, collectibles, or real estate properties to buy.
+                         Wait for other
+                         like-minded potential co-owners to find out about their interests to buy, enjoy, rent out to
+                         earn income, and
+                         manage the booking of these properties together.' | translateString | async}}
+                    </p>
+                    <p class="text-justify">{{'The regular social networking membership with posting and listing privileges is free to all users' | translateString | async}}!</p>
+                </div>             
+                <!-- <div class="col-md-6 text-center padding-bottom-20" id="buyerHome">
+                    <button class="btn btn-primary btn-lg"></button>
+                </div>
+                <div class="col-md-6 text-center padding-bottom-20" id="sellerHome">
+                    <button class="btn btn-orange btn-lg "></button> -->
+                <!-- <button class="btn btn-orange btn-lg" onclick="window.location.href='/i-am-seller'">List Properties as a Seller</button>
+                    <p class="text-center" style="margin: 5px;">Or</p>
+                    <button class="btn btn-orange btn-lg " href="#" onclick="window.location.href='/search-for-seller'">Search for Seller's Listings</button> -->
+            </div>
+        </div>
+        <!-- <p>&nbsp;</p> -->
+
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <img alt="Image is loading" class="" src="../../../assets/images/vacccc.jpeg" width="100%">
+            </div>
+            <div class="col-xl-6 text-center padding-20" id="buyerHome">
+                <button class="btn btn-primary btn-lg" (click)="goToForSale(1)">{{'Add Listings for Sale' | translateString | async}}&nbsp;</button>
+                <p class="text-center" style="margin: 5px;">{{'Or' | translateString | async}}</p>
+                <button class="btn btn-primary btn-lg" (click)="goToForSale(2)">{{'Add Listings for Lease' | translateString | async}}</button>
+            </div>
+            <div class="col-xl-6 text-center padding-20" id="sellerHome">
+                <button class="btn btn-orange btn-lg" (click)="goToForSale(1)">{{'Search for Sale Listings' | translateString | async}}&nbsp;</button>
+                <p class="text-center" style="margin: 5px;">{{'Or' | translateString | async}}</p>
+                <button class="btn btn-orange btn-lg" (click)="goToForSale(2)">{{'Search for Lease Listings' | translateString | async}}</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="myModal-goProperty">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{'WeCoOwn website' | translateString | async}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                {{'This feature will bring you to WeCoOwn website.' | translateString | async}}
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" (click)="goToWeCoown()">{{'Yes' | translateString | async}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{'Close' | translateString | async}}</button>
+            </div>
+        </div>
+    </div>
+</div>

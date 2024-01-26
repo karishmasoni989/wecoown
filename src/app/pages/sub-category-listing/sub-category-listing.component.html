@@ -1,0 +1,199 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>{{MemberSubCatURL}} {{'Listings' | translateString | async}}</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{'Home' | translateString | async}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{MemberSubCatURL}} {{'Listings' | translateString | async}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="page rowPadding">
+    <div class="row padding15 search-filter-by-multiple">
+        <div class="form-group padding5 all-listing-keyword">
+            <input class="form-control CheckForm" type="text" placeholder="Keywords" [(ngModel)]="getKeywords">
+            <button class="fa fa-search searchIcon btn" (click)="goToSearchFilter()"></button>
+        </div>
+        <div class="form-group padding5 width-purpose-type115">
+            <select class="form-control CheckForm" (change)="goToSearchFilter()" [(ngModel)]="getFinalPurpose">
+                <option value="">{{'Purpose' | translateString | async}}</option>
+                <option value="For Sale">{{'For Sale' | translateString | async}}</option>
+                <option value="For Lease">{{'For Lease' | translateString | async}}</option>
+                <option value="Both">{{'Both' | translateString | async}} {{'(For Sale & Lease)' | translateString | async}}</option>
+            </select>
+        </div>
+        <div class="form-group padding5 width-country150">
+            <select class="form-control CheckForm" (change)="changeCoutry($event.target.value);goToSearchFilter()"
+                [(ngModel)]="searchSelectCountry">
+                <!-- <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country" (change)="changeCoutry($event.target.value)"> -->
+                <option value="">{{'All Countries' | translateString | async}}</option>
+                <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                    {{task.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group padding5 width-state-city125">
+            <select class="form-control CheckForm" (change)="changeState($event.target.value);goToSearchFilter()"
+                [(ngModel)]="searchSelectState">
+                <!-- <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state" (change)="here($event.target.value)"> -->
+                <option value="">{{'All States' | translateString | async}}</option>
+                <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                    {{task.region}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group padding5 width-state-city125">
+            <select class="form-control CheckForm" (change)="goToSearchFilter()" [(ngModel)]="searchSelectCity">
+                <!-- <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city"> -->
+                <option value="">{{'All Cities' | translateString | async}}</option>
+                <option *ngFor="let task of getAllCities" value="{{task.name}}">
+                    {{task.name}}
+                </option>
+            </select>
+        </div>
+        <div class="padding5">
+            <button (click)="gotoCreateListing()" class="dropbtn form-control">{{'Create a listing' | translateString | async}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <div class="dropdown">
+                <button (click)="openDropdownList()" class="dropbtn">Create a listing</button>
+                <div id="myDropdown" class="dropdown-contentListt">
+                    <a routerLink="/listing-real-estate">Real Estate</a>
+                    <a routerLink="/listing-aircraft">Jets & Aircraft</a>
+                    <a routerLink="/listing-yachts">Yachts & Ships</a>                   
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+    <div class="row">
+        <h4 class="dispNone notFoundPost">{{'No item found' | translateString | async}}!</h4>
+        <h4 id="no-post-list" style="display: none;">{{'No listing uploaded yet' | translateString | async}}!</h4>
+        <div class="col-md-4 marginBottom30" *ngFor="let allBuyer of allPostdata, let i= index">
+            <div class="colorBlack borderRadius10 hoverRed"
+                routerLink="/listing-detail/{{allBuyer._id}}||{{allBuyer.name}}">
+                <!-- <div class="bgGrey colorBlack Padding-1rem ">                
+                    <p>{{allBuyer.address_line1}} {{allBuyer.address_line2}}  {{allBuyer.landmark}},</p>
+                    <p> {{allBuyer.zipcode}}  {{allBuyer.city}}  {{allBuyer.state}}  {{allBuyer.country}}  {{allBuyer.name}} For Sale</p>
+                     </div>       -->
+                <div class="bgGrey ShowPurposeDiv Padding-1rem topBorderRadius10">
+                    <p class="red marginBottom0">
+                        {{'Price' | translateString | async}}: {{allBuyer.price}}
+                    </p>
+                    <p class="showPUrposeCard">
+                        <span *ngIf="allBuyer.name === 'Jets & Aircraft'">{{'JA' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Real Estate'">{{'RE' | translateString | async}}{{allBuyer.Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Yachts & Ships'">{{'YS' | translateString | async}}{{allBuyer.Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Crowdfunding Projects'">{{'CP' | translateString | async}}{{allBuyer.Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Crypto-Assets'">{{'CA' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Horses & Live Stocks'">{{'HL' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Artworks & Antiques'">{{'AW' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Cars & RVs'">{{'CR' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.name === 'Business Properties'">{{'BP' | translateString | async}}{{allBuyer.Form_Serial_Number}}</span>
+                        <span *ngIf="allBuyer.purpose === 'Both'" class="float-right red">{{'Both' | translateString | async}} (For Sale & Lease)</span>
+                        <span *ngIf="allBuyer.purpose === 'For Sale'"
+                            class="float-right colorOrange">{{allBuyer.purpose}}</span>
+                        <span *ngIf="allBuyer.purpose === 'For Lease'"
+                            class="float-right colorBlue">{{allBuyer.purpose}}</span>
+                    </p>
+                </div>
+                <div class="img-divvv">
+                    <button *ngIf="allBuyer.Sold_out === true" class="btn btnSoldOutListing">Sold</button>
+                    <button class="btn btnShareListing"><i class="fa fa-share"></i></button>
+                    <a href="javascript:void(0);">
+                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpg'"
+                            class="height300" alt="Image is loading" width="100%"
+                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpeg'"
+                            class="height300" alt="Image is loading" width="100%"
+                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'png'"
+                            class="height300" alt="Image is loading" width="100%"
+                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                        <video controls
+                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'mp4'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                        <video controls
+                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'mov'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                        <video controls
+                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'webm'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                    </a>
+                    <!-- <img alt="Image is loading"  alt="No Image" width="100%" height="200px"> -->
+                </div>
+                <div class="bgGrey bg-box-listing Padding-1rem bottomBorderRadius10">
+                    <p style="margin-bottom: 0;"><strong>{{'Property Type' | translateString | async}}: {{allBuyer.name}}</strong> </p>
+                    <p><strong>{{'Address' | translateString | async}}: {{allBuyer.address_line1}}
+                            <span *ngIf="allBuyer.address_line2">, {{allBuyer.address_line2}} </span>
+                            <span *ngIf="allBuyer.landmark">, {{allBuyer.landmark}}</span>, {{allBuyer.city}},
+                            {{allBuyer.state | stateSplitNameShow}}, {{allBuyer.country | countrySplitNameShow}}, {{allBuyer.zipcode}}</strong> </p>
+                </div>
+                <!-- <a href="javascript:void(0);" (click)="goToCategoryName(allBuyer.category_name)" ><img alt="Image is loading" class="borderRadius10" src="{{ baseURLofAPi+allBuyer.banner_image.src }}" alt="No Image" width="100%" height="270px"></a>  -->
+                <!-- <div *ngFor="let photos of allBuyer.property_photos; let i = index">            
+                     <img alt="Image is loading" *ngIf="allBuyer.property_photos == []" alt="No Image" width="100%" src="../../../assets/images/default.jpg" height="200px">  
+                     <img alt="Image is loading" *ngIf="i == 0" alt="No Image" width="100%" src="../../../assets/images/no image.png" height="200px">  
+                 </div> -->
+
+                <!-- <img alt="Image is loading" routerLink="/categories/{{draftperfdata}}" class="img" 
+                 src="{{(prod.images[0] != undefined ? prod.images[0].src : 'assets/icon/error.jpg') || 'assets/icon/error.jpg'}}"> -->
+            </div>
+
+        </div>
+        <!-- <div class="col-md-8">
+            <h3>{{allBuyer.category_name}}</h3>
+           <p class="desc text-justify">{{allBuyer.description}}</p>               
+           <button class="btn btn-primary" (click)="goToCategoryName(allBuyer.category_name)" >Search More</button> 
+        </div>        -->
+    </div>
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{'Modal Heading' | translateString | async}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                {{'Modal body' | translateString | async}}..
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

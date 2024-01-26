@@ -1,0 +1,410 @@
+<div id="loader"></div>
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>{{'Profile Details' | translateString | async}}</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{'Home' | translateString | async}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'Profile Details' | translateString | async}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <div class="row">
+            <div class="col-md-3">
+                <br>
+                <button class="btn btn-primary" onclick="window.location.href='/user-signup-report'">{{'Back To Report' | translateString | async}}</button>
+            </div>
+            <div class="col-md-6">
+                <br>
+                <input type="text" class="property_head" readonly>
+                <div class="alert alert-success profile-success dispNone"></div>
+                <div class="alert alert-danger profile-danger dispNone"></div>
+               
+                    <p>{{'Registering as' | translateString | async}} :</p>
+                    <div class="checkbox form-group">
+                        <p>
+                            <input type="checkbox" id="role_1" value="1" checked disabled>&nbsp;{{'A buyer on WeCoOwn' | translateString | async}}<br>
+                            <input type="checkbox" id="role_2" value="2">&nbsp;{{'A seller on WePropertyowners' | translateString | async}}<br>
+                            <input type="checkbox" id="role_3" value="3">&nbsp;{{'A community member on WeHomeowners' | translateString | async}}<br>
+                            <input type="checkbox" id="role_4" value="4">&nbsp;{{'A community member on WeBusinessowners' | translateString | async}}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'First Name' | translateString | async}} : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="firstname" placeholder="{{'First Name' | translateString | async}}" id="firstname" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Last Name' | translateString | async}} : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="lastname" placeholder="{{'Last Name' | translateString | async}}" id="lastname" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Username' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="text" placeholder="{{'Username' | translateString | async}}" value="{{username}}" id="username" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Email Address' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="email" placeholder="{{'Email Address' | translateString | async}}" id="email" readonly value="{{email}}">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Designation' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="designation" readonly placeholder="{{'Designation' | translateString | async}}" id="designation" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Country' | translateString | async}} : </label>                
+                        <input class="form-control CheckForm" id="country-select" type="text" [(ngModel)]="getcountry" placeholder="{{'Country' | translateString | async}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'State' | translateString | async}} : </label>               
+                        <input class="form-control CheckForm" id="state-select" type="text" [(ngModel)]="getstate" placeholder="{{'State' | translateString | async}}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'City' | translateString | async}} : </label>                     
+                        <input class="form-control CheckForm" id="city-select" type="text" [(ngModel)]="getcity" placeholder="{{'City' | translateString | async}}" readonly>
+                    </div>
+                    <div class="checkbox form-group">
+                        <p>{{'Vendor Type' | translateString | async}}:</p>
+                        <div>
+                            <input type="checkbox" id="vendor_1" value="1">&nbsp;<span>
+                                {{'Real Estate Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-1" *ngIf="vender1 != '[]'">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender1.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender1.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender1.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender1.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_2" value="2">&nbsp;<span>
+                                {{'Mortgage Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-2" *ngIf="vender2 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender2.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender2.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender2.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender2.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_3" value="3">&nbsp;<span>
+                                {{'Ship Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-3" *ngIf="vender3 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender3.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender3.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender3.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender3.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_4" value="4">&nbsp;<span>
+                                {{'Yacht Charter Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-4" *ngIf="vender4 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender4.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender4.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender4.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender4.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_5" value="5">&nbsp;<span>
+                                {{'Shipyard' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-5" *ngIf="vender5 != []">
+                             
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender5.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender5.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender5.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender5.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_6" value="6">&nbsp;<span>
+                                {{'Aircraft Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-6" *ngIf="vender6 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender6.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender6.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender6.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender6.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_7" value="7">&nbsp;<span>
+                                {{'Jet Charter Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-7" *ngIf="vender7 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender7.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender7.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender7.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender7.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_8" value="8">&nbsp;<span>
+                                {{'Jet FBO' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-8" *ngIf="vender8 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender8.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender8.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender8.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender8.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_9" value="9">&nbsp;<span>
+                                {{'Art Dealer' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-9" *ngIf="vender9 != []">
+                             
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender9.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender9.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender9.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender9.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_10" value="10">&nbsp;<span>
+                                {{'Appraiser' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-10" *ngIf="vender10 != []">
+                          
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender10.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender10.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender10.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender10.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_11" value="11">&nbsp;<span>
+                                {{'Property Manager' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-11" *ngIf="vender11 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender11.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender11.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender11.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender11.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_12" value="12">&nbsp;<span>
+                                {{'Inspection Company' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-12" *ngIf="vender12 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender12.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender12.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender12.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender12.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_13" value="13">&nbsp;<span>
+                                {{'Mechanic & Technician' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-13" *ngIf="vender13 != []">
+                        
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender13.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender13.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender13.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender13.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_14" value="14">&nbsp;<span>
+                                {{'Construction & Repair Company' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-14" *ngIf="vender14 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender14.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender14.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender14.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender14.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_15" value="15">&nbsp;<span>
+                                {{'Insurance Agent' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-15" *ngIf="vender15 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender15.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender15.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender15.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender15.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_16" value="16" >&nbsp;<span>
+                                {{'Bank Lender' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-16" *ngIf="vender16 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender16.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender16.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender16.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender16.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_17" value="17" >&nbsp;<span>
+                                {{'Loan Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-17" *ngIf="vender17 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender17.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender17.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender17.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender17.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_18" value="18" >&nbsp;<span>
+                                {{'Escrow & Title Company' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-18" *ngIf="vender18 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender18.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender18.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender18.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender18.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_19" value="19">&nbsp;<span>
+                                {{'Attorney' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-19" *ngIf="vender19 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender19.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender19.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender19.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender19.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_20" value="20">&nbsp;<span>
+                                {{'Company Formation Agent' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-20" *ngIf="vender20 != []">
+                              
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender20.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender20.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender20.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender20.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_21" value="21" >&nbsp;<span>
+                                {{'Accountant' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-21" *ngIf="vender21 != []">
+                             
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender21.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender21.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender21.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender21.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_22" value="22">&nbsp;<span>
+                                {{'Secretarial Service' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-22" *ngIf="vender22 != []">
+                     
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender22.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender22.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender22.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender22.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_23" value="23">&nbsp;<span>
+                                {{'Publications' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-23" *ngIf="vender23 != []">
+                             
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender23.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender23.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender23.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender23.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_24" value="24" >&nbsp;<span>
+                                {{'Others' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-24" *ngIf="vender24 != []">
+                               
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender24.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender24.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender24.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender24.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_25" value="25">&nbsp;<span>
+                            {{'Crowdfunding Sponsor' | translateString | async}}</span>&nbsp;&nbsp;
+                        <div class="form-control pTagMargin dispNone" id="div-vender-25" *ngIf="vender25 != []">
+                           
+                            <p><strong>{{'Company Name' | translateString | async}}</strong> :
+                                {{vender25.company_name}}</p>
+                            <p><strong>{{'Company Email Address' | translateString | async}}</strong> :
+                                {{vender25.company_email}}</p>
+                            <p><strong>{{'Company Website Address' | translateString | async}}</strong> :
+                                {{vender25.company_website}}</p>
+                            <p><strong>{{'Company Address' | translateString | async}}</strong> :
+                                {{vender25.company_address}}</p>
+                        </div>
+                        </div>
+                    </div>
+                  
+            </div>
+            <div class="col-md-3">
+                <br>
+            </div>
+        </div>
+    </section>
+    <br>
+</div>

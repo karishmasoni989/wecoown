@@ -1,0 +1,16 @@
+.form-group {
+  margin-bottom: 0px;
+}
+
+.orangeColor {
+  font-weight: 600;
+  color: orange;
+}
+
+.peroperty-fatcs {
+  padding: 20px 10px;
+  border-radius: 5px;
+  margin: 0px;
+  border: 1px solid #ced4da;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,20 @@
+.backBlueAndPadding {
+    background-color: #8496fa;
+    color: white;
+    border-radius: 5px;
+    height: 450px;
+    margin-bottom: 20px;
+  }
+  .membershipText{
+      font-size: 20px;
+      font-weight: 600;
+  }
+  .subcribeButton{
+      background: orange;
+      color: white;
+      height: 44px;
+      border: none;
+      border-radius: 21px;
+      padding: 8px 16px;
+      margin-top: 10px;
+  }

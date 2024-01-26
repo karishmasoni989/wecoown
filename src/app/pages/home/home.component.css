@@ -1,0 +1,161 @@
+@media screen and (max-width:400px) {}
+
+@media only screen and (min-device-width: 401px) and (max-device-width: 600px) {}
+
+@media only screen and (min-device-width: 601px) and (max-device-width: 991px) {}
+
+.wrap {
+    background-image: url('../../../assets/images/real estate 3.jpg') !important;
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    position: relative;
+    padding: 100px 140px;
+    overflow: hidden;
+}
+
+.sectionPadding {
+    font-size: 43px;
+}
+
+.search-container {
+    background-color: rgba(0, 0, 0, .8);
+    padding: 10px;
+    font-size: 1.375rem;
+}
+#for-lease-menu .search-container {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 10px;
+    font-size: 1.375rem;
+}
+.entry-content p {
+    overflow-wrap: break-word !important;
+}
+
+.search-container select {
+    padding: 10px;
+    width: 25%;
+    height: 55px;
+    margin-right: 10px;
+}
+
+.search-container input {
+    padding: 10px;
+    width: 53%;
+    height: 55px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    height: 55px;
+    background-color: #ec7834;
+    color: #fff;
+    width: 19%;
+    margin: 0;
+    border-color: transparent;
+}
+
+section.entry-content {
+    padding: 40px;
+}
+
+.rowoftable {
+    padding: 25px;
+    border-bottom: 1px solid #4b779e
+}
+
+.desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.search-types {
+    display: flex;
+    margin: 0;
+}
+
+.search-types h2 {
+    margin-bottom: 0;
+}
+
+.for-sale-button {
+    color: #fff;
+    font-size: 1.375rem;
+    background-color: rgba(0, 0, 0, .8);
+    padding: 17px 30px;
+    border: 0;
+    margin-right: 4px;
+}
+
+.for-lease-button {
+    color: #fff;
+    font-size: 1.375rem;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 17px 30px;
+    border: 0;
+}
+
+@media screen and (max-width: 500px) {
+    section.entry-content {
+        padding: 5px;
+    }
+    .search-container input {
+        padding: 10px;
+        width: 100%;
+        height: 55px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .search-container select {
+        padding: 10px;
+        width: 100%;
+        height: 55px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .search-container button {
+        height: 55px;
+        background-color: #ec7834;
+        color: #fff;
+        width: 100%;
+        margin: 0;
+        border-color: transparent;
+    }
+    .sectionPadding {
+        font-size: 30px;
+    }
+    .wrap {
+        background-image: url('../../../assets/images/real estate 3.jpg') !important;
+        background-color: #ddd;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
+        position: relative;
+        padding: 35px 33px;
+        overflow: hidden;
+    }
+}
+
+p {
+    font: normal 16px / 29px "Roboto", Helvetica, Arial, Verdana, sans-serif
+}
+
+.homeHeading {
+    font-size: 2.2rem;
+    color: #ec7834 !important;
+}
+
+.home-sub-heading {
+    font-size: 2.5rem;
+}
+
+div.buttonWidthSame button {
+    width: 271px;
+}
+.line-height-intial{
+    line-height: initial;
+}

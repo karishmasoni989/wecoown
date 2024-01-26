@@ -1,0 +1,449 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Property Type: Artworks & Antiques</h3>
+        <h5 class="createListing">Serial Number: AW{{getCurrentSerialNumber}}</h5>
+        <h5 class="updateListing dispNone">Serial Number: AW{{Form_Serial_Number}}</h5>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400 Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>   
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                 -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name"
+                        [(ngModel)]="Tittle_Name" formControlName="Tittle_Name">
+                    <label>Property Type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input [(ngModel)]="Artwork_type" readonly formControlName="Artwork_type"
+                        class="form-control CheckForm" type="text">
+                    <label>Property Sub-type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="Artwork_subtype" (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="Artwork_subtype">
+                        <option value="">Select Artworks & Antiques Sub-type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose"
+                        (change)="changePurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+
+            <div class="row peroperty-fatcs westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques Collectibles">
+                <div class="col-md-12">
+                    <h4>General:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price">
+                </div>
+                <div class="form-group col-md-4 westernPaintings">
+                    <label>Provenance:</label><br>
+                    <input [(ngModel)]="Provenance" formControlName="Provenance" class="form-control CheckForm" type="text"
+                        placeholder="Provenance">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks">
+                    <label>Medium:</label><br>
+                    <input [(ngModel)]="Medium" formControlName="Medium" class="form-control CheckForm" type="text"
+                        placeholder="Medium">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings contemporaryArtworks digitalArtworks">
+                    <label>Features:</label><br>
+                    <input [(ngModel)]="Features" formControlName="Features" class="form-control CheckForm" type="text"
+                        placeholder="Features">
+                </div>
+                <div class="form-group col-md-4 westernPaintings contemporaryArtworks modernArtworks digitalArtworks Antiques">
+                    <label>Listed By:</label><br>
+                    <input [(ngModel)]="Listed_By" formControlName="Listed_By" class="form-control CheckForm" type="text"
+                        placeholder="Listed By">
+                </div>
+                <div class="form-group col-md-4 Sculptures">
+                    <label>MPN:</label><br>
+                    <input [(ngModel)]="MPN" formControlName="MPN" class="form-control CheckForm" type="text"
+                        placeholder="MPN">
+                </div>
+                <div class="form-group col-md-4 Sculptures">
+                    <label>Placement:</label><br>
+                    <input [(ngModel)]="Placement" formControlName="Placement" class="form-control CheckForm" type="text"
+                        placeholder="Placement">
+                </div>
+                <div class="form-group col-md-4 Sculptures">
+                    <label>Model Number:</label><br>
+                    <input [(ngModel)]="Model_number" formControlName="Model_number" class="form-control CheckForm" type="text"
+                        placeholder="Model Number">
+                </div>
+                <div class="form-group col-md-4 orientalPaintings Sculptures contemporaryArtworks modernArtworks">
+                    <label>Quantity Type:</label><br>
+                    <input [(ngModel)]="Quantity_Type" formControlName="Quantity_Type" class="form-control CheckForm" type="text"
+                        placeholder="Quantity Type">
+                </div>
+                <div class="form-group col-md-4 digitalArtworks Antiques Collectibles">
+                    <label>Artwork Description:</label><br>
+                    <input [(ngModel)]="Artwork_Description" formControlName="Artwork_Description" class="form-control CheckForm" type="text"
+                        placeholder="Artwork Description">
+                </div>
+                <div class="form-group col-md-4 digitalArtworks Antiques">
+                    <label>Maker:</label><br>
+                    <input [(ngModel)]="Maker" formControlName="Maker" class="form-control CheckForm" type="text"
+                        placeholder="Maker">
+                </div>
+                <div class="form-group col-md-4 Antiques Collectibles">
+                    <label>Condition:</label><br>
+                    <input [(ngModel)]="Condition" formControlName="Condition" class="form-control CheckForm" type="text"
+                        placeholder="Condition">
+                </div>
+                <div class="form-group col-md-4 Collectibles">
+                    <label>Circulated/Uncirculated:</label><br>
+                    <input [(ngModel)]="Circulated_Uncirculated" formControlName="Circulated_Uncirculated" class="form-control CheckForm" type="text"
+                        placeholder="Circulated/Uncirculated">
+                </div>
+                <div class="form-group col-md-4 Collectibles">
+                    <label>Modified Item:</label><br>
+                    <input [(ngModel)]="Modified_Item" formControlName="Modified_Item" class="form-control CheckForm" type="text"
+                        placeholder="Modified Item">
+                </div>
+            </div>
+
+            <div class="row peroperty-fatcs westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques Collectibles">
+                <div class="col-md-12">
+                    <h4>Artwork Details:</h4>
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks">
+                    <label>Subject:</label><br>
+                    <input [(ngModel)]="Subject" formControlName="Subject" class="form-control CheckForm" type="text"
+                        placeholder="Subject">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques">
+                    <label>Style:</label><br>
+                    <input [(ngModel)]="Style" formControlName="Style" class="form-control CheckForm" type="text"
+                        placeholder="Style">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks Antiques">
+                    <label>Region of Origin:</label><br>
+                    <input [(ngModel)]="Region_of_Origin" formControlName="Region_of_Origin" class="form-control CheckForm" type="text"
+                        placeholder="Region of Origin">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings">
+                    <label>Painting Surface:</label><br>
+                    <input [(ngModel)]="Painting_Surface" formControlName="Painting_Surface" class="form-control CheckForm" type="text"
+                        placeholder="Painting Surface">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings">
+                    <label>Date of Creation:</label><br>
+                    <input [(ngModel)]="Date_of_Creation" formControlName="Date_of_Creation" class="form-control CheckForm" type="date"
+                        placeholder="Date of Creation" data-date-format="dd/MM/yyyy" value="{{Date_of_Creation | date : 'yyyy-MM-dd'}}">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks">
+                    <label>Originality:</label><br>
+                    <input [(ngModel)]="Originality" formControlName="Originality" class="form-control CheckForm" type="text"
+                        placeholder="Originality">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings contemporaryArtworks digitalArtworks">
+                    <label>Artist:</label><br>
+                    <input [(ngModel)]="Artist" formControlName="Artist" class="form-control CheckForm" type="text"
+                        placeholder="Artist">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings">
+                    <label>Signed:</label><br>
+                    <select class="form-control CheckForm" formControlName="Signed" [(ngModel)]="Signed" (change)="changePurposeSigned($event.target.value)">
+                        <option value="">Select for Signed</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures Antiques Collectibles">
+                    <label>Original/Reproduction:</label><br>
+                    <input [(ngModel)]="Original_Reproduction" formControlName="Original_Reproduction" class="form-control CheckForm" type="text"
+                        placeholder="Original/Reproduction">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Grade:</label><br>
+                    <input [(ngModel)]="Grade" formControlName="Grade" class="form-control CheckForm" type="text"
+                        placeholder="Grade">
+                </div>
+                <div class="form-group col-md-4 Sculptures contemporaryArtworks digitalArtworks">
+                    <label>Color:</label><br>
+                    <input [(ngModel)]="Color" formControlName="Color" class="form-control CheckForm" type="text"
+                        placeholder="Color">
+                </div>
+                <div class="form-group col-md-4 Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques">
+                    <label>Date of Creation:</label><br>
+                    <input [(ngModel)]="Date_of_Creation" formControlName="Date_of_Creation" class="form-control CheckForm" type="text"
+                        placeholder="Date of Creation" value="{{Date_of_Creation | date : 'yyyy-MM-dd'}}">
+                </div>
+                <div class="form-group col-md-4 Sculptures">
+                    <label>Culture:</label><br>
+                    <input [(ngModel)]="Culture" formControlName="Culture" class="form-control CheckForm" type="text"
+                        placeholder="Culture">
+                </div>
+                <div class="form-group col-md-4 Sculptures Antiques Collectibles">
+                    <label>Type:</label><br>
+                    <input [(ngModel)]="Type" formControlName="Type" class="form-control CheckForm" type="text"
+                        placeholder="Type">
+                </div>
+                <div class="form-group col-md-4 digitalArtworks">
+                    <label>Print Surface:</label><br>
+                    <input [(ngModel)]="Print_Surface" formControlName="Print_Surface" class="form-control CheckForm" type="text"
+                        placeholder="Print Surface">
+                </div>
+                <div class="form-group col-md-4 digitalArtworks">
+                    <label>Printing Technique:</label><br>
+                    <input [(ngModel)]="Printing_Technique" formControlName="Printing_Technique" class="form-control CheckForm" type="text"
+                        placeholder="Printing Technique">
+                </div>
+                <div class="form-group col-md-4 Antiques Collectibles">
+                    <label>History:</label><br>
+                    <input [(ngModel)]="History" formControlName="History" class="form-control CheckForm" type="text"
+                        placeholder="History">
+                </div>
+                <div class="form-group col-md-4 Collectibles">
+                    <label>Country/Region Manufacture:</label><br>
+                    <input [(ngModel)]="Country_Region_Manufacture" formControlName="Country_Region_Manufacture" class="form-control CheckForm" type="text"
+                        placeholder="Country/Region Manufacture">
+                </div>
+            
+            </div>
+
+            <div class="row peroperty-fatcs westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques Collectibles">
+                <div class="col-md-12 westernPaintings orientalPaintings contemporaryArtworks digitalArtworks">
+                    <h4>Dimensions:</h4>
+                </div>
+                <div class="col-md-12 Sculptures modernArtworks Antiques">
+                    <h4>Dimensions, Weight and Material:</h4>
+                </div>
+                <div class="col-md-12 Collectibles">
+                    <h4>Size, Weight and Material:</h4>
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques">
+                    <label>Width (inches):</label><br>
+                    <input [(ngModel)]="Width_Inches" formControlName="Width_Inches" class="form-control CheckForm" type="text"
+                        placeholder="Width (inches)">
+                </div>
+                <div class="form-group col-md-4 westernPaintings orientalPaintings Sculptures contemporaryArtworks modernArtworks digitalArtworks Antiques">
+                    <label>Height (inches):</label><br>
+                    <input [(ngModel)]="Height_Inches" formControlName="Height_Inches" class="form-control CheckForm" type="text"
+                        placeholder="Height (inches)">
+                </div>
+                <!-- <div class="form-group col-md-4">
+                    <label>Size:</label><br>
+                    <input [(ngModel)]="Size" formControlName="Size" class="form-control CheckForm" type="text"
+                        placeholder="Size">
+                </div> -->
+                <div class="form-group col-md-4 Sculptures Antiques Collectibles">
+                    <label>Weight:</label><br>
+                    <input [(ngModel)]="Weight" formControlName="Weight" class="form-control CheckForm" type="text"
+                        placeholder="Weight">
+                </div>
+                <div class="form-group col-md-4 Sculptures modernArtworks Antiques Collectibles">
+                    <label>Material Used:</label><br>
+                    <input [(ngModel)]="Material_used" formControlName="Material_used" class="form-control CheckForm" type="text"
+                        placeholder="Material Used">
+                </div>
+                <div class="form-group col-md-4 Sculptures Antiques Collectibles">
+                    <label>Measurements:</label><br>
+                    <input [(ngModel)]="Measurements" formControlName="Measurements" class="form-control CheckForm" type="text"
+                        placeholder="Measurements">
+                </div>
+            
+            </div>
+
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share:</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>

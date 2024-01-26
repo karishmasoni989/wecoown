@@ -1,0 +1,311 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>PBMS</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">PBMS</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row not-logged-in display-none">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <h4>You are not logged in. You must first login for more information.
+                </h4>
+                <button type="button" class="btn btn-primary maginTop10"
+                    onclick="window.location.href='/login'">Login</button>
+            </div>
+        </div>
+        <div class="row logged-in-user alreadymembership display-none">
+            <div class="col-md-3">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <h4 *ngIf="memberShipTypePre">You are already have a {{memberShipTypePre}} membership from
+                    {{startdateMebershipPre | date : 'dd-MM-yyyy'}} to
+                    {{enddateMebershipPre | date : 'dd-MM-yyyy'}}.
+                </h4>
+            </div>
+            <!-- <div class="col-md-9">
+                <h3>Click here to go to my portfolio!</h3>
+                <button class="btn btn-primary maginTop10" onclick="window.location.href='/user-profile'">My Portfolio</button>
+            </div> -->
+            <!-- <div class="col-md-9 samePostUserId display-none">
+                <h3>Invite Friends</h3>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="alert alert-success dispNone inviteSuccess"></div>
+                        <div class="alert alert-danger dispNone inviteDanger"></div>
+                        <ng-select [items]="getAllMembersdata" [multiple]="true" bindLabel="firstname" bindValue="_id"
+                            [(ngModel)]="selectedUserIds">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label selectedPadd"><a href=""><img class="radius50Per"
+                                            src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px">
+                                        {{item.firstname}} {{item.lastname}}</a></span>
+                                <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                    aria-hidden="true">×</span>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item">
+                                <img class="radius50Per"
+                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                    width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                            </ng-template>
+                        </ng-select>                       
+                        <button class="btn btn-primary maginTop10" (click)="sendInvitation()">Invite</button>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-6 notSamePostUserId display-none">
+                <div class="alert alert-success dispNone bookReqSuccess"></div>
+                <div class="alert alert-danger dispNone bookReqDanger"></div>
+                <h3>If You like this post then please click on show interest button!</h3>
+                <button class="btn btn-primary maginTop10" (click)="sendBookReq()">Show Interest</button>
+            </div> -->
+        </div>
+        <div class="row logged-in-user notAlreadymembership display-none">
+            <div class="col-md-3"></div>          
+            <form class="ModalCloseClick col-md-6" [formGroup]="addMembershipForm" (ngSubmit)="submitMemberShip()">
+                <div class="">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <label class="checkContainer">Premier Membership
+                        <input type="radio" checked="checked" name="radio" id="premier-check" (click)="checkRadio(1)">
+                        <span class="checkmark"></span>&nbsp;&nbsp;
+                    </label>
+                    <label class="checkContainer">Professional Membership
+                        <input type="radio" name="radio" id="professional-check" (click)="checkRadio(2)">
+                        <span class="checkmark"></span>&nbsp;&nbsp;
+                    </label><br><br>
+                    <p class="premierVal">Your premier membership $30 for a month. Your trial period for 3 days.</p>
+                    <p class="professionalVal dispNone">Your professional membership $50 for a month. Your trial
+                        period
+                        for 3 days.</p>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Card Type : </label><br>
+                            <select class="form-control" id="Card_Type" formControlName="Card_Type">
+                                <option value="">Select Card Type</option>
+                                <option value="1">Visa</option>
+                                <option value="2">MasterCard</option>
+                                <option value="3">Amex</option>
+                                <option value="4">Discover</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Number : </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Number" maxlength="16"
+                                formControlName="Card_Number" id="Card_Number" value=""
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Holder Name: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Holder Name"
+                                formControlName="card_holder_name" id="card_holder_name" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>CVV: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="CVV" maxlength="3"
+                                formControlName="cvv" id="cvv" value=""
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Expiration : </label><br><br>
+                            <div class="disFlex marginTopMinus15">
+                                <select class="form-control" id="exp_month" formControlName="exp_month">
+                                    <option value="">Select Month</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="slash">/</label>
+                                <select class="form-control" id="exp_year" formControlName="exp_year">
+                                    <option value="">Select Year</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <p>&nbsp;</p>
+        <!-- <div class="row" > -->
+            <div class="allPortfolio-box" *ngIf="getMyAllPortfolioData.length != 0">
+                <div class="card marginBottom10">
+                    <div class="card-header">
+                        <h2 class="margin-bottom-0">My Portfolio
+                            <button class="btn btn-primary float-right" (click)="checkAlreadymembership()"
+                                data-keyboard="false" data-backdrop="static" data-target="#my-portfolio-modal"
+                                data-toggle="modal">Create Property/Assets</button>
+                        </h2>
+                    </div>
+                    <div class="card-body" *ngFor="let item of getMyAllPortfolioData">
+                        <!-- <div> -->
+                        <a href="javascript:void(0);" (click)="goToMemberPage(item.sender_id._id)">
+                            <img alt="Image is loading" class="border-radious50 marginRight5"
+                                src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                width="40px" height="40px">
+                            <span><strong>{{item.sender_id.firstname}} {{item.sender_id.lastname}}</strong></span>
+                        </a>
+                        <span> created the property
+                            <strong>{{item.title}}.</strong> You are <span
+                                *ngIf="item.sender_id._id == getCurrentUser">admin</span>
+                            <span *ngIf="item.sender_id._id != getCurrentUser">member</span> of the property.
+                        </span>
+                        <h6>Property Url : <a href="{{item.property_url}}" target="_blank">{{item.property_url}}</a>
+                        </h6>
+                        <h6>Members : {{1+item.recevier_id.length}}</h6>
+                        <div class="about-portfolio">
+                            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)"
+                                    (click)="goToMemberPage(item.sender_id._id)"><img alt="Image is loading"
+                                        class="border-radious50"
+                                        src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">
+                                    {{item.sender_id.firstname}}
+                                    {{item.sender_id.lastname}}</a></span>
+                            <span class="spanForAllImageWithUsername" *ngFor="let member of item.recevier_id"><a
+                                    href="javascript:void(0)" (click)="goToMemberPage(member.user_id._id)"><img
+                                        alt="Image is loading" class="border-radious50"
+                                        src="{{ member.user_id.profile_pic.length != 0 ? (baseURLofAPi+member.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">
+                                    {{member.user_id.firstname}} {{member.user_id.lastname}}</a></span>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </section>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="my-portfolio-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create a Portfolio</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>You don't have any membership. Please purchase a membership for more infomation.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary" onclick='window.location.href="/pbms"'>Purchase
+                    Membership</button>
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+
+            <form class="ModalCloseClick alreadymembership display-none" [formGroup]="createMyPortfolio"
+                id="myPortfolioCreateFormTag" (ngSubmit)="submitMyPortfolio()">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Property url : <span class="red">*</span></label>
+                            <input class="form-control col-md-9 float-right" placeholder="Property url"
+                                formControlName="property_url" id="property_url" value="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Title : <span class="red">*</span></label>
+                            <input class="form-control col-md-9 float-right" placeholder="Title" formControlName="title"
+                                id="title" value="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Invite members : <span class="red">*</span></label>
+                            <div class="col-md-9 float-right paddingAll0">
+                                <div class="alert alert-success dispNone inviteSuccess"></div>
+                                <div class="alert alert-danger dispNone inviteDanger"></div>
+                                <ng-select [items]="getAllMembersdata" [multiple]="true" bindLabel="firstname"
+                                    bindValue="_id" [(ngModel)]="selectedUserIds" [ngModelOptions]="{standalone: true}">
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                    class="radius50Per"
+                                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                    width="30px" height="30px">
+                                                {{item.firstname}} {{item.lastname}}</a></span>
+                                        <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                            aria-hidden="true">×</span>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <img class="radius50Per"
+                                            src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

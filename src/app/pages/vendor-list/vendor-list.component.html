@@ -1,0 +1,36 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Vendor Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{'Home' | translateString | async}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'Vendor Listings' | translateString | async}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div style="color: black;" *ngFor="let allItem of getAllData | keyvalue; let i = index;">
+            <h3>{{allItem.key}}:</h3>
+            <div class="row">
+                <div class="col-md-3" *ngFor="let item of allItem.value ; let k = index;">
+                    <div style="height: 320px;">
+                        <!-- <img alt="Image is loading" src="{{ baseURLofAPi+item.ad_image[0].src }}"
+                        width="100%"> -->
+                        <a href="{{item.vendor_url}}" target="_blank"><img class="img-border" alt="Image is loading" height="260px" src="{{ item.ad_image.length != 0 ? (baseURLofAPi+item.ad_image[0].src) : '../../../assets/images/no-image.jpg' }}" width="100%"></a>
+                        <a href="{{item.vendor_url}}" target="_blank">
+                            <p class="desc p-size">{{item.vendor_name}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

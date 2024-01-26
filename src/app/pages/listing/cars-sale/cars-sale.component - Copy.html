@@ -1,0 +1,599 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Property Type: Cars & RVs</h3>
+        <h5 class="createListing">Serial Number: CR{{getCurrentSerialNumber}}</h5>
+        <h5 class="updateListing dispNone">Serial Number: CR{{Form_Serial_Number}}</h5>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400 Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>   
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                 -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name"
+                        [(ngModel)]="Tittle_Name" formControlName="Tittle_Name">
+                    <label>Property Type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input [(ngModel)]="Cars_Rv_type" readonly formControlName="Cars_Rv_type"
+                        class="form-control CheckForm" type="text">
+                    <label>Property Sub-type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="Cars_Rv_subtype" (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="Cars_Rv_subtype">
+                        <option value="">Select Cars & RVs Sub-Type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose">
+                        (change)="changePurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+
+            <div class="row peroperty-fatcs luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses eVsHybrids trucks vansLimos">
+                <div class="col-md-12">
+                    <h4>General:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price:</label><br>
+                    <input [(ngModel)]="price" formControlName="price" class="form-control CheckForm" type="text"
+                        placeholder="Price">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Body Type:</label><br>
+                    <input [(ngModel)]="Body_type" formControlName="Body_type" class="form-control CheckForm" type="text"
+                        placeholder="Body Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Make Model:</label><br>
+                    <input [(ngModel)]="make_model" formControlName="make_model" class="form-control CheckForm" type="text"
+                        placeholder="Make Model">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year Manufactured:</label><br>
+                    <input [(ngModel)]="year_built" formControlName="year_built" class="form-control CheckForm" type="text"
+                        placeholder="Year Manufactured">
+                </div>
+            
+            
+            </div>
+
+            <div class="row peroperty-fatcs luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses eVsHybrids trucks vansLimos">
+                <div class="col-md-12">
+                    <h2>Specifications:</h2>
+                </div>
+                <div class="col-md-12">
+                    <h4>Overview:</h4>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Body Color:</label><br>
+                    <input [(ngModel)]="Body_color" formControlName="Body_color" class="form-control CheckForm" type="text"
+                        placeholder="Body Color">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Gear Box:</label><br>
+                    <input [(ngModel)]="Gear_Box" formControlName="Gear_Box" class="form-control CheckForm" type="text"
+                        placeholder="Gear Box">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Drive Type:</label><br>
+                    <input [(ngModel)]="Drive_Type" formControlName="Drive_Type" class="form-control CheckForm" type="text"
+                        placeholder="Drive Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Seating Capacity:</label><br>
+                    <input [(ngModel)]="Seating_Capacity" formControlName="Seating_Capacity" class="form-control CheckForm" type="text"
+                        placeholder="Seating Capacity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Steering Type:</label><br>
+                    <input [(ngModel)]="Steering_Type" formControlName="Steering_Type" class="form-control CheckForm" type="text"
+                        placeholder="Steering Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Turning Radius:</label><br>
+                    <input [(ngModel)]="Turning_Radius" formControlName="Turning_Radius" class="form-control CheckForm" type="text"
+                        placeholder="Turning Radius">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Front Brake Type:</label><br>
+                    <input [(ngModel)]="Front_Brake_Type" formControlName="Front_Brake_Type" class="form-control CheckForm" type="text"
+                        placeholder="Front Brake Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rear Brake Type:</label><br>
+                    <input [(ngModel)]="Rear_Brake_Type" formControlName="Rear_Brake_Type" class="form-control CheckForm" type="text"
+                        placeholder="Rear Brake Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Top Speed:</label><br>
+                    <input [(ngModel)]="Top_Speed" formControlName="Top_Speed" class="form-control CheckForm" type="text"
+                        placeholder="Top Speed">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acceleration:</label><br>
+                    <input [(ngModel)]="Acceleration" formControlName="Acceleration" class="form-control CheckForm" type="text"
+                        placeholder="Acceleration">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Tyre Type:</label><br>
+                    <input [(ngModel)]="Tyre_Type" formControlName="Tyre_Type" class="form-control CheckForm" type="text"
+                        placeholder="Tyre Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Wheel Size:</label><br>
+                    <input [(ngModel)]="Wheel_Size" formControlName="Wheel_Size" class="form-control CheckForm" type="text"
+                        placeholder="Wheel Size">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Alloy Wheel Size:</label><br>
+                    <input [(ngModel)]="alloy_wheel_size" formControlName="alloy_wheel_size" class="form-control CheckForm" type="text"
+                        placeholder="Alloy Wheel Size">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Number of Doors:</label><br>
+                    <input [(ngModel)]="No_of_doors" formControlName="No_of_doors" class="form-control CheckForm" type="text"
+                        placeholder="Number of Doors">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cargo Volume:</label><br>
+                    <input [(ngModel)]="cargo_volume" formControlName="cargo_volume" class="form-control CheckForm" type="text"
+                        placeholder="Cargo Volume">
+                </div>
+
+                <div class="col-md-12">
+                    <h4>Engine:</h4>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Engine Type:</label><br>
+                    <input [(ngModel)]="Engine_Type" formControlName="Engine_Type" class="form-control CheckForm" type="text"
+                        placeholder="Engine Type">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Fuel Type:</label><br>
+                    <input [(ngModel)]="Type_of_fuel" formControlName="Type_of_fuel" class="form-control CheckForm" type="text"
+                        placeholder="Fuel Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Displacement:</label><br>
+                    <input [(ngModel)]="Displacement" formControlName="Displacement" class="form-control CheckForm" type="text"
+                        placeholder="Displacement">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Maximum Power:</label><br>
+                    <input [(ngModel)]="Max_Power" formControlName="Max_Power" class="form-control CheckForm" type="text"
+                        placeholder="Maximum Power">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Maximum Torque:</label><br>
+                    <input [(ngModel)]="max_torque" formControlName="max_torque" class="form-control CheckForm" type="text"
+                        placeholder="Maximum Torque">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Number of Cylinder:</label><br>
+                    <input [(ngModel)]="No_Of_Cylinder" formControlName="No_Of_Cylinder" class="form-control CheckForm" type="text"
+                        placeholder="Number of Cylinder">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Valves Per Cylinder:</label><br>
+                    <input [(ngModel)]="Valves_Per_Cylinder" formControlName="Valves_Per_Cylinder" class="form-control CheckForm" type="text"
+                        placeholder="Valves Per Cylinder">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Valve Configuration:</label><br>
+                    <input [(ngModel)]="Valve_Configuration" formControlName="Valve_Configuration" class="form-control CheckForm" type="text"
+                        placeholder="Valve Configuration">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks vansLimos">
+                    <label>Fuel Supply System:</label><br>
+                    <input [(ngModel)]="Fuel_Supply_System" formControlName="Fuel_Supply_System" class="form-control CheckForm" type="text"
+                        placeholder="Fuel Supply System">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks">
+                    <label>Turbo Charger:</label><br>
+                    <input [(ngModel)]="Turbo_Charger" formControlName="Turbo_Charger" class="form-control CheckForm" type="text"
+                        placeholder="Turbo Charger">
+                </div>
+                <div class="form-group col-md-4 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses trucks">
+                    <label>Super Charger:</label><br>
+                    <input [(ngModel)]="superCharger" formControlName="superCharger" class="form-control CheckForm" type="text"
+                        placeholder="Super Charger">
+                </div>
+
+                <div class="col-md-12 luxuryCarsSUVs commuterCarsSUVs campersRVs commercialBuses eVsHybrids trucks vansLimos">
+                    <h4>Dimensions:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Length:</label><br>
+                    <input [(ngModel)]="Length" formControlName="Length" class="form-control CheckForm" type="text"
+                        placeholder="Length">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Width:</label><br>
+                    <input [(ngModel)]="Width" formControlName="Width" class="form-control CheckForm" type="text"
+                        placeholder="Width">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Height:</label><br>
+                    <input [(ngModel)]="Height" formControlName="Height" class="form-control CheckForm" type="text"
+                        placeholder="Height">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Ground Clearance Unladen:</label><br>
+                    <input [(ngModel)]="Ground_Clearance_Unladen" formControlName="Ground_Clearance_Unladen" class="form-control CheckForm" type="text"
+                        placeholder="Ground Clearance Unladen">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Wheel Base:</label><br>
+                    <input [(ngModel)]="Wheel_Base" formControlName="Wheel_Base" class="form-control CheckForm" type="text"
+                        placeholder="Wheel Base">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Front Tread:</label><br>
+                    <input [(ngModel)]="Front_Tread" formControlName="Front_Tread" class="form-control CheckForm" type="text"
+                        placeholder="Front Tread">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rear Tread:</label><br>
+                    <input [(ngModel)]="Rear_Tread" formControlName="Rear_Tread" class="form-control CheckForm" type="text"
+                        placeholder="Rear Tread">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Kerb Weight:</label><br>
+                    <input [(ngModel)]="Kerb_Weight" formControlName="Kerb_Weight" class="form-control CheckForm" type="text"
+                        placeholder="Kerb Weight">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gross Weight:</label><br>
+                    <input [(ngModel)]="Gross_Weight" formControlName="Gross_Weight" class="form-control CheckForm" type="text"
+                        placeholder="Gross Weight">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rear Head Room:</label><br>
+                    <input [(ngModel)]="Rear_Head_Room" formControlName="Rear_Head_Room" class="form-control CheckForm" type="text"
+                        placeholder="Rear Head Room">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Front Head Room:</label><br>
+                    <input [(ngModel)]="Front_Head_Room" formControlName="Front_Head_Room" class="form-control CheckForm" type="text"
+                        placeholder="Front Head Room">
+                </div>
+            
+            </div>
+
+            <div class="row peroperty-fatcs campersRVs">
+                <div class="col-md-12">
+                    <h4>RV Interior Details:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>RV Class:</label><br>
+                    <input [(ngModel)]="RV_CLASS" formControlName="RV_CLASS" class="form-control CheckForm" type="text"
+                        placeholder="RV Class">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Dry Weight:</label><br>
+                    <input [(ngModel)]="DRY_WEIGHT" formControlName="DRY_WEIGHT" class="form-control CheckForm" type="text"
+                        placeholder="Dry Weight">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Sleeps:</label><br>
+                    <input [(ngModel)]="SLEEPS" formControlName="SLEEPS" class="form-control CheckForm" type="text"
+                        placeholder="Sleeps">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Slide Outs:</label><br>
+                    <input [(ngModel)]="SLIDE_OUTS" formControlName="SLIDE_OUTS" class="form-control CheckForm" type="text"
+                        placeholder="Slide Outs">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fireplace:</label><br>
+                    <input [(ngModel)]="Fireplace" formControlName="Fireplace" class="form-control CheckForm" type="text"
+                        placeholder="Fireplace">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Black Tank Flush:</label><br>
+                    <input [(ngModel)]="Black_Tank_Flush" formControlName="Black_Tank_Flush" class="form-control CheckForm" type="text"
+                        placeholder="Black Tank Flush">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Outside Shower:</label><br>
+                    <input [(ngModel)]="Outside_Shower" formControlName="Outside_Shower" class="form-control CheckForm" type="text"
+                        placeholder="Outside Shower">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Pass Through Storage:</label><br>
+                    <input [(ngModel)]="pass_through_storage" formControlName="pass_through_storage" class="form-control CheckForm" type="text"
+                        placeholder="Pass Through Storage">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Storage Facility:</label><br>
+                    <input [(ngModel)]="storage_facility" formControlName="storage_facility" class="form-control CheckForm" type="text"
+                        placeholder="Storage Facility">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Kitchen Facility:</label><br>
+                    <input [(ngModel)]="kitchen_facility" formControlName="kitchen_facility" class="form-control CheckForm" type="text"
+                        placeholder="Kitchen Facility">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bedroom Facility:</label><br>
+                    <input [(ngModel)]="bedroom_facility" formControlName="bedroom_facility" class="form-control CheckForm" type="text"
+                        placeholder="Bedroom Facility">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>HVAC:</label><br>
+                    <input [(ngModel)]="HVAC" formControlName="HVAC" class="form-control CheckForm" type="text"
+                        placeholder="HVAC">
+                </div>
+            
+            </div>
+
+            <div class="row peroperty-fatcs eVsHybrids">
+                <div class="col-md-12">
+                    <h4>Charging Details:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>MPGe:</label><br>
+                    <input [(ngModel)]="MPGe" formControlName="MPGe" class="form-control CheckForm" type="text"
+                        placeholder="MPGe">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Charging:</label><br>
+                    <input [(ngModel)]="CHARGING" formControlName="CHARGING" class="form-control CheckForm" type="text"
+                        placeholder="Charging">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Electric Range:</label><br>
+                    <input [(ngModel)]="Electric_Range" formControlName="Electric_Range" class="form-control CheckForm" type="text"
+                        placeholder="Electric Range">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Battery Size:</label><br>
+                    <input [(ngModel)]="Battery_size" formControlName="Battery_size" class="form-control CheckForm" type="text"
+                        placeholder="Battery Size">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cost to Charge Full:</label><br>
+                    <input [(ngModel)]="Cost_to_charge_full" formControlName="Cost_to_charge_full" class="form-control CheckForm" type="text"
+                        placeholder="Cost to Charge Full">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Monthly Charge Cost:</label><br>
+                    <input [(ngModel)]="Monthly_charge_cost" formControlName="Monthly_charge_cost" class="form-control CheckForm" type="text"
+                        placeholder="Monthly Charge Cost">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Full Charge-in:</label><br>
+                    <input [(ngModel)]="Full_charge_in" formControlName="Full_charge_in" class="form-control CheckForm" type="text"
+                        placeholder="Full Charge-in">
+                </div>
+            
+            </div>
+
+            <div class="row peroperty-fatcs vansLimos">
+                <div class="col-md-12">
+                    <h4>Coach Details:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year Coach Build:</label><br>
+                    <input [(ngModel)]="Year_Coach_Build" formControlName="Year_Coach_Build" class="form-control CheckForm" type="text"
+                        placeholder="Year Coach Build">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Vehicle Primary Use:</label><br>
+                    <input [(ngModel)]="VEHICLE_PRIMARY_USE" formControlName="VEHICLE_PRIMARY_USE" class="form-control CheckForm" type="text"
+                        placeholder="Vehicle Primary Use">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Coach Builder:</label><br>
+                    <input [(ngModel)]="COACH_BUILDER" formControlName="COACH_BUILDER" class="form-control CheckForm" type="text"
+                        placeholder="Coach Builder">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>VIN:</label><br>
+                    <input [(ngModel)]="VIN" formControlName="VIN" class="form-control CheckForm" type="text"
+                        placeholder="VIN">
+                </div>
+            
+            </div>
+
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share:</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>

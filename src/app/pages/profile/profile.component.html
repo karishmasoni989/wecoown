@@ -1,0 +1,916 @@
+﻿<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>{{'Account Settings' | translateString | async}}</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{'Home' | translateString | async}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'Account Settings' | translateString | async}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <form class="" [formGroup]="editUserForm" (ngSubmit)="editUserProfile()">
+            <div class="row">
+                <div class="col-md-3">
+                    <br>
+                    <div class="money-bag">
+                        <p>&nbsp;</p>
+                        <img src="../../../assets/images/money-bag1.png" width="50%">
+                        <p>&nbsp;</p>
+                        <span>{{'WCX Rewards Tokens' | translateString | async}} <br>{{wcx_rewards_tokens}}</span>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="marginBottom0">{{'Claim Key' | translateString | async}}: </label><br>
+                        <span>
+                            <input class="form-control input-claim-key" placeholder="Claim Key" readonly
+                                formControlName="claim_key" [(ngModel)]="claim_key">
+                            <button class="btn btn-primary claim-btn" type="button"
+                                data-target="#claim-key-reedem-modal" data-toggle="modal">{{'Claim' | translateString | async}}</button>
+                        </span>
+                        <button class="btn btn-primary" type="button" (click)="goToMyvouchers()">{{'My Vouchers' | translateString | async}}</button>
+                    </div>
+                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#add-edit-timeline">Add/Edit
+                        Timeline</button> -->
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success profile-success dispNone"></div>
+                    <div class="alert alert-danger profile-danger dispNone"></div>
+                    <p>{{'Registering as' | translateString | async}} :</p>
+                    <div class="checkbox form-group">
+                        <p>
+                            <input type="checkbox" id="role_2" value="2" checked disabled>&nbsp;{{'A seller on
+                            WePropertyowners' | translateString | async}}<br>
+                            <input type="checkbox" id="role_1" value="1">&nbsp;{{'A buyer on WeCoOwn' | translateString | async}}<br>
+                            <input type="checkbox" id="role_3" value="3">&nbsp;{{'A community member on WeHomeowners' | translateString | async}}<br>
+                            <input type="checkbox" id="role_4" value="4">&nbsp;{{'A community member on WeBusinessowners' | translateString | async}}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'First Name' | translateString | async}} : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="firstname"
+                            placeholder="{{'First Name' | translateString | async}}" formControlName="firstname" id="firstname" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Last Name' | translateString | async}} : <span class="red">*</span></label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="lastname" placeholder="{{'Last Name' | translateString | async}}"
+                            formControlName="lastname" id="lastname" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Username' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="text" placeholder="" value="{{username}}"
+                            id="username" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Email Address' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="email" placeholder="" id="email" readonly
+                            value="{{email}}">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Designation' | translateString | async}} : </label><br>
+                        <input class="form-control CheckForm" type="text" [(ngModel)]="designation"
+                            placeholder="{{'Designation' | translateString | async}}" formControlName="designation" id="designation"
+                            oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Country' | translateString | async}} : </label>
+                        <select class="form-control CheckForm" id="country-select" formControlName="country"
+                            (change)="changeCoutry($event.target.value)" [(ngModel)]="getcountry">
+                            <option value="">{{'All Countries' | translateString | async}}</option>
+                            <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                                {{task.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'State' | translateString | async}} : </label>
+                        <select class="form-control CheckForm" id="state-select" formControlName="state"
+                            (change)="changeState($event.target.value)" [(ngModel)]="getstate">
+                            <option value="">{{'All States' | translateString | async}}</option>
+                            <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                                {{task.region}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'City' | translateString | async}} : </label>
+                        <select class="form-control CheckForm" id="city-select" formControlName="city"
+                            [(ngModel)]="getcity">
+                            <option value="">{{'All Cities' | translateString | async}}</option>
+                            <option *ngFor="let task of getAllCities" value="{{task.name}}">
+                                {{task.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="checkbox form-group">
+                        <p>{{'Vendor Type' | translateString | async}}:</p>
+                        <div>
+                            <input type="checkbox" id="vendor_1" value="1"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Real Estate Broker')">&nbsp;<span>
+                                {{'Real Estate Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-1" *ngIf="vender1 != '[]'">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('1','Real Estate Broker',vender1)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('1','Real Estate Broker')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender1.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender1.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender1.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender1.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_2" value="2"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Mortgage Broker')">&nbsp;<span>
+                                {{'Mortgage Broker' | translateString | async}}</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-2" *ngIf="vender2 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('2','Mortgage Broker',vender2)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('2','Mortgage Broker')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender2.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender2.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender2.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender2.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_3" value="3"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Ship Broker')">&nbsp;<span>
+                                Ship Broker</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-3" *ngIf="vender3 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('3','Ship Broker',vender3)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('3','Ship Broker')"><i class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender3.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender3.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender3.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender3.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_4" value="4"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Yacht Charter Broker')">&nbsp;<span>
+                                Yacht Charter Broker</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-4" *ngIf="vender4 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('4','Yacht Charter Broker',vender4)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('4','Yacht Charter Broker')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender4.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender4.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender4.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender4.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_5" value="5"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Shipyard')">&nbsp;<span>
+                                Shipyard</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-5" *ngIf="vender5 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('5','Shipyard',vender5)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('5','Shipyard')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender5.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender5.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender5.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender5.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_6" value="6"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Aircraft Broker')">&nbsp;<span>
+                                Aircraft Broker</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-6" *ngIf="vender6 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('6','Aircraft Broker',vender6)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('6','Aircraft Broker')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender6.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender6.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender6.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender6.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_7" value="7"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Jet Charter Broker')">&nbsp;<span>
+                                Jet Charter Broker</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-7" *ngIf="vender7 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('7','Jet Charter Broker',vender7)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('7','Jet Charter Broker')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender7.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender7.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender7.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender7.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_8" value="8"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Jet FBO')">&nbsp;<span>
+                                Jet FBO</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-8" *ngIf="vender8 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('8','Jet FBO',vender8)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('8','Jet FBO')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender8.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender8.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender8.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender8.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_9" value="9"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Art Dealer')">&nbsp;<span>
+                                Art Dealer</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-9" *ngIf="vender9 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('9','Art Dealer',vender9)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('9','Art Dealer')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender9.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender9.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender9.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender9.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_10" value="10"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Appraiser')">&nbsp;<span>
+                                Appraiser</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-10" *ngIf="vender10 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('10','Appraiser',vender10)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('10','Appraiser')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender10.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender10.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender10.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender10.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_11" value="11"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Property Manager')">&nbsp;<span>
+                                Property Manager</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-11" *ngIf="vender11 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('11','Property Manager',vender11)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('11','Property Manager')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender11.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender11.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender11.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender11.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_12" value="12"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Inspection Company')">&nbsp;<span>
+                                Inspection Company</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-12" *ngIf="vender12 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('12','Inspection Company',vender12)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('12','Inspection Company')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender12.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender12.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender12.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender12.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_13" value="13"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Mechanic & Technician')">&nbsp;<span>
+                                Mechanic & Technician</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-13" *ngIf="vender13 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('13','Mechanic & Technician',vender13)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('13','Mechanic & Technician')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender13.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender13.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender13.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender13.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_14" value="14"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Construction & Repair Company')">&nbsp;<span>
+                                Construction & Repair Company</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-14" *ngIf="vender14 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('14','Construction & Repair Company',vender14)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('14','Construction & Repair Company')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender14.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender14.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender14.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender14.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_15" value="15"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Insurance Agent')">&nbsp;<span>
+                                Insurance Agent</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-15" *ngIf="vender15 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('15','Insurance Agent',vender15)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('15','Insurance Agent')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender15.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender15.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender15.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender15.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_16" value="16"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Bank Lender')">&nbsp;<span>
+                                Bank Lender</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-16" *ngIf="vender16 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('16','Bank Lender',vender16)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('16','Bank Lender')"><i class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender16.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender16.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender16.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender16.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_17" value="17"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Loan Broker')">&nbsp;<span>
+                                Loan Broker</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-17" *ngIf="vender17 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('17','Loan Broker',vender17)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('17','Loan Broker')"><i class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender17.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender17.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender17.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender17.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_18" value="18"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Escrow & Title Company')">&nbsp;<span>
+                                Escrow & Title Company</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-18" *ngIf="vender18 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('18','Escrow & Title Company',vender18)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('18','Escrow & Title Company')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender18.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender18.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender18.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender18.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_19" value="19"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Attorney')">&nbsp;<span>
+                                Attorney</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-19" *ngIf="vender19 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('19','Attorney',vender19)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('19','Attorney')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender19.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender19.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender19.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender19.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_20" value="20"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Company Formation Agent')">&nbsp;<span>
+                                Company Formation Agent</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-20" *ngIf="vender20 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('20','Company Formation Agent',vender20)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('20','Company Formation Agent')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender20.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender20.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender20.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender20.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_21" value="21"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Accountant')">&nbsp;<span>
+                                Accountant</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-21" *ngIf="vender21 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('21','Accountant',vender21)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('21','Accountant')"><i class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender21.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender21.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender21.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender21.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_22" value="22"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Secretarial Service')">&nbsp;<span>
+                                Secretarial Service</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-22" *ngIf="vender22 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('22','Secretarial Service',vender22)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('22','Secretarial Service')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender22.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender22.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender22.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender22.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_23" value="23"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Publications')">&nbsp;<span>
+                                Publications</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-23" *ngIf="vender23 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('23','Publications',vender23)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('23','Publications')"><i class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender23.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender23.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender23.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender23.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_24" value="24"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Others')">&nbsp;<span>
+                                Others</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-24" *ngIf="vender24 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal" (click)="goToVendorModal('24','Others',vender24)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal" (click)="getVendorIDD('24','Others')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> : {{vender24.company_name}}
+                                </p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> : {{vender24.company_email}}
+                                </p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> : {{vender24.company_website}}
+                                </p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> : {{vender24.company_address}}
+                                </p>
+                            </div>
+                            <input type="checkbox" id="vendor_25" value="25"
+                                (click)="venderCheckedVal($event.target.value, $event.target.id, 'Crowdfunding Sponsor')">&nbsp;<span>
+                                Crowdfunding Sponsor</span>&nbsp;&nbsp;
+                            <div class="form-control pTagMargin dispNone" id="div-vender-25" *ngIf="vender25 != []">
+                                <span class="float-right">
+                                    <button class="btn btn-secondary" type="button" data-target="#vendor-checkbox-modal"
+                                        data-toggle="modal"
+                                        (click)="goToVendorModal('25','Crowdfunding Sponsor',vender25)">
+                                        <i class="fa fa-pencil"></i></button>&nbsp;
+                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                        data-target="#delete-checkbox-modal"
+                                        (click)="getVendorIDD('25','Crowdfunding Sponsor')"><i
+                                            class="fa fa-trash"></i></button>
+                                </span>
+                                <p><strong>{{'Company Name' | translateString | async}}</strong> :
+                                    {{vender25.company_name}}</p>
+                                <p><strong>{{'Company Email Address' | translateString | async}}</strong> :
+                                    {{vender25.company_email}}</p>
+                                <p><strong>{{'Company Website Address' | translateString | async}}</strong> :
+                                    {{vender25.company_website}}</p>
+                                <p><strong>{{'Company Address' | translateString | async}}</strong> :
+                                    {{vender25.company_address}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-primary" id="formSubmit" type="submit">Submit</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <p class="pull-right"><a href="#" data-toggle="modal" data-target="#myModal" data-keyboard="false"
+                            data-backdrop="static">Change Password!</a></p>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone passwordValidSuccess">
+                <button type="button" class="close" data-dismiss="alert" [routerLink]="['/login']" >×</button>
+                <strong>Success!</strong> Password Successfull.
+            </div> -->
+            <input type="text" class="property_head" readonly>
+            <div class="alert alert-success dispNone passwordValidSuccess"></div>
+            <div class="alert alert-danger dispNone passwordValidDanger"></div>
+            <!-- Modal body -->
+            <form class="ModalCloseClick" [formGroup]="changePsswordForm" (ngSubmit)="chengePassword()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Old Password : </label><br>
+                        <input class="form-control ChangePasswordCheckForm" #old_password type="password" maxlength="20"
+                            placeholder="Old Password" formControlName="old_password" id="old_password" value="">
+                        <span class="icon-place-eye" (click)="ionViewDidLoad3()"><i class="fa fa-eye"
+                                aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password : </label><br>
+                        <input class="form-control ChangePasswordCheckForm" #new_password type="password" maxlength="20"
+                            placeholder="New Password" formControlName="new_password" id="new_password" value="">
+                        <span class="icon-place-eye" (click)="ionViewDidLoad()"><i class="fa fa-eye"
+                                aria-hidden="true"></i></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password : </label><br>
+                        <input class="form-control ChangePasswordCheckForm" #confirm_password type="password"
+                            maxlength="20" placeholder="Confirm Password" formControlName="confirm_password"
+                            id="confirm_password" value="">
+                        <span class="icon-place-eye" (click)="ionViewDidLoad2()"><i class="fa fa-eye"
+                                aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="vendor-checkbox-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{modalVendorName}}</h4>
+                <button type="button" class="close" data-dismiss="modal" id="vendor-modal-close">&times;</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone passwordValidSuccess">
+                <button type="button" class="close" data-dismiss="alert" [routerLink]="['/login']" >×</button>
+                <strong>Success!</strong> Password Successfull.
+            </div> -->
+            <input type="text" class="property_head" readonly>
+            <div class="alert alert-success dispNone vendor-success"></div>
+            <div class="alert alert-danger dispNone vendor-danger"></div>
+            <!-- Modal body -->
+            <!-- <form [formGroup]="changePsswordForm" (ngSubmit)="chengePassword()"> -->
+            <form class="ModalCloseClick">
+                <div class="modal-body">
+                    <h5>Company Information</h5>
+                    <div class="form-group">
+                        <label>Company Name : </label><br>
+                        <input class="form-control" type="text" placeholder="Company Name" id="company_name"
+                            [(ngModel)]="Vendor_company_name" name="Vendor_company_name">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Email Address : </label><br>
+                        <input class="form-control" type="email" placeholder="Company Email Address" id="company_email"
+                            [(ngModel)]="Vendor_company_email" name="Vendor_company_email">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Website Address : </label><br>
+                        <input class="form-control" type="text" placeholder="Company Website Address"
+                            id="company_website" [(ngModel)]="Vendor_company_website" name="Vendor_company_website">
+                    </div>
+                    <div class="form-group">
+                        <label>Company Address : </label><br>
+                        <textarea class="form-control" type="text" rows="3" placeholder="Company Address"
+                            id="company_address">{{Vendor_company_address}}</textarea>
+                    </div>
+                    <input type="hidden" id="vendor_checked_id" value="{{modalVendorValue}}">
+                </div>
+            </form>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" type="button"
+                    (click)="submitvendorForm()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="delete-checkbox-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"> {{deleteVendorName}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone delete-vendor-success"></div>
+            <div class="alert alert-danger dispNone delete-vendor-danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                Are you sure you want to uncheck vendor type and delete the information?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" (click)="ConfirmDeleteVendor()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="claim-key-reedem-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Redeem Reward!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                {{userModalClaimKeyText}}
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary showYesNoClaimKey" (click)="confirmYesClaimKey()"
+                    data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-primary showYesNoClaimKey" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary showCloseClaimKey dispNone" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<!-- <div class="modal" id="add-edit-timeline">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="padding: 10px;">
+            <div class="modal-header">
+                <h4 class="modal-title">Add/Edit Timeline</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+           
+            <div class="alert alert-success dispNone add-edit-success"></div>
+            <div class="alert alert-danger dispNone add-edit-danger"></div>
+            <form [formGroup]="addEditForm" (ngSubmit)="addEditSubmit()">
+                <div class="modal-body">
+                    <div class="row add-edit-common">
+                        <div class="col-md-12">
+                            <label><strong> Profile Picture :</strong></label>
+                            <label>&nbsp;&nbsp;{{profilePhotoName}}</label>
+                            <a href="javascript:void(0);" class="float-right">Edit </a>
+                            <input type="file" id="profile-img" class="hideInput"
+                                (change)="profilePhotosDropped($event.target.files)" single title=""
+                                accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <img class="profile-img"
+                                    src="{{ getProfileImage != undefined ? getProfileImage : '../../../assets/images/user1.png' }}"
+                                    width="50px">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label><strong>Cover Picture :</strong></label>
+                            <label>&nbsp;&nbsp;{{coverPhotoName}}</label>
+                            <a href="javascript:void(0);" class="float-right">Edit </a>
+                            <input type="file" id="cover-img" class="hideInput"
+                                (change)="coverPhotosDropped($event.target.files)" single title=""
+                                accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cover-div">
+                                <img class="cover-img"
+                                    src="{{ getCoverImage != undefined ? getCoverImage : '../../../assets/images/no-image.jpg' }}"
+                                    width="100%">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <label><strong>About Yourself :</strong></label><br>
+                            <textarea class=" form-control" formControlName="bio" [(ngModel)]="bio"
+                                placeholder="Describe Yourself" rows="7"></textarea>
+                            <div class="disFlex">
+                                <input class="inputMargin-Top" type="checkbox" id="profile-public"
+                                    value="profile-public">
+                                <h5>&nbsp;Do you want your profile to be visible to public?</h5>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            
+                <div class="modal-footer">
+                    <button type="button" id="" class="btn btn-primary pull-left" type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->

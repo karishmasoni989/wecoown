@@ -1,0 +1,803 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3 id="">Property Type: Crowdfunding Projects</h3>
+        <h4 class="createListing">Serial Number: CP{{getCurrentSerialNumber}}</h4>
+        <h4 class="updateListing dispNone">Serial Number: CP{{Serial_Number}}</h4>
+        <!-- <input type="text" class="property_head" readonly> -->
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in
+                            mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400 Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                        -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name" [(ngModel)]="Tittle_Name"
+                        formControlName="Tittle_Name">
+                    <label>Crowdfunding Type:
+                    </label><br>
+                    <input [(ngModel)]="CrowdFunding_type" readonly formControlName="CrowdFunding_type"
+                        class="form-control CheckForm" type="text" placeholder="Crowdfunding Type">
+                    <label>Property Sub-type:
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="CrowdFunding_subtype"
+                        (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="CrowdFunding_subtype">
+                        <option value="">Select Crowdfunding Sub-type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose">
+                        <option value="">Select Purpose</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <!-- <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                        </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                        </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task?.country_name}}">
+                            {{task?.country_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="here($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task?.state_name}}">
+                            {{task?.state_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task?.city_name}}">
+                            {{task?.city_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                        </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div> -->
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code+'||'+task.name}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task.country+'||'+task.isoCode+'||'+task.region}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs equityCrowdfunding realEstateCrowdfunding">
+                <div class="col-md-12">
+                    <h4>General Info</h4>
+                    <!-- Started from here -->
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Fees:</label><br>
+                    <input [(ngModel)]="Fees" formControlName="Fees" class="form-control CheckForm" type="text"
+                        placeholder="Fees">
+                </div> -->
+                <div class="form-group col-md-4">
+                    <label>Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Minimum Investment: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Minimum Investment"
+                        [(ngModel)]="Minimum_Investment" formControlName="Minimum_Investment">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Average Annual Return: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Average Annual Return"
+                        [(ngModel)]="Average_Annual_Return" formControlName="Average_Annual_Return">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Total Investor Distributions: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Total Investor Distributions"
+                        [(ngModel)]="Total_Investor_Distributions" formControlName="Total_Investor_Distributions">
+                </div> -->
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Investment Options: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Investment Options"
+                        [(ngModel)]="Investment_Options" formControlName="Investment_Options">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Accredited Investors Only: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Accredited Investors Only" [(ngModel)]="Accredited_Investors_Only"
+                        formControlName="Accredited_Investors_Only">
+                </div> -->
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Pros: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Pros" [(ngModel)]="Pros"
+                        formControlName="Pros">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Cons: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Cons" [(ngModel)]="Cons"
+                        formControlName="Cons">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Early Withdrawals:
+                    </label><br>
+                    <input [(ngModel)]="Early_Withdrawals" formControlName="Early_Withdrawals"
+                        class="form-control CheckForm" type="text" placeholder="Early Withdrawals">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Steep Investment Minimums:
+                    </label><br>
+                    <input [(ngModel)]="Steep_Investment_Minimums" formControlName="Steep_Investment_Minimums"
+                        class="form-control CheckForm" type="text" placeholder="Steep Investment Minimums">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Annual Returns:
+                    </label><br>
+                    <input [(ngModel)]="Historical_Annual_Returns" formControlName="Historical_Annual_Returns"
+                        class="form-control CheckForm" type="text" placeholder="Annual Returns">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding">
+                    <label>Reinvestment Opportunities:
+                    </label><br>
+                    <input [(ngModel)]="Reinvestment_Opportunities" formControlName="Reinvestment_Opportunities"
+                        class="form-control CheckForm" type="text" placeholder="Reinvestment Opportunities">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Website Transparency:
+                        </label><br>
+                    <input [(ngModel)]="Website_Transparency" formControlName="Website_Transparency" class="form-control CheckForm"
+                        type="text" placeholder="Website Transparency">
+                </div> -->
+                <div class="form-group col-md-4 equityCrowdfunding">
+                    <label>Business Bureau Ratings:
+                    </label><br>
+                    <input [(ngModel)]="Business_Bureau_Ratings" formControlName="Business_Bureau_Ratings"
+                        class="form-control CheckForm" type="text" placeholder="Business Bureau Ratings">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding">
+                    <label>Educational Offerings:
+                    </label><br>
+                    <input [(ngModel)]="Educational_Offerings" formControlName="Educational_Offerings"
+                        class="form-control CheckForm" type="text" placeholder="Educational Offerings">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Average Cash Yield:
+                    </label><br>
+                    <input [(ngModel)]="Targeted_Average_Cash_Yield" formControlName="Targeted_Average_Cash_Yield"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Average Cash Yield">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Investment Period:
+                    </label><br>
+                    <input [(ngModel)]="Targeted_Investment_Period" formControlName="Targeted_Investment_Period"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Investment Period">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Equity Multiple:
+                    </label><br>
+                    <input [(ngModel)]="Targeted_Equity_Multiple" formControlName="Targeted_Equity_Multiple"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Equity Multiple">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Targeted Investor IRR:
+                    </label><br>
+                    <input [(ngModel)]="Targeted_Investor_IRR" formControlName="Targeted_Investor_IRR"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Investor IRR">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Preferred Return:
+                    </label><br>
+                    <input [(ngModel)]="Preferred_Return" formControlName="Preferred_Return"
+                        class="form-control CheckForm" type="text" placeholder="Preferred Return">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Investment Strategy:</label><br>
+                    <input [(ngModel)]="Investment_Strategy" formControlName="Investment_Strategy"
+                        class="form-control CheckForm" type="text" placeholder="Investment Strategy">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Property Type:</label><br>
+                    <input [(ngModel)]="Property_Type" formControlName="Property_Type" class="form-control CheckForm"
+                        type="text" placeholder="Property Type">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Investment Profile:
+                    </label><br>
+                    <input [(ngModel)]="Investment_Profile" formControlName="Investment_Profile"
+                        class="form-control CheckForm" type="text" placeholder="Investment Profile">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Number of Holdings:
+                    </label><br>
+                    <input [(ngModel)]="Number_of_Holdings" formControlName="Number_of_Holdings"
+                        class="form-control CheckForm" type="text" placeholder="Number of Holdings">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Footnotes:
+                    </label><br>
+                    <input [(ngModel)]="Footnotes" formControlName="Footnotes" class="form-control CheckForm"
+                        type="text" placeholder="Footnotes">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Property Type:
+                        </label><br>
+                    <input [(ngModel)]="Property_Type" formControlName="Property_Type" class="form-control CheckForm" type="text"
+                        placeholder="Property Type">
+                </div>          
+                
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Disclaimers Disclosures:
+                        </label><br>
+                    <input [(ngModel)]="Disclaimers_Disclosures" formControlName="Disclaimers_Disclosures"
+                        class="form-control CheckForm" type="text" placeholder="Disclaimers Disclosures">
+                </div>
+                
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Sponsor Historic Net IRR:
+                        </label><br>
+                    <input [(ngModel)]="Sponsor_Historic_Net_IRR" formControlName="Sponsor_Historic_Net_IRR"
+                        class="form-control CheckForm" type="text" placeholder="Sponsor Historic Net IRR">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Sponsor Historic Equity Multiple:
+                        </label><br>
+                    <input [(ngModel)]="Sponsor_Historic_Equity_Multiple"
+                        formControlName="Sponsor_Historic_Equity_Multiple" class="form-control CheckForm"
+                        type="text" placeholder="Sponsor Historic Equity Multiple">
+                </div>         
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Company Term:
+                        </label><br>
+                    <input [(ngModel)]="Company_Term" formControlName="Company_Term"
+                        class="form-control CheckForm" type="text" placeholder="Company Term">
+                </div>  
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Next Targeted Close Date:
+                        </label><br>
+                    <input [(ngModel)]="Next_Targeted_Close_Date" formControlName="Next_Targeted_Close_Date" class="form-control CheckForm"
+                        type="date" placeholder="Next Targeted Close Date" data-date-format="dd/MM/yyyy">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Offers Due Date:
+                        </label><br>
+                    <input [(ngModel)]="Offers_Due_Date" formControlName="Offers_Due_Date" class="form-control CheckForm"
+                        type="date" placeholder="Offers Due Date" data-date-format="dd/MM/yyyy">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Funds Due Date:
+                        </label><br>
+                    <input [(ngModel)]="Funds_Due_Date" formControlName="Funds_Due_Date" class="form-control CheckForm" type="date"
+                        placeholder="Funds Due Date" data-date-format="dd/MM/yyyy">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Project IRR:
+                        </label><br>
+                    <input [(ngModel)]="Targeted_Project_IRR" formControlName="Targeted_Project_IRR"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Project IRR">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Sponsor Co-Investment:
+                        </label><br>
+                    <input [(ngModel)]="Sponsor_Co_Investment" formControlName="Sponsor_Co_Investment" class="form-control CheckForm"
+                        type="text" placeholder="Sponsor Co-Investment">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>zoning:
+                        </label><br>
+                    <input [(ngModel)]="zoning" formControlName="zoning" class="form-control CheckForm" type="text"
+                        placeholder="zoning">
+                </div> -->
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Company Term:
+                    </label><br>
+                    <input [(ngModel)]="Company_Term" formControlName="Company_Term" class="form-control CheckForm"
+                        type="text" placeholder="Company Term">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Next Targeted Close Date:
+                    </label><br>
+                    <dp-date-picker class="form-control"
+                    [ngModel]="Next_Targeted_Close_Date | date:'MM/dd/yyyy'" formControlName="Next_Targeted_Close_Date"
+                    [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                    <!-- <input [(ngModel)]="Next_Targeted_Close_Date" formControlName="Next_Targeted_Close_Date"
+                        class="form-control CheckForm" type="date" placeholder="Next Targeted Close Date"
+                        data-date-format="dd/MM/yyyy" value="{{Next_Targeted_Close_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Offers Due Date:
+                    </label><br>
+                    <dp-date-picker class="form-control"
+                    [ngModel]="Offers_Due_Date | date:'MM/dd/yyyy'" formControlName="Offers_Due_Date"
+                    [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                    <!-- <input [(ngModel)]="Offers_Due_Date" formControlName="Offers_Due_Date"
+                        class="form-control CheckForm" type="date" placeholder="Offers Due Date"
+                        data-date-format="dd/MM/yyyy" value="{{Offers_Due_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Funds Due Date:
+                    </label><br>
+                    <dp-date-picker class="form-control"
+                    [ngModel]="Funds_Due_Date | date:'MM/dd/yyyy'" formControlName="Funds_Due_Date"
+                    [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                    <!-- <input [(ngModel)]="Funds_Due_Date" formControlName="Funds_Due_Date" class="form-control CheckForm"
+                        type="date" placeholder="Funds Due Date" data-date-format="dd/MM/yyyy" value="{{Funds_Due_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Distribution:
+                    </label><br>
+                    <input [(ngModel)]="Distribution" formControlName="Distribution" class="form-control CheckForm"
+                        type="text" placeholder="Distribution">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Distribution Start Date:
+                    </label><br>
+                    <dp-date-picker class="form-control"
+                    [ngModel]="Targeted_Distribution_Start_Date | date:'MM/dd/yyyy'" formControlName="Targeted_Distribution_Start_Date"
+                    [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                    <!-- <input [(ngModel)]="Targeted_Distribution_Start_Date"
+                        formControlName="Targeted_Distribution_Start_Date" class="form-control CheckForm" type="date"
+                        placeholder="Targeted Distribution Start Date" data-date-format="dd/MM/yyyy" value="{{Targeted_Distribution_Start_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Preferred Return Accrual Date:
+                    </label><br>
+                    <dp-date-picker class="form-control"
+                    [ngModel]="Preferred_Return_Accrual_Date | date:'MM/dd/yyyy'" formControlName="Preferred_Return_Accrual_Date"
+                    [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                    <!-- <input [(ngModel)]="Preferred_Return_Accrual_Date" formControlName="Preferred_Return_Accrual_Date"
+                        class="form-control CheckForm" type="date" placeholder="Preferred Return Accrual Date"
+                        data-date-format="dd/MM/yyyy" value="{{Preferred_Return_Accrual_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>SD-IRA Investments:
+                    </label><br>
+                    <input [(ngModel)]="SD_IRA_Investments" formControlName="SD_IRA_Investments"
+                        class="form-control CheckForm" type="text" placeholder="SD-IRA Investments">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Initial Posting Date:
+                        </label><br>
+                    <input [(ngModel)]="Initial_Posting_Date" formControlName="Initial_Posting_Date"
+                        class="form-control CheckForm" type="date" placeholder="Initial Posting Date"
+                        data-date-format="dd/MM/yyyy">
+                </div> -->
+                <div class="form-group col-md-4 equityCrowdfunding">
+                    <label>Fund Size:
+                    </label><br>
+                    <input [(ngModel)]="Fund_Size" formControlName="Fund_Size" class="form-control CheckForm"
+                        type="text" placeholder="Fund Size">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding">
+                    <label>Sponsor:
+                    </label><br>
+                    <input [(ngModel)]="Sponsor" formControlName="Sponsor" class="form-control CheckForm" type="text"
+                        placeholder="Sponsor">
+                </div>
+
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Business Plan:
+                    </label><br>
+                    <input [(ngModel)]="Business_Plan" formControlName="Business_Plan" class="form-control CheckForm"
+                        type="text" placeholder="Business Plan">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Key Deal Points:
+                    </label><br>
+                    <input [(ngModel)]="Key_Deal_Points" formControlName="Key_Deal_Points"
+                        class="form-control CheckForm" type="text" placeholder="Key Deal Points">
+                </div>
+
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Summary of Changes:
+                    </label><br>
+                    <input [(ngModel)]="Summary_of_Changes" formControlName="Summary_of_Changes"
+                        class="form-control CheckForm" type="text" placeholder="Summary of Changes">
+                </div>
+                <!-- <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Prior WePo Offerings:
+                        </label><br>
+                    <input [(ngModel)]="Prior_WePo_Offerings" formControlName="Prior_WePo_Offerings"
+                        class="form-control CheckForm" type="text" placeholder="Prior WePo Offerings">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Targeted Cash Distributions:
+                        </label><br>
+                    <input [(ngModel)]="Targeted_Cash_Distributions" formControlName="Targeted_Cash_Distributions"
+                        class="form-control CheckForm" type="text" placeholder="Targeted Cash Distributions">
+                </div>
+
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Sponsor Experience:
+                        </label><br>
+                    <input [(ngModel)]="Sponsor_Experience" formControlName="Sponsor_Experience" class="form-control CheckForm"
+                        type="text" placeholder="Sponsor Experience">
+                </div>
+                
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>1031 Exchange:
+                        </label><br>
+                    <input [(ngModel)]="One031_Exchange" formControlName="One031_Exchange" class="form-control CheckForm" type="text"
+                        placeholder="1031 Exchange">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Opportunity Zone:
+                        </label><br>
+                    <input [(ngModel)]="Opportunity_Zone" formControlName="Opportunity_Zone"
+                        class="form-control CheckForm" type="text" placeholder="Opportunity Zone">
+                </div> -->
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Investor Accreditation:
+                    </label><br>
+                    <input [(ngModel)]="Investor_Accreditation" formControlName="Investor_Accreditation"
+                        class="form-control CheckForm" type="text" placeholder="Investor Accreditation">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Tax:
+                    </label><br>
+                    <input [(ngModel)]="Tax" formControlName="Tax" class="form-control CheckForm" type="text"
+                        placeholder="Tax">
+                </div>
+                <div class="form-group col-md-4 realEstateCrowdfunding">
+                    <label>Land Assessment: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Land Assessment"
+                        [(ngModel)]="Land_Assessment" formControlName="Land_Assessment">
+                </div>
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Reasons to Invest:
+                    </label><br>
+                    <input [(ngModel)]="Reasons_to_Invest" formControlName="Reasons_to_Invest"
+                        class="form-control CheckForm" type="text" placeholder="Reasons to Invest">
+                </div>
+
+                <div class="form-group col-md-4 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Features:
+                    </label><br>
+                    <input [(ngModel)]="Features" formControlName="Features" class="form-control CheckForm" type="text"
+                        placeholder="Features">
+                </div>
+            </div>
+            <!-- <div class="row peroperty-fatcs ">
+                <div class="col-md-12">
+                    <h4>Property Price & Tax</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price Per Unit: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price Per Unit"
+                        [(ngModel)]="price_per_unit" formControlName="price_per_unit">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cap Rate: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Cap Rate" [(ngModel)]="cap_rate"
+                        formControlName="cap_rate">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gross Rent Multiplier: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Gross Rent Multiplier"
+                        [(ngModel)]="gross_rent_multiplier" formControlName="gross_rent_multiplier">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parcel Number: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Parcel Number"
+                        [(ngModel)]="Parcel_Number" formControlName="Parcel_Number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Land Assessment: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Land Assessment"
+                        [(ngModel)]="Land_Assessment" formControlName="Land_Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Improvements Assessment: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Improvements Assessment"
+                        [(ngModel)]="Improvements_Assessment" formControlName="Improvements_Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Assessment: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Total Assessment"
+                        [(ngModel)]="Total_Assessment" formControlName="Total_Assessment">
+                </div>
+            </div> -->
+            <div class="row peroperty-fatcs equityCrowdfunding realEstateCrowdfunding">
+                <div class="col-md-12">
+                    <h4>Property Highlights</h4>
+                </div>
+                <div class="form-group col-md-6 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Investment Highlights:
+                    </label><br>
+                    <textarea [(ngModel)]="invesment_highlights" formControlName="invesment_highlights"
+                        class="form-control CheckForm" type="text" placeholder="Investment Highlights" rows="6"
+                        id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-6 equityCrowdfunding realEstateCrowdfunding">
+                    <label>Description:
+                    </label><br>
+                    <textarea [(ngModel)]="Description" formControlName="Description" class="form-control CheckForm"
+                        type="text" placeholder="Description" rows="6" id="firstname"></textarea>
+                </div>
+                <!-- <div class="form-group col-md-6">
+                    <label>Selling Date:</label><br>
+                    <textarea [(ngModel)]="selling_date" formControlName="selling_date"
+                        class="form-control CheckForm" type="text" placeholder="Selling Date" rows="6"
+                        id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Sold Out:</label><br>
+                    <textarea [(ngModel)]="Description" formControlName="Sold_out"
+                        class="form-control CheckForm" type="text" placeholder="Sold Out" rows="6"
+                        id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Property Photos:</label><br>
+                    <textarea [(ngModel)]="property_photos" formControlName="property_photos"
+                        class="form-control CheckForm" type="text" placeholder="Property Photos" rows="6"
+                        id="firstname"></textarea>
+                </div> -->
+            </div>
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share :</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+        </form>
+        <!-- <div class="row peroperty-fatcs">
+            <div class="col-md-12">
+                <h4>Nearby Schools </h4>
+            </div>
+            <div class="col-md-12">
+                <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button><br>
+                <form [formGroup]="invoiceForm" class="table-responsive">
+                    <table class="table1" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>School_Name</th>
+                                <th>Grades</th>
+                                <th>Distance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="itemRows">                            
+                            <tr *ngFor="let itemrow of invoiceForm.controls['itemRows']; let i=index"
+                                [formGroupName]="i">                                
+                                <td><input formControlName="Rating" class="form-control" placeholder="Rating"></td>
+                                <td><input formControlName="School_Name" class="form-control "
+                                        placeholder="School_Name"></td>
+                                <td><input formControlName="Grades" class="form-control " placeholder="Grades"></td>
+                                <td><input formControlName="Distance" class="form-control " placeholder="Distance"></td>
+                         
+                                <td><button *ngIf="invoiceForm.controls['itemRows']"
+                                        (click)="deleteRow(i)" class="btn btn-danger"><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="form-group text-center col-md-12">
+                <button class="btn btn-primary " id="formSubmit" (click)="submit()">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="row peroperty-fatcs">
+            <div class="col-md-12">
+                <h4>Neighborhood </h4>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Neighborhood: </label><br>
+                <input [(ngModel)]="Neighborhood" formControlName="Neighborhood" class="form-control CheckForm"
+                    type="text" placeholder="Neighborhood">
+            </div>
+        </div> -->
+
+    </section>
+    <br>
+</div>

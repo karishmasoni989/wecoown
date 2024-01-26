@@ -1,0 +1,156 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Manage Ads</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Ads</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+
+    <h3>&nbsp;</h3>
+    <div class="row">
+        <div class="col-md-12 text-center checboxAds">
+            <br>
+            <label class="checkContainer">All Ads
+                <input type="radio" checked="checked" name="radio" id="banner-check" (click)="checkRadio(1)">
+                <span class="checkmark"></span>&nbsp;&nbsp;
+            </label>
+            <label class="checkContainer">Vendor Listing
+                <input type="radio" name="radio" id="vendor-check" (click)="checkRadio(2)">
+                <span class="checkmark"></span>
+            </label><br><br>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div id="all-ads-table" class="table-responsive" style="color: black;">
+        <table datatable class="table table-bordered table-hover table-striped" style="width:100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Ad Type</th>
+                    <th>Category Name </th>
+                    <th>Url of button</th>
+                    <th>Days</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of getAllAdData; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.url_button}}</td>
+                    <td>{{item.days}}</td>
+                    <td>{{item.start_date | date : "dd/MM/yyyy"}}</td>
+                    <td>{{item.end_date | date : "dd/MM/yyyy"}}</td>
+                    <td>{{item.status}}</td>
+                    <td>
+                        <button type="button" class="btn btn-orange" (click)="actionEdit(item.name, item._id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button *ngIf="item.status == 'Active'" type="button" class="btn btn-success" data-toggle="modal" data-target="#status-modal" (click)="actionStatus(item.name, item._id, item.status)">
+                            <i class="fa fa-flag"></i>
+                        </button>
+                        <button *ngIf="item.status == 'Inactive'" type="button" class="btn btn-danger" data-toggle="modal" data-target="#status-modal" (click)="actionStatus(item.name, item._id, item.status)">
+                            <i class="fa fa-flag"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+    <!-- /.box-header -->
+    <div id="vendor-ads-table" class="table-responsive" style="color: black; display: none;">
+        <table datatable id="hii" class="table table-bordered table-hover table-striped" style="width:100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No.</th>
+                    <!-- <th>Ad Type</th> -->
+                    <th>Vendor Name</th>
+                    <th>Vendor Type</th>
+                    <th>Vendor Email Address</th>
+                    <th>Vendor Address</th>
+                    <th>Vendor Url</th>
+                    <th>Days</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of getAllVendorData; let i = index">
+                    <td>{{i+1}}</td>
+                    <!-- <td>{{item.name}}</td> -->
+                    <td>{{item.vendor_name}}</td>
+                    <td>{{item.vendor_type}}</td>
+                    <td>{{item.vendor_email}}</td>
+                    <td>{{item.vendor_address}}</td>
+                    <td style="overflow-y: auto;width:200px; height: 200px;">{{item.vendor_url}}</td>
+                    <td>{{item.days}}</td>
+                    <td>{{item.start_date | date : "dd/MM/yyyy"}}</td>
+                    <td>{{item.end_date | date : "dd/MM/yyyy"}}</td>
+                    <td>{{item.status}}</td>
+                    <!-- <td><%= data[i].mobile %></td>
+                  <td><%= data[i].email %></td>
+                  <td><%= data[i].gender %></td> -->
+                    <!-- <td><%= data[i].status %></td> -->
+                    <td>
+                        <button type="button" class="btn btn-orange" (click)="actionEdit(item.name, item._id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button *ngIf="item.status == 'Active'" type="button" class="btn btn-success" data-toggle="modal" data-target="#status-modal" (click)="actionStatus(item.name, item._id, item.status)">
+                            <i class="fa fa-flag"></i>
+                        </button>
+                        <button *ngIf="item.status == 'Inactive'" type="button" class="btn btn-danger" data-toggle="modal" data-target="#status-modal" (click)="actionStatus(item.name, item._id, item.status)">
+                            <i class="fa fa-flag"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="status-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Status</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success ad-Success dispNone"></div>
+            <div class="alert alert-danger ad-danger dispNone"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-success postDelete-success dispNone"></div>
+                <p class="">Are you sure you want to change the status?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="confirmStatus()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>

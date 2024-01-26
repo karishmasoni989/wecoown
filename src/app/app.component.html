@@ -1,0 +1,1327 @@
+<!-- ks -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="../assets/css/style.css">  -->
+  <!-- Owl Stylesheets -->
+  <!-- <link rel="stylesheet" href="../assets/css/owl.carousel.min.css"> -->
+  <!-- <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css"> -->
+  <!-- Loader -->
+  <div class="loader-overlay" *ngIf="loading">
+      <div class="showbox">
+          <div class="loader">
+              <svg class="circular" viewBox="25 25 50 50">
+                  <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+              </svg>
+          </div>
+      </div>
+  </div>
+  <!-- ./Loader -->
+  
+  <div class="masthead inline-header" role="banner">
+      <div class="top-bar bg-back-blue top-bar-line-hide">
+          <div class="top-bar-bg"></div>
+          <section class="section-header">
+              <div id="mySidenav" class="sidenav" style="display: none;">
+                  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+                  <!-- <button onclick="window.location.href='/'">Home</button> -->
+                  <button class="dispNone" id="portfolioButtonShow" (click)="goToMyPortfolio()">{{'My Portfolio' | translateString | async}}</button>
+                  <button style="display: none;" id="my-posting1" (click)="goToMyPosting()">{{'My Postings' | translateString | async}}</button>
+                  <button class="dispNone" id="EditButtonShow" onclick="window.location.href='/my-listing'">{{'My
+                    Listings' | translateString | async}}</button>
+                  <button class="dispNone" id="myVouchersButtonShow" onclick="window.location.href='/my-vouchers'">{{'My
+                    Vouchers' | translateString | async}}</button>
+                  <button class="dispNone" id="settingButtonShow"
+                      onclick="window.location.href='/account-settings'">{{'Account Settings' | translateString | async}}</button>
+                  <button style="display: none;" id="user-sigup-report1"
+                      onclick="window.location.href='/user-signup-report'">{{'User Signup Report' | translateString | async}}
+                  </button>
+                  <button class="dispNone" id="createAdButtonShow" onclick="window.location.href='/create-ads'">{{'Create
+                    Ads' | translateString | async}}</button>
+                  <button class="dispNone" id="manageAdButtonShow" onclick="window.location.href='/manage-ads'">{{'Manage
+                    Ads' | translateString | async}}</button>
+                  <!-- <button class="accordion">About Us</button>
+                  <div class="panel">
+                      <a href="/contact-us">Contact Us</a>
+                      <a href="/privacy-policy">Privacy Policy</a>
+                      <a href="/terms-conditions">Terms &amp; Conditions</a>
+                  </div> -->
+                  <!-- <button onclick="window.open('https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49','https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49'); return false">Blog</button> -->
+                  <button class="accordion">{{'How It Works' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="/our-services">{{'Our Services' | translateString | async}}</a>
+                      <a href="/membership">{{'Membership' | translateString | async}}</a>
+                  </div>
+                  <button (click)="goToWeCoown()">{{'Invite Co-owners on WeCoOwn' | translateString | async}}</button>
+                  <button onclick="window.location.href='/fractional-shares-listing'">{{'Fractional Shares Listings' | translateString | async}}</button>
+                  <button onclick="window.location.href='/pbms'">{{'PBMS' | translateString | async}}</button>
+                  <button href="https://www.wecoownrewards.com/" onclick="window.open(this.href, this.href); return false">{{'WeCoOwn
+                    Rewards' | translateString | async}}</button>               
+                  <!-- <button onclick="window.location.href='/vendor-list'">Vendor Resources</button> -->
+                  <button class="accordion">{{'Add Listing' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);" (click)="goToForSale(1)">{{'For Sale' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goToForSale(2)">{{'For Lease' | translateString | async}}</a>
+                  </div>
+                  <!-- <div class="panel">
+            <a href="">Insurance Quotes</a>
+          </div> -->
+                  <!-- <button onclick="window.location.href='/contact-us'">WeCoOwn Community Blog</button> -->
+                  <button onclick="window.location.href='/login'" class="dashboardNoneLog" id="login1">{{'Login' | translateString | async}}</button>
+                  <button onclick="window.location.href='/register'" class="dashboardNoneLog"
+                      id="register1">{{'Register' | translateString | async}}</button>
+                  <!-- <button onclick="window.location.href='/dashboard'" class="dispNone" id="dashboard1">Dashboard</button> -->
+                  <!-- <button class="dispNone" id="profileMobileView"><img src="../assets/images/user1.png" style="width: 40px; height: 28px; border-radius: 50%;"></button> -->
+                  <button class="accordion">{{'Real Estate' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Apartment Buildings')">{{'Apartment
+                          Buildings' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Estate Homes and Luxury Mansions')">{{'Estate Homes and
+                          Luxury Mansions' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Single Family Homes & Condos')">{{'Single Family Homes &
+                          Condos' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Vacation Homes & Timeshares')">{{'Vacation Homes &
+                          Timeshares' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Mobile Homes & RV Parks')">{{'Mobile Homes & RV Parks' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Castles & Chateaux')">{{'Castles
+                        & Chateaux' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Churches & Temples')">{{'Churches
+                        & Temples' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Office Buildings')">{{'Office
+                        Buildings' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Private Islands')">{{'Private
+                        Islands' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Villages & Towns')">{{'Villages &
+                        Towns' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Real Estate','Land Parcels')">{{'Land
+                        Parcels' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Retail Shopping Malls')">{{'Retail Shopping Malls' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Real Estate','Industrial Plants & Warehouses')">{{'Industrial Plants &
+                          Warehouses' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Business Properties' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Hotels & Golf Resorts')">{{'Hotels & Golf
+                          Resorts' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Motels, Hostels & B&Bs')">{{'Motels, Hostels &
+                          B&Bs' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Restaurants, Bars & Clubs')">{{'Restaurants, Bars &
+                          Clubs' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Ranches & Farms')">{{'Ranches & Farms' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Cannabis Properties')">{{'Cannabis Properties' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Wineries & Vineyards')">{{'Wineries' | translateString | async}} &amp;
+                          {{'Vineyards' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Gas Stations & C Stores')">{{'Gas Stations & C
+                          Stores' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Car Wash Facilities')">{{'Car Wash Facilities' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Assisted Living & Nursing Homes')">{{'Assisted
+                          Living & Nursing Homes' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Business Properties','Rehab Centers')">{{'Rehab
+                        Centers' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Parking Lots')">{{'Parking Lots' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Business Properties','Camp Grounds')">{{'Camp
+                        Grounds' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Business Properties','Equestrian Centers')">{{'Equestrian Centers' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Business Properties','Marinas')">{{'Marinas' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Yachts & Ships' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Yachts & Ships','Super Yachts')">{{'Super
+                        Yachts' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Yachts & Ships','Sail Boats')">{{'Sail
+                        Boats' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Yachts & Ships','Fishing Boats')">{{'Fishing
+                        Boats' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Yachts & Ships','Speed Boats')">{{'Speed
+                        Boats' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Yachts & Ships','Power Yachts')">{{'Power
+                        Yachts' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Yachts & Ships','Catamarans')">{{'Catamarans' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Yachts & Ships','Submarines')">{{'Submarines' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Yachts & Ships','Hydroplanes')">{{'Hydroplanes' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Yachts & Ships','Commercial Ships')">{{'Commercial Ships' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Jets & Aircraft' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Jets & Aircraft','Jets')">{{'Jets' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Jets & Aircraft','Turboprop Aircraft')">{{'Turboprop Aircraft' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Jets & Aircraft','Piston Aircraft')">{{'Piston
+                        Aircraft' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Jets & Aircraft','Helicopters')">{{'Helicopters' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Jets & Aircraft','Passenger Drones')">{{'Passenger Drones' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Jets & Aircraft','Flying Cars')">{{'Flying
+                        Cars' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Cars & RVs' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','Luxury Cars & SUVs')">{{'Luxury
+                        Cars & SUVs' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Cars & RVs','Commuter Cars & SUVs')">{{'Commuter Cars & SUVs' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','Campers & RVs')">{{'Campers &
+                        RVs' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','Commercial Buses')">{{'Commercial
+                        Buses' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','EVs & Hybrids')">{{'EVs &
+                        Hybrids' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','Trucks')">{{'Trucks' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Cars & RVs','Vans & Limos')">{{'Vans &
+                        Limos' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Artworks & Antiques' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Western Paintings')">{{'Western Paintings' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Oriental Paintings')">{{'Oriental Paintings' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Sculptures')">{{'Sculptures' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Contemporary Artworks')">{{'Contemporary
+                          Artworks' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Modern Artworks')">{{'Modern Artworks' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Digital Artworks')">{{'Digital Artworks' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Antiques')">{{'Antiques' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Collectibles')">{{'Collectibles' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Horses & Live Stocks' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Artworks & Antiques','Race Horses')">{{'Race
+                        Horses' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Artworks & Antiques','Draft Horses')">{{'Draft
+                        Horses' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Artworks & Antiques','Show Horses')">{{'Show
+                        Horses' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Artworks & Antiques','Cattle')">{{'Cattle' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Artworks & Antiques','Sheep')">{{'Sheep' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Artworks & Antiques','Other Live Stocks')">{{'Other Live Stocks' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Crypto-Assets' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Crypto-Assets','Real Estate Asset Tokens')">{{'Real Estate Asset
+                          Tokens' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Crypto-Assets','Commodity Asset Tokens')">{{'Commodity Asset Tokens' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Crypto-Assets','Utility Tokens')">{{'Utility
+                        Tokens' | translateString | async}}</a>
+                      <a href="javascript:void(0);" (click)="goTocatrgpyList('Crypto-Assets','NFTs')">{{'NFTs' | translateString | async}}</a>
+                  </div>
+                  <button class="accordion">{{'Crowdfunding Projects' | translateString | async}}</button>
+                  <div class="panel">
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Crowdfunding Projects','Property Crowdfunding')">{{'Property
+                          Crowdfunding' | translateString | async}}</a>
+                      <a href="javascript:void(0);"
+                          (click)="goTocatrgpyList('Crowdfunding Projects','Equity Crowdfunding')">{{'Equity Crowdfunding' | translateString | async}}</a>
+                  </div>
+                  <button class="dispNone" id="SignoutButtonShow" (click)="signOut();">{{'SignOut' | translateString | async}}</button>
+              </div>
+  
+              <div class="row ColorWhite width100Per">
+                  <!-- <div class="col-md-2 disFlex"> -->
+                  <!-- City name link -->
+                  <div id="loc_city_link" class="toggle_handler primary_location col-md-2 width100Per"
+                      data-location="location_aslink">
+                      <span class="col-8" id="SpanMenu" style="display: none;" (click)="openNav($event)">&#9776;
+                          {{'Menu' | translateString | async}}</span>
+                      <span class="marginLeftLoc">
+                          <!-- <span id="google_translate_element"></span> -->
+                          <!-- <i class="fa fa-map-marker" style="margin-top:10px"></i>&nbsp; -->
+                          <a href="javascript:void(0);" class="ColorWhite" id="language-click-open-dropp"
+                              data-toggle="collapse" data-target="#language-drop">{{'Language' | translateString | async}}
+                              <i class="fa fa-angle-down" id="language-click-open-dropp" data-toggle="collapse"
+                                  data-target="#language-drop"></i>
+                          </a>
+                          <div id="language-drop" class="collapse">
+                              <ul>
+                                  <li (click)="ChangeLanguageGlo('zh-TW')"><a>{{'Chinese' | translateString | async}} <img
+                                              src="../assets/images/china.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('fr')"><a>{{'French' | translateString | async}} <img src="../assets/images/france.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('de')"><a>{{'German' | translateString | async}} <img src="../assets/images/germany.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('ko')"><a>{{'Korean' | translateString | async}} <img src="../assets/images/korea.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('ru')"><a>{{'Russian' | translateString | async}} <img src="../assets/images/russia.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('es')"><a>{{'Spanish' | translateString | async}} <img src="../assets/images/spain.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('sv')"><a>{{'Swedish' | translateString | async}} <img src="../assets/images/sweden.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('th')"><a>{{'Thai' | translateString | async}} <img src="../assets/images/thailand.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('ja')"><a>{{'Japanese' | translateString | async}} <img src="../assets/images/japan.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('pt')"><a>{{'Portuguese' | translateString | async}} <img
+                                              src="../assets/images/portgual.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('vi')"><a>{{'Vietnamese' | translateString | async}} <img
+                                              src="../assets/images/vietnam.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                                  <li (click)="ChangeLanguageGlo('en')"><a>{{'English' | translateString | async}} <img src="../assets/images/USA.png"
+                                              style="width: 40px; height: 28px; float:right;"></a></li>
+                              </ul>
+                          </div>
+                      </span>
+                  </div>
+                  <div class="col-md-2">
+                      <!-- <input type="text" id="search-input-bar" (keyup)="onSearch($event)" class="search-input" placeholder="Search Members"><i class="fa fa-search forSearch"></i>
+                      <ul class="all-search-list">
+                          <div *ngFor="let item of getSearchMember">
+                              <li (click)="goToMemberPage(item._id)">
+                                  <a href="javascript:void(0);">
+                                      <img alt="Image is loading" src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../assets/images/user1.png' }}" width="30px">
+                                  </a>&nbsp;
+                                  <a class="link-blue" href="javascript:void(0);">{{item.firstname}} {{item.lastname}}</a></li>
+                          </div>
+                          <div id="no-search-result" style="display: none;">
+                              <li>
+                                  <a href="javascript:void(0);">No Result Found</a>
+                              </li>
+                          </div>
+                      </ul> -->
+                  </div>
+  
+                  <!-- Primary Navigation Menu Start -->
+                  <div id="menu-primary" class="menu-container fb-iconL col-md-8">
+                      <nav role="navigation" class="wrap float-right">
+                          <!-- #menu-primary-title -->
+                          <div class="menu">
+                              <ul id="menu-primary-items" class="primary_menu clearfix">
+                                  <!-- <li class="dropdown">
+                                      <a routerLink="/" aria-current="page" class="">Home</a>
+                                  </li> -->
+                                  <!-- 
+                                  <li class="dropdown">
+                                      <a href="" class="">About Us</a>
+                                      <div class="dropdown-content font-weight-bold">
+                                          <a routerLink="/contact-us">Contact Us</a>
+                                          <a routerLink="/privacy-policy">Privacy Policy</a>
+                                          <a routerLink="/terms-conditions">Terms &amp; Conditions</a>
+                                      </div>
+                                  </li> -->
+                                  <!-- <li>
+                                      <a href="https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49"
+                                          onclick="window.open(this.href, this.href); return false">Blog</a>
+                                  </li> -->
+                                  <li class="dropdown">
+                                      <a href="" class="">{{'How It Works' | translateString | async}}</a>
+                                      <div class="dropdown-content font-weight-bold">
+                                          <a routerLink="/our-services">{{'Our Services' | translateString | async}}</a>
+                                          <a routerLink="/membership">{{'Membership' | translateString | async}}</a>
+                                      </div>
+                                  </li>
+                                  <!-- <li class="dropdown">
+                      <a href="" class="">Managing
+                        Co-ownership</a>
+                      <div class="dropdown-content font-weight-bold">
+                        <a href="">Farjho</a>
+                        <a href="">Farjao</a>
+                      </div>
+                    </li> -->
+                                  <!-- <li class="dropdown">
+                                      <a href="/vendor-list" class="">Vendor Resources</a>                                   
+                                  </li> -->
+                                  <li>
+                                      <a href="javascript:void(0);" (click)="goToWeCoown()">{{'Invite Co-owners on
+                                        WeCoOwn' | translateString | async}}</a>                                 
+                                  </li>            
+                                  <li class="dropdown">
+                                      <a [routerLink]="['/fractional-shares-listing']">{{'Fractional Shares Listings' | translateString | async}}</a>
+                                    </li>                  
+                                  <li class="btn-orange">
+                                      <a routerLink="/pbms">{{'PBMS' | translateString | async}}</a>
+                                      <!-- <div class="dropdown-content font-weight-bold">
+                                          <a >Property Booking & Management System (PBMS)</a>
+                                          <a [routerLink]="['/fractional-shares-listing']">Fractional Shares Listings</a>
+                                      </div> -->
+                                  </li>
+                                  <li>
+                                      <a href="https://www.wecoownrewards.com/"
+                                        onclick="window.open(this.href, this.href); return false">{{'WeCoOwn Rewards' | translateString | async}}</a>
+                                    </li>
+                                  <li class="notificationBell" style="display: none;" id="userNofication1"
+                                      (click)="OpenNotificationindow()">
+                                      <a (click)="OpenNotificationindow()" id="userNotifyIcon"><i
+                                              class="fa fa-bell font-size20" id="userNotifyICC"></i></a>
+                                      <span id="UnreadNotify">{{NotificationUnreadCount}}</span>
+                                  </li>
+                                  <div id="notication-content" class="" style="display: none;">
+                                      <ul>
+                                          <h4 id="showNoNotification" class="paddingTextInvitaion">{{'No Notifications' | translateString | async}}</h4>
+                                          <div *ngFor="let item of getRequestForProperty; let i = index">
+                                              <h3 *ngIf="i == 0" class="paddingTextInvitaion">{{'Request for Book Property' | translateString | async}}
+                                              </h3>
+                                              <!-- <span *ngFor="let innerItem of item.recevier_id"> -->
+                                              <li class="listOfNotify"
+                                                  (click)="goToBooking(item.pbms_group_id._id, item.pbms_group_id.title, item.pbms_group_id.all_admins)">
+                                                  <a class="colorBlack">
+                                                      <img alt="Image is loading" class="border-radious50 float-left"
+                                                          src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                          width="50px" height="50px">
+                                                      <span>{{item.user_id.firstname}} {{item.user_id.lastname}} {{'wants to
+                                                        book' | translateString | async}} {{item.pbms_group_id.title}} {{'property from' | translateString | async}}
+                                                          {{item.start_date | date : "dd/MM/yyyy"}} {{'to' | translateString | async}} {{item.end_date |
+                                                          date : "dd/MM/yyyy"}}.
+                                                      </span>
+                                                  </a>
+                                              </li>
+                                              <!-- </span> -->
+                                          </div>
+                                          <div *ngFor="let item of getRequestForAdminApprovalData; let i = index">
+                                              <h3 *ngIf="i == 0" class="paddingTextInvitaion">{{'Request for Admin Approval' | translateString | async}}
+                                              </h3>
+                                              <span *ngFor="let innerItem of item.recevier_id">
+                                                  <li *ngIf="currentLocalUserData.id == innerItem.invited_by_user_id && innerItem.request_for_admin.status == 'Pending' && innerItem.request_for_admin.action == 'Yes'"
+                                                      class="listOfNotify"
+                                                      (click)="openDialogAdminApproval(item._id,innerItem.user_id._id)"
+                                                      data-toggle="modal"
+                                                      data-target="#open-pbms-adminAprroveRequest-modal1">
+                                                      <a class="colorBlack">
+                                                          <img alt="Image is loading" class="border-radious50 float-left"
+                                                              src="{{ innerItem.user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                              width="50px" height="50px">
+                                                          <span>{{'innerItem.user_id.firstname' | translateString | async}}
+                                                              {{'innerItem.user_id.lastname' | translateString | async}} {{'is request you to
+                                                              become a admin for Property Co-Owners Group' | translateString | async}} {{'item.title' | translateString | async}}.
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                              </span>
+                                          </div>
+                                          <div *ngFor="let item of getNotificationData; let i = index">
+                                              <h3 *ngIf="i == 0" class="paddingTextInvitaion">{{'Invitations' | translateString | async}}</h3>
+                                              <span *ngFor="let innerItem of item.recevier_id">
+                                                  <li *ngIf="currentLocalUserData.id == innerItem.user_id._id"
+                                                      class="listOfNotify" (click)="openPortfolioPopup(item._id)"
+                                                      data-toggle="modal" data-target="#portfolio-data-modal">
+                                                      <a class="colorBlack">
+                                                          <img alt="Image is loading" class="border-radious50 float-left"
+                                                              src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                              width="50px" height="50px">
+                                                          <span>{{'innerItem.invited_by_user_id.firstname' | translateString | async}}
+                                                              {{'innerItem.invited_by_user_id.lastname' | translateString | async}}
+                                                              {{'invites you for Property Co-Owners group' | translateString | async}} {{'item.title' | translateString | async}} {{'as a
+                                                              Co-Owner.' | translateString | async}}
+                                                          </span>
+                                                      </a>
+                                                  </li>
+                                              </span>
+                                          </div>
+                                      </ul>
+                                  </div>
+                                  <li class="dashboardNoneLog" id="login2"><a data-reveal-id=""
+                                          routerLink="/login">{{'Login' | translateString | async}}</a>
+                                  </li>
+                                  <li class="dashboardNoneLog" id="register2"><a data-reveal-id=""
+                                          routerLink="/register">{{'Register' | translateString | async}}</a></li>
+                                  <li class="dropdown" style="display: none;padding: 3px;background: transparent"
+                                      id="userProfileImg">
+                                      <img alt="Image is loading"
+                                          src="{{ imgageOfUser != '' ? baseURLofAPi+imgageOfUser : '../assets/images/user44.png' }}"
+                                          style="width: 40px; height: 28px; border-radius: 50%;">
+                                      <div class="dropdown-content font-weight-bold">
+                                          <a (click)="goToMyPortfolio()">{{'My Portfolio' | translateString | async}}</a>
+                                          <!-- <a href="https://wecoown.com/user-profile?logToken" target="_blank" id="my-posting2"
+                                              style="display: none;">My Postings</a> -->
+                                          <a href="javascript:void(0);" (click)="goToMyPosting()" id="my-posting2"
+                                              style="display: none;">{{'My Postings' | translateString | async}}</a>
+                                          <a href="/my-listing">{{'My Listings' | translateString | async}}</a>
+                                          <a href="/my-vouchers">{{'My Vouchers' | translateString | async}}</a>
+                                          <a href="/account-settings">{{'Account Settings' | translateString | async}}</a>
+                                          <a style="display: none;" id="user-sigup-report2" class="dispNone"
+                                              href="/user-signup-report">{{'User Signup Report' | translateString | async}}</a>
+                                          <!-- <a href="/chat-message">Messages</a> -->
+                                          <div class="dropdown submenu-technical">
+                                              <a class="dropdown-toggle" data-toggle="dropdown" id="ads-of-sub"
+                                                  style="display: flex">{{'Advertisement' | translateString | async}}
+                                                  &nbsp;<i class="fa fa-caret-down"
+                                                      style="margin-top: 3px; margin-left: 3px"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                              <div class="dropdown-content12 font-weight-bold">
+                                                  <a href="/create-ads">{{'Create Ads' | translateString | async}}</a>
+                                                  <a href="/manage-ads">{{'Manage Ads' | translateString | async}}</a>
+                                              </div>
+                                          </div>
+                                          <a href="javascript:void(0);" (click)="signOut()">{{'Sign Out' | translateString | async}}</a>
+                                      </div>
+                                  </li>
+                                  <!-- <li class="dispNone" id="dashboard2"><a href="/dashboard">Dashboard</a></li> -->
+                                  <!-- <li class="dropdown" style="display: none;padding: 3px;background: transparent" id="userProfileImg">
+                    <img src="{{ imgageOfUser != '' ? imgageOfUser : '../assets/images/user44.png' }}"
+                      style="width: 40px; height: 28px; border-radius: 50%;">
+                    <div class="dropdown-content font-weight-bold">
+                      <a href="/user-profile">My Listings</a>
+                      <a href="/account-settings">Profile Settings</a>            
+                      <a href="/chat-message">Messages</a>
+                      <a href="/" (click)="signOut()">Sign Out</a>
+                    </div>
+                  </li> -->
+  
+                              </ul>
+                          </div>
+                      </nav>
+                  </div>
+  
+                  <!-- Primary Navigation Menu End -->
+              </div>
+          </section>
+      </div>
+      <header class="header-bar">
+          <nav class="nav-bar">
+              <!-- <div class="row">
+                  <div class="col-md-3">
+                      <a href="/">
+                          <img alt="Image is loading" src="../assets/images/" width="110px">
+                      </a>
+                  </div>
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6 topnav fb-iconL">
+                      <ul>
+                         
+                          <li>
+                              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#coll-content">Add Listings</button>
+                              <div id="coll-content" class="collapse collapseContent">
+                                  <div>
+                                      <button class="width140 marginBottom10">For Sale</button>
+                                      <button class="width140">For Lease</button>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div> -->
+              <div class="row">
+                  <div class="col-md-12 disFlex imgResponsive">
+                      <a href="/">
+                          <img alt="Image is loading" src="../assets/images/Trans-1.png" width="110px">
+                      </a>
+                      <div class="topnav fb-iconL" id="myTopnav">
+                          <h5 class="maginTop5">{{'Search for current sellers\' listings in these categories' | translateString | async}}:</h5>
+                          <!-- <h5 class="maginTop5">&nbsp;</h5> -->
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Real Estate' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Apartment Buildings')">{{'Apartment
+                                      Buildings' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Estate Homes and Luxury Mansions')">{{'Estate
+                                      Homes and Luxury Mansions' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Single Family Homes & Condos')">{{'Single
+                                      Family Homes & Condos' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Vacation Homes & Timeshares')">{{'Vacation
+                                      Homes & Timeshares' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Mobile Homes & RV Parks')">{{'Mobile Homes & RV
+                                      Parks' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Castles & Chateaux')">{{'Castles & Chateaux' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Churches & Temples')">{{'Churches & Temples' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Office Buildings')">{{'Office Buildings' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Private Islands')">{{'Private Islands' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Villages & Towns')">{{'Villages & Towns' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Land Parcels')">{{'Land Parcels' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Retail Shopping Malls')">{{'Retail Shopping
+                                      Malls' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Real Estate','Industrial Plants & Warehouses')">{{'Industrial
+                                      Plants & Warehouses' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Business Properties' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Hotels & Golf Resorts')">{{'Hotels &
+                                      Golf Resorts' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Motels, Hostels & B&Bs')">{{'Motels,
+                                      Hostels & B&Bs' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Restaurants, Bars & Clubs')">{{'Restaurants,
+                                      Bars & Clubs' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Ranches & Farms')">{{'Ranches &
+                                      Farms' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Cannabis Properties')">{{'Cannabis
+                                      Properties' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Wineries & Vineyards')">{{'Wineries' | translateString | async}}
+                                      &amp; {{'Vineyards' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Gas Stations & C Stores')">{{'Gas
+                                      Stations & C Stores' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Car Wash Facilities')">{{'Car Wash
+                                      Facilities' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Assisted Living & Nursing Homes')">{{'Assisted
+                                      Living & Nursing Homes' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Rehab Centers')">{{'Rehab Centers' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Parking Lots')">{{'Parking Lots' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Camp Grounds')">{{'Camp Grounds' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Equestrian Centers')">{{'Equestrian
+                                      Centers' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Business Properties','Marinas')">{{'Marinas' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Yachts & Ships' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Super Yachts')">{{'Super Yachts' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Sail Boats')">{{'Sail Boats' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Fishing Boats')">{{'Fishing Boats' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Speed Boats')">{{'Speed Boats' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Power Yachts')">{{'Power Yachts' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Catamarans')">{{'Catamarans' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Submarines')">{{'Submarines' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Hydroplanes')">{{'Hydroplanes' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Yachts & Ships','Commercial Ships')">{{'Commercial Ships' | translateString | async}}</a>
+                                  <!-- <a href="Yachts%20&%20Boats">Yachts & Boats</a> -->
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Jets & Aircraft' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Jets')">{{'Jets' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Turboprop Aircraft')">{{'Turboprop
+                                      Aircraft' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Piston Aircraft')">{{'Piston Aircraft' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Helicopters')">{{'Helicopters' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Passenger Drones')">{{'Passenger Drones' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Jets & Aircraft','Flying Cars')">{{'Flying Cars' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Cars & RVs' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Luxury Cars & SUVs')">{{'Luxury Cars & SUVs' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Commuter Cars & SUVs')">{{'Commuter Cars &
+                                      SUVs' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Campers & RVs')">{{'Campers & RVs' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Commercial Buses')">{{'Commercial Buses' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','EVs & Hybrids')">{{'EVs & Hybrids' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Trucks')">{{'Trucks' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Cars & RVs','Vans & Limos')">{{'Vans & Limos' | translateString | async}}</a>
+                                  <!-- <a href="Shared%20Vehicles">Shared Vehicles</a> -->
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Artworks & Antiques' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Western Paintings')">{{'Western
+                                      Paintings' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Oriental Paintings')">{{'Oriental
+                                      Paintings' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Sculptures')">{{'Sculptures' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Contemporary Artworks')">{{'Contemporary
+                                      Artworks' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Modern Artworks')">{{'Modern
+                                      Artworks' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Digital Artworks')">{{'Digital
+                                      Artworks' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Antiques')">{{'Antiques' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Artworks & Antiques','Collectibles')">{{'Collectibles' | translateString | async}}</a>
+                                  <!-- <a href="Arts%20&%20Antiques">Arts & Antiques</a> -->
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Horses & Live Stocks' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Race Horses')">{{'Race Horses' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Draft Horses')">{{'Draft Horses' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Show Horses')">{{'Show Horses' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Cattle')">{{'Cattle' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Sheep')">{{'Sheep' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Horses & Live Stocks','Other Live Stocks')">{{'Other Live
+                                      Stocks' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Crypto-Assets' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <!-- <a href="Tokenized%20Ownership%20&%20Crypto%20Assets">Tokenized Ownership & Crypto
+                            Assets</a> -->
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Crypto-Assets','Real Estate Asset Tokens')">{{'Real Estate
+                                      Asset Tokens' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Crypto-Assets','Commodity Asset Tokens')">{{'Commodity Asset
+                                      Tokens' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Crypto-Assets','Utility Tokens')">{{'Utility Tokens' | translateString | async}}</a>
+                                  <a href="javascript:void(0);" (click)="goTocatrgpyList('Crypto-Assets','NFTs')">{{'NFTs' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <div class="dropdown">
+                              <button class="dropbtn"><strong>{{'Crowdfunding Projects' | translateString | async}}</strong>
+                                  <i class="fa fa-angle-down"></i>
+                              </button>
+                              <div class="dropdown-content font-weight-bold">
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Crowdfunding Projects','Property Crowdfunding')">{{'Property
+                                      Crowdfunding' | translateString | async}}</a>
+                                  <a href="javascript:void(0);"
+                                      (click)="goTocatrgpyList('Crowdfunding Projects','Equity Crowdfunding')">{{'Equity
+                                      Crowdfunding' | translateString | async}}</a>
+                              </div>
+                          </div>
+                          <!-- <button type="button" id="add-listing-btn-header" style="position: absolute;"
+                              class="btn btn-info" data-toggle="collapse" data-target="#coll-content">Add
+                              Listings</button> -->
+                          <div style="display: inline-block;">
+                              <div class="dropdown" id="addDrop">
+                                  <button (click)="openDropdownList()" class="dropbtnnn" id="add-listing-btn-header"
+                                      style="position: absolute;">{{'Add Listings' | translateString | async}}</button>
+                                  <div id="coll-content" class="collapseContent">
+                                      <div style="display: grid; padding: 10px;">
+                                          <button class="width140 marginBottom10" (click)="goToForSale(1)">{{'For
+                                            Sale' | translateString | async}}</button>
+                                          <button class="width140" (click)="goToForSale(2)">{{'For Lease' | translateString | async}}</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- <div class="dropdown">
+                        <button class="dropbtn"><strong>Others</strong>
+                          <i class="fa fa-angle-down"></i>
+                        </button>
+                        <div class="dropdown-content font-weight-bold">
+                         
+                          <a href="Others">Others</a>
+          
+                        </div>
+                      </div> -->
+                          <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a> -->
+                          <!-- <div id="coll-content" class="collapse collapseContent">
+                              <div style="display: grid; padding: 10px;">
+                                  <button class="width140 marginBottom10" (click)="goToForSale(1)">For Sale</button>
+                                  <button class="width140" (click)="goToForSale(2)">For Lease</button>
+                              </div>
+                          </div> -->
+                      </div>
+                  </div>
+              </div>
+          </nav>
+      </header>
+  </div>
+  <!-- {{baseURLofAPi}} -->
+  <router-outlet></router-outlet>
+  
+  <footer class="ColorWhite bg-back-blue">
+      <div class="footer-main">
+          <div class="container-footer">
+              <div class="row">
+                  <div class="col-md-3">
+                      <aside class="ftco-box">
+                          <h4>&nbsp;</h4>
+                          <h4 class="" style="color: white !important;">{{'Contact Info' | translateString | async}}:</h4>
+                          <div class="">
+                              <ul class="footer-menu spanPaddingLeft">
+                                  <li><i class="fa fa-map-marker"></i>&nbsp;<strong>{{'Administrations' | translateString | async}}:</strong><br>
+                                      <p>{{'WeCoOwn, Inc.' | translateString | async}}<br>{{'2901 W Coast Hwy' | translateString | async}}, #200,<br>
+                                          {{'Newport Beach, CA 92663, USA' | translateString | async}}
+                                      </p>
+                                      <strong>&nbsp;&nbsp;&nbsp;{{'Global Headquarters' | translateString | async}}:</strong><br>
+                                      <p>{{'WeCoOwn Technologies Ltd' | translateString | async}}<br>{{'30A Brookwood Crescent, Artane,' | translateString | async}}<br>
+                                          {{'D05 EV29, Dublin 5, Ireland' | translateString | async}}
+                                      </p>
+                                  </li>
+                                  <!-- <li>
+                                      <i class="fa fa-phone"></i>&nbsp;
+                                      <strong>Phone:</strong><br>
+                                      <p><a class="ColorWhite" href="tel://8884568881">+1-888-456-8881</a></p>
+                                  </li> -->
+                                  <li>
+                                      <i class="fa fa-envelope"></i>&nbsp;
+                                      <strong>{{'Email' | translateString | async}}:</strong><br>
+                                      <p><a class="ColorWhite"
+                                              href="mailto:info@wepropertyowners.com">info@wepropertyowners.com</a></p>
+                                  </li>
+                                  <li>
+                                      <i class="fa fa-clock-o"></i>&nbsp;
+                                      <strong>{{'Website' | translateString | async}}:</strong><br>
+                                      <p>
+                                          <a class="ColorWhite" href="https://www.wepropertyowners.com/"
+                                              onclick="window.open(this.href, this.href); return false">https://www.WePropertyOwners.com</a><br>
+                                          <a class="ColorWhite" href="https://www.wecoownrewards.com/"
+                                              onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnRewards.com</a><br>
+                                          <a class="ColorWhite" href="https://www.wecoownnft.com/"
+                                              onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnNFT.com</a>
+                                      </p>
+                                  </li>
+                              </ul>
+                          </div>
+                      </aside>
+                  </div>
+                  <div class="col-md-6">
+                      <h4>&nbsp;</h4>
+                      <a style="font-size: 19px;font-weight: 700;">{{'Quick Links' | translateString | async}}:</a>
+                      <div class="row" style="margin-top: 10px;">
+                          <div class="col-md-6">
+                              <aside class="ftco-box aside-course">
+                                  <div class="coursesUlList">
+                                      <ul class="footer-menu">
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite"
+                                                  href="/">&nbsp;{{'Home' | translateString | async}}</a></li>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite"
+                                                  href="javascript:void(0);" data-toggle="collapse"
+                                                  data-target="#footer-about-us">&nbsp;{{'About Us' | translateString | async}}</a></li>
+                                          <div id="footer-about-us" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a href="/contact-us"
+                                                  class="ColorWhite">{{'Contact Us' | translateString | async}}</a><br>
+                                              <i class="fa fa-angle-right"></i><a href="/privacy-policy"
+                                                  class="ColorWhite">{{'Privacy Policy' | translateString | async}}</a><br>
+                                              <i class="fa fa-angle-right"></i><a href="/terms-conditions"
+                                                  class="ColorWhite">{{'Terms' | translateString | async}} &amp; {{'Conditions' | translateString | async}}</a><br>
+                                          </div>
+                                      </ul>
+                                  </div>
+                              </aside>
+                          </div>
+                          <div class="col-md-6 marignTopMinus15Inmobile">
+                              <aside class="ftco-box">
+                                  <div class="coursesUlList">
+                                      <ul class="footer-menu">
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite"
+                                                  href="/vendor-list">&nbsp;{{'Vendor Resources' | translateString | async}}</a></li>
+                                          <li class=""><i class="fa fa-plus"></i>
+                                              <a class="ColorWhite"
+                                                  href="https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49"
+                                                  onclick="window.open(this.href, this.href); return false">&nbsp;{{'Blog' | translateString | async}}</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </aside>
+                          </div>
+                      </div>
+                      <!-- <a style="font-size: 19px;font-weight: 700;">Sellers, please enter your property listings here:</a>
+                      <div class="row" style="margin-top: 10px;">
+                          <div class="col-md-6">
+                              <aside class="ftco-box aside-course">
+                                  <div class="coursesUlList">
+                                      <ul class="footer-menu ">
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot1">&nbsp;Real Estate</a></li>
+                                          <div id="foot1" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Apartment
+                                                  Buildings</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Estate Homes and
+                                                  Luxury Mansions</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Single Family Homes &
+                                                  Condos</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Vacation Homes &
+                                                  Timeshares</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Mobile Homes & RV
+                                                  Parks</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Castles &
+                                                  Chateaux</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Churches &
+                                                  Temples</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Office
+                                                  Buildings</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Private
+                                                  Islands</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Villages &
+                                                  Towns</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Land Parcels</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Retail Shopping
+                                                  Malls</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Industrial Plants &
+                                                  Warehouses</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot2">&nbsp;Business
+                                                  Properties</a></li>
+                                          <div id="foot2" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Hotels & Golf
+                                                  Resorts</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Motels, Hostels &
+                                                  B&Bs</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Restaurants, Bars &
+                                                  Clubs</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Ranches &
+                                                  Farms</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Cannabis
+                                                  Properties</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Wineries &amp;
+                                                  Vineyards</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Gas Stations & C
+                                                  Stores</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Car Wash
+                                                  Facilities</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Assisted Living &
+                                                  Nursing Homes</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Rehab Centers</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Parking Lots</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Camp Grounds</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Equestrian
+                                                  Centers</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Marinas</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot3">&nbsp;Yachts & Ships</a>
+                                          </li>
+                                          <div id="foot3" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Super Yachts</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Sail Boats</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Fishing Boats</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Speed Boats</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Power Yachts</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Catamarans</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Submarines</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Hydroplanes</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Commercial
+                                                  Ships</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot4">&nbsp;Jets & Aircraft</a>
+                                          </li>
+                                          <div id="foot4" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Jets</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Turboprop
+                                                  Aircraft</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Piston
+                                                  Aircraft</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Helicopters</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Passenger
+                                                  Drones</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Flying Cars</a><br>
+                                          </div>                                      
+                                      </ul>
+                                  </div>
+                              </aside>
+                          </div>
+                          <div class="col-md-6 marignTopMinus15Inmobile">
+                              <aside class="ftco-box">
+                                  <div class="coursesUlList">
+                                      <ul class="footer-menu">
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot5">&nbsp;Cars & RVs</a></li>
+                                          <div id="foot5" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Luxury Cars &
+                                                  SUVs</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Commuter Cars &
+                                                  SUVs</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Campers & RVs</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Commercial
+                                                  Buses</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">EVs & Hybrids</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Trucks</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Vans & Limos</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot6">&nbsp;Artworks &
+                                                  Antiques</a></li>
+                                          <div id="foot6" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Western
+                                                  Paintings</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Oriental
+                                                  Paintings</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Sculptures</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Contemporary
+                                                  Artworks</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Modern
+                                                  Artworks</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Digital
+                                                  Artworks</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Antiques</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Collectibles</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot7">&nbsp;Horses & Live
+                                                  Stocks</a></li>
+                                          <div id="foot7" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Race
+                                                  Horses</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Draft Horses</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Show Horses</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Cattle</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Sheep</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Other Live
+                                                  Stocks</a><br>
+                                          </div>
+                                          <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial" data-toggle="collapse" data-target="#foot8">&nbsp;Tokenized
+                                                  Crypto-Assets</a></li>
+                                          <div id="foot8" class="collapse">
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Real Estate Based
+                                                  Asset Tokens</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Commodity Based Asset
+                                                  Tokens</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">Utility
+                                                  Tokens</a><br>
+                                              <i class="fa fa-angle-right"></i><a class="ColorWhite">NFTs</a><br>
+                                          </div>                                      
+                                      </ul>
+                                  </div>
+                              </aside>
+                          </div>
+                      </div> -->
+                  </div>
+                  <div class="col-md-3">
+                      <aside id="contact-info-widget-2" class="ftco-box">
+                          <h4 class="widget-title">{{'Newsletter Subscription' | translateString | async}}</h4>
+                          <div class="contact-info contact-info-block">
+                              <p>{{'Please subscribe to our latest news!' | translateString | async}}</p>
+                              <div class="alert alert-success news-success dispNone"></div>
+                              <div class="alert alert-danger news-danger dispNone"></div>
+                              <form [formGroup]="newsSubscribeForm" (ngSubmit)="newsSubscribeSubmit()" id="newsForm">
+                                  <div class="form-group">
+                                      <input class="form-control CheckFormNews" type="text" placeholder="{{'Name' | translateString | async}}"
+                                          formControlName="name" id="newsName">
+                                  </div>
+                                  <div class="form-group">
+                                      <input class="form-control CheckFormNews" type="email" placeholder="{{'Email Address' | translateString | async}}"
+                                          formControlName="email" id="newsEmail">
+                                  </div>
+                                  <div class="form-group">
+                                      <button class="btn btn-primary" id="NewsformSubmit" type="submit">{{'Subscribe' | translateString | async}}</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </aside>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <div class="row">
+              <div class="col-md-3">
+                  <a href="/">
+                      <img alt="Image is loading" src="../assets/images/Trans-1.png" width="110px">
+                  </a>
+              </div>
+              <div class="col-md-5">
+  
+              </div>
+              <div class="col-md-4 imgAllRound">
+                  <a href="https://www.facebook.com/WePropertyOwners/"
+                      onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-facebook-f"></span>
+                      <!-- <img src="../assets/images/fb-white.jpg" width="50px"> -->
+                  </a>
+                  <!-- <a>
+            <span class="fa fa-google-plus"></span>
+          </a> -->
+                  <a href="https://www.instagram.com/wepropertyowners/"
+                      onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-instagram"></span>
+                  </a>
+                  <a href="https://www.linkedin.com/company/wepropertyowners"
+                      onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-linkedin"></span>
+                  </a>
+                  <a href="https://twitter.com/WePropOwners?s=09"
+                      onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-twitter"></span>
+                  </a>
+                  <a href="https://www.youtube.com/channel/UCOwKKGKaK2DWkiZJi9-CfQA"
+                      onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-youtube"></span>
+                  </a>
+                  <a href="https://medium.com/wecoown" onclick="window.open(this.href, this.href); return false">
+                      <span class="fa fa-medium" aria-hidden="true"></span>
+                  </a>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+                  <ul class="disFlex">
+                      <li style="padding: 15px 0px;"><a class="ColorWhite" href="/terms-conditions">{{'Terms' | translateString | async}} &amp;
+                              {{'Conditions' | translateString | async}}</a></li>
+                      <li class="privacyLi" style="padding: 15px;"><a class="ColorWhite" href="/privacy-policy">{{'Privacy
+                        Policy' | translateString | async}}</a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-md-4">
+  
+              </div>
+              <div class="col-md-4 ">
+                  <div class="">{{'WePropertyowners is a division of WeCoOwn Inc.' | translateString | async}} <br>{{'©2020 WeCoOwn Technologies Ltd. All
+                    rights reserved.' | translateString | async}}
+                      <a href="" style="color:#fff!important">&nbsp;</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  
+  <div class="cookie-container col-md-6">
+      <p>
+          {{'We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We
+          also disclose information about your use of our site with our social media, advertising and analytics partners.
+          Additional details are available
+          in our' | translateString | async}}
+          <a href="/privacy-policy">{{'privacy policy' | translateString | async}}</a> {{'and' | translateString | async}} <a href="#">{{'cookie policy' | translateString | async}}</a>.
+      </p>
+  
+      <button class="cookie-btn-accept">
+          <i class="fa fa-check"></i>&nbsp;{{'Accept Cookies' | translateString | async}}
+      </button>&nbsp;
+      <button class="cookie-btn-decline">
+          <i class="fa fa-times"></i>&nbsp;{{'Decline Cookies' | translateString | async}}
+      </button>
+  </div>
+  
+  <!-- The Modal -->
+  <div class="modal" id="portfolio-data-modal">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content" *ngIf="getOnePortfolioData">
+  
+              <!-- Modal Header -->
+              <div class="modal-header">
+                  <h4 class="modal-title">{{'Property Co-Owners Group Name' | translateString | async}} : {{'getOnePortfolioData.title' | translateString | async}}</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+  
+              <!-- Modal body -->
+              <div class="modal-body">
+                  <div class="alert alert-success dispNone sent-request-become-admin-success"></div>
+                  <div class="alert alert-danger dispNone sent-request-become-admin-danger"></div>
+                  <div class="alert alert-danger dispNone purchaseMembershipText">
+                      {{'In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                      must purchase the membership. Please purchase the membership.' | translateString | async}}
+                  </div>
+                  <div *ngFor="let memberRec of getOnePortfolioData.recevier_id">
+                      <div class="poertfolio-div-accept"
+                          *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.status == 'Pending' && memberRec.request_for_admin.action == 'No'">
+                          <a href="javascript:void(0)"
+                              (click)="goToMemberPage11( getOnePortfolioData.group_creater_id._id)" target="_blank"><img
+                                  alt="Image is loading" class="border-radious50 float-left marginRight5"
+                                  src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                  width="50px" height="50px"></a>
+                          <h4>{{'getOnePortfolioData.group_creater_id.firstname' | translateString | async}}
+                              {{'getOnePortfolioData.group_creater_id.lastname' | translateString | async}}
+                              {{'invites you for Property Co-Owners group' | translateString | async}} {{'getOnePortfolioData.title' | translateString | async}} {{'as a Co-Owner.' | translateString | async}}
+                          </h4>
+                          <button class="btn btn-orange marginRight5"
+                              (click)="goToReuestForAdmin(getOnePortfolioData._id)">{{'Join
+                              Co-Owners Group as Admin' | translateString | async}}</button>
+                          <button class="btn btn-orange marginRight5"
+                              (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">{{'Join
+                              Co-Owners Group as Member' | translateString | async}}</button>
+                          <button class="btn btn-primary"
+                              (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">{{'Decline
+                              Invitation' | translateString | async}}</button>
+                      </div>
+                      <div class="poertfolio-div-accept"
+                          *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.request_for_admin.status == 'Pending' && memberRec.request_for_admin.action == 'Yes'">
+                          <h4 class="text-success">{{'Your Request is pending for approval of become a admin.' | translateString | async}} <button
+                                  class="btn btn-primary float-right"
+                                  (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">{{'Decline
+                                  Invitation' | translateString | async}}</button></h4>
+                      </div>
+                  </div>
+                  <!-- <div class="poertfolio-div-accept" *ngIf="Accept_Reject_Check">
+              <span *ngFor="let innerItem of getOnePortfolioData.recevier_id">
+                <span *ngIf="currentLocalUserData.id == innerItem.user_id._id">
+                  <a href="javascript:void(0)" (click)="goToMemberPage11( innerItem.invited_by_user_id._id)" target="_blank"><img alt="Image is loading" class="border-radious50 float-left marginRight5"
+                  src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="50px" height="50px"></a>
+                  <h4>{{innerItem.invited_by_user_id.firstname}} {{innerItem.invited_by_user_id.lastname}}  invites you for Property Co-Owners group {{getOnePortfolioData.title}} as a Co-Owner.</h4>
+                    <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'Yes')">Join
+                      Co-Owners Group as Admin</button>
+                      <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">Join
+                          Co-Owners Group as Member</button>
+                    <button class="btn btn-primary" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline Invitation</button>
+                </span>
+                </span>
+              </div> -->
+                  <div class="about-portfolio">
+                      <h4>{{'About' | translateString | async}}</h4>
+                      <h6>{{'Title' | translateString | async}} : <a href="{{getOnePortfolioData.property_url}}"
+                              target="_blank">{{'getOnePortfolioData.title' | translateString | async}}</a></h6>
+                      <h6>{{'Members' | translateString | async}} : {{'getOnePortfolioData.TotalMember' | translateString | async}}</h6>
+                      <div class="about-portfolio" id="about-member-portfolio-id">
+                          <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                                  (click)="goToMemberPage11(getOnePortfolioData.group_creater_id._id)"><img
+                                      alt="Image is loading" class="border-radious50"
+                                      src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                      width="30px" height="30px">
+                                  {{'getOnePortfolioData.group_creater_id.firstname' | translateString | async}}
+                                  {{'getOnePortfolioData.group_creater_id.lastname' | translateString | async}}
+                                  ({{'Admin' | translateString | async}})</a></span>
+                          <span class="spanForAllImageWithUsername" *ngFor="let item of PortfolioMemberData"><a
+                                  href="javascript:void(0)" target="_blank"
+                                  (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading"
+                                      class="border-radious50"
+                                      src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                      width="30px" height="30px">
+                                  {{'item.user_id.firstname' | translateString | async}} {{'item.user_id.lastname' | translateString | async}} <span
+                                      *ngIf="item.is_admin == true">({{'Admin' | translateString | async}})</span></a></span>
+                      </div>
+                  </div>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">{{'Close' | translateString | async}}</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal" id="open-pbms-adminAprroveRequest-modal1">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content" *ngIf="getAdminOnePbmsData">
+  
+              <!-- Modal Header -->
+              <div class="modal-header">
+                  <h4 class="modal-title">{{'Property Co-Owners Group' | translateString | async}} : {{'getAdminOnePbmsData.title' | translateString | async}}</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+  
+              <!-- Modal body -->
+              <div class="modal-body">
+                  <div class="alert alert-success dispNone response-become-admin-success"></div>
+                  <div class="alert alert-danger dispNone response-become-admin-danger"></div>
+                  <div class="poertfolio-div-accept">
+                      <span class="font18weight500" *ngFor="let item of getAdminOnePbmsData.recevier_id">
+                          <a *ngIf="recevierUserIdWantsAdmin == item.user_id._id" href="javascript:void(0)"
+                              target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading"
+                                  class="border-radious50"
+                                  src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                  width="40px" height="40px">
+                              {{'item.user_id.firstname' | translateString | async}} {{'item.user_id.lastname' | translateString | async}} <span
+                                  *ngIf="item.is_admin == true">({{'Admin' | translateString | async}})</span></a></span>
+                      <h6>{{'Are you sure you want to make this person to be an admin of the Property Co-Owners Group?' | translateString | async}}</h6>
+                      <button class="btn btn-primary marginRight5"
+                          (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,1)">{{'Join as
+                          an Admin' | translateString | async}}</button>
+                      <button class="btn btn-primary"
+                          (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,2)">{{'Join as
+                          a Member' | translateString | async}}</button>
+                      <!-- <div class="red">*Yes = The invited person will become the admin of Property Co-Owners Group.<br>*No = The invited person will become the member of Property Co-Owners Group.</div> -->
+                  </div>
+                  <div class="about-portfolio">
+                      <h4>{{'About' | translateString | async}}</h4>
+                      <h6>{{'Title' | translateString | async}} : <a href="{{getAdminOnePbmsData.property_url}}"
+                              target="_blank">{{getAdminOnePbmsData.title}}</a></h6>
+                      <h6>{{'Members' | translateString | async}} : {{'getAdminOnePbmsData.TotalMember' | translateString | async}}</h6>
+                      <div class="about-portfolio" id="about-member-portfolio-id">
+                          <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                                  (click)="goToMemberPage11(getAdminOnePbmsData.group_creater_id._id)"><img
+                                      alt="Image is loading" class="border-radious50"
+                                      src="{{ getAdminOnePbmsData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getAdminOnePbmsData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                      width="30px" height="30px">
+                                  {{'getAdminOnePbmsData.group_creater_id.firstname' | translateString | async}}
+                                  {{'getAdminOnePbmsData.group_creater_id.lastname' | translateString | async}}
+                                  ({{'Admin' | translateString | async}})</a></span>
+                          <span class="spanForAllImageWithUsername"
+                              *ngFor="let item of getAdminApproveProfileMemberData"><a href="javascript:void(0)"
+                                  target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading"
+                                      class="border-radious50"
+                                      src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                      width="30px" height="30px">
+                                  {{'item.user_id.firstname' | translateString | async}} {{'item.user_id.lastname' | translateString | async}} <span
+                                      *ngIf="item.is_admin == true">({{'Admin' | translateString | async}})</span></a></span>
+                      </div>
+                  </div>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">{{'Close' | translateString | async}}</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- js files -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
+  <!-- <script src="/assets/js/jquery-migrate-3.0.0.min.js"></script> -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js'></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->

@@ -1,0 +1,460 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/* You can add global styles to this file, and also import other style files */
+@media screen and (min-device-width: 501px) and (max-device-width: 992px) {
+  .search-container select {
+    padding: 10px;
+    width: 48% !important;
+    height: 55px;
+    margin-right: 10px;
+  }
+
+  .search-container input {
+    padding: 10px;
+    width: 50% !important;
+    height: 55px;
+    margin-right: 0 !important;
+  }
+
+  .sectionPadding {
+    font-size: 30px !important;
+  }
+
+  .wrap {
+    /* background-image: url(searchBBB.jpg) !important; */
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    position: relative;
+    padding: 100px 1% !important;
+    overflow: hidden;
+  }
+
+  .search-container button {
+    height: 55px;
+    background-color: #cf0000;
+    color: #fff;
+    width: 300px !important;
+    margin-top: 10px !important;
+    margin-left: 27% !important;
+    border-color: transparent;
+  }
+
+  .marginLeftLoc {
+    margin-left: 15%;
+  }
+}
+
+@media screen and (max-device-width: 501px) {}
+
+@media screen and (max-device-width: 767px) {
+
+  /* for search filter */
+  .all-listing-keyword,
+  .my-listing-keyword {
+    width: 100% !important;
+  }
+
+  .width-purpose-type115,
+  .width-property-type160,
+  .width-property-subtype190,
+  .width-country150,
+  .width-state-city125 {
+    width: 50% !important;
+  }
+}
+.height-fit-content{
+  height: fit-content;
+}
+.margin-top-minus10 {
+  margin-top: -10px;
+}
+.marginBottom0{
+  margin-bottom: 0px !important;
+}
+/* for show pupose in card */
+.showPUrposeCard {
+  margin-bottom: 0;
+  display: flow-root;
+}
+
+.padding5 {
+  padding: 5px;
+}
+
+.padding15 {
+  padding: 15px;
+}
+
+/* for show purpose in diff color */
+.ShowPurposeDiv {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.colorOrange {
+  color: orange;
+}
+
+.colorBlue {
+  color: #007bff;
+}
+
+.topBorderRadius10 {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.bottomBorderRadius10 {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.marginBottom30 {
+  margin-bottom: 30px;
+}
+
+.hoverRed:hover {
+  border: 4px solid #007bff;
+}
+
+/* for search filter by multiple */
+.search-filter-by-multiple .form-group {
+  margin-bottom: 0;
+}
+
+.search-filter-by-multiple .form-control {
+  margin-bottom: 0;
+}
+
+.search-filter-by-multiple .searchIcon {
+  float: right;
+  margin-top: -38px;
+  margin-right: 0px;
+  padding: 10px;
+  background: #ec7834;
+  color: white;
+}
+
+.all-listing-keyword {
+  width: 300px;
+}
+
+.my-listing-keyword {
+  width: 225px;
+}
+
+.width-purpose-type115 {
+  width: 115px;
+}
+
+.width-property-type160 {
+  width: 160px;
+}
+
+.width-property-subtype190 {
+  width: 190px;
+}
+
+.width-country150 {
+  width: 150px;
+}
+
+.width-state-city125 {
+  width: 125px;
+}
+
+/* share button of listing */
+.btnShareListing {
+  background: #007bff;
+  color: white;
+  position: absolute;
+  right: 15px;
+  padding: 4px 8px;
+}
+.btnSoldOutListing{
+    left: 15px;
+    font-weight: 600;
+    background: red;
+    padding: 4px 8px;
+    color: white;
+    position: absolute;
+}
+
+/* for property heading in forms */
+.property_head {
+  border: 0 !important;
+  height: 5px;
+  display: inherit;
+}
+.property_head:focus {
+  outline: none !important;
+}
+/*previous css */
+.onlyImgVideoRed{
+  color: red;
+}
+video{
+  background-color: #878787 ;
+}
+
+/* wecown */
+.btn{
+  font-size: 0.9rem;
+}
+.showModelBackgroundBlack{
+  background-color: rgba(0, 0, 0, .7);
+}
+.text-yellow{
+  color: yellow;
+}
+.width100Percent{
+  width: 100%;
+}
+.displayRealFlex{
+  display: flex;
+}
+.paddingRight0{
+  padding-right: 0;
+}
+.bgGrey {
+  background: #f1f1f1;
+}
+.text-justify{
+    text-align: justify;
+}
+.borderRaduis5{
+  border-radius: 5px;
+}
+.CommonBorderRadiusBackGrey{
+  background: #dae0e5;
+  padding: 7px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+.padding10{
+  padding: 10px;
+}
+.poertfolio-div-accept{
+  background: #eee;
+  border-radius: 5px;
+  padding: 15px 10px;
+}
+.showRequestForBook{
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background: #eee;
+}
+.font18weight500{
+  font-size: 18px;
+  font-weight: 600;
+}
+.spanForAllImageWithUsername{
+  background: #dae0e5;
+  padding: 5px;
+  font-weight: 500;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+.padding-left-0{
+  padding-left: 0px;
+}
+.paddingAll0{
+  padding: 0;
+}
+.font-size20{
+  font-size: 20px !important;
+}
+/* for poerfolio modal */
+.about-portfolio{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #c1c1c1;
+  margin: 10px 0;
+}
+/* for notification show */
+#allow_notify{
+  display: none;
+  background-color: darkgray;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+}
+/* for title of posting */
+.titleOfPosting{
+  text-align: center;
+  padding: 10px 5px;
+  background: #dae0e5;
+  border-radius: 0px 0px 5px 5px;
+}
+/* for property heading in forms */
+.property_head {
+border: 0 !important;
+height: 5px;
+display: inherit;
+}
+.property_head:focus {
+outline: none !important;
+}
+
+.onlyImgVideoRed{
+  color: red;
+}
+.marginKeft10{
+  margin-left: 10px;
+}
+/* for video show */
+.margin-botMinus75{
+  margin-bottom: -75px;
+}
+.radius50Per{
+  border-radius: 50%;
+}
+/* for carousel next previous */
+.carousel-control-prev {
+  left: 0;
+  height: 50px;
+  top: 45%;
+  position: absolute;
+}
+.carousel-control-next {
+  right: 0;
+  height: 50px;
+  top: 45%;
+  position: absolute;
+}
+/* wepo listing show */
+.marginBottom30 {
+  margin-bottom: 30px;
+}
+.hoverRed:hover {
+  border: 4px solid #007bff;
+}
+.marginBottom0{
+    margin-bottom: 0;
+}
+/* for show purpose in diff color */
+.ShowPurposeDiv {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.colorOrange {
+  color: orange;
+}
+
+.colorBlue {
+  color: #007bff;
+}
+
+.topBorderRadius10 {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.bottomBorderRadius10 {
+  border-radius: 0px 0px 10px 10px;
+}  
+/* for loader */
+.showbox {  position: fixed;  z-index: 9999;  top: 0;  bottom: 0;  left: 0;  right: 0;  padding: 0;  background-color: rgba(0, 0, 0, .7);
+}
+.loader {  position: fixed;  top: 46%;  left: 46%;  margin: 0 auto;  width: 70px;}
+.loader:before {  content: '';  display: block;  padding-top: 100%;}
+.circular {
+-webkit-animation: rotate 2s linear infinite;
+        animation: rotate 2s linear infinite;
+height: 100%;
+-webkit-transform-origin: center center;
+        transform-origin: center center;
+width: 100%;
+position: absolute;  top: 0;  bottom: 0;  left: 0;  right: 0;  margin: auto;}
+.path {  stroke-dasharray: 1, 200;  stroke-dashoffset: 0;  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+        animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;  stroke-linecap: round;}
+@-webkit-keyframes rotate {  100% {    -webkit-transform: rotate(360deg);            transform: rotate(360deg); }}
+@keyframes rotate {  100% {    -webkit-transform: rotate(360deg);            transform: rotate(360deg);  }}
+@-webkit-keyframes dash {  0% {    stroke-dasharray: 1, 200;    stroke-dashoffset: 0;  } 50% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -35px;  }  100% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -124px;  }}
+@keyframes dash {  0% {    stroke-dasharray: 1, 200;    stroke-dashoffset: 0;  }  50% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -35px;  }  100% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -124px;  }}
+@-webkit-keyframes color {  100%,  0% {    stroke: #d62d20;  }  40% {    stroke: #0057e7;  }  66% {    stroke: #008744;  }  80%,  90% {    stroke: #ffa700;  }}
+@keyframes color {  100%,  0% {    stroke: #d62d20;  }  40% {    stroke: #0057e7;  }  66% {    stroke: #008744;  }  80%,  90% {    stroke: #ffa700;  }}
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+.marginRight10 {
+  margin-right: 10px;
+}
+.marginRight5 {
+  margin-right: 5PX;
+}
+.marginBottom5 {
+  margin-bottom: 5PX;
+}
+h4 {
+  font: normal bold 18px / 26px "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;
+}
+
+/* for datepicker */
+dp-calendar-nav .dp-calendar-nav-container {
+  position: relative;
+  box-sizing: border-box;
+  height: 35px !important;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+dp-date-picker{
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  margin-bottom: 10px;
+}
+dp-date-picker input{
+ padding: .375rem .75rem;
+ width: 100%;
+ font-size: 1rem;
+ border: 1px solid #ced4da;
+ border-radius: .25rem;
+ color: #495057;
+ border: 0;
+}
+dp-day-calendar .dp-calendar-day {
+  box-sizing: border-box;
+  width: 33px !important;
+  height: 33px !important;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  background: white;
+}
+dp-day-calendar .dp-calendar-weekday {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 33px !important;
+  font-size: 14px;
+  text-align: center;
+  border-left: 0 !important;
+  border-bottom: 0 !important;
+}
+dp-calendar-nav .dp-nav-header-btn {
+  cursor: pointer;
+  border: 0 !important;
+  font-size: 15px;
+  background: #106cc8 !important;
+  border-radius: 3px !important;
+  color: white !important;
+}
+dp-calendar-nav .dp-calendar-nav-left, dp-calendar-nav .dp-calendar-nav-right {
+  line-height: 0;
+  width: 23px !important;
+  margin: 2px;
+  background: #106cc8;
+  height: 26px;
+  border: 0;
+  border-radius: 2px;
+  color: white;
+}
+/* for date time picker */
+ng2-datetime-picker {
+  top: 70px !important;
+}

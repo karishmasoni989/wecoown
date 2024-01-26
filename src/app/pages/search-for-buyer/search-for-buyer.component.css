@@ -1,0 +1,97 @@
+.wrap {
+  background-image: url('../../../assets/images/searchBBB.jpg') !important;
+  background-color: #ddd;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+  position: relative;
+  padding: 100px 180px;
+  overflow: hidden;
+}
+
+.sectionPadding {
+  font-size: 50px;
+}
+
+.search-container {
+  background-color: rgba(0, 0, 0, .7);
+  padding: 10px;
+  font-size: 1.375rem;
+}
+.entry-content p{
+    overflow-wrap: break-word !important;
+}
+
+.search-container select {
+  padding: 10px;
+  width: 300px;
+  height: 55px;
+  margin-right: 10px;
+}
+
+.search-container input {
+  padding: 10px;
+  width: 480px;
+  height: 55px;
+  margin-right: 10px;
+}
+
+.search-container button {
+  height: 55px;
+  background-color: #cf0000;
+  color: #fff;
+  width: 168px;
+  margin: 0;
+  border-color: transparent;
+}
+
+section.entry-content {
+  padding: 40px;
+}
+
+.rowoftable {
+  padding: 25px;
+  border-bottom: 1px solid #4b779e
+}
+
+.desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media screen and (max-width: 495px) {
+    section.entry-content {
+        padding: 5px;
+    }
+  .search-container input {
+    padding: 10px;
+    width: 250px;
+    height: 55px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .search-container select {
+    padding: 10px;
+    width: 250px;
+    height: 55px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .sectionPadding {
+    font-size: 30px;
+  }
+
+  .wrap {
+    background-image: url('../../../assets/images/searchBBB.jpg') !important;
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    position: relative;
+    padding: 35px;
+    overflow: hidden;
+  }
+}

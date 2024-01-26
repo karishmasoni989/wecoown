@@ -1,0 +1,594 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>{{'Edit Ads' | translateString | async}}</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{'Home' | translateString | async}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{'Edit Ads' | translateString | async}}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <!-- <div class="text-center">
+        <span class="spanAdTes"><strong> Advertisement Plans</strong>
+        </span>
+        <hr class="hr-line">
+    </div>
+    <div class="adText" [innerHTML]="AdText">
+        
+    </div> -->
+    <br>
+    <h2>{{CurrentNameAd}}</h2>
+    <input type="text" class="property_head" readonly>
+    <div class="alert alert-success ad-Success dispNone"></div>
+    <div class="alert alert-danger ad-danger dispNone"></div>
+    <div id="banner-div" style="display: none;">
+        <br>
+        <h4>{{'How do you want your ad to look' | translateString | async}}?</h4>
+        <form [formGroup]="bannerForm" (ngSubmit)="bannerSubmit()" *ngIf="getBannerData">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{'Image' | translateString | async}} /  {{'Video' | translateString | async}}: {{'728 x 90' | translateString | async}} {{'pixel Banner ads' | translateString | async}}<span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileDropped($event.target.files)" style="float: right;" single accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>{{'Drag and drop files here' | translateString | async}}</p>
+                            <p>{{'Or' | translateString | async}}</p>
+                            <button for="fileDropRef">{{'Browse for files' | translateString | async}}</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>{{'Url for button click' | translateString | async}} : <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Url for button click' | translateString | async}}" formControlName="url_button" id="url-banner" [(ngModel)]="banner_url" value="{{getBannerData[0].url_button}}">
+                    <label>{{'Category' | translateString | async}} : <span class="red">*</span></label><br>
+                    <select class="form-control" id="category-banner" formControlName="category" [(ngModel)]="banner_category">
+                        <option value="">{{'Select Category' | translateString | async}}</option>
+                        <option *ngFor="let categoryAll of categoryArray" value="{{categoryAll.category_name}}">
+                            {{categoryAll.category_name}}
+                        </option>
+                    </select>
+                    <label> {{'Do you have any coupon' | translateString | async}}: </label><br>
+                    <div>
+                        <span>
+                            <input class="form-control input-coupon" placeholder="Coupon" formControlName="coupon"
+                                [(ngModel)]="banner_coupon" id="coupon-banner" value="{{getBannerData[0].coupon}}">
+                            <button class="btn btn-primary apply-btn">{{'Apply' | translateString | async}}</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <img src="{{baseURLofAPi+getBannerData[0].ad_image[0].src}}" width="210px" height="210px">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <h4>{{'Duration and Budget' | translateString | async}} :<span class="red">*</span></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Start Date' | translateString | async}} :</p>
+                                <input class="form-control date" type="date" data-date-format="dd-MM-yyyy" value="{{banner_start_date | date : 'yyyy-MM-dd'}}" [(ngModel)]="banner_start_date" (change)="getDays($event.target.value, 1)" formControlName="start_date" id="start-date-banner">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Days' | translateString | async}} :</p>
+                                <input class="form-control" id="banner-number" value="0" type="number" placeholder="0" [(ngModel)]="banner_days" (keyup)="getDays($event.target.value, 2)" formControlName="days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('banner-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('banner-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'End Date' | translateString | async}} :</p>
+                                <input class="form-control" type="text" [(ngModel)]="endDateBanner" readonly formControlName="end_date" id="end-date-banner" value="{{endDateBanner| date : 'yyyy-MM-dd'}}">
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">Days :</p>
+                                <input class="form-control" id="banner-number" [(ngModel)]="banner_days" type="number"
+                                    placeholder="0" formControlName="days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('banner-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('banner-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">End Date :</p>
+                                <input class="form-control date" type="date" formControlName="end_date"
+                                    [(ngModel)]="banner_end_date" id="end-date-banner"
+                                    value="{{getBannerData[0].end_date}}">
+                            </div>
+                        </div> -->
+                        <span>
+                            <!-- <p class="marginBottom5">Country, Currency</p>
+                            <select class="form-control" >
+                                <option>IN, USD</option>
+                            </select> -->
+                            <label>{{'Total Budget' | translateString | async}} :</label>
+                            <select class="form-control" id="banner-total-budget" formControlName="total_budget" [(ngModel)]="banner_totoal_bg">
+                                <option value="">{{'Select Total Budget' | translateString | async}}</option>
+                                <option value="$10.00" >${{'10.00' | translateString | async}}</option>
+                                <option value="$20.00">${{'20.00' | translateString | async}}</option>
+                                <option value="$30.00">${{'30.00' | translateString | async}}</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control height238">
+                        <h4 class="marginBottom5"> {{'Payment Summary' | translateString | async}}:</h4>
+                        <p>{{'Your ad will run for 0 days' | translateString | async}}</p>
+                        <div class="divTotal">
+                            <p class="marginBottom5">{{'Total Budget' | translateString | async}} <span class="float-right" id="banner-totoal-budget">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="marginBottom5">{{'Estimated Tax' | translateString | async}} <span class="float-right" id="banner-estimated-tax">${{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="borderTop marginBottom5">{{'Total Amount ' | translateString | async}}<span class="float-right" id="banner-total-amount">${{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p>&nbsp;</p>
+                    <button class="btn btn-orange" style="margin-right: 10px;" onclick="window.location.href='/manage-ads'">{{'Back' | translateString | async}}</button>
+                    <button class="btn btn-primary" type="submit">{{'Update Now' | translateString | async}}</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="sidebar-div" style="display: none;">
+        <br>
+        <h4>{{'How do you want your ad to look' | translateString | async}}?</h4>
+        <form [formGroup]="sidebarForm" (ngSubmit)="SidebarSubmit()" *ngIf="getSidebarData">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{'Image' | translateString | async}} / {{'Video' | translateString | async}} : {{'300 x 250' | translateString | async}} {{'pixel Sidebar ads' | translateString | async}}<span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileDropped($event.target.files)" style="float: right;" single accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>{{'Drag and drop files here' | translateString | async}}</p>
+                            <p>{{'Or' | translateString | async}}</p>
+                            <button for="fileDropRef">{{'Browse for files' | translateString | async}}</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- <label>Headline : </label><br>
+                <input class="form-control" placeholder="Headline"> -->
+                    <label>{{'Url for button click ' | translateString | async}}: <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Url for button click ' | translateString | async}}" formControlName="url_button" [(ngModel)]="sidebar_url" id="url-sidebar">
+                    <label>{{'Category ' | translateString | async}} : <span class="red">*</span></label><br>
+                    <select class="form-control" id="category-sidebar" formControlName="category" [(ngModel)]="sidebar_category">
+                        <option value="">{{'Select Category' | translateString | async}}</option>
+                        <option *ngFor="let categoryAll of categoryArray" value="{{categoryAll.category_name}}">                        
+                            {{categoryAll.category_name}}
+                        </option>
+                    </select>
+                    <label>{{'Do you have any coupon' | translateString | async}} : </label><br>
+                    <div>
+                        <span>
+                            <input class="form-control input-coupon" placeholder="{{'Coupon' | translateString | async}}" formControlName="coupon"
+                                [(ngModel)]="sidebar_coupon">
+                            <button class="btn btn-primary apply-btn">{{'Apply' | translateString | async}}</button>
+                        </span>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6">
+            </div> -->
+                <!-- <div class="col-md-6">
+            </div> -->
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <img src="{{baseURLofAPi+getSidebarData[0].ad_image[0].src}}" width="210px" height="210px">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <h4>{{'Duration and Budget' | translateString | async}} :<span class="red">*</span></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Start Date' | translateString | async}} :</p>
+                                <input class="form-control date" type="date" data-date-format="dd-MM-yyyy" value="{{sidebar_start_date | date : 'yyyy-MM-dd'}}" [(ngModel)]="sidebar_start_date" (change)="getDaysSidebar($event.target.value, 1)" formControlName="start_date" id="start-date-sidebar">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Days' | translateString | async}} :</p>
+                                <input class="form-control" id="sidebar-number" value="0" type="number" placeholder="0" [(ngModel)]="sidebar_days" (keyup)="getDaysSidebar($event.target.value, 2)" formControlName="days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('sidebar-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('sidebar-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5"> {{'End Date' | translateString | async}}:</p>
+                                <input class="form-control" type="text" [(ngModel)]="endDateSidebar" readonly formControlName="end_date" id="end-date-sidebar" value="{{endDateSidebar| date : 'yyyy-MM-dd'}}">
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">Days :</p>
+                                <input class="form-control" id="sidebar-number" value="0" type="number" placeholder="0"
+                                    formControlName="days" [(ngModel)]="sidebar_days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('sidebar-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('sidebar-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">End Date :</p>
+                                <input class="form-control date" type="date" formControlName="end_date"
+                                    id="end-date-sidebar" [(ngModel)]="sidebar_end_date">
+                            </div>
+                        </div> -->
+                        <span>
+                            <!-- <p class="marginBottom5">Country, Currency</p>
+                        <select class="form-control">
+                            <option>IN, USD</option>
+                        </select> -->
+                            <label>{{'Total Budget' | translateString | async}} :</label>
+                            <select class="form-control" id="sidebar-total-budget" formControlName="total_budget">
+                                <option value="">{{'Select Total Budget' | translateString | async}}</option>
+                                <option value="$10.00" [selected]="sidebar_totoal_bg == '$10.00'">${{'10.00' | translateString | async}}</option>
+                                <option value="$20.00" [selected]="sidebar_totoal_bg == '$20.00'">${{'20.00' | translateString | async}}</option>
+                                <option value="$30.00" [selected]="sidebar_totoal_bg == '$30.00'">${{'30.00' | translateString | async}}</option>
+                            </select>
+                        </span>
+                    </div>
+
+                </div>
+                <!-- <div class="col-md-6">
+               
+            </div> -->
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control height238">
+                        <h4 class="marginBottom5">{{'Payment Summary' | translateString | async}} :</h4>
+                        <p>{{'Your ad will run for 0 days' | translateString | async}}</p>
+                        <div class="divTotal">
+                            <p class="marginBottom5">{{'Total Budget' | translateString | async}} <span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="marginBottom5"> {{'Estimated Tax' | translateString | async}}<span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="borderTop marginBottom5">{{'Total Amount' | translateString | async}} <span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p>&nbsp;</p>
+                    <button class="btn btn-orange" style="margin-right: 10px;" onclick="window.location.href='/manage-ads'">{{'Back' | translateString | async}}</button>
+                    <button class="btn btn-primary" type="submit">{{'Update Now' | translateString | async}}</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="poster-div" style="display: none;">
+        <br>
+        <h4>{{'How do you want your ad to look' | translateString | async}}?</h4>
+        <form [formGroup]="posterForm" (ngSubmit)="PosterSubmit()" *ngIf="getPosterData">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{'Image' | translateString | async}} / {{'Video' | translateString | async}} : <span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileDropped($event.target.files)" style="float: right;" single accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>{{'Drag and drop files here' | translateString | async}}</p>
+                            <p>{{'Or' | translateString | async}}</p>
+                            <button for="fileDropRef">{{'Browse for files' | translateString | async}}</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>{{'Description' | translateString | async}} : <span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <textarea class="form-control textareaDes" placeholder="{{'Description' | translateString | async}}" formControlName="description" id="desc-poster" [(ngModel)]="poster_desc">{{getPosterData[0].description}}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <img src="{{baseURLofAPi+getPosterData[0].ad_image[0].src}}" width="210px" height="210px">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label> {{'Headline' | translateString | async}}: <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Headline' | translateString | async}}" formControlName="headline" id="headline-poster" [(ngModel)]="poster_headline">
+                    <label> {{'Url for button click' | translateString | async}}: <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Url for button click' | translateString | async}}" formControlName="url_button" id="url-poster" [(ngModel)]="poster_url">
+                    <label>{{'Category' | translateString | async}} : <span class="red">*</span></label><br>
+                    <select class="form-control" id="category-poster" formControlName="category" [(ngModel)]="poster_category">
+                                <option value="">{{'Select Category' | translateString | async}}</option>
+                                <option *ngFor="let categoryAll of categoryArray" value="{{categoryAll.category_name}}">
+                                    {{categoryAll.category_name}}
+                                </option>
+                            </select>
+                </div>
+                <!-- <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                </div> -->
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <h4>{{'Duration and Budget' | translateString | async}} :<span class="red">*</span></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Start Date' | translateString | async}} :</p>
+                                <input class="form-control date" type="date" data-date-format="dd-MM-yyyy" value="{{poster_start_date | date : 'yyyy-MM-dd'}}" (change)="getDaysPoster($event.target.value, 1)" formControlName="start_date" id="start-date-poster" [(ngModel)]="poster_start_date">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Days' | translateString | async}} :</p>
+                                <input class="form-control" id="poster-number" value="0" type="number" placeholder="0" (keyup)="getDaysPoster($event.target.value, 2)" formControlName="days" [(ngModel)]="poster_days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('poster-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('poster-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'End Date' | translateString | async}} :</p>
+                                <input class="form-control" type="text" [(ngModel)]="endDatePoster" readonly formControlName="end_date" id="end-date-poster" value="{{endDatePoster| date : 'yyyy-MM-dd'}}">
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">Days :</p>
+                                <input class="form-control" id="poster-number" value="0" type="number" placeholder="0"
+                                    formControlName="days" [(ngModel)]="poster_days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('poster-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('poster-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">End Date :</p>
+                                <input class="form-control date" type="date" formControlName="end_date"
+                                    id="end-date-poster" [(ngModel)]="poster_end_date">
+                            </div>
+                        </div> -->
+                        <span>
+                            <!-- <p class="marginBottom5">Country, Currency</p>
+                        <select class="form-control">
+                            <option>IN, USD</option>
+                        </select> -->
+                            <label>{{'Total Budget' | translateString | async}} :</label>
+                            <select class="form-control" id="poster-total-budget" formControlName="total_budget">
+                                <option value=""> {{'Select Total Budget' | translateString | async}}</option>
+                                <option value="$10.00" [selected]="poster_totoal_bg == '$10.00'">${{'10.00' | translateString | async}}</option>
+                                <option value="$20.00" [selected]="poster_totoal_bg == '$20.00'">${{'20.00' | translateString | async}}</option>
+                                <option value="$30.00" [selected]="poster_totoal_bg == '$30.00'">${{'30.00' | translateString | async}}</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control height238">
+                        <h4 class="marginBottom5">{{'Payment Summary' | translateString | async}} :</h4>
+                        <p>{{'Your ad will run for 0 days' | translateString | async}}</p>
+                        <div class="divTotal">
+                            <p class="marginBottom5">{{'Total Budget' | translateString | async}} <span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="marginBottom5">{{'Estimated Tax' | translateString | async}} <span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span></p>
+                            <p class="borderTop marginBottom5">{{'Total Amount ' | translateString | async}} <span class="float-right">$ {{'35.00' | translateString | async}}{{'USD' | translateString | async}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label> {{'Do you have any coupon ' | translateString | async}}: </label><br>
+                    <div>
+                        <span>
+                            <input class="form-control input-coupon" placeholder="{{'Coupon ' | translateString | async}}" formControlName="coupon"
+                                [(ngModel)]="poster_coupon">
+                            <button class="btn btn-primary apply-btn">{{'Apply ' | translateString | async}}</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p>&nbsp;</p>
+                    <button class="btn btn-orange" style="margin-right: 10px;" onclick="window.location.href='/manage-ads'">Back</button>
+                    <button class="btn btn-primary" type="submit">{{'Update Now' | translateString | async}}</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="vendor-div" style="display: none;">
+        <br>
+        <h4>{{'How do you want your ad to look' | translateString | async}}?</h4>
+        <form [formGroup]="vendorPageListingForm" (ngSubmit)="VendorPageListingSubmit()" *ngIf="getvendorData">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{'Image' | translateString | async}} /  {{'Logo' | translateString | async}}:<span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileDropped($event.target.files)" style="float: right;" single accept="image/x-png,image/gif,image/jpeg,image/jpg">
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>{{'Drag and drop files here' | translateString | async}}</p>
+                            <p>{{'Or' | translateString | async}}</p>
+                            <button for="fileDropRef">{{'Browse for files' | translateString | async}}</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!-- <label>Headline : </label><br>
+                <input class="form-control" placeholder="Headline"> -->
+                    <label>{{'Vendor Name' | translateString | async}} : <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Vendor Name' | translateString | async}}" formControlName="vendor_name" id="vendor-name" [(ngModel)]="vendor_name">
+                    <label>{{'Vendor Email Address' | translateString | async}} : <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder="{{'Vendor Email Address' | translateString | async}}" formControlName="vendor_email" id="vendor-email" [(ngModel)]="vendor_email">
+                    <label> {{'Vendor URL' | translateString | async}}: <span class="red">*</span></label><br>
+                    <input class="form-control" placeholder=" {{'Vendor URL' | translateString | async}}" formControlName="vendor_url" id="vendor-url" [(ngModel)]="vendor_url">
+                    <!-- <label>Category : </label><br>
+                <select class="js-example-basic-multiple form-control" name="">
+                    <option value="">Select Category</option>
+                    <option value="{{item.category_name}}" *ngFor="let item of categoryArray">{{item.category_name}}
+                    </option>
+                </select> -->
+                </div>
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <img src="{{baseURLofAPi+getvendorData[0].ad_image[0].src}}" width="210px" height="210px">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label> {{'Vendor Type' | translateString | async}}: <span class="red">*</span></label><br>
+                    <select class="form-control" id="vendor_type" formControlName="vendor_type" [(ngModel)]="vendor_type">
+                        <option value="">{{'Select Vendor Type' | translateString | async}}</option>
+                        <option *ngFor="let item of VenderTypeArray" value="{{item.vendor_type}}">
+                            {{item.vendor_type}}
+                        </option>
+                    </select>
+                    <label>{{'Vendor Address' | translateString | async}} :<span class="red">*</span></label>
+                    <textarea class="form-control" placeholder="{{'Vendor Address' | translateString | async}}" rows="5" formControlName="vendor_address" [(ngModel)]="vendor_address" id="vendor-address"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="Padding-1rem form-control">
+                        <h4>{{'Duration ' | translateString | async}} :<span class="red">*</span></h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Start Date' | translateString | async}} :</p>
+                                <input class="form-control date" type="date" data-date-format="dd-MM-yyyy" (change)="getDaysVendor($event.target.value, 1)" value="{{vendor_start_date | date : 'yyyy-MM-dd'}}" formControlName="start_date" id="start-date-vender" [(ngModel)]="vendor_start_date">
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'Days' | translateString | async}} :</p>
+                                <input class="form-control" id="vender-number" value="0" type="number" placeholder="0" (keyup)="getDaysVendor($event.target.value, 2)" formControlName="days" [(ngModel)]="vendor_days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('vender-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('vender-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">{{'End Date' | translateString | async}} :</p>
+                                <input class="form-control" type="text" [(ngModel)]="endDateVender" readonly formControlName="end_date" id="end-date-vendor" value="{{endDateVender | date : 'dd-MM-yyyy'}}">
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <p class="marginBottom5">Days :</p>
+                                <input class="form-control" id="vender-number" type="number" placeholder="0"
+                                     formControlName="days">
+                                <span class="inc-dec-button">
+                                    <div class="value-button" id="decrease" (click)="decreaseValue('vender-number')"
+                                        value="Decrease Value">-
+                                    </div>
+                                    <div class="value-button" id="increase" (click)="increaseValue('vender-number')"
+                                        value="Increase Value">+
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="marginBottom5">End Date :</p>
+                                <input class="form-control date" type="date" formControlName="end_date"
+                                    id="end-date-vendor" [(ngModel)]="vendor_end_date">
+                            </div>
+                        </div> -->
+                        <!-- <span>
+                        <p class="marginBottom5">Country, Currency</p>
+                        <select class="form-control">
+                            <option>IN, USD</option>
+                        </select>
+                        <label>Total Budget :</label>
+                        <select class="form-control">
+                            <option>$10.00</option>
+                        </select>
+                    </span> -->
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <p>&nbsp;</p>
+                    <button class="btn btn-orange" style="margin-right: 10px;" onclick="window.location.href='/manage-ads'">{{'Back' | translateString | async}}</button>
+                    <button class="btn btn-primary" type="submit">{{'Update Now' | translateString | async}}</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

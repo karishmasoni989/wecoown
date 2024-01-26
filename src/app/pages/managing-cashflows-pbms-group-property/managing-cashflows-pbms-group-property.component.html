@@ -1,0 +1,355 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Managing Cashflows</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Managing Cashflows</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row alreadymembership display-none">
+            <form *ngIf="showCreateForm" class="ModalCloseClick col-md-12" [formGroup]="createManagingCashflows"
+                (ngSubmit)="submitManagingCashflows('add')">
+                <div class="">
+                    <!-- <h4>Managing Cashflows : {{bookPropertyTitle}}</h4> -->
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <!-- <form onsubmit="getValue(f)">
+                                <label>Favorite Colors</label>
+                                <input type="text" name="colors[]"  required value="red" />
+                                <input type="text" name="colors[]"  required value="green" />
+                                <input type="text" name="colors[]" />
+                                <input type="text" name="ddd[]" />
+                                <input type="text" name="dfff" />
+                                <input type="submit" value="Submit" />
+                            </form> -->
+                        </div>
+                        <div class="col-lg-7">
+                            <input type="text" class="property_head" readonly>
+                            <div class="alert alert-success dispNone booksuccess"></div>
+                            <div class="alert alert-danger dispNone bookdanger"></div>
+                            <label class="checkContainer marginKeft10">In Percentage
+                                <input type="radio" name="radio" id="checkbox-cashflow-in-percent"
+                                    (click)="checkCashflows(1)" checked="checked">
+                                <span class="checkmark"></span>&nbsp;&nbsp;
+                            </label>
+                            <label class="checkContainer marginKeft10">In Amount
+                                <input type="radio" name="radio" id="checkbox-cashflow-in-amount"
+                                    (click)="checkCashflows(2)">
+                                <span class="checkmark"></span>&nbsp;&nbsp;
+                            </label>
+                            <br><br>
+                            <div class="form-group col-md-12">
+                                <label>Distribution Frequency : <span class="red">*</span></label>
+                                <select class="form-control col-md-8 float-right"
+                                    formControlName="distribution_frequency">
+                                    <option value="">Select Distribution Frequency</option>
+                                    <option value="One Time">One Time</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                                <!-- <input class="form-control col-md-9 float-right"  placeholder="0"
+                                    name="member1" value="{{getAdminId}}"> -->
+                            </div><br>
+                            <!-- <div class="form-group col-md-12 disFlex padding-left-0 margin-bottom-0">
+                                <label class="col-md-4">{{getAdminData}} : <span class="red">*</span></label>
+                                <span class="col-md-3 displayRealFlex padding0And5">
+                                    <input class="form-control" placeholder="0" value=""
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    <i class="spanPercent">%</i>
+                                </span>
+                                <select class="form-control col-md-5 float-right"
+                                    (change)="getSelectedDistributeMethod($event.target.value,'showSelectedMethodBox1')">
+                                    <option value="">Select Distribution Method</option>
+                                    <option value="Bank Account">Bank Account</option>
+                                    <option value="PayPal Email Address">PayPal Email Address</option>
+                                    <option value="Cryptocurrency Account Public Address">Cryptocurrency Account
+                                        Public Address</option>
+                                </select>
+                                <span class="col-md-4 padding0And5 dispNone" id="showSelectedMethodBox1">
+                                    <input class="form-control" placeholder="" value="">
+                                </span>
+                            </div> -->
+                            <div formArrayName="memberData">
+                                <div *ngFor="let item of createManagingCashflows.get('memberData')['controls']; let i=index;"
+                                    [formGroupName]="i">
+                                    <div class="form-group col-md-12 disFlex padding-left-0 margin-bottom-0">
+                                        <label class="col-md-4 showPadLeft0">{{AllUserNameShowArray[i]}}: <span class="red">*</span></label>
+                                        <span class="col-md-3 displayRealFlex padding0And5">
+                                            <input class="form-control" placeholder="0"
+                                                formControlName="distribution_amount_or_percent"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                                                value="">
+                                            <i class="spanPercent">%</i>
+                                        </span>
+                                        <select class="form-control col-md-5 float-right"
+                                            formControlName="distribution_method"
+                                            (change)="getSelectedDistributeMethod($event.target.value,'showSelectedMethodBox'+(i))">
+                                            <option value="">Select Distribution Method</option>
+                                            <option value="Bank Account">Bank Account</option>
+                                            <option value="PayPal Email Address">PayPal Email Address</option>
+                                            <option value="Cryptocurrency Account Public Address">Cryptocurrency
+                                                Account
+                                                Public Address</option>
+                                        </select>
+                                        <span class="col-md-4 padding0And5 dispNone distrinutionAnotherTextClass" id="showSelectedMethodBox{{i}}">
+                                            <input class="form-control anotherText" placeholder=""
+                                                formControlName="distribution_method_text" value="">
+                                        </span>
+                                    </div>
+                                    <!-- <div class="form-group col-md-6">
+                                    <label>{{item.user_id.firstname}} {{item.user_id.lastname}} : <span class="red">*</span></label>
+                                    <input class="form-control col-md-7" placeholder="0" 
+                                        name="member{{i+2}}" value="{{item.user_id._id}}">
+                                </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+                <!-- <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button><br> -->
+                <!-- <form [formGroup]="invoiceForm">
+                  <div formArrayName="itemRows">      
+                    <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
+                      <h4>Invoice Row #{{ i + 1 }}</h4>
+                      <div class="form-group">
+                        <label>Item Name</label>
+                        <input formControlName="itemname" class="form-control">
+                        <label>Name</label>
+                        <input formControlName="name" class="form-control">
+                      </div>
+                    </div>
+                  </div>            
+                </form> -->
+                <!-- <pre>{{createManagingCashflows.value | json}}</pre> -->
+                <div class="text-center">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary marginRight5"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" type="submit"
+                        routerLink="/pbms-actions">Cancel</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>
+            <form *ngIf="!showCreateForm" class="ModalCloseClick col-md-12" [formGroup]="createManagingCashflows"
+                (ngSubmit)="submitManagingCashflows('update')">
+                <div class="">
+                    <!-- <p>Englishhhhhhh</p> -->
+                    <!-- <h4>Managing Cashflows : {{bookPropertyTitle}}</h4> -->
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <!-- <form onsubmit="getValue(f)">
+                            <label>Favorite Colors</label>
+                            <input type="text" name="colors[]"  required value="red" />
+                            <input type="text" name="colors[]"  required value="green" />
+                            <input type="text" name="colors[]" />
+                            <input type="text" name="ddd[]" />
+                            <input type="text" name="dfff" />
+                            <input type="submit" value="Submit" />
+                        </form> -->
+                        </div>
+                        <div class="col-lg-7" *ngFor="let previousData of getPreviousDataOfCashflow">
+                            <input type="text" class="property_head" readonly>
+                            <div class="alert alert-success dispNone booksuccess"></div>
+                            <div class="alert alert-danger dispNone bookdanger"></div>
+                            <label class="checkContainer marginKeft10">In Percentage
+                                <input type="radio" name="radio" id="update-checkbox-cashflow-in-percent"
+                                    (click)="checkCashflows(1)" [checked]="previousData.distribution_type == 'Percent'">
+                                <span class="checkmark"></span>&nbsp;&nbsp;
+                            </label>
+                            <label class="checkContainer marginKeft10">In Amount
+                                <input type="radio" name="radio" id="update-checkbox-cashflow-in-amount" [checked]="previousData.distribution_type == 'Amount'"
+                                    (click)="checkCashflows(2)">
+                                <span class="checkmark"></span>&nbsp;&nbsp;
+                            </label>
+                            <br><br>
+                            <div class="form-group col-md-12">
+                                <label>Distribution Frequency : <span class="red">*</span></label>
+                                <select class="form-control col-md-8 float-right" [(ngModel)]="distribution_frequency"
+                                    formControlName="distribution_frequency">
+                                    <option value="">Select Distribution Frequency</option>
+                                    <option value="One Time">One Time</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                                <!-- <input class="form-control col-md-9 float-right"  placeholder="0"
+                                name="member1" value="{{getAdminId}}"> -->
+                            </div><br>
+                            <!-- <div class="form-group col-md-12 disFlex padding-left-0 margin-bottom-0">
+                            <label class="col-md-4">{{getAdminData}} : <span class="red">*</span></label>
+                            <span class="col-md-3 displayRealFlex padding0And5">
+                                <input class="form-control" placeholder="0" value=""
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                <i class="spanPercent">%</i>
+                            </span>
+                            <select class="form-control col-md-5 float-right"
+                                (change)="getSelectedDistributeMethod($event.target.value,'showSelectedMethodBox1')">
+                                <option value="">Select Distribution Method</option>
+                                <option value="Bank Account">Bank Account</option>
+                                <option value="PayPal Email Address">PayPal Email Address</option>
+                                <option value="Cryptocurrency Account Public Address">Cryptocurrency Account
+                                    Public Address</option>
+                            </select>
+                            <span class="col-md-4 padding0And5 dispNone" id="showSelectedMethodBox1">
+                                <input class="form-control" placeholder="" value="">
+                            </span>
+                        </div> -->
+                            <div formArrayName="memberData">
+                                <div *ngFor="let item of createManagingCashflows.get('memberData')['controls']; let i=index;"
+                                    [formGroupName]="i">
+                                    <div class="form-group col-md-12 disFlex padding-left-0 margin-bottom-0">
+                                        <label class="col-md-4 showPadLeft0">{{AllUserNameShowArray[i]}}: <span class="red">*</span></label>
+                                        <span class="col-md-3 displayRealFlex padding0And5">
+                                            <input class="form-control" placeholder="0"
+                                                formControlName="distribution_amount_or_percent"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                                                value="">
+                                            <i class="spanPercent">%</i>
+                                        </span>
+                                        <select class="form-control col-md-5 float-right"
+                                            formControlName="distribution_method"
+                                            (change)="getSelectedDistributeMethod($event.target.value,'updateShowSelectedMethodBox'+(i))">
+                                            <option value="">Select Distribution Method</option>
+                                            <option value="Bank Account">Bank Account</option>
+                                            <option value="PayPal Email Address">PayPal Email Address</option>
+                                            <option value="Cryptocurrency Account Public Address">Cryptocurrency
+                                                Account Public Address</option>
+                                        </select>
+                                        <span class="col-md-4 padding0And5 distrinutionAnotherTextClass" id="updateShowSelectedMethodBox{{i}}">
+                                            <input class="form-control anotherText" placeholder=""
+                                                formControlName="distribution_method_text">
+                                        </span>
+                                    </div>
+                                    <!-- <div class="form-group col-md-6">
+                                <label>{{item.user_id.firstname}} {{item.user_id.lastname}} : <span class="red">*</span></label>
+                                <input class="form-control col-md-7" placeholder="0" 
+                                    name="member{{i+2}}" value="{{item.user_id._id}}">
+                            </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button><br> -->
+                <!-- <form [formGroup]="invoiceForm">
+              <div formArrayName="itemRows">      
+                <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
+                  <h4>Invoice Row #{{ i + 1 }}</h4>
+                  <div class="form-group">
+                    <label>Item Name</label>
+                    <input formControlName="itemname" class="form-control">
+                    <label>Name</label>
+                    <input formControlName="name" class="form-control">
+                  </div>
+                </div>
+              </div>            
+            </form> -->
+                <!-- <pre>{{createManagingCashflows.value | json}}</pre> -->
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary marginRight5"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" type="submit"
+                        routerLink="/pbms-actions">Cancel</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>
+            <!-- <div class="col-md-7">
+                <div>
+                    <span class="orangeColor">● Booked</span>
+                </div>
+                <full-calendar *ngIf="options" #fullcalendar [events]="AllBookingDates" [header]="options.header"
+                    [customButtons]="options.customButtons" [plugins]="options.plugins"
+                    [columnHeaderHtml]="options.columnHeaderHtml"></full-calendar>
+            </div> -->
+            <!-- <div class="col-md-12">
+                <h3>Activity History :</h3>
+                <div id="all-ads-table" class="table-responsive" style="color: black;">
+                    <table datatable class="table table-bordered table-hover table-striped" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Booked by</th>
+                                <th>Purpose</th>
+                                <th>From - To (Date & Time)</th>
+                                <th>Number of Persons</th>
+                                <th>Booking Notes</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of getBookedPropertyDataById; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.user_id.firstname}} {{item.user_id.lastname}}</td>
+                                <td>{{item.purpose}}</td>
+                                <td>{{item.start_date | date : "dd/MMM/yyyy (hh:mm a)"}} - {{item.end_date | date :
+                                    "dd/MMM/yyyy (hh:mm a)"}}</td>
+                                <td>{{item.number_of_persons}}</td>
+                                <td>{{item.booking_notes}}</td>
+                                <td>
+                                    <button *ngIf="getCurrentUser == item.user_id._id && checkStartDate(item.start_date)" type="button" data-toggle="modal"
+                                    data-target="#cancel-confirm-booking-modal" class="btn btn-primary" (click)="SaveCancelBookingId(item._id)">Cancel
+                                        Booking</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="row notAlreadymembership display-none">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+        </div> -->
+        <p>&nbsp;</p>
+    </section>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="cancel-confirm-booking-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Cancel Booking</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="alert alert-success dispNone cancelBookSuccess"></div>
+            <div class="alert alert-danger dispNone cancelBookdanger"></div>
+            <div class="modal-body">
+                Are you sure you want to cancel this booking?
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" (click)="confirmCancelBooking()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

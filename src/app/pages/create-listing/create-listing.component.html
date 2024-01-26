@@ -1,0 +1,156 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Create Listing</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Listing</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Create Listing</h3>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video : 728 x 90 pixel Banner ads<span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/x-png,image/gif,image/jpeg,image/jpg" multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Link : <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" formControlName="links">
+                    <label>Address : <span class="red">*</span></label><br>
+                    <textarea class="form-control CheckForm height125" type="text" placeholder="Address"  rows="5" formControlName="address">
+
+                    </textarea>
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Facts:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Sale Type : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="sale_type" class="form-control CheckForm" type="text" placeholder="Sale Type" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Sale Conditions : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="sale_condition" class="form-control CheckForm" type="text" placeholder="Sale Conditions" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Type : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="property_type" class="form-control CheckForm" type="text" placeholder="Property Type" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Sub-type : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="property_subtype" class="form-control CheckForm" type="text" placeholder="Property Sub-type" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Building Class : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="building_class" class="form-control CheckForm" type="text" placeholder="Building Class" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Lot Size: <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="lot_size" class="form-control CheckForm" type="text" placeholder="Lot Size" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rentable Building Area : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="rentable_building_area" class="form-control CheckForm" type="text" placeholder="Rentable Building Area"
+                        >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>No. Stories : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="no_stories" class="form-control CheckForm" type="text" placeholder="No. Stories" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year Built : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="year_built" class="form-control CheckForm" type="text" placeholder="Year Built" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking Ratio : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="parking_ratio" class="form-control CheckForm" type="text" placeholder="Parking Ratio" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Clear Ceiling Height : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="claer_ceiling_height" class="form-control CheckForm" type="text" placeholder="Clear Ceiling Height" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>No. Dock-High Doors/Loading: <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="no_dock_high_doors" class="form-control CheckForm" type="text" placeholder="No. Dock-High Doors/Loading"
+                        >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>No. Drive In / Grade-Level Doors : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="no_drive_in" class="form-control CheckForm" type="text" placeholder="No. Drive In / Grade-Level Doors"
+                        >
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Opportunity Zone : <!-- <span class="red">*</span> --></label><br>
+                    <input formControlName="oppotunity_zone" class="form-control CheckForm" type="text" placeholder="Opportunity Zone" >
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Summary:</h4>
+                </div>
+                <div class="alert alert-success register-success dispNone">
+                    <!-- <button type="button" class="close" data-dismiss="alert" [routerLink]="['/login']" >×</button> -->
+                </div>
+                <div class="alert alert-danger register-danger dispNone"></div>
+                <div class="form-group col-md-6">
+                    <label>Investment Summary : <!-- <span class="red">*</span> --></label><br>
+                    <textarea formControlName="invesment_summary" class="form-control CheckForm" type="text" placeholder="Investment Summary" rows="6"
+                        id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Executive Summary : <!-- <span class="red">*</span> --></label><br>
+                    <textarea formControlName="executive_summary" class="form-control CheckForm" type="text" placeholder="Executive Summary" rows="6"
+                        id="firstname"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>
