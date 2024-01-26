@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "weco-wepo",
+  "private_key_id": "AIzaSyCQ8B_jTfW44Yz16gsc373HUCN15qlbMX0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCUDv7VXUg/qCdW\nqRoRTCG5aMPxqBZ+iAx0wO/Tkr96eHxeVxiVQY/eMG9k0SZbdJ6gXyjfpmv0Xp7U\nCUxsgLL3K4ia0DvcbXMXQIVLDUO00uoKuhAhIraQu6qHhC3f2AAuL4IXyKSqV8MC\nPpRA5o1HHxAqUgdiO+mcZiFKqtBjFx9VES0eeJmxTVonfagJwMDz67yq9P9rNB4N\n4d49Uz/U2rqDfgCoNHqjBNtc2uRo8tcL7J05USLt4xNT9G5yWG60MttwRc+YN+FI\nctXiBPb8sRZu5GVz/WGeudmO3lvJBgK1KM7aSosWmKSW7gv3TjgjMSM4jtogIYIs\n2vZe3fmVAgMBAAECggEAHfyphVpWyznJ+eXW90DlpbE/2l5ya98vMqhvCnly2aG0\ngsD+JCC6vEQwE4m+zJAinpWXaDDDNaPCZGybs3AfjysciEp7jUoHoOJ6/LfriiCb\nsV9869Eli8vOnpLZXbhYVQJfRWToYO3Ue8xj538qhwiWFBQ4FZ/P0VLoFEDjYuYZ\noAJ/GPWb6uHukUwezDkAw3iAkPHhAPYdSzGWbORZYZx8SR0Tm/HWX/nSFjnZNgeY\nxi0B5R8vYJ92dqckPBNQEIh4guzcL/QlIJcX4D9F8q6EQiAVpsZW/epkaRtj6adm\nEZaNXdkkMPs+wR+KzuFUhKZLqBbHIGYZQL8JK7IO8wKBgQDDOPUhHCk3+FMSlrmu\n6fxJQtR4urjb3trTOGiyK0/gm/kipuvdasZlmx8eCpzdT9MqxAVbNjUQ14Mwcbaf\n31RSIdWl5pa0J1c93dawv/jAroAI1Y/GFvkcP6hDcjpEIdRUCLW66W9shQWWuPgY\nlre0Btu8QeVruQQa03xaaTqOowKBgQDCJx6tbbtv3pHuPrx4BeEM7AQLrjpOwNDJ\nbzpc+z/vpABUDFYuXi36JiUEemN0WWFsso/q2Bbm4Sz6Thb8OyLQJtm91AbIG3ra\nHkKH36GwUplp7jksI3m2Fi/jjplyIpVZ1RV9pId9/wHtkInwDUbsJIiy0drPcI0g\ntJlZFq5yZwKBgQCcpx7kw8E7nXOjzfkQJ8h/TTZL7qGaJXj41yIEHodJWD+Rk9pe\n4Wh0bgaJR8DaQkzT21nk+FmauyUVgZonLcFu6qGTL7ast4jlJxc428MTcrNg42Ys\ncZDSHy65eHbS50aHbDnP07PKo+95I9JJgN/GgV5f8YzUZTGrCRuXPSt0+wKBgQCx\nOB4jde9KjOGtk2xbLhqfvetvcghdDFlIFRQz/U7+Ajgef+hGiMb0986ASOrxMAji\nvBbr6XT2KAHzNEZ808nSMDQ+twO9sn+wC0D1X2bqWGsaq01agcM+NwBdeTONYA3t\norfsKLtYgeWToISYLrZXJH32o+FTyku318HF9RMk7wKBgF/iou6ZB6ayBuurSuYR\nnA8HdEdzf9DqxkjqhUcB34oj/xXjPlu7KtUA3+w9IaXPGQibef3NmHXzT/CVafsQ\nHVLQglxIG2ZWYCmCufuKvccmRJVS5uSbF5JNCDehi46v7/7XkLJ/FpUnBKbYM5xZ\nQKDVDwluz8txz9tPtmY5ckC2\n-----END PRIVATE KEY-----\n",
+  "client_email": "weco-wepo-translation@weco-wepo.iam.gserviceaccount.com",
+  "client_id": "111355245329778557634",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/weco-wepo-translation%40weco-wepo.iam.gserviceaccount.com"
+}
