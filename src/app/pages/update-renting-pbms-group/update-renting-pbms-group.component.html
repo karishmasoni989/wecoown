@@ -1,0 +1,130 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Update Rent Property</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Update Rent Property</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row">
+            <form class="ModalCloseClick col-md-12" [formGroup]="createRentingPropertyForm"
+                (ngSubmit)="submitRentingPropertyForm()">
+                <div class="">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <h4>Update Rent Property : {{rent_property_title}}</h4>
+                    <div class="row inputOutline0">
+                        <div class="col-md-12">
+                            <div id="rental-form">
+                                <h5>Deposit received from <input [(ngModel)]="deposit_recevied_from"
+                                        formControlName="deposit_recevied_from"> Amount ($)
+                                    <input class="" [(ngModel)]="amount" formControlName="amount"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><br>Current
+                                    address<input class="current_address" [(ngModel)]="current_address"
+                                        formControlName="current_address"> For
+                                    rent of
+                                    the property located at: <input class="" [(ngModel)]="property_located_at"
+                                        formControlName="property_located_at"><br>Rent
+                                    amount($) <input class="" [(ngModel)]="rent_amount" formControlName="rent_amount"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    is to be paid monthly in
+                                    advance.<br>Rental period : <input class="rental_period_checkbox"
+                                        id="rental_period_number_of_days" type="checkbox">
+                                    Number of Days <input class="rental_period_checkbox" id="rental_period_month"
+                                        type="checkbox"> Month <input class="rental_period_checkbox" type="checkbox"
+                                        id="rental_period_year"> Year<br>Late fee <input class="" [(ngModel)]="late_fee"
+                                        formControlName="late_fee"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    will be charged if rent is not paid on time.<br> First
+                                    month rent balance to be paid on or before <input class="" type="date"
+                                        data-date-format="dd-MM-yyyy"
+                                        value="{{first_month_rent_before_date | date : 'yyyy-MM-dd'}}"
+                                        [(ngModel)]="first_month_rent_before_date"
+                                        formControlName="first_month_rent_before_date"> Tenant may not move into the
+                                    property untill
+                                    balance of first month's rent is paid.<br> Security deposit paid by the tenant is to
+                                    be
+                                    returned after property is vacated and no damaged is assessed by landlord. <br>
+                                    Amount
+                                    of Security deposit($) <input class="" [(ngModel)]="security_deposit"
+                                        formControlName="security_deposit"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><br>
+                                    The
+                                    property will be made available to move into on (date) <input type="date"
+                                        data-date-format="dd-MM-yyyy"
+                                        value="{{property_available_move_date | date : 'yyyy-MM-dd'}}" class=""
+                                        [(ngModel)]="property_available_move_date"
+                                        formControlName="property_available_move_date"><br>
+                                    Landlord is responsible for : <input type="checkbox"
+                                        class="landlord-responsible-checkboxes" id="gas_landlord" value="gas">
+                                    Gas <input class="landlord-responsible-checkboxes" type="checkbox"
+                                        id="electricity_landlord" value="electricity">
+                                    Electricity <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="heat_landlord" value="heat">
+                                    Heat <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="cable_landlord" value="cable">
+                                    Cable Tv <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="internet_landlord" value="internet">
+                                    Internet Access <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="water_landlord" value="water">
+                                    Water <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="snow_landlord" value="snow">
+                                    Snow Removal <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="lawn_landlord" value="lawn">
+                                    Lawn Maintenance.<br> All parties have a copy of this Agreement <br>
+                                    <span>Broker&nbsp;&nbsp;&nbsp;&nbsp;<input class="" [(ngModel)]="broker_name"
+                                            formControlName="broker_name"></span>
+                                    <span>Sign <input class="marginLeft23"></span>
+                                    <span>Date <input class="marginLeft23" type="date" data-date-format="dd-MM-yyyy"
+                                            value="{{broker_date | date : 'yyyy-MM-dd'}}" [(ngModel)]="broker_date"
+                                            formControlName="broker_date"></span>
+                                    <br class="mobileViewDisplayNone"><span>Landlord <input class=""
+                                            [(ngModel)]="landlord_name" formControlName="landlord_name"> </span>
+                                    <span>Sign <input class="marginLeft23"></span>
+                                    <span>Date <input class="marginLeft23" type="date" data-date-format="dd-MM-yyyy"
+                                            value="{{landlord_date | date : 'yyyy-MM-dd'}}" [(ngModel)]="landlord_date"
+                                            formControlName="landlord_date"></span>
+                                    <br class="mobileViewDisplayNone"><span>Tenant&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                            class="" [(ngModel)]="tenant_name" formControlName="tenant_name"> </span>
+                                    <span>Sign <input class="marginLeft23"></span>
+                                    <span>Date <input class="marginLeft23" type="date" data-date-format="dd-MM-yyyy"
+                                            value="{{tenant_date | date : 'yyyy-MM-dd'}}" [(ngModel)]="tenant_date"
+                                            formControlName="tenant_date"></span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary marginRight5"
+                        styleSheetFile="assets/css/style.css,assets/css/print-pbms-rental-form.css"
+                        [useExistingCss]="true" printTitle="WeCoOwn Rental Form" printSectionId="rental-form"
+                        ngxPrint>Print</button>
+                    <button type="button" class="btn btn-primary marginRight5" type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" routerLink="/rent-pbms-property">Cancel</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>

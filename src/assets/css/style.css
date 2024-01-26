@@ -1,0 +1,186 @@
+body {
+  font: normal "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+.bgGrey {
+  background: #f1f1f1;
+}
+@media (min-width: 1200px) {  .container-body {    max-width: 1650px !important;  }
+  .checboxAds{    padding-left: 27%;  }}
+.container-body {  width: 100%;  padding-right: 0 !important;  padding-left: 0 !important;  margin-right: auto;  margin-left: auto;
+}
+.bg-back-blue {  background: #0b3655 none repeat center center;}
+.text-color-blue {  color: #0b3655 !important;}
+.fb-btn-like {  color: rgb(32, 120, 244);  font-weight: 600;}
+h1,h2,h3,h4,h5,h6 {  color: #0b3655 !important;}
+.disFlex {
+  display: flex;
+}
+.display-inherit{
+  display: inherit;
+}
+.Padding-1rem{
+  padding: 1rem;
+}
+.dispNone {
+  display: none;
+}
+.colorBlack {
+  color: black !important;
+}
+.width50{
+  width: 50%;
+}
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}
+.padding-20 {
+  padding: 20px;
+}
+.icon-place-eye{  float: right;  margin-top: -50px;  padding-right: 12px;}
+.section-header {  padding: 5px 60px;}
+.btn-primary {  background-color: #1c66a0 !important;  border: none;}
+.btn-primary:hover {
+  background-color: #ec7834 !important;
+}
+.btn-orange {  color: white;  background-color: #ec7834 !important;  border: none;}
+.whitePacess{ white-space: break-spaces !important;}
+textarea {  white-space: break-spaces !important;}
+.btn-orange:hover {
+  background-color: #1c66a0 !important;
+}
+a:hover {
+  color: #bbbbbb;
+}
+.maginTop10 {
+  margin-top: 10px;
+}
+.maginTop5 {
+  margin-top: 5px;
+}
+.entry-content {  color: black;  padding: 20px 0px;}
+/* for owl carousel in listing detail page */
+.owl-theme .owl-nav {  margin-top: 10px;  display: block !important;}
+.owl-theme .owl-nav [class*=owl-] {
+  color: #FFF;  height: 40px;  width: 40px;  font-size: 20px !important;  margin: 5px;
+  padding: 4px 7px;  background: #ec7834 !important;  display: inline-block;  cursor: pointer;  border-radius: 5px !important;}
+.owl-prev{  float: left;    margin-top: -220px !important;    position: relative !important;    margin-left: 10px !important;}
+.owl-next{  float: right;    position: relative !important;    margin-top: -220px !important;    margin-right: 10px !important;}
+.ColorWhite {  color: white !important;}
+.font18{ font-size: 18px;}
+a.ColorWhite:hover {  color: #ec7834 !important;}
+p{ font-size: 18px;}
+/* .form-group{  display: inline-block;} */
+h4 {  font-weight: 500;    font-size: 22px;  font: normal "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;}
+h3 {  font: normal bold 20px / 26px "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif;}
+a:hover {  color: #ec7834;}
+ul {  list-style: none;  padding-left: 0;}
+h1 {  font: normal bold 30px / 44px "Roboto Condensed", Helvetica, Arial, Verdana, sans-serif !important;}
+.dataTables_wrapper label{  float: inherit;  margin-top: 10px !important;  margin-bottom: 0px !important;}
+label {  float: left;  color: #0b3655;}
+.form-control {margin-bottom: 17px;}
+.red {  color: red !important;  font-weight: bold;}
+.text-color-blue {  color: #0b3655;}
+.paddingTop20 {  padding-top: 20px;}
+/* header of middle section */
+.rowPadding {  padding: 5px 60px;}
+.paddingTopBottom {  padding: 40px 0%;}
+.bg-grey-light {  background: #f4f4f4;}
+.page-tittle {  padding: 10px;  color: #0b3655;}
+.page-tittle-h1 {  padding-bottom: 0px;}
+ol.breadcrumb {  background-color: transparent;  margin: 0;}
+div.breadDiv {  float: right;}
+.page {  color: #bbbbbb;}
+.bold {  font-weight: bold;}
+.btn-facebook {  color: white;  background: #3B5998;}
+.marginBottom10 {  margin-bottom: 10px;}
+.marg {  margin-right: 5PX;}
+.marginBottom5 {  margin-bottom: 5PX;}
+.btn-google {  color: white;  background: #DF4F37;}
+.border-radious50 {  border-radius: 50%;}
+.btn-twitter {  color: white;  background: #55ACEE;}
+.More-Images-post {  position: absolute;  color: white !important;  font-size: 30px !important;
+  font-weight: 700;  right: 23%;  margin-top: 80px;}
+.Fourth-image-opacity {  filter: brightness(0.5);}
+.borderRadius10 {  border-radius: 10px;}
+/* for like hsare comment */
+.like-comment-div {  padding: 5px !important;}
+.spanCommentSection {  display: flex;  margin-bottom: 10px;}
+.width-Like {  padding: 10px !important;  width: 30%;  margin-right: 1%;}
+.width-comment {  width: 38%;  margin-right: 1%;  padding: 6px 5px;}
+.width-share {  width: 30%;}
+.LikeInModal {  color: white;  border-radius: 50%;  padding: 3px;  background: #2078f4;}
+.comment-box {  height: 330px;  margin-bottom: 0;  padding: 10px !important;}
+#comment-show-box {  border: 1px solid #ced4da;  border-radius: 5px;  height: 211px;  overflow: auto;  padding: 10px;}
+.comment-box textarea {  position: relative;  top: 10px;  margin-bottom: 0;}
+.send-comment { position: relative; float: right;  top: -27px;  margin-right: 7px;  padding: 2px 8px !important;}
+.MakeCoverPhotoPost {  margin-top: 15px;  margin-right: 5px;}
+/* for radio buttons */
+/* The checkContainer */
+.checkContainer {  display: block;  position: relative;  padding-left: 35px;  margin-bottom: 12px;  cursor: pointer;
+  font-size: 18px;  -webkit-user-select: none;  -moz-user-select: none;  -ms-user-select: none;  user-select: none;}
+/* Hide the browser's default radio button */
+.checkContainer input {  position: absolute;  opacity: 0;  cursor: pointer;}
+/* Create a custom radio button */
+.checkmark {  position: absolute;  top: 0;  left: 0;  height: 25px;  width: 25px;  background-color: #ccc;  border-radius: 50%;}
+/* On mouse-over, add a grey background color */
+.checkContainer:hover input~.checkmark {  background-color: #ccc;}
+/* When the radio button is checked, add a blue background */
+.checkContainer input:checked~.checkmark {  background-color: #ec7834;}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {  content: "";  position: absolute;  display: none;}
+/* Show the indicator (dot/circle) when checked */
+.checkContainer input:checked~.checkmark:after {  display: block;}
+/* Style the indicator (dot/circle) */
+.checkContainer .checkmark:after {  top: 9px;  left: 9px;  width: 8px;  height: 8px;  border-radius: 50%;  background: white;}
+@media (max-width:992px) {  #loc_city_link {    display: flex; padding: 0;}
+  .marginLeftLoc {      }  .header-bar {    padding: 10px 20px;  }
+  .section-header {    padding: 5px 20px;  }  .privacyLi {    padding-left: 0px !important;  }
+  button.cookie-btn-decline::after {    content: none !important;  }
+  .carousel-caption {    top: 25% !important;    position: absolute;    right: 15%;    bottom: 20px;
+    left: 15%;    z-index: 10;    padding-top: 20px;    padding-bottom: 20px;    color: #fff;    text-align: center;  }
+  .disFlex {    display: inline-block;  }  .rowPadding {    padding: 5px 20px;  }
+  div.breadDiv {    margin-left: 0%;  }  ol.breadcrumb {    background-color: #e9ecef;    margin: 0;  }}
+@media (max-width:767px) {  div.breadDiv {    float: none;  }
+  .cookie-container {    position: fixed;    z-index: 1000;    bottom: -100%;    left: 0;    right: 0;
+    background: #2f3640;    color: #f5f6fa;    padding: 0 32px;    box-shadow: 0 -2px 16px rgba(92, 115, 148, 0.39);
+    transition: 400ms;   margin: 0px;    padding: 30px;    border-radius: 10px;  }
+  #homeCarousel .carousel-caption h1 {    font-size: 1.4rem !important;  }
+  #homeCarousel .carousel-inner img {    height: 340px !important;  }
+  .carousel-caption {    top: 16% !important;    position: absolute;    right: 15%;    bottom: 20px;    left: 15%;
+    z-index: 10;    padding-top: 20px;    padding-bottom: 20px;    color: #fff;    text-align: center;  }
+  .marignTopMinus15Inmobile {    margin-top: -15px;  }
+  /* .page-tittle h1{
+    padding-bottom: 0px !important;
+  } */
+}
+@media screen and (max-width: 386px) {  .maginBottom10 {    margin-top: 10px;  }}
+@media screen and (max-width: 495px) {  .maginBottom5 {    margin-top: 5px !important;  }}
+@media (min-width: 992px) {
+  #like-comment-modal .modal-lg,  #like-comment-property-photo-modal .modal-lg {    max-width: 80%;  }
+  .checboxAds{    padding-left: 27%;  }}
+@media (min-width: 576px) {  #like-comment-modal .modal-dialog,  #like-comment-property-photo-modal .modal-lg {    max-width: 80%;
+    margin: 1.75rem auto;  }}
+/* for ad text */
+.ulClassAdText{  font-size: 20px !important;}
+/* for loader */
+.showbox {  position: fixed;  z-index: 1;  top: 0;  bottom: 0;  left: 0;  right: 0;  padding: 0;  background-color: rgba(0, 0, 0, .7);
+}
+.loader {  position: fixed;  top: 46%;  left: 46%;  margin: 0 auto;  width: 70px;}
+.loader:before {  content: '';  display: block;  padding-top: 100%;}
+.circular {
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  height: 100%;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  width: 100%;
+  position: absolute;  top: 0;  bottom: 0;  left: 0;  right: 0;  margin: auto;}
+.path {  stroke-dasharray: 1, 200;  stroke-dashoffset: 0;  -webkit-animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;  stroke-linecap: round;}
+@-webkit-keyframes rotate {  100% {    -webkit-transform: rotate(360deg);            transform: rotate(360deg); }}
+@keyframes rotate {  100% {    -webkit-transform: rotate(360deg);            transform: rotate(360deg);  }}
+@-webkit-keyframes dash {  0% {    stroke-dasharray: 1, 200;    stroke-dashoffset: 0;  } 50% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -35px;  }  100% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -124px;  }}
+@keyframes dash {  0% {    stroke-dasharray: 1, 200;    stroke-dashoffset: 0;  }  50% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -35px;  }  100% {    stroke-dasharray: 89, 200;    stroke-dashoffset: -124px;  }}
+@-webkit-keyframes color {  100%,  0% {    stroke: #d62d20;  }  40% {    stroke: #0057e7;  }  66% {    stroke: #008744;  }  80%,  90% {    stroke: #ffa700;  }}
+@keyframes color {  100%,  0% {    stroke: #d62d20;  }  40% {    stroke: #0057e7;  }  66% {    stroke: #008744;  }  80%,  90% {    stroke: #ffa700;  }}

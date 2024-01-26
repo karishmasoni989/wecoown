@@ -1,0 +1,116 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>PBMS Functions</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">PBMS Functions</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row display-none">
+            <!-- <div class="col-md-1"></div> -->
+            <div class="col-md-3 text-center alreadymembership">
+                <div class="backBlueAndPadding" style="background: #ff7982;">
+                    <p>&nbsp;</p>
+                    <div class="marginBottom10">
+                        <img src="../../../assets/images/booking property.jpg" width="250px" height="180px">
+                    </div>
+                    <span class="text-uppercase membershipText">Booking</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Booking Co-Owned Properties</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Servicing Co-Owned Properties</span><br>
+                    <p>&nbsp;</p>
+                    <!-- <span>Try 3 days <i class="text-yellow">for free</i>. Then $30.00/year</span><br> -->
+                    <button class="subcribeButton btn" (click)="goToBookingProperty()">Continue <i class="fa fa-arrow-right"></i></button>
+                    <br>
+                    <p>&nbsp;</p>
+                </div>
+            </div>     
+            <div class="col-md-3 text-center alreadymembership showRenting">
+                <div class="backBlueAndPadding">
+                    <p>&nbsp;</p>
+                    <div class="marginBottom10">
+                        <img src="../../../assets/images/rent property.jpg" width="250px" height="180px">
+                    </div>
+                    <span class="text-uppercase membershipText">Renting</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Renting Co-Owned Properties</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Servicing Co-Owned Properties</span><br>
+                    <p>&nbsp;</p>
+                    <button class="subcribeButton btn" (click)="goToRentingProperty()">Continue <i class="fa fa-arrow-right"></i></button>
+                    <br>
+                    <p>&nbsp;</p>
+                </div>
+            </div>     
+            <div class="col-md-3 text-center alreadymembership showChatering">
+                <div class="backBlueAndPadding" style="background: #12d0b4;">
+                    <p>&nbsp;</p>
+                    <div class="marginBottom10">
+                        <img src="../../../assets/images/chartring property.jpg" width="250px" height="180px">
+                    </div>
+                    <span class="text-uppercase membershipText">Chartering</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Chartering Co-Owned Properties</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Servicing Co-Owned Properties</span><br>
+                    <p>&nbsp;</p>
+                    <button class="subcribeButton btn" (click)="goToCharteringProperty()">Continue <i class="fa fa-arrow-right"></i></button>
+                    <br>
+                    <p>&nbsp;</p>
+                </div>
+            </div>  
+            <div class="col-md-3 text-center alreadymembership">
+                <div class="backBlueAndPadding" style="background: #fd4c57;">
+                    <p>&nbsp;</p>
+                    <div class="marginBottom10">
+                        <img src="../../../assets/images/buy-sell property.jpg" width="250px" height="180px">
+                    </div>
+                    <span class="text-uppercase membershipText">Buy/Sell Co-Ownership</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Buying & Selling of Partial Co-Ownership</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Servicing Co-Owned Properties</span><br>
+                    <p class="marginBottom0">&nbsp;</p>
+                    <button class="subcribeButton btn" (click)="goToOpenPropertyUrl()">Continue <i class="fa fa-arrow-right"></i></button>
+                    <br>
+                    <p>&nbsp;</p>
+                </div>
+            </div>     
+             <!-- <div class="col-md-1"></div> -->
+            <!-- <div class="col-md-2"></div> -->
+            <div class="col-md-3 text-center alreadymembership">
+                <div class="backBlueAndPadding" style="background: #76bc66;">
+                    <p>&nbsp;</p>
+                    <div class="marginBottom10">
+                        <img src="../../../assets/images/cash flow property.jpg" width="250px" height="180px">
+                    </div>
+                    <span class="text-uppercase membershipText">Managing Cashflows</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Managing the Cashflows of Co-Owned Properties</span><br>
+                    <span><i class="fa fa-check text-yellow"></i> Servicing Co-Owned Properties</span><br>
+                    <p class="marginBottom0">&nbsp;</p>
+                    <button class="subcribeButton btn" (click)="goToManagingCashflowsProperty()">Continue <i class="fa fa-arrow-right"></i></button>
+                    <br>
+                    <p>&nbsp;</p>
+                </div>
+            </div>     
+            <div class="col-md-2 notAlreadymembership"></div>
+            <div class="col-md-8 notAlreadymembership">
+            </div>
+            <p>&nbsp;</p>
+        </div>
+    </section>
+</div>

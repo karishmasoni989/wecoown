@@ -1,0 +1,276 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Rent Property</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rent Property</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row alreadymembership display-none">
+            <!-- <div class="col-md-12 about-portfolio" *ngIf="getAllReuestForBookedProperty.length != 0">
+                <div class="showRequestForBook" *ngFor="let item of getAllReuestForBookedProperty">
+                    <h4 class="margin-bottom-0"><img alt="Image is loading" class="border-radious50 marginRight5"
+                            src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                            width="40px" height="40px"> {{item.user_id.firstname}} {{item.user_id.lastname}} wants to
+                        book property from {{item.start_date | date : "dd/MM/yyyy"}} to {{item.end_date | date :
+                        "dd/MM/yyyy"}}. Please accept or reject request.
+                        <button class="btn btn-primary marginRight5"
+                            (click)="setResponseOfMemberBookPropertyReq(item._id,'accept')">Accept</button>
+                        <button class="btn btn-primary"
+                            (click)="setResponseOfMemberBookPropertyReq(item._id,'reject')">Reject</button>
+                    </h4>
+                    <h4 class="margin-bottom-0">Notes</h4>
+                    <p class="margin-bottom-0 intro-brakr-spaces colorBlack">
+                        {{item.renting_notes}}
+                    </p>
+                </div>
+            </div> -->
+            <form class="ModalCloseClick col-md-12" [formGroup]="createRentingPropertyForm"
+                (ngSubmit)="submitRentingPropertyForm()">
+                <div class="">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <h4>Rent Property : {{bookPropertyTitle}}</h4>
+                    <div class="row inputOutline0">
+                        <div class="col-md-12">
+                            <div id="rental-form">
+                                <h5>Deposit received from <input formControlName="deposit_recevied_from"> Amount ($)
+                                    <input class="" formControlName="amount"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><br>Current
+                                    address<input class="" formControlName="current_address"> For
+                                    rent of
+                                    the property located at: <input class=""
+                                        formControlName="property_located_at"><br>Rent
+                                    amount($) <input class="" formControlName="rent_amount"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    is to be paid monthly in
+                                    advance.<br>Rental period : <input class="rental_period_checkbox"
+                                        id="rental_period_number_of_days" type="checkbox">
+                                    Number of Days <input class="rental_period_checkbox" id="rental_period_month"
+                                        type="checkbox"> Month <input class="rental_period_checkbox" type="checkbox"
+                                        id="rental_period_year"> Year<br>Late fee <input class=""
+                                        formControlName="late_fee"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    will be charged if rent is not paid on time.<br> First
+                                    month rent balance to be paid on or before <input class="" type="date"
+                                        formControlName="first_month_rent_before_date"> Tenant may not move into the
+                                    property untill
+                                    balance of first month's rent is paid.<br> Security deposit paid by the tenant is to
+                                    be
+                                    returned after property is vacated and no damaged is assessed by landlord. <br>
+                                    Amount
+                                    of Security deposit($) <input class="" formControlName="security_deposit"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><br>
+                                    The
+                                    property will be made available to move into on (date) <input type="date" class=""
+                                        formControlName="property_available_move_date"><br>
+                                    Landlord is responsible for : <input type="checkbox"
+                                        class="landlord-responsible-checkboxes" id="gas_landlord" value="gas">
+                                    Gas <input class="landlord-responsible-checkboxes" type="checkbox"
+                                        id="electricity_landlord" value="electricity">
+                                    Electricity <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="heat_landlord" value="heat">
+                                    Heat <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="cable_landlord" value="cable">
+                                    Cable Tv <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="internet_landlord" value="internet">
+                                    Internet Access <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="water_landlord" value="water">
+                                    Water <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="snow_landlord" value="snow">
+                                    Snow Removal <input type="checkbox" class="landlord-responsible-checkboxes"
+                                        id="lawn_landlord" value="lawn">
+                                    Lawn Maintenance.<br> All parties have a copy of this Agreement <br>
+                                    <span>Broker&nbsp;&nbsp;&nbsp;&nbsp;<input class=""
+                                            formControlName="broker_name"></span>
+                                    <span>Sign <input class="marginLeft23"></span>
+                                    <span>Date <input class="marginLeft23" type="date" formControlName="broker_date"></span>
+                                    <br class="mobileViewDisplayNone"><span>Landlord <input class="" formControlName="landlord_name"></span>
+                                    <span>Sign <input class="marginLeft23"> </span>
+                                    <span>Date <input class="marginLeft23" type="date" formControlName="landlord_date"></span><br class="mobileViewDisplayNone">
+                                    <span>Tenant&nbsp;&nbsp;&nbsp;&nbsp;<input class=""
+                                            formControlName="tenant_name"></span>
+                                    <span>Sign <input class="marginLeft23"></span>
+                                    <span>Date <input class="marginLeft23" type="date"
+                                            formControlName="tenant_date"></span>
+                                </h5>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group col-md-4">
+                            <label>Purpose : <span class="red">*</span></label>
+                            <input class="form-control"  formControlName="purpose" >
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Start Date & Time : <span class="red">*</span></label>
+                            <input class="form-control" type="datetime-local" data-date-format="dd-MM-yyyy"
+                                formControlName="start_date" id="start_date">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>End Date & Time: <span class="red">*</span></label>
+                            <input class="form-control" type="datetime-local" data-date-format="dd-MM-yyyy"
+                                formControlName="end_date" id="end_date">
+                        </div>  
+                        <div class="form-group col-md-4">
+                            <label>Price : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Price" formControlName="price" id="price">
+                        </div>     
+                        <div class="form-group col-md-4">
+                            <label>Full Name : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Full Name" formControlName="full_Name" id="full_Name">
+                        </div>           
+                        <div class="form-group col-md-4">
+                            <label>Designation : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Designation" formControlName="designation" id="designation">
+                        </div> 
+                        <div class="form-group col-md-4">
+                            <label>Email : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Email" formControlName="email" id="email">
+                        </div>        
+                        <div class="form-group col-md-4">
+                            <label>Phone : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Phone" formControlName="phone" id="phone">
+                        </div>   
+                        <div class="form-group col-md-4">
+                            <label>Late Fee : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Late Fee" formControlName="late_fee" id="late_fee">
+                        </div>   
+                        <div class="form-group col-md-4">
+                            <label>Security Amount : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Security Amount" formControlName="security_amount" id="security_amount">
+                        </div>  
+                        <div class="form-group col-md-4">
+                            <label>Rental Period : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Rental Period" formControlName="rental_period" id="rental_period">
+                        </div>  
+                        <div class="form-group col-md-4">
+                            <label>Agreement : <span class="red">*</span></label>
+                            <input class="form-control" type="file" single placeholder="phone" (change)="onUploadAgrrementFile($event.target.files)"  formControlName="phone" id="phone">
+                        </div>   
+                        <div class="form-group col-md-4">
+                            <label>Full Address : </label>
+                            <textarea class="form-control" rows="4" type="text" formControlName="address" id="address"
+                                placeholder="Full Address"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Renting Notes : </label>
+                            <textarea class="form-control" rows="4" type="text" formControlName="renting_notes" id="renting_notes"
+                                placeholder="Renting Notes"></textarea>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary marginRight5"
+                        styleSheetFile="assets/css/style.css,assets/css/print-pbms-rental-form.css"
+                        [useExistingCss]="true" printTitle="WeCoOwn Rental Form" printSectionId="rental-form"
+                        ngxPrint>Print</button>
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary marginRight5"
+                        type="submit">Submit</button>
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary"
+                        type="submitprint-pbms-rental-form.css" routerLink="/pbms-actions">Cancel</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>
+            <!-- <div class="col-md-7">
+                <div>
+                    <span class="orangeColor">● Rented</span>
+                </div> -->
+            <!-- <full-calendar #calenderBook [options]="calendarOptions"></full-calendar> -->
+            <!-- <full-calendar *ngIf="options" #fullcalendar [events]="AllBookingDates" [header]="options.header"
+                    [customButtons]="options.customButtons" [plugins]="options.plugins"
+                    [columnHeaderHtml]="options.columnHeaderHtml"></full-calendar> -->
+            <!-- </div> -->
+            <div class="col-md-12">
+                <h3>Activity History :</h3>
+                <div id="all-ads-table" class="table-responsive" style="color: black;">
+                    <table datatable class="table table-bordered table-hover table-striped" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Deposit Received From</th>
+                                <th>The Property Will Be Made Available To Move Into On (date) </th>
+                                <th>Created Date</th>
+                                <th>Action</th>
+                                <!-- <th>Number of Persons</th>
+                                <th>Booking Notes</th>
+                                 -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of getRentingPropertyDataById; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.deposit_recevied_from}}</td>
+                                <td>{{item.property_available_move_date | date : "dd/MM/yyyy"}}</td>
+                                <td>{{item.created_at | date : "dd/MM/yyyy"}}</td>
+                                <!-- <td>{{item.number_of_persons}}</td>
+                                <td>{{item.renting_notes}}</td> -->
+                                <td>
+                                    <button type="button" class="btn btn-orange"
+                                        (click)="updateRentingProperty(item._id)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row notAlreadymembership display-none">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+    </section>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="cancel-confirm-booking-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Cancel Booking</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="alert alert-success dispNone cancelBookSuccess"></div>
+            <div class="alert alert-danger dispNone cancelBookdanger"></div>
+            <div class="modal-body">
+                Are you sure you want to cancel this booking?
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" (click)="confirmCancelBooking()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

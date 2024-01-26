@@ -1,0 +1,934 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Property Type: Business Properties</h3>
+        <h5 class="createListing">Serial Number: BP{{getCurrentSerialNumber}}</h5>
+        <h5 class="updateListing dispNone">Serial Number: BP{{Form_Serial_Number}}</h5>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400 Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>   
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                 -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name"
+                        [(ngModel)]="Tittle_Name" formControlName="Tittle_Name">
+                    <label>Property Type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input [(ngModel)]="Business_type" readonly formControlName="Business_type"
+                        class="form-control CheckForm" type="text">
+                    <label>Property Sub-type:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="Business_subtype" (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="Business_subtype">
+                        <option value="">Select Business Sub-Type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                        <!-- <span class="red">*</span> --></label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose">
+                        (change)="changePurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:
+                        <!-- <span class="red">*</span> --></label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+
+            <!-- General -->
+            <div class="row peroperty-fatcs hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds equestrianCenters marinas">
+                <div class="col-md-12">
+                    <h4>General:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price">
+                </div>
+                <!-- <div class="form-group col-md-4">
+                    <label>Location:</label><br>
+                    <input [(ngModel)]="Location" formControlName="Location" class="form-control CheckForm" type="text"
+                        placeholder="Location">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Area:</label><br>
+                    <input [(ngModel)]="Area" formControlName="Area" class="form-control CheckForm" type="text"
+                        placeholder="Area">
+                </div> -->
+                <div class="form-group col-md-4 hotelsGolfResorts restaurantsBarsClubs GasStationsCStores CarWashFacilities parkingLots">
+                    <label>Tenancy:</label><br>
+                    <input [(ngModel)]="Tenancy" formControlName="Tenancy" class="form-control CheckForm" type="text"
+                        placeholder="Tenancy">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts hotelsGolfResorts motelsHostelsBBS ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots equestrianCenters marinas">
+                    <label>Opportunity Zone:</label><br>
+                    <input [(ngModel)]="Opportunity_Zone" formControlName="Opportunity_Zone" class="form-control CheckForm" type="text"
+                        placeholder="Opportunity Zone">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots marinas">
+                    <label>Transportation:</label><br>
+                    <input [(ngModel)]="Transportation" formControlName="Transportation" class="form-control CheckForm" type="text"
+                        placeholder="Transportation">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Additional Comment:</label><br>
+                    <textarea [(ngModel)]="Add_Additional_Comment" formControlName="Add_Additional_Comment" class="form-control CheckForm" type="text"
+                        placeholder="Additional Comment" rows="1" id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Average Daily Rate:</label><br>
+                    <input [(ngModel)]="Average_Daily_Rate" formControlName="Average_Daily_Rate" class="form-control CheckForm" type="text"
+                        placeholder="Average Daily Rate">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Corridor:</label><br>
+                    <input [(ngModel)]="corridor" formControlName="corridor" class="form-control CheckForm" type="text"
+                        placeholder="Corridor">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts assistedLivingNursingHomes">
+                    <label>Room Mix Information:</label><br>
+                    <input [(ngModel)]="Room_Mix_Info" formControlName="Room_Mix_Info" class="form-control CheckForm" type="text"
+                        placeholder="Room Mix Information">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs CarWashFacilities">
+                    <label>Sale Conditions:</label><br>
+                    <input [(ngModel)]="Sale_Conditions" formControlName="Sale_Conditions" class="form-control CheckForm" type="text"
+                        placeholder="Sale Conditions">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Parking:</label><br>
+                    <input [(ngModel)]="Parking" formControlName="Parking" class="form-control CheckForm" type="text"
+                        placeholder="Parking">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Frontage:</label><br>
+                    <input [(ngModel)]="Frontage" formControlName="Frontage" class="form-control CheckForm" type="text"
+                        placeholder="Frontage">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores assistedLivingNursingHomes rehabCenters parkingLots campGrounds equestrianCenters marinas">
+                    <label>Cap. Rate:</label><br>
+                    <input [(ngModel)]="Cap_Rate" formControlName="Cap_Rate" class="form-control CheckForm" type="text"
+                        placeholder="Cap. Rate">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>NOI:</label><br>
+                    <input [(ngModel)]="NOI" formControlName="NOI" class="form-control CheckForm" type="text"
+                        placeholder="NOI">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Building Height:</label><br>
+                    <input [(ngModel)]="Building_Height" formControlName="Building_Height" class="form-control CheckForm" type="text"
+                        placeholder="Building Height">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs">
+                    <label>Slab to Slab:</label><br>
+                    <input [(ngModel)]="Slab_to_Slab" formControlName="Slab_to_Slab" class="form-control CheckForm" type="text"
+                        placeholder="Slab to Slab">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Building FAR:</label><br>
+                    <input [(ngModel)]="Building_FAR" formControlName="Building_FAR" class="form-control CheckForm" type="text"
+                        placeholder="Building FAR">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Land Acres:</label><br>
+                    <input [(ngModel)]="Land_acres" formControlName="Land_acres" class="form-control CheckForm" type="text"
+                        placeholder="Land Acres">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs">
+                    <label>Occupancy:</label><br>
+                    <input [(ngModel)]="Occupancy" formControlName="Occupancy" class="form-control CheckForm" type="text"
+                        placeholder="Occupancy">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs GasStationsCStores">
+                    <label>Major Tenants:</label><br>
+                    <input [(ngModel)]="Major_Tenants" formControlName="Major_Tenants" class="form-control CheckForm" type="text"
+                        placeholder="Major Tenants">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs">
+                    <label>Nearby Amentities:</label><br>
+                    <input [(ngModel)]="Nearby_Amentities" formControlName="Nearby_Amentities" class="form-control CheckForm" type="text"
+                        placeholder="Nearby Amentities">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Number of Lots:</label><br>
+                    <input [(ngModel)]="Number_of_Lots" formControlName="Number_of_Lots" class="form-control CheckForm" type="text"
+                        placeholder="Number of Lots">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Price per Lot:</label><br>
+                    <input [(ngModel)]="Price_per_lot" formControlName="Price_per_lot" class="form-control CheckForm" type="text"
+                        placeholder="Price per Lot">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Acres per Lot:</label><br>
+                    <input [(ngModel)]="Acres_per_lot" formControlName="Acres_per_lot" class="form-control CheckForm" type="text"
+                        placeholder="Acres per Lot">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Total Lot Size:</label><br>
+                    <input [(ngModel)]="Total_Lot_Size" formControlName="Total_Lot_Size" class="form-control CheckForm" type="text"
+                        placeholder="Total Lot Size">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs CannabisProperties GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots equestrianCenters marinas">
+                    <label>Building Size:</label><br>
+                    <input [(ngModel)]="Building_Size" formControlName="Building_Size" class="form-control CheckForm" type="text"
+                        placeholder="Building Size">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties">
+                    <label>Number of Licenses:</label><br>
+                    <input [(ngModel)]="Number_Licenses" formControlName="Number_Licenses" class="form-control CheckForm" type="text"
+                        placeholder="Number of Licenses">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties">
+                    <label>License Mix Info.:</label><br>
+                    <input [(ngModel)]="License_Mix_Info" formControlName="License_Mix_Info" class="form-control CheckForm" type="text"
+                        placeholder="License Mix Info.">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores assistedLivingNursingHomes equestrianCenters">
+                    <label>Nearby Amenities:</label><br>
+                    <input [(ngModel)]="Nearby_Amenities" formControlName="Nearby_Amenities" class="form-control CheckForm" type="text"
+                        placeholder="Nearby Amenities">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms WineriesVineyards campGrounds equestrianCenters">
+                    <label>Price per Acreage:</label><br>
+                    <input [(ngModel)]="Price_per_acreage" formControlName="Price_per_acreage" class="form-control CheckForm" type="text"
+                        placeholder="Price per Acreage">
+                </div>
+                <div class="form-group col-md-4 WineriesVineyards campGrounds equestrianCenters">
+                    <label>Number of Buildings:</label><br>
+                    <input [(ngModel)]="Number_Buildings" formControlName="Number_Buildings" class="form-control CheckForm" type="text"
+                        placeholder="Number of Buildings">
+                </div>
+                <div class="form-group col-md-4 WineriesVineyards campGrounds">
+                    <label>Square ft. per Building:</label><br>
+                    <input [(ngModel)]="Sq_ft_per_building" formControlName="Sq_ft_per_building" class="form-control CheckForm" type="text"
+                        placeholder="Square ft. per Building">
+                </div>
+                <div class="form-group col-md-4 WineriesVineyards campGrounds equestrianCenters">
+                    <label>Number of Acres:</label><br>
+                    <input [(ngModel)]="No_Acres" formControlName="No_Acres" class="form-control CheckForm" type="text"
+                        placeholder="Number of Acres">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts restaurantsBarsClubs WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes parkingLots campGrounds equestrianCenters marinas">
+                    <label>Amenities:</label><br>
+                    <input [(ngModel)]="Amenities" formControlName="Amenities" class="form-control CheckForm" type="text"
+                        placeholder="Amenities">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots marinas">
+                    <label>Year Built:</label><br>
+                    <input [(ngModel)]="Year_Built" formControlName="Year_Built" class="form-control CheckForm" type="text"
+                        placeholder="Year Built">
+                </div>
+                <div class="form-group col-md-4 CarWashFacilities">
+                    <label>Number of Drive In/Grade Level Doors:</label><br>
+                    <input [(ngModel)]="Number_of_Drive_In_Grade_Level_Doors" formControlName="Number_of_Drive_In_Grade_Level_Doors" class="form-control CheckForm" type="text"
+                        placeholder="Number of Drive In/Grade Level Doors">
+                </div>
+                <div class="form-group col-md-4 assistedLivingNursingHomes rehabCenters">
+                    <label>Price per Bed:</label><br>
+                    <input [(ngModel)]="Price_per_Bed" formControlName="Price_per_Bed" class="form-control CheckForm" type="text"
+                        placeholder="Price per Bed">
+                </div>
+                <div class="form-group col-md-4 campGrounds">
+                    <label>Operating Schedule:</label><br>
+                    <input [(ngModel)]="Operating_Schedule" formControlName="Operating_Schedule" class="form-control CheckForm" type="text"
+                        placeholder="Operating Schedule">
+                </div>
+                <div class="form-group col-md-4 equestrianCenters">
+                    <label>Number of Barns:</label><br>
+                    <input [(ngModel)]="No_Barns" formControlName="No_Barns" class="form-control CheckForm" type="text"
+                        placeholder="Number of Barns">
+                </div>
+                <div class="form-group col-md-4 equestrianCenters">
+                    <label>Stables per Barn:</label><br>
+                    <input [(ngModel)]="Stables_per_barn" formControlName="Stables_per_barn" class="form-control CheckForm" type="text"
+                        placeholder="Stables per Barn">
+                </div>
+                <div class="form-group col-md-4 equestrianCenters">
+                    <label>Total Stables:</label><br>
+                    <input [(ngModel)]="Total_Stables" formControlName="Total_Stables" class="form-control CheckForm" type="text"
+                        placeholder="Total Stables">
+                </div>
+                <div class="form-group col-md-4 marinas">
+                    <label>Slip Mix Info.:</label><br>
+                    <input [(ngModel)]="Slip_Mix_Info" formControlName="Slip_Mix_Info" class="form-control CheckForm" type="text"
+                        placeholder="Slip Mix Info.">
+                </div>
+            </div>
+
+            <!-- Property Taxes -->
+            <div class="row peroperty-fatcs hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds equestrianCenters marinas">
+                <div class="col-md-12">
+                    <h4>Property Taxes:</h4>
+                </div>  
+                <div class="form-group col-md-4">
+                    <label>Land Assessment:</label><br>
+                    <input [(ngModel)]="Land_Assessment" formControlName="Land_Assessment" class="form-control CheckForm" type="text"
+                        placeholder="Land Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Improvements Assessment:</label><br>
+                    <input [(ngModel)]="Improvements_Assessment" formControlName="Improvements_Assessment" class="form-control CheckForm" type="text"
+                        placeholder="Improvements Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Assessment:</label><br>
+                    <input [(ngModel)]="Total_Assessment" formControlName="Total_Assessment" class="form-control CheckForm" type="text"
+                        placeholder="Total Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parcel Number:</label><br>
+                    <input [(ngModel)]="Parcel_Number" formControlName="Parcel_Number" class="form-control CheckForm" type="text"
+                        placeholder="Parcel Number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Sale Flyer:</label><br>
+                    <input [(ngModel)]="Sale_Flyer" formControlName="Sale_Flyer" class="form-control CheckForm" type="text"
+                        placeholder="Sale Flyer">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds Marina">
+                    <label>Zoning:</label><br>
+                    <input [(ngModel)]="Zoning" formControlName="Zoning" class="form-control CheckForm" type="text"
+                        placeholder="Zoning">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters">
+                    <label>Financial Summary:</label><br>
+                    <input [(ngModel)]="Financial_Summary" formControlName="Financial_Summary" class="form-control CheckForm" type="text"
+                        placeholder="Financial Summary">
+                </div>
+                <div class="form-group col-md-4 restaurantsBarsClubs">
+                    <label>Demographics:</label><br>
+                    <input [(ngModel)]="Demographics" formControlName="Demographics" class="form-control CheckForm" type="text"
+                        placeholder="Demographics">
+                </div>
+            </div>
+
+            <!-- Property Facts -->
+            <div class="row peroperty-fatcs hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds equestrianCenters marinas">
+                <div class="col-md-12">
+                    <h4>Property Facts:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price per sq. ft/acreage:</label><br>
+                    <input [(ngModel)]="Price_Per_SF" formControlName="Price_Per_SF" class="form-control CheckForm" type="text"
+                        placeholder="Price per sq. ft/acreage">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Sale Type:</label><br>
+                    <input [(ngModel)]="Sale_Type" formControlName="Sale_Type" class="form-control CheckForm" type="text"
+                        placeholder="Sale Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Type:</label><br>
+                    <input [(ngModel)]="Property_Type_CW" formControlName="Property_Type_CW" class="form-control CheckForm" type="text"
+                        placeholder="Property Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Subtype:</label><br>
+                    <input [(ngModel)]="Property_Subtype_CW" formControlName="Property_Subtype_CW" class="form-control CheckForm" type="text"
+                        placeholder="Property Subtype">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Building Class:</label><br>
+                    <input [(ngModel)]="Building_Class" formControlName="Building_Class" class="form-control CheckForm" type="text"
+                        placeholder="Building Class">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots marinas">
+                    <label>Lot Size:</label><br>
+                    <input [(ngModel)]="Lot_Size" formControlName="Lot_Size" class="form-control CheckForm" type="text"
+                        placeholder="Lot Size">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Rentable Building Area:</label><br>
+                    <input [(ngModel)]="Rentable_Building_Area" formControlName="Rentable_Building_Area" class="form-control CheckForm" type="text"
+                        placeholder="Rentable Building Area">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Number of Stories:</label><br>
+                    <input [(ngModel)]="No_Stories" formControlName="No_Stories" class="form-control CheckForm" type="text"
+                        placeholder="Number of Stories">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Year Build/Renovated:</label><br>
+                    <input [(ngModel)]="Years_build_Renovated" formControlName="Years_build_Renovated" class="form-control CheckForm" type="text"
+                        placeholder="Year Build/Renovated">
+                </div>
+                <div class="form-group col-md-4 CarWashFacilities">
+                    <label>Growth & Expansion:</label><br>
+                    <input [(ngModel)]="Growth_Expansion" formControlName="Growth_Expansion" class="form-control CheckForm" type="text"
+                        placeholder="Growth & Expansion">
+                </div>
+
+                <div class="col-md-12">
+                    <h4>Summary:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Investement Highlights:</label><br>
+                    <textarea [(ngModel)]="Investement_Highlights" formControlName="Investement_Highlights" class="form-control CheckForm" type="text"
+                        placeholder="Investement Highlights" rows="1" id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Executive Summary:</label><br>
+                    <textarea [(ngModel)]="Executive_Summary" formControlName="Executive_Summary" class="form-control CheckForm" type="text"
+                        placeholder="Executive Summary" rows="1" id="firstname"></textarea>
+                </div>
+            </div>
+
+            <!-- <div class="row peroperty-fatcs hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs ranchesFarms CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds">
+                <div class="col-md-12">
+                    <h4>Facilities:</h4>
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Building Size:</label><br>
+                    <input [(ngModel)]="Building_Size" formControlName="Building_Size" class="form-control CheckForm" type="text"
+                        placeholder="Building Size">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Activity and Adventure:</label><br>
+                    <input [(ngModel)]="Activity_adventure" formControlName="Activity_adventure" class="form-control CheckForm" type="text"
+                        placeholder="Activity and Adventure">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS restaurantsBarsClubs">
+                    <label>Popular Amenities:</label><br>
+                    <input [(ngModel)]="popular_amenities" formControlName="popular_amenities" class="form-control CheckForm" type="text"
+                        placeholder="Popular Amenities">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Agricultural Uses:</label><br>
+                    <input [(ngModel)]="Agricultural_Uses" formControlName="Agricultural_Uses" class="form-control CheckForm" type="text"
+                        placeholder="Agricultural Uses">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Land:</label><br>
+                    <input [(ngModel)]="Land" formControlName="Land" class="form-control CheckForm" type="text"
+                        placeholder="Land">
+                </div>
+                <div class="form-group col-md-4 ranchesFarms">
+                    <label>Irrigation Water:</label><br>
+                    <input [(ngModel)]="Irrigation_water" formControlName="Irrigation_water" class="form-control CheckForm" type="text"
+                        placeholder="Irrigation Water">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds">
+                    <label>Trading Hours:</label><br>
+                    <input [(ngModel)]="trading_hours" formControlName="trading_hours" class="form-control CheckForm" type="text"
+                        placeholder="Trading Hours">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters parkingLots campGrounds">
+                    <label>Support Training:</label><br>
+                    <input [(ngModel)]="Support_Training" formControlName="Support_Training" class="form-control CheckForm" type="text"
+                        placeholder="Support Training">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters">
+                    <label>Home Based:</label><br>
+                    <input [(ngModel)]="home_based" formControlName="home_based" class="form-control CheckForm" type="text"
+                        placeholder="Home Based">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters">
+                    <label>Relocatable:</label><br>
+                    <input [(ngModel)]="Relocatable" formControlName="Relocatable" class="form-control CheckForm" type="text"
+                        placeholder="Relocatable">
+                </div>
+                <div class="form-group col-md-4 CarWashFacilities parkingLots campGrounds">
+                    <label>Employees:</label><br>
+                    <input [(ngModel)]="Employees" formControlName="Employees" class="form-control CheckForm" type="text"
+                        placeholder="Employees">
+                </div>
+                <div class="form-group col-md-4 CarWashFacilities assistedLivingNursingHomes parkingLots campGrounds">
+                    <label>EBITDA:</label><br>
+                    <input [(ngModel)]="EBITDA" formControlName="EBITDA" class="form-control CheckForm" type="text"
+                        placeholder="EBITDA">
+                </div>
+
+                <div class="col-md-12 hotelsGolfResorts motelsHostelsBBS">
+                    <h4>Indoor Features:</h4>
+                </div>
+
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Suites:</label><br>
+                    <input [(ngModel)]="suites" formControlName="suites" class="form-control CheckForm" type="text"
+                        placeholder="Suites">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Beds:</label><br>
+                    <input [(ngModel)]="Beds" formControlName="Beds" class="form-control CheckForm" type="text"
+                        placeholder="Beds">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Furniture, Fixtures & Equipment (FF&E):</label><br>
+                    <input [(ngModel)]="Furniture_Fixtures_Equipment" formControlName="Furniture_Fixtures_Equipment" class="form-control CheckForm" type="text"
+                        placeholder="Furniture, Fixtures & Equipment (FF&E)">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Number of Rooms:</label><br>
+                    <input [(ngModel)]="number_of_rooms" formControlName="number_of_rooms" class="form-control CheckForm" type="text"
+                        placeholder="Number of Rooms">
+                </div>
+                <div class="form-group col-md-4 motelsHostelsBBS">
+                    <label>Kitchens:</label><br>
+                    <input [(ngModel)]="kitchens" formControlName="kitchens" class="form-control CheckForm" type="text"
+                        placeholder="Kitchens">
+                </div>
+                <div class="form-group col-md-4 motelsHostelsBBS">
+                    <label>Living Quarters:</label><br>
+                    <input [(ngModel)]="living_quarters" formControlName="living_quarters" class="form-control CheckForm" type="text"
+                        placeholder="Living Quarters">
+                </div>
+
+                <div class="col-md-12 hotelsGolfResorts motelsHostelsBBS">
+                    <h4>Outdoor Features:</h4>
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Parking Ratio:</label><br>
+                    <input [(ngModel)]="Parking_Ratio" formControlName="Parking_Ratio" class="form-control CheckForm" type="text"
+                        placeholder="Parking Ratio">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Entertainment:</label><br>
+                    <input [(ngModel)]="entertainment" formControlName="entertainment" class="form-control CheckForm" type="text"
+                        placeholder="entertainment">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Access and Parking:</label><br>
+                    <input [(ngModel)]="Access_and_Parking" formControlName="Access_and_Parking" class="form-control CheckForm" type="text"
+                        placeholder="Access and Parking">
+                </div>
+                <div class="form-group col-md-4 motelsHostelsBBS">
+                    <label>Swimming Pool:</label><br>
+                    <input [(ngModel)]="swimming_pool" formControlName="swimming_pool" class="form-control CheckForm" type="text"
+                        placeholder="Swimming Pool">
+                </div>
+                <div class="form-group col-md-4 motelsHostelsBBS">
+                    <label>Corridor:</label><br>
+                    <input [(ngModel)]="corridor" formControlName="corridor" class="form-control CheckForm" type="text"
+                        placeholder="Corridor">
+                </div>
+                <div class="form-group col-md-4 motelsHostelsBBS">
+                    <label>Driveway:</label><br>
+                    <input [(ngModel)]="Driveway" formControlName="Driveway" class="form-control CheckForm" type="text"
+                        placeholder="Driveway">
+                </div>
+
+            
+            </div> -->
+
+            <!-- <div class="row peroperty-fatcs hotelsGolfResorts motelsHostelsBBS CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters marinas">
+                <div class="col-md-12">
+                    <h4>Sales Revenue:</h4>
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters marinas">
+                    <label>Sales Revenue:</label><br>
+                    <input [(ngModel)]="Sales_Revenue" formControlName="Sales_Revenue" class="form-control CheckForm" type="text"
+                        placeholder="Sales Revenue">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts CannabisProperties WineriesVineyards motelsHostelsBBS GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters marinas">
+                    <label>Cash Flow:</label><br>
+                    <input [(ngModel)]="Cash_Flow" formControlName="Cash_Flow" class="form-control CheckForm" type="text"
+                        placeholder="Cash Flow">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters marinas">
+                    <label>Asking Price:</label><br>
+                    <input [(ngModel)]="Asking_Price" formControlName="Asking_Price" class="form-control CheckForm" type="text"
+                        placeholder="Asking Price">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards GasStationsCStores CarWashFacilities assistedLivingNursingHomes rehabCenters campGrounds equestrianCenters marinas">
+                    <label>Freehold Price:</label><br>
+                    <input [(ngModel)]="Freehold_Price" formControlName="Freehold_Price" class="form-control CheckForm" type="text"
+                        placeholder="Freehold Price">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards rehabCenters campGrounds equestrianCenters marinas">
+                    <label>Asking Price:</label><br>
+                    <input [(ngModel)]="Asking_Price" formControlName="Asking_Price" class="form-control CheckForm" type="text"
+                        placeholder="Asking Price">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards CarWashFacilities GasStationsCStores assistedLivingNursingHomes equestrianCenters marinas">
+                    <label>Expansion Potential:</label><br>
+                    <input [(ngModel)]="Expansion_Potential" formControlName="Expansion_Potential" class="form-control CheckForm" type="text"
+                        placeholder="Expansion Potential">
+                </div>
+                <div class="form-group col-md-4 CannabisProperties WineriesVineyards CarWashFacilities GasStationsCStores assistedLivingNursingHomes rehabCenters campGrounds marinas">
+                    <label>Years Established:</label><br>
+                    <input [(ngModel)]="Years_established" formControlName="Years_established" class="form-control CheckForm" type="text"
+                        placeholder="Years Established">
+                </div>
+
+                <div class="col-md-12 hotelsGolfResorts motelsHostelsBBS">
+                    <h4>Business Operation:</h4>
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Years Established:</label><br>
+                    <input [(ngModel)]="Years_established" formControlName="Years_established" class="form-control CheckForm" type="text"
+                        placeholder="Years Established">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Real Estate:</label><br>
+                    <input [(ngModel)]="Real_Estate" formControlName="Real_Estate" class="form-control CheckForm" type="text"
+                        placeholder="Real Estate">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Property ID:</label><br>
+                    <input [(ngModel)]="property_id" formControlName="property_id" class="form-control CheckForm" type="text"
+                        placeholder="Property ID">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Sale Condition:</label><br>
+                    <input [(ngModel)]="sale_condition" formControlName="sale_condition" class="form-control CheckForm" type="text"
+                        placeholder="Sale Condition">
+                </div>
+                <div class="form-group col-md-4 hotelsGolfResorts motelsHostelsBBS">
+                    <label>Listing Type:</label><br>
+                    <input [(ngModel)]="listing_type" formControlName="listing_type" class="form-control CheckForm" type="text"
+                        placeholder="Listing Type">
+                </div>
+            
+            
+            </div> -->
+
+            <div class="row peroperty-fatcs equestrianCenters">
+                <div class="col-md-12">
+                    <h4>Grazing Land Information:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Grazing Acres:</label><br>
+                    <input [(ngModel)]="Grazing_Acres" formControlName="Grazing_Acres" class="form-control CheckForm" type="text"
+                        placeholder="Grazing Acres">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acre Hay Land:</label><br>
+                    <input [(ngModel)]="Acre_Hay_Land" formControlName="Acre_Hay_Land" class="form-control CheckForm" type="text"
+                        placeholder="Acre Hay Land">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Deep Well:</label><br>
+                    <select class="form-control CheckForm" formControlName="Deep_Well"
+                        [(ngModel)]="Deep_Well">
+                        <option value="">Select Value</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Livestock:</label><br>
+                    <input [(ngModel)]="livestock" formControlName="livestock" class="form-control CheckForm" type="text"
+                        placeholder="Livestock">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Location & Access:</label><br>
+                    <input [(ngModel)]="Location_and_Access" formControlName="Location_and_Access" class="form-control CheckForm" type="text"
+                        placeholder="Location & Access">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acers of Grass Hay:</label><br>
+                    <input [(ngModel)]="acers_of_grass_hay" formControlName="acers_of_grass_hay" class="form-control CheckForm" type="text"
+                        placeholder="Acers of Grass Hay">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acers of Dry Land:</label><br>
+                    <input [(ngModel)]="acers_of_dry_land" formControlName="acers_of_dry_land" class="form-control CheckForm" type="text"
+                        placeholder="Acers of Dry Land">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acers of Flood Irrigated Alfalfa:</label><br>
+                    <input [(ngModel)]="acers_of_flood_irrigated_alfalfa" formControlName="acers_of_flood_irrigated_alfalfa" class="form-control CheckForm" type="text"
+                        placeholder="Acers of Flood Irrigated Alfalfa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Acers of BLM Lease:</label><br>
+                    <input [(ngModel)]="acers_of_BLM_lease" formControlName="acers_of_BLM_lease" class="form-control CheckForm" type="text"
+                        placeholder="Acers of BLM Lease">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cross Fence:</label><br>
+                    <select class="form-control CheckForm" formControlName="Cross_fence"
+                        [(ngModel)]="Cross_fence">
+                        <option value="">Select Value</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            
+            
+            </div>
+
+            <div class="row peroperty-fatcs marinas">
+                <div class="col-md-12">
+                    <h4>Occupancy Details:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Occupancy Rate:</label><br>
+                    <input [(ngModel)]="OCCUPANCY_RATE" formControlName="OCCUPANCY_RATE" class="form-control CheckForm" type="text"
+                        placeholder="Occupancy Rate">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Concession:</label><br>
+                    <input [(ngModel)]="CONCESSION" formControlName="CONCESSION" class="form-control CheckForm" type="text"
+                        placeholder="Concession">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Moorings:</label><br>
+                    <input [(ngModel)]="MOORINGS" formControlName="MOORINGS" class="form-control CheckForm" type="text"
+                        placeholder="Moorings">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Maximum Length:</label><br>
+                    <input [(ngModel)]="MAX_LENGHT" formControlName="MAX_LENGHT" class="form-control CheckForm" type="text"
+                        placeholder="Maximum Length">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Maximum Depth:</label><br>
+                    <input [(ngModel)]="MAX_DEPTH" formControlName="MAX_DEPTH" class="form-control CheckForm" type="text"
+                        placeholder="Maximum Depth">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Dry Dock:</label><br>
+                    <input [(ngModel)]="DRY_DOCK" formControlName="DRY_DOCK" class="form-control CheckForm" type="text"
+                        placeholder="Dry Dock">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Area:</label><br>
+                    <input [(ngModel)]="AREA_TOTAL" formControlName="AREA_TOTAL" class="form-control CheckForm" type="text"
+                        placeholder="Total Area">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Hauling Capacity:</label><br>
+                    <input [(ngModel)]="HAULING_CAPACITY" formControlName="HAULING_CAPACITY" class="form-control CheckForm" type="text"
+                        placeholder="Hauling Capacity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Buildings:</label><br>
+                    <input [(ngModel)]="BUILDINGS" formControlName="BUILDINGS" class="form-control CheckForm" type="text"
+                        placeholder="Buildings">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Marina Store:</label><br>
+                    <input [(ngModel)]="MARINA_STORE" formControlName="MARINA_STORE" class="form-control CheckForm" type="text"
+                        placeholder="Marina Store">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fuel Dispensing:</label><br>
+                    <input [(ngModel)]="FUEL_DISPENSING" formControlName="FUEL_DISPENSING" class="form-control CheckForm" type="text"
+                        placeholder="Fuel Dispensing">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Restaurants:</label><br>
+                    <input [(ngModel)]="RESTAURANT" formControlName="RESTAURANT" class="form-control CheckForm" type="text"
+                        placeholder="Restaurants">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking Spaces:</label><br>
+                    <input [(ngModel)]="PARKING_SPACES" formControlName="PARKING_SPACES" class="form-control CheckForm" type="text"
+                        placeholder="Parking Spaces">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Equipment Inc:</label><br>
+                    <input [(ngModel)]="EQUIPMENT_INC" formControlName="EQUIPMENT_INC" class="form-control CheckForm" type="text"
+                        placeholder="Equipment Inc">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Yatch Services:</label><br>
+                    <input [(ngModel)]="YACHT_SERVICE" formControlName="YACHT_SERVICE" class="form-control CheckForm" type="text"
+                        placeholder="Yatch Services">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Profitable:</label><br>
+                    <input [(ngModel)]="PROFITABLE" formControlName="PROFITABLE" class="form-control CheckForm" type="text"
+                        placeholder="Profitable">
+                </div>
+
+            
+            
+            </div>
+
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share:</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>

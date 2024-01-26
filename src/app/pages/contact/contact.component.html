@@ -1,0 +1,88 @@
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Contact Us</h1>       
+        </div>
+        <div class="col-md-6 page-tittle">       
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">       
+        <div class="row rowLineheight text-center">
+            <div class="col-md-4">
+                <i class="fa fa-map-marker"></i>
+                <p><strong>Administrations<br>
+                        <span class="text-color-blue">WeCoOwn, Inc.<br>2901 W Coast Hwy, #200, <br>Newport Beach, CA 92663, USA</span>
+                        <br>
+                    </strong>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <i class="fa fa-building"></i>
+                <p><strong>Global Headquarters<br>
+                        <span class="text-color-blue">
+                            WeCoOwn Technologies Ltd<br>30A Brookwood Crescent, Artane,<br>
+                   D05 EV29, Dublin 5, Ireland
+                            <!-- <a class="text-color-blue"
+                                href="tel://8884568881">+1-888-456-8881</a> -->
+                            <br> 
+                        </span>
+                </strong>
+                </p>
+            </div>
+            <div class="col-md-4 ">
+                <i class="fa fa-envelope"></i>
+                <p><strong>Drop us a Line<br>
+                    <a class="text-color-blue" href="mailto:info@wepropertyowners.com">info@wepropertyowners.com</a>
+                   </strong>
+                </p>
+            </div>           
+            <div class="col-md-6">
+                <br><br>
+                <h3>Have any questions or propositions? Get in touch!</h3>
+                <p><strong>Please feel free to tell us what’s on your mind.<br>
+                We respond to all customer’s feedback and we look forward to hearing from you!<br>                   
+                 Fields marked with an <span class="red">*</span>are required</strong></p>
+                 <form  [formGroup]="contactForm" (ngSubmit)="submitForm()" id="simpleForm">
+                     <div class="alert alert-success contact-success dispNone">Your message was sent Successfully !</div>
+                    <div class="alert alert-danger contact-danger dispNone"></div>
+                     <div class="form-group">
+                        <label>Name : <span class="red">*</span></label>     <br>                 
+                         <input class="form-control CheckForm" type="text" placeholder="Name" formControlName="name" id="name">
+                     </div>
+                     <div class="form-group">
+                        <label>Email Address : <span class="red">*</span></label> <br>      
+                        <input class="form-control CheckForm" type="email" placeholder="Email Address" formControlName="email" id="email">
+                    </div>                   
+                    <div class="form-group">                        
+                        <label>Description : <span class="red">*</span></label><br>   
+                        <textarea class="form-control CheckForm" placeholder="Description" rows="5" formControlName="address" id="address"></textarea>
+                    </div>                   
+                    <!-- <div class="">                       
+                        <label>What is thirteen minus 6?<span class="red">*</span></label><br>   
+                        <input class="form-control" placeholder="">
+                    </div> -->
+                    <!-- <div class="">
+                        <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+                        <div class="help-block with-errors"></div>
+                    </div>    -->
+                    <div>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                 </form>
+            </div>
+            <div class="col-md-6">
+                <br><br>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.4180994317526!2d-117.92759228479622!3d33.62039968072555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd20078ff1c899%3A0xd905d10ba0c9f144!2s2901%20West%20Coast%20Hwy%20%23200%2C%20Newport%20Beach%2C%20CA%2092663%2C%20USA!5e0!3m2!1sen!2sin!4v1602143336540!5m2!1sen!2sin" width="100%" height="520" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>           
+    </section>
+</div>

@@ -1,0 +1,15 @@
+input {
+  border-bottom: solid 2px !important;
+  border: 0;
+  outline: 0;
+  height: 40px;
+}
+input[type=checkbox] {
+ height: 14px !important;
+}
+h5 {
+    padding-top: 25px 0px;
+  line-height: 70px !important;
+  font-size: 19px !important;
+  text-align: justify;
+}
