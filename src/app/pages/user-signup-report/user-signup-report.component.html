@@ -1,0 +1,85 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>User Signup Report</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Signup Report</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <div class="alert alert-success dispNone userReport-success"></div>
+    <div class="alert alert-danger dispNone userReport-Danger"></div>
+
+    <section class="" *ngIf="getMemberData">
+        <br>
+        <button class="btn btn-primary marginBottom10" (click)="CreateCsv()">Export Data as CSV File</button>
+        <div id="all-user-table" class="table-responsive table-body" style="color: black;">
+            <ngx-datatable 
+            tableClass = "table table-striped table-bordered table-hover table-responsive"
+            [data]="data"
+            [options]="options" 
+            [columns]="columns"
+            >       
+           
+          </ngx-datatable>
+          
+            <!-- <table datatable class="table table-bordered table-hover table-striped" style="width:100%" >
+                <thead class="thead-dark">
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Designation</th>
+                        <th>Intro</th>
+                        <th>Verified</th>
+                        <th>Register Date</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody style="word-break: break-word;">
+                    <tr *ngFor="let item of getMemberData; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{item.firstname}} {{item.lastname}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.country}}</td>
+                        <td>{{item.state}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.designation}}</td>
+                        <td>{{item.bio}}</td>
+                        <td>{{item.verfied}}</td>
+                        <td>{{item.created_at | date : "dd/MM/yyyy"}}</td>
+                        <td>{{item.status}}</td>
+                        <td>
+                            <button type="button" class="btn btn-orange" (click)="goTodetail(item._id)">
+                                <i class="fa fa-edit"></i>
+                            </button>                            
+                        </td>
+                    </tr>    
+                </tbody>
+            </table> -->
+        </div>
+    </section>
+</div>

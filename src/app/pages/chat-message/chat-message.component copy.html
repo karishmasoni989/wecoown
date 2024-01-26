@@ -1,0 +1,280 @@
+<!-- <div id="loader"></div> -->
+
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div *ngFor="let monthData of resultData">
+    <div class="upcoming-container">
+        <div class="upcoming-container-title-section color">
+            Group Month | {{monthData.date | date : 'dd MMMM yyyy' }}
+        </div>
+        <div class="upcoming-container-card-section">
+            <div *ngFor="let card of monthData.products"
+                class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 upcoming-container-card-item">
+               <span>{{card}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <!-- Page header start -->
+    <!-- Page header end -->
+
+    <!-- Content wrapper start -->
+    <div class="content-wrapper">
+        <div *ngIf="noChat == true" class="bg-grey-light">
+            <h3>No chats</h3>
+        </div>
+        <!-- Row start -->
+        <div *ngIf="noChat == false" class="row gutters">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="card m-0">
+
+                    <!-- Row start -->
+                    <div class="row no-gutters">
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-3 col-3">
+                            <div class="users-container">
+                                <div class="chat-search-box">
+                                    <div class="input-group">
+                                        <input class="form-control" id="search-user-input" placeholder="Search"
+                                            (keyup)="onSearch($event)">
+                                        <!-- <i class="fa fa-search"></i> -->
+                                        <!-- <div class="input-group-btn">
+                                            <button type="button" class="btn btn-orange">
+                                            </button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <ul class="all-user-search-list">
+                                    <div *ngFor="let item of getSearchMemberList">
+                                        <li (click)="goToChatBot(item._id)">
+                                            <a href="javascript:void(0);">
+                                                <img alt="Image is loading"
+                                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../assets/images/user1.png' }}"
+                                                    width="30px" height="30px">
+                                            </a>&nbsp;
+                                            <a class="link-blue" href="javascript:void(0);">{{item.firstname}}
+                                                {{item.lastname}}</a>
+                                        </li>
+                                    </div>
+                                    <div id="no-search-result" style="display: none;">
+                                        <li>
+                                            <a href="javascript:void(0);">No Result Found</a>
+                                        </li>
+                                    </div>
+                                </ul>
+                                <div class="verticalScroll">
+                                    <ul class="users" *ngFor="let chatCol of listAllC; let o = index">
+                                        <li class="person contacts_all" id="contact_number_{{o}}" data-chat="person1"
+                                            (click)="openchatBox(o)">
+                                            <div *ngIf="userIDDDD == chatCol.start_chat_user_id._id">
+                                                <div class="user">
+                                                    <img src="{{ chatCol.receiver_user.profile_pic.length != 0 ? (baseURLofAPi+chatCol.receiver_user.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        alt="" onerror="this.src='../../../assets/images/user1.png'">
+                                                </div>
+                                                <p class="name-time">
+                                                    <span class="name">{{chatCol.receiver_user.firstname}}
+                                                        {{chatCol.receiver_user.lastname}}</span>
+                                                </p>
+                                                <span class="dot hide" id="count_number_{{chatCol.chat_id}}"></span>
+                                            </div>
+
+                                            <div *ngIf="userIDDDD == chatCol.receiver_user._id">
+                                                <div class="user">
+                                                    <img src="{{ chatCol.start_chat_user_id.profile_pic.length != 0 ? (baseURLofAPi+chatCol.start_chat_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        alt="" onerror="this.src='../../../assets/images/user1.png'">
+                                                </div>
+                                                <p class="name-time">
+                                                    <span class="name">{{chatCol.start_chat_user_id.firstname}}
+                                                        {{chatCol.start_chat_user_id.lastname}}</span>
+                                                </p>
+                                                <span class="dot hide" id="count_number_{{chatCol.chat_id}}"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-8 col-md-8 col-sm-9 col-9">
+                            <div class="chat_box_top">
+                                <div class="selected-user">
+                                    <a class="ColorWhite" href="javascript:void(0);" target="_blank"
+                                        (click)="GoToMemberDetail(activeReceiverID)"><span>
+                                            <img class="border-radious50" src="{{imgageOfReceiverUser}}" width="40px"
+                                                height="40px">
+                                            <span class="property_name"> {{ RecevierFirstLastName }}</span></span></a>
+                                </div>
+                                <div class="showSelectOptionsAll display-None">
+                                    <span class="colorWhiteShowCount">{{showSelectedMsgCount}} selected</span>
+                                    <button class="btn btn-orange border-radious50" (click)="goToCloseSelected()">
+                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="btn btn-orange border-radious50 marginRight5"
+                                        (click)="submitDeleteMessage(2)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="showOptions display-None">
+                                    <ul class="">
+                                        <li id="selectMsgDropdown" (click)="selectMessage()"><a class="deleteMsg">Select
+                                                messages</a></li>
+                                        <li id="deleteMsgDropdown" (click)="submitDeleteMessage(1)" class="deleteMsg">
+                                            <a>Delete messages</a></li>
+                                        <li id="editMesgDropdown" (click)="GotoUpdateText()" class="editMsg"><a>Edit
+                                                messages</a></li>
+                                    </ul>
+                                </div>
+                                <div *ngFor="let iteratorloop of listChatByChatID; let j = index;">
+                                    <div class="chat-container" id="chat_box_{{ iteratorloop.chat_id }}">
+                                        <ul class="chat-box chatContainerScroll">
+                                            <div class="chat_foorloop"
+                                                *ngFor="let chat of iteratorloop.messages; let i = index;">
+                                                <input type="checkbox" id="checkbox_select_id_{{chat._id}}"
+                                                    (click)="goToSelectedMsg(chat._id)"
+                                                    class="checkSelectBoc showSelectOptionsAll display-None">
+                                                <!-- <div class="unread_messages">
+                                                    <hr class="hor-line-col-unread"><span class="unread-span-color">{{chat.created_at | date : 'dd-MM-yyyy'}}</span>
+                                                    <hr class="hor-line-col-unread">
+                                                </div>  -->
+                                                <li class="chat-left" id="chat_message_{{chat._id}}"
+                                                    (contextmenu)="onRightClick($event)"
+                                                    *ngIf="userIDDDD == chat.recevier_id._id">
+                                                    <!-- <div class="chat-text">{{ chat.message }}</div> -->
+                                                    <div class="chat-text propertyShowDiv"
+                                                        (contextmenu)="MsgRightlick($event,chat._id,'chat-left')"
+                                                        *ngIf="chat.property_id; else onlyShowUnreadText1">
+                                                        <img class="interest-img" width="300px"
+                                                            src="{{baseURLofAPi+chat.property_id.cover_photo[0].src}}"><br>
+                                                        Title : {{ chat.property_id.title }} <br>Category :
+                                                        {{ chat.property_id.category }} <br>{{ chat.message }}
+                                                    </div>
+                                                    <ng-template #onlyShowUnreadText1>
+                                                        <div class="chat-text"
+                                                            (contextmenu)="MsgRightlick($event, chat._id, 'chat-left')">
+                                                            {{ chat.message }}</div>
+                                                    </ng-template>
+                                                    <div class="chat-hour">{{chat.created_at | date:'hh:mm a'}}
+                                                    </div>
+                                                </li>
+                                                <li class="chat-right" id="chat_message_{{chat._id}}"
+                                                    (contextmenu)="onRightClick($event)"
+                                                    *ngIf="userIDDDD == chat.sender_id._id">
+                                                    <i *ngIf="chat.read == true" class="fa fa-check-circle"
+                                                        aria-hidden="true"></i>
+                                                    <div class="chat-hour">{{chat.created_at | date:'hh:mm a'}} </div>
+                                                    <div class="chat-text propertyShowDiv"
+                                                        (contextmenu)="MsgRightlick($event, chat._id, 'chat-right')"
+                                                        *ngIf="chat.property_id; else onlyShowUnreadText2">
+                                                        <img class="interest-img"
+                                                            src="{{baseURLofAPi+chat.property_id.cover_photo[0].src}}"><br>
+                                                        Title : {{ chat.property_id.title }} <br>Category :
+                                                        {{ chat.property_id.category }} <br>{{ chat.message }}
+                                                    </div>
+                                                    <ng-template #onlyShowUnreadText2>
+                                                        <div class="chat-text"
+                                                            (contextmenu)="MsgRightlick($event, chat._id, 'chat-right')">
+                                                            {{ chat.message }}</div>
+                                                    </ng-template>
+                                                    <!-- <div class="chat-text">{{ chat.message }}</div> -->
+
+                                                </li>
+                                            </div>
+                                            <div *ngIf="toShowUnreadBanner == true" class="unread_messages">
+                                                <hr class="hor-line-col-unread"><span class="unread-span-color">Unread
+                                                    Messages</span>
+                                                <hr class="hor-line-col-unread">
+                                            </div>
+                                            <div class="chat_foorloop" *ngFor="let unread of unreadCurrentchat">
+                                                <input type="checkbox" id="checkbox_select_id_{{unread._id}}"
+                                                    (click)="goToSelectedMsg(unread._id)"
+                                                    class="checkSelectBoc showSelectOptionsAll display-None">
+                                                <li class="chat-left" id="chat_message_{{unread._id}}"
+                                                    *ngIf="userIDDDD == unread.recevier_id._id"
+                                                    (contextmenu)="onRightClick($event)">
+                                                    <div class="chat-text propertyShowDiv"
+                                                        (contextmenu)="MsgRightlick($event, unread._id, 'chat-left')"
+                                                        *ngIf="unread.property_id; else onlyShowUnreadText3">
+                                                        <img class="interest-img"
+                                                            src="{{baseURLofAPi+unread.property_id.cover_photo[0].src}}"><br>
+                                                        Title : {{ unread.property_id.title }} <br>Category :
+                                                        {{ unread.property_id.category }} <br>{{ unread.message }}
+                                                    </div>
+                                                    <ng-template #onlyShowUnreadText3>
+                                                        <div class="chat-text"
+                                                            (contextmenu)="MsgRightlick($event, unread._id, 'chat-left')">
+                                                            {{ unread.message }}</div>
+                                                    </ng-template>
+                                                    <!-- <div class="chat-text">{{ unread.message }}</div> -->
+                                                    <div class="chat-hour">{{unread.created_at | date:'hh:mm a'}}
+                                                    </div>
+                                                </li>
+
+                                                <li class="chat-right" id="chat_message_{{unread._id}}"
+                                                    (contextmenu)="onRightClick($event)"
+                                                    *ngIf="userIDDDD == unread.sender_id._id">
+                                                    <i *ngIf="unread.read == true" class="fa fa-check-circle"
+                                                        aria-hidden="true"></i>
+                                                    <div class="chat-hour">{{ unread.created_at | date:'hh:mm a'}}
+                                                    </div>
+                                                    <div class="chat-text propertyShowDiv"
+                                                        (contextmenu)="MsgRightlick($event, unread._id,'chat-right')"
+                                                        *ngIf="unread.property_id; else onlyShowUnreadText4">
+                                                        <img class="interest-img"
+                                                            src="{{baseURLofAPi+unread.property_id.cover_photo[0].src}}"><br>
+                                                        Title : {{ unread.property_id.title }} <br>Category :
+                                                        {{ unread.property_id.category }} <br>{{ unread.message }}
+                                                    </div>
+                                                    <ng-template #onlyShowUnreadText4>
+                                                        <div class="chat-text"
+                                                            (contextmenu)="MsgRightlick($event, unread._id, 'chat-right')">
+                                                            {{ unread.message }}</div>
+                                                    </ng-template>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                        <div class="form-group mt-3 mb-0">
+                                            <textarea id="reply_textarea_{{ iteratorloop.chat_id }}"
+                                                class="form-control CreateMessageText" (keyup.enter)="submitReply()"
+                                                rows="3" placeholder="Type your message here..."></textarea>
+                                            <button class="btn btn-primary submitMessage CreateMessageText"
+                                                (click)="submitReply()"><i class="fa fa-paper-plane"></i></button>
+                                            <textarea id="update_reply_textarea_{{ iteratorloop.chat_id }}"
+                                                class="form-control editMessageText display-None"
+                                                (keyup.enter)="submitUpdateMsg()" rows="3"
+                                                placeholder="Type your message here..."></textarea>
+                                            <button class="btn btn-primary submitMessage editMessageText display-None"
+                                                (click)="submitUpdateMsg()"><i class="fa fa-paper-plane"></i></button>
+                                            <!-- <button class="btn btn-primary submitMessage"><i
+                                                        class="fa fa-paperclip"></i><input type='file' (change)="onSelectFile($event)" /></button>                                        -->
+                                            <img [src]="url" *ngIf="format==='image' && url" height="200"> <br />
+                                            <video [src]="url" *ngIf="format==='video' && url" height="200"
+                                                controls></video> <br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Row end -->
+
+    </div>
+    <!-- Content wrapper end -->
+
+</div>

@@ -1,0 +1,15 @@
+.desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.p-size{
+    font-size: 17px;
+    font-weight: 600;
+    color: black !important;
+}
+.img-border{
+    border-radius: 10px;
+}

@@ -1,0 +1,303 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Update Book Property</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Update Book Property</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row alreadymembership display-none">
+            <form class="ModalCloseClick" [formGroup]="createCharteringPropertyForm"
+                (ngSubmit)="submitCharteringPropertyForm()">
+                <div class="">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <h4>Update Chartering : {{book_property_title}}</h4>
+                    <div class="row peroperty-fatcs">
+                        <div class="col-md-12">
+                            <h4>Charterer :</h4>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Full Name : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Full Name" [(ngModel)]="full_Name"
+                                formControlName="full_Name" id="full_Name"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Contact Name (if company):</label>
+                            <input class="form-control" placeholder="Contact Name" [(ngModel)]="contact_name"
+                                formControlName="contact_name" id="contact_name"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Address : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Address" [(ngModel)]="address"
+                                formControlName="address" id="address">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Work Telephone :</label>
+                            <input class="form-control" placeholder="Work Telephone" [(ngModel)]="work_tel"
+                                formControlName="work_tel" id="work_tel"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Postcode : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Postcode" maxlength="10" [(ngModel)]="postcode"
+                                formControlName="postcode" id="postcode"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Fax : </label>
+                            <input class="form-control" placeholder="Fax" [(ngModel)]="fax" formControlName="fax"
+                                id="fax">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Email Address : <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Email Address" [(ngModel)]="email"
+                                formControlName="email" id="email">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Mobile Number: <span class="red">*</span></label>
+                            <input class="form-control" placeholder="Mobile Number" maxlength="10" minlength="10"
+                                [(ngModel)]="mobile" formControlName="mobile" id="mobile"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+                    <div class="row peroperty-fatcs">
+                        <div class="col-md-12">
+                            <h4>Charter Details :</h4>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Vessel : </label>
+                            <input class="form-control" placeholder="Vessel" [(ngModel)]="vessel"
+                                formControlName="vessel" id="vessel">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Type : </label>
+                            <input class="form-control" placeholder="Type" [(ngModel)]="type" formControlName="type"
+                                id="type">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>LOA : </label>
+                            <input class="form-control" placeholder="LOA" [(ngModel)]="loa" formControlName="loa"
+                                id="loa">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Embarkation Point : </label>
+                            <input class="form-control" [(ngModel)]="embarkation_point"
+                                formControlName="embarkation_point" placeholder="Embarkation Point"
+                                id="embarkation_point">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Disembarkation Point : </label>
+                            <input class="form-control" [(ngModel)]="disembarkation_point"
+                                formControlName="disembarkation_point" placeholder="Disembarkation Point"
+                                id="disembarkation_point">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Cruising Limits : </label>
+                            <input class="form-control" placeholder="Cruising Limits" [(ngModel)]="cruising_limits"
+                                formControlName="cruising_limits" id="cruising_limits">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Start Date & Time : <span class="red">*</span></label>
+                            <!-- <input class="form-control" type="datetime-local" data-date-format="MM-dd-yyyy"
+                                [(ngModel)]="start_date" value="{{start_date}}" formControlName="start_date"
+                                id="start_date"> -->
+                                <input ng2-datetime-picker [ngModel]="start_date | date : 'MM/dd/yyyy (HH:mm)': 'UTC'" id="start_date" class="form-control"
+                                formControlName="start_date" date-format="MM/DD/YYYY HH:mm" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>End Date & Time: <span class="red">*</span></label>
+                            <!-- <input class="form-control" type="datetime-local" data-date-format="MM-dd-yyyy"
+                                [(ngModel)]="end_date" value="{{end_date}}" formControlName="end_date" id="end_date"> -->
+                            <input ng2-datetime-picker [ngModel]="end_date | date : 'MM/dd/yyyy (HH:mm)': 'UTC'" id="end_date" class="form-control"
+                                formControlName="end_date" date-format="MM/DD/YYYY HH:mm" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Crew : </label>
+                            <input class="form-control" placeholder="Crew" [(ngModel)]="crew" formControlName="crew"
+                                id="crew">
+                        </div>
+                    </div>
+                    <div class="row peroperty-fatcs">
+                        <div class="col-md-12">
+                            <h4>Fees ($):</h4>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Vessel Fee : </label>
+                                <input class="form-control col-md-5" placeholder="Vessel Fee" [(ngModel)]="vessel_fee"
+                                    formControlName="vessel_fee" id="vessel_fee"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Miscellaneous Amount: </label>
+                                <input class="form-control col-md-5" placeholder="Miscellaneous"
+                                    [(ngModel)]="miscellaneous_amount" formControlName="miscellaneous_amount"
+                                    id="miscellaneous_amount"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Miscellaneous Reason: </label>
+                                <input class="form-control col-md-5" placeholder="Miscellaneous Reason"
+                                    [(ngModel)]="miscellaneous_reason" formControlName="miscellaneous_reason"
+                                    id="miscellaneous_reason">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Sub Total : </label>
+                                <input class="form-control col-md-5" placeholder="Sub Total" [(ngModel)]="sub_total"
+                                    formControlName="sub_total" id="sub_total"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Tax : </label>
+                                <input class="form-control col-md-5" placeholder="Tax" [(ngModel)]="tax"
+                                    formControlName="tax" id="tax"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Total Charter Fees : <span class="red">*</span></label>
+                                <input class="form-control col-md-5" placeholder="Total Charter Fees"
+                                    [(ngModel)]="total_charter_fees" formControlName="total_charter_fees"
+                                    id="total_charter_fees"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Booking Deposit : </label>
+                            <input class="form-control" placeholder="Booking Deposit" [(ngModel)]="booking_deposit"
+                                formControlName="booking_deposit" id="booking_deposit"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Booking Deposit Due Date : </label>
+                            <!-- <input class="form-control" type="date" placeholder="booking_deposit_due_date"
+                            [(ngModel)]="booking_deposit_due_date" value="{{booking_deposit_due_date | date:'yyyy-MM-dd'}}" formControlName="booking_deposit_due_date" id="booking_deposit_due_date"> -->
+                            <dp-date-picker class="form-control"
+                                [ngModel]="booking_deposit_due_date | date:'MM/dd/yyyy'"
+                                formControlName="booking_deposit_due_date" [config]="datePickerConfig"
+                                placeholder="mm/dd/yyyy"></dp-date-picker>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label>Booking Deposit Paid : </label>
+                            <input class="form-control" placeholder="Booking Deposit Paid"
+                                [(ngModel)]="booking_deposit_paid" formControlName="booking_deposit_paid"
+                                id="booking_deposit_paid">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Security Bond : </label>
+                            <input class="form-control" placeholder="Security Bond" [(ngModel)]="security_bond"
+                                formControlName="security_bond" id="security_bond"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Security Bond Due Date : </label>
+                            <!-- <input class="form-control" type="date" placeholder="Security Bond Due Date"
+                            [(ngModel)]="security_bond_due_date" value="{{security_bond_due_date | date:'yyyy-MM-dd'}}" formControlName="security_bond_due_date" id="security_bond_due_date"> -->
+                            <dp-date-picker class="form-control" [ngModel]="security_bond_due_date | date:'MM/dd/yyyy'"
+                                formControlName="security_bond_due_date" [config]="datePickerConfig"
+                                placeholder="mm/dd/yyyy"></dp-date-picker>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Security Bond Paid : </label>
+                            <input class="form-control" placeholder="Security Bond Paid"
+                                [(ngModel)]="security_bond_paid" formControlName="security_bond_paid"
+                                id="security_bond_paid">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Other Deposit : </label>
+                            <input class="form-control" placeholder="Other Deposit" [(ngModel)]="other_deposit"
+                                formControlName="other_deposit" id="other_deposit"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Other Deposit Due Date : </label>
+                            <!-- <input class="form-control" type="date" placeholder="Other Deposit Due Date"
+                            [(ngModel)]="other_deposit_due_date" value="{{other_deposit_due_date | date:'yyyy-MM-dd'}}"  formControlName="other_deposit_due_date" id="other_deposit_due_date"> -->
+                            <dp-date-picker class="form-control" [ngModel]="other_deposit_due_date | date:'MM/dd/yyyy'"
+                                formControlName="other_deposit_due_date" [config]="datePickerConfig"
+                                placeholder="mm/dd/yyyy"></dp-date-picker>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Other Deposit Paid : </label>
+                            <input class="form-control" placeholder="Other Deposit Paid"
+                                [(ngModel)]="other_deposit_paid" formControlName="other_deposit_paid"
+                                id="other_deposit_paid">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Total Deposit Received : </label>
+                                <input class="form-control col-md-5" placeholder="Total Deposit Received"
+                                    [(ngModel)]="total_deposit_received" formControlName="total_deposit_received"
+                                    id="total_deposit_received"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Balance Due : </label>
+                                <input class="form-control col-md-5" placeholder="Balance Due" [(ngModel)]="balance_due"
+                                    formControlName="balance_due" id="balance_due"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group col-md-4">
+                        <label>Number of Persons : </label>
+                        <input class="form-control" type="text" [(ngModel)]="" formControlName="number_of_persons"
+                            id="number_of_persons" placeholder="Number of Persons"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Booking Notes : </label>
+                        <textarea class="form-control" rows="4" type="text" [(ngModel)]="" formControlName="booking_notes"
+                            id="booking_notes" placeholder="Booking Notes"></textarea>
+                    </div> -->
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary marginRight5"
+                        type="submit">Submit</button>
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary" type="submit"
+                        routerLink="/chartering-pbms-property">Cancel</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>
+        </div>
+        <p>&nbsp;</p>
+    </section>
+</div>

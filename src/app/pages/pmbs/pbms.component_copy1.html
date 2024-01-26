@@ -1,0 +1,1276 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>PBMS</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">PBMS</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page rowPadding">
+    <section class="">
+        <p>&nbsp;</p>
+        <div class="row not-logged-in display-none">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <h4>You are not logged in. You must first login for more information.
+                </h4>
+                <button type="button" class="btn btn-primary maginTop10"
+                    onclick="window.location.href='/login'">Login</button>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div class="row logged-in-user display-none">
+            <div class="col-md-3 alreadymembership">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <!-- <h4 *ngIf="memberShipTypePre">You are already have a {{memberShipTypePre}} membership from
+                    {{startdateMebershipPre | date : 'MM-dd-yyyy'}} to
+                    {{enddateMebershipPre | date : 'MM-dd-yyyy'}}.
+                </h4> -->
+                <h4 *ngIf="memberShipTypePre" class="text-justify">Your trial {{memberShipTypePre}} Membership has been
+                    confirmed. You can
+                    cancel this membership before the end of the third day from today. If not cancelled
+                    before the trial period ends, your will automatically be charged from the payment method you have
+                    been provided. The
+                    {{memberShipTypePre}} Membership with start from the same date of your payment is made.
+                </h4>
+                <button *ngIf="memberShipTypePre == 'Premium'" class="btn btn-primary"
+                    data-target="#upgrade-membership-modal" data-toggle="modal">Change Membership</button>
+                <!-- <div class="card marginBottom10" *ngIf="getRequestForAdminApprovalData">
+                    <div class="card-header">
+                        <h4 class="paddingTextInvitaion">Request for Admin Approval</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="NoDataReqFound display-none">No request found!</h4>
+                        <div *ngFor="let item of getRequestForAdminApprovalData; let i = index">
+                            <span *ngFor="let innerItem of item.recevier_id">
+                                <li *ngIf="getCurrentUser == innerItem.invited_by_user_id && innerItem.request_for_admin.status == 'Pending' && innerItem.request_for_admin.action == 'Yes'"
+                                    class="listOfNotify"
+                                    (click)="openDialogAdminApproval(item._id,innerItem.user_id._id)"
+                                    data-toggle="modal" data-target="#open-pbms-adminAprroveRequest-modal">
+                                    <a class="colorBlack">
+                                        <img alt="Image is loading" class="border-radious50 marginRight5 float-left"
+                                            src="{{ innerItem.user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="50px" height="50px">
+                                        <span class="spanShowFlex">{{innerItem.user_id.firstname}} {{innerItem.user_id.lastname}} is request
+                                            you to
+                                            become a admin for Property Co-Owners Group {{item.title}}.
+                                        </span>
+                                    </a>
+                                </li>
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-md-3 notAlreadymembership"></div>
+            <form class="ModalCloseClick col-md-6 notAlreadymembership" [formGroup]="addMembershipForm"
+                (ngSubmit)="submitMemberShip()">
+                <div class="">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                    <label class="checkContainer">Premium Membership
+                        <input type="radio" checked="checked" name="radio" id="premier-check" (click)="checkRadio(1)">
+                        <span class="checkmark"></span>&nbsp;&nbsp;
+                    </label>
+                    <label class="checkContainer">Professional Membership
+                        <input type="radio" name="radio" id="professional-check" (click)="checkRadio(2)">
+                        <span class="checkmark"></span>&nbsp;&nbsp;
+                    </label><br><br>
+                    <p class="premierVal">Your Premium Membership $30 for a month. Your trial period for 3 days.</p>
+                    <p class="professionalVal dispNone">Your professional membership $50 for a month. Your trial
+                        period
+                        for 3 days.</p>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Card Type : </label><br>
+                            <select class="form-control" id="Card_Type" formControlName="Card_Type">
+                                <option value="">Select Card Type</option>
+                                <option value="1">Visa</option>
+                                <option value="2">MasterCard</option>
+                                <option value="3">Amex</option>
+                                <option value="4">Discover</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Number : </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Number" maxlength="16"
+                                formControlName="Card_Number" id="Card_Number" value=""
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Holder Name: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Holder Name"
+                                formControlName="card_holder_name" id="card_holder_name" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>CVV: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="CVV" maxlength="3"
+                                formControlName="cvv" id="cvv" value=""
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Expiration : </label><br><br>
+                            <div class="disFlex marginTopMinus15">
+                                <select class="form-control" id="exp_month" formControlName="exp_month">
+                                    <option value="">Select Month</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="slash">/</label>
+                                <select class="form-control" id="exp_year" formControlName="exp_year">
+                                    <option value="">Select Year</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                    <p>&nbsp;</p>
+                </div>
+                <p class="margin-bottom-0">&nbsp;</p>
+            </form>
+            <div class="col-md-3 notAlreadymembership"></div>
+            <div class="col-md-2 notAlreadymembership"></div>
+            <!-- <div class="row" > -->
+            <div class="allPortfolio-box col-md-9">
+                <div class="alert alert-success dispNone sent-request-become-admin-success"></div>
+                <div class="alert alert-danger dispNone sent-request-become-admin-danger"></div>
+                <div class="alert alert-danger dispNone purchaseMembershipText">
+                    In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please purchase the membership.
+                </div>
+                <div class="card marginBottom10">
+                    <div class="card-header">
+                        <h2 class="margin-bottom-0">Co-Owned Property
+                            <button class="btn btn-primary float-right" (click)="checkAlreadymembership()"
+                                data-keyboard="false" data-backdrop="static" data-target="#my-portfolio-modal"
+                                data-toggle="modal">New Co-Owned Property </button>
+                        </h2>
+                    </div>
+                    <div class="card-body" *ngFor="let item of getMyAllPortfolioData">
+                        <!-- <div> -->
+                        <div *ngFor="let memberRec of item.recevier_id">
+                            <div class="poertfolio-div-accept"
+                                *ngIf="memberRec.user_id._id == getCurrentUser && memberRec.status == 'Pending' && memberRec.request_for_admin.action == 'No'">
+                                <a href="javascript:void(0)" (click)="goToMemberPage11( item.group_creater_id._id)"
+                                    target="_blank"><img alt="Image is loading"
+                                        class="border-radious50 float-left marginRight5"
+                                        src="{{ item.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+item.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="50px" height="50px"></a>
+                                <h4>{{item.group_creater_id.firstname}} {{item.group_creater_id.lastname}}
+                                    invite you for Property Co-Owners Group {{item.title}} as a Co-Owner.
+                                </h4>
+                                <button class="btn btn-orange marginRight5" (click)="goToReuestForAdmin(item._id)">Join
+                                    Co-Owners Group as Admin</button>
+                                <button class="btn btn-orange marginRight5"
+                                    (click)="goToUpdateStatus(item._id, 1, 'No')">Join
+                                    Co-Owners Group as Member</button>
+                                <button class="btn btn-primary" (click)="goToUpdateStatus(item._id, 2, 'No')">Decline
+                                    Invitation</button>
+                            </div>
+                            <div class="poertfolio-div-accept"
+                                *ngIf="memberRec.user_id._id == getCurrentUser && memberRec.request_for_admin.status == 'Pending' && memberRec.request_for_admin.action == 'Yes'">
+                                <h4 class="text-success">Your Request is pending for approval of become a admin. <button
+                                        class="btn btn-primary float-right"
+                                        (click)="goToUpdateStatus(item._id, 2, 'No')">Decline
+                                        Invitation</button></h4>
+                            </div>
+                        </div>
+                        <div class="about-portfolio"
+                            *ngIf="getObjectOfRecevierForShowAdminBtn(item.recevier_id) === true">
+                            <h5>Request for Admin Approval</h5>
+                            <span *ngFor="let member of item.recevier_id">
+                                <span
+                                    *ngIf="getCurrentUser == member.invited_by_user_id && member.request_for_admin.status == 'Pending' && member.request_for_admin.action == 'Yes'"
+                                    class="spanForAllImageWithUsername" data-dismiss="modal"
+                                    (click)="openDialogAdminApproval(item._id,member.user_id._id)" data-toggle="modal"
+                                    data-target="#open-pbms-adminAprroveRequest-modal">
+                                    <a href="javascript:void(0)">
+                                        <img alt="Image is loading" class="border-radious50"
+                                            src="{{ member.user_id.profile_pic.length != 0 ? (baseURLofAPi+member.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px"> {{member.user_id.firstname}}
+                                        {{member.user_id.lastname}} </a>
+                                </span>
+                            </span>
+                        </div>
+                        <span *ngFor="let memberRec11 of item.recevier_id">
+                            <span *ngIf="memberRec11.user_id._id == getCurrentUser && memberRec11.status != 'Pending'">
+                                <button *ngIf="item.group_creater_id._id != getCurrentUser"
+                                    class="btn btn-primary paddDec float-right"
+                                    (click)="checkAlreadymembership();openDeleteConfirm(item._id)" data-keyboard="false"
+                                    title="Leave group" data-backdrop="static" data-target="#leave-group-modal"
+                                    data-toggle="modal"><i class="fas fa-user-times"></i></button>
+                            </span>
+                        </span>
+                        <!-- <button class="btn btn-primary paddDec float-right"
+                            *ngIf="getObjectOfRecevierForShowAdminBtn(item.recevier_id) === true"
+                            (click)="checkAlreadymembership();openListOfRequestForAdmin(item._id, item.recevier_id)"
+                            data-keyboard="false" title="Leave group" data-backdrop="static"
+                            data-target="#list-of-request-make-admin-modal" data-toggle="modal">Admin request</button> -->
+                        <!-- <button *ngIf="item.group_creater_id._id == getCurrentUser"
+                            class="btn btn-primary paddDec float-right "
+                            (click)="checkAlreadymembership();openDeleteConfirm(item._id)" data-keyboard="false"
+                            title="Delete group" data-backdrop="static" data-target="#delete-group-modal"
+                            data-toggle="modal"><i class="fas fa-trash"></i></button>
+                        <button *ngIf="item.group_creater_id._id == getCurrentUser"
+                            class="btn btn-primary paddDec float-right marginRight5" id="add-more-btn"
+                            (click)="checkAlreadymembership();OpenOneGroup(item._id,2)" data-keyboard="false"
+                            title="Remove user" data-backdrop="static" data-target="#delete-members-in-group-modal"
+                            data-toggle="modal"><i class="fas fa-user-minus"></i></button>
+                        <button *ngIf="item.group_creater_id._id == getCurrentUser"
+                            class="btn btn-primary paddDec float-right marginRight5" id="remove-more-btn"
+                            (click)="checkAlreadymembership();OpenOneGroup(item._id,1)" data-keyboard="false"
+                            title="Add more user" data-backdrop="static" data-target="#add-more-members-in-group-modal"
+                            data-toggle="modal"><i class="fas fa-user-plus"></i></button> -->
+                        <span *ngFor="let innerItem1 of item.all_admins">
+                            <span *ngIf="innerItem1.user_id == getCurrentUser">
+                                <button *ngIf="innerItem1.user_id == getCurrentUser"
+                                    class="btn btn-primary paddDec float-right marginRight5"
+                                    (click)="checkAlreadymembership();openDeleteConfirm(item._id)" data-keyboard="false"
+                                    title="Delete group" data-backdrop="static" data-target="#delete-group-modal"
+                                    data-toggle="modal"><i class="fas fa-trash"></i></button>
+                                <button *ngIf="innerItem1.user_id == getCurrentUser"
+                                    class="btn btn-primary paddDec float-right marginRight5" id="add-more-btn"
+                                    (click)="checkAlreadymembership();OpenOneGroup(item._id,2)" data-keyboard="false"
+                                    title="Remove user" data-backdrop="static"
+                                    data-target="#delete-members-in-group-modal" data-toggle="modal"><i
+                                        class="fas fa-user-minus"></i></button>
+                                <button *ngIf="innerItem1.user_id == getCurrentUser"
+                                    class="btn btn-primary paddDec float-right marginRight5" id="remove-more-btn"
+                                    (click)="checkAlreadymembership();OpenOneGroup(item._id,1)" data-keyboard="false"
+                                    title="Add more user" data-backdrop="static"
+                                    data-target="#add-more-members-in-group-modal" data-toggle="modal"><i
+                                        class="fas fa-user-plus"></i></button>
+                            </span>
+                        </span>
+                        <a href="javascript:void(0);" (click)="goToMemberPage(item.group_creater_id._id)">
+                            <img alt="Image is loading" class="border-radious50 marginRight5"
+                                src="{{ item.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+item.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                width="40px" height="40px">
+                            <span><strong>{{item.group_creater_id.firstname}}
+                                    {{item.group_creater_id.lastname}}</strong></span>
+                        </a>
+                        <span> created the
+                            <strong> {{item.title}} </strong>Property Co-Owners Group.
+                            <span *ngIf="item.group_creater_id._id == getCurrentUser">
+                                You are <span *ngIf="item.group_creater_id._id == getCurrentUser">admin</span>
+                                of the property.
+                            </span>
+                            <span *ngFor="let memberRec11 of item.recevier_id">
+                                <span
+                                    *ngIf="memberRec11.user_id._id == getCurrentUser && memberRec11.status != 'Pending'">
+                                    You are <span *ngIf="memberRec11.is_admin == true">admin</span>
+                                    <span *ngIf="memberRec11.is_admin == false">member</span> of the property.
+                                </span>
+                            </span>
+                        </span>
+                        <!-- <span> created the 
+                            <strong> {{item.title}} </strong>Property Co-Owner Group.
+                            <span *ngIf="item.group_creater_id._id == getCurrentUser">
+                                You are <span *ngIf="item.group_creater_id._id == getCurrentUser">admin</span>
+                                <span *ngIf="item.group_creater_id._id != getCurrentUser">member</span> of the property.
+                            </span>
+                            <span *ngFor="let memberRec11 of item.recevier_id">
+                                <span
+                                    *ngIf="memberRec11.user_id._id == getCurrentUser && memberRec11.status != 'Pending'">
+                                    You are <span *ngIf="item.group_creater_id._id == getCurrentUser">admin</span>
+                                    <span *ngIf="item.group_creater_id._id != getCurrentUser">member</span> of the property.
+                                </span>
+                            </span>
+                        </span> -->
+                        <h6>Title : <a href="{{item.property_url}}" target="_blank">{{item.title}}</a>
+                        </h6>
+                        <h6 *ngIf="item.property_text">Property Text : {{item.property_text}}</h6>
+                        <h6>Members : {{item.TotalMember}}</h6>
+                        <h6 *ngIf="item.property_images.length != 0">
+                            Property Photos :
+                            <!-- <span class="spanForAllImageWithUsername" *ngFor="let imgOfPbms of item.property_images"> -->
+                            <!-- <a href="javascript:void(0)"><img alt="Image is loading" class="border-radious50"
+                                        src="{{baseURLofAPi+imgOfPbms.src}}" width="70px" height="70px">
+                                </a> -->
+                            <a href="javascript:void(0);" data-toggle="modal" class="marginBottom10 marginRight10"
+                                data-target="#showUploadedPhotosModal"
+                                (click)="getAllImagesOfPbmsOneGroup(item.property_images)"
+                                *ngFor='let ImgSrc of item.property_images; let i = index; let L = count;'>
+                                <img alt="Image is loading" *ngIf='i < 5'
+                                    class="padding3 hover-shadow cursor borderRadius10" width="100px" height="100px"
+                                    src="{{baseURLofAPi+ImgSrc.src}}" data-target="#carouselExample11"
+                                    attr.data-slide-to="{{i}}">
+                                <span *ngIf="i == 5">
+                                    <img alt="Image is loading" *ngIf='i < 6'
+                                        class="padding3 hover-shadow cursor Fourth-image-opacity borderRadius10"
+                                        width="100px" height="100px" src="{{baseURLofAPi+ImgSrc.src}}"
+                                        data-target="#carouselExample11" attr.data-slide-to="{{i}}">
+                                    <span class="More-photo-section-Images2">+{{L - (i + 1)}}</span>
+                                </span>
+                            </a>
+                            <!-- <a href="javascript:void(0);" class="marginBottom10 marginRight10"
+                                *ngFor='let ImgSrc of item.property_images; let i = index; let L = count;'>
+                                <img alt="Image is loading" *ngIf='i < 3'
+                                    class="padding3 hover-shadow cursor borderRadius10" width="90px" height="90px"
+                                    src="{{baseURLofAPi+ImgSrc.src}}">
+                                <span *ngIf="i == 5">
+                                    <img alt="Image is loading" *ngIf='i < 6'
+                                        class="padding3 hover-shadow cursor Fourth-image-opacity borderRadius10"
+                                        width="90px" height="90px" src="{{baseURLofAPi+ImgSrc.src}}">
+                                    <span class="More-photo-section-Images">+{{L - (i + 1)}}</span>
+                                </span>
+                            </a> -->
+                            <!-- </span> -->
+                        </h6>
+                        <div class="about-portfolio">
+                            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)"
+                                    (click)="goToMemberPage(item.group_creater_id._id)"><img alt="Image is loading"
+                                        class="border-radious50"
+                                        src="{{ item.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+item.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">
+                                    {{item.group_creater_id.firstname}}
+                                    {{item.group_creater_id.lastname}} (Admin)</a></span>
+                            <span *ngFor="let member of item.recevier_id">
+                                <span *ngIf="member.status == 'Accept'" class="spanForAllImageWithUsername">
+                                    <a href="javascript:void(0)" (click)="goToMemberPage(member.user_id._id)"><img
+                                            alt="Image is loading" class="border-radious50"
+                                            src="{{ member.user_id.profile_pic.length != 0 ? (baseURLofAPi+member.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px"> {{member.user_id.firstname}}
+                                        {{member.user_id.lastname}} <span
+                                            *ngIf="member.is_admin == true">(Admin)</span></a>
+                                </span>
+                            </span>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" id="showUploadedPhotosModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Photos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carouselExample11" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample11" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample11" role="button" data-slide="next">
+                        <span class="fa fa-angle-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="open-pbms-adminAprroveRequest-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" *ngIf="getAdminOnePbmsData">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Property Co-Owners Group : {{getAdminOnePbmsData.title}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-success dispNone response-become-admin-success"></div>
+                <div class="alert alert-danger dispNone response-become-admin-danger"></div>
+                <div class="poertfolio-div-accept">
+                    <span class="font18weight500" *ngFor="let item of getAdminOnePbmsData.recevier_id">
+                        <a *ngIf="recevierUserIdWantsAdmin == item.user_id._id" href="javascript:void(0)"
+                            target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading"
+                                class="border-radious50"
+                                src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                width="40px" height="40px">
+                            {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                                *ngIf="item.is_admin == true">(Admin)</span></a></span>
+                    <h6>Are you sure you want to make this person to be an admin of the Property Co-Owners Group?</h6>
+                    <button class="btn btn-primary marginRight5"
+                        (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,1)">Join as
+                        an Admin</button>
+                    <button class="btn btn-primary"
+                        (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,2)">Join as
+                        a Member</button>
+                </div>
+                <div class="about-portfolio">
+                    <h4>About</h4>
+                    <h6>Title : <a href="{{getAdminOnePbmsData.property_url}}"
+                            target="_blank">{{getAdminOnePbmsData.title}}</a></h6>
+                    <h6>Members : {{getAdminOnePbmsData.TotalMember}}</h6>
+                    <div class="about-portfolio" id="about-member-portfolio-id">
+                        <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                                (click)="goToMemberPage11(getAdminOnePbmsData.group_creater_id._id)"><img
+                                    alt="Image is loading" class="border-radious50"
+                                    src="{{ getAdminOnePbmsData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getAdminOnePbmsData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                    width="30px" height="30px">
+                                {{getAdminOnePbmsData.group_creater_id.firstname}}
+                                {{getAdminOnePbmsData.group_creater_id.lastname}}
+                                (Admin)</a></span>
+                        <span class="spanForAllImageWithUsername"
+                            *ngFor="let item of getAdminApproveProfileMemberData"><a href="javascript:void(0)"
+                                target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading"
+                                    class="border-radious50"
+                                    src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                    width="30px" height="30px">
+                                {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                                    *ngIf="item.is_admin == true">(Admin)</span></a></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="my-portfolio-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">New Co-Owned Property</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Purchase
+                    Membership</button> -->
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+            <div class="alreadymembership display-none padding10">
+                <label class="checkContainer marginKeft10">Property in My Portfolio
+                    <input type="radio" name="radio" id="search-my-portfolio-check" (click)="checkPbmsForm(3)"
+                        checked="checked">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                </label>
+                <label class="checkContainer marginKeft10">Property listed on WePropertyowners
+                    <input type="radio" name="radio" id="search-wepo-check" (click)="checkPbmsForm(1)">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                </label>
+                <label class="checkContainer marginKeft10">Property in My Listings
+                    <input type="radio" name="radio" id="search-my-listings-check" (click)="checkPbmsForm(4)">
+                    <span class="checkmark"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </label>
+                <label class="checkContainer">Property listed on a third party website
+                    <input type="radio" name="radio" id="search-thirdParty-check" (click)="checkPbmsForm(2)">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                </label>
+                <p>&nbsp;</p>
+                <br><br>
+                <div class="alert alert-success dispNone booksuccess"></div>
+                <div class="alert alert-danger dispNone bookdanger"></div>
+                <form class="ModalCloseClick search-on-wepo-form display-none" style="display: none;"
+                    [formGroup]="createMyPortfolio" id="myPortfolioCreateFormTag" (ngSubmit)="submitMyPortfolio()">
+                    <div class="modal-body">
+                        <input type="text" class="property_head" readonly>
+                        <div class="row">
+                            <!-- <div class="form-group col-md-12">
+                                <label>Property Photos : </label>
+                                <div class="dropzone form-control col-md-9 float-right" id="fullImageBox">
+                                    <input type="file" #fileDropRef id="fileDropRef" formControlName="property_photos"
+                                        (change)="onFileDropped($event.target.files)" style="float: right;" multiple
+                                        accept="image/png,image/jpeg,image/jpg">
+                                    <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                                    <p>Drag and drop files here</p>
+                                    <p>Or</p>
+                                    <button for="fileDropRef">Browse for files</button>
+                                    <p class="onlyImgVideoRed">(Only Images in jpg/jpeg/png.)</p>
+                                </div>
+                                <div class="form-control col-md-9 float-right files-list">
+                                    <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                        <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                            width="45px">&nbsp;
+                                        <div class="info">
+                                            <p class="name">{{ file?.name}}</p>
+                                        </div>
+                                        <div class="float-right">
+                                            &nbsp;<img alt="Image is loading"
+                                                src="../../../assets/images/delteFile1.png" width="20px"
+                                                (click)="delteFile(i)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <input class="form-control col-md-9 float-right" placeholder="Title"
+                                formControlName="title" id="title" value=""> -->
+                            <div class="form-group col-md-12">
+                                <label>Title : <span class="red">*</span></label>
+                                <!-- <select name="" id="" class="form-control col-md-9 float-right" >
+                                    <option *ngFor="let car of wePoAllListing" [value]="car._id">{{car.Tittle_Name}}</option>
+                                </select> -->
+                                <ng-select class="form-control col-md-9 float-right"
+                                    (change)="getSelectedWePoTitle(selectedWePoTitle)" [(ngModel)]="selectedWePoTitle"
+                                    [ngModelOptions]="{standalone: true}" placeholder="Select Title"
+                                    class="form-control col-md-9 float-right">
+                                    <ng-option *ngFor="let car of wePoAllListing"
+                                        [value]="car.Tittle_Name+'-'+car.name+'-'+car._id">
+                                        <!-- <img class="borderRaduis5" src="{{baseURLofAPi+car.property_photos[0].src}}" width="40px" height="40px">  -->
+                                        {{car.Tittle_Name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Property URL : <span class="red">*</span></label>
+                                <input class="form-control col-md-9 float-right" placeholder="Property URL"
+                                    formControlName="property_url" id="property_url" readonly
+                                    [(ngModel)]="property_url">
+                            </div>
+                            <!-- <div class="form-group col-md-12">
+                                <label>Property Text : </label>
+                                <textarea rows="4" class="form-control col-md-9 float-right" placeholder="Property Text"
+                                    formControlName="property_text" id="property_text"></textarea>
+                            </div> -->
+                            <div class="form-group col-md-12">
+                                <label>Invite members : </label>
+                                <div class="col-md-9 float-right paddingAll0">
+                                    <div class="alert alert-success dispNone inviteSuccess"></div>
+                                    <div class="alert alert-danger dispNone inviteDanger"></div>
+                                    <ng-select [items]="getAllMembersdata" placeholder="Select Members"
+                                        [multiple]="true" bindLabel="firstname" bindValue="_id"
+                                        [(ngModel)]="selectedUserIds" [ngModelOptions]="{standalone: true}">
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                        class="radius50Per"
+                                                        src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        width="30px" height="30px">
+                                                    {{item.firstname}} {{item.lastname}}</a></span>
+                                            <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                                aria-hidden="true">×</span>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item">
+                                            <img class="radius50Per"
+                                                src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                            type="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+                <form class="ModalCloseClick search-on-thirdParty-form display-none" style="display: none;"
+                    [formGroup]="createMyPortfolio2" id="myPortfolioCreateFormTag2" (ngSubmit)="submitMyPortfolio2()">
+                    <div class="modal-body">
+                        <input type="text" class="property_head" readonly>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Property Photos : </label>
+                                <div class="dropzone form-control col-md-9 float-right" id="fullImageBox">
+                                    <input type="file" #fileDropRef2 id="fileDropRef2" formControlName="property_photos"
+                                        (change)="onFileDropped($event.target.files)" style="float: right;" multiple
+                                        accept="image/png,image/jpeg,image/jpg">
+                                    <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                                    <p>Drag and drop files here</p>
+                                    <p>Or</p>
+                                    <button for="fileDropRef2">Browse for files</button>
+                                    <p class="onlyImgVideoRed">(Only Images in jpg/jpeg/png.)</p>
+                                </div>
+                                <div class="form-control col-md-9 float-right files-list">
+                                    <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                        <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                            width="45px">&nbsp;
+                                        <div class="info">
+                                            <p class="name">{{file?.name}}</p>
+                                        </div>
+                                        <div class="float-right">
+                                            &nbsp;<img alt="Image is loading"
+                                                src="../../../assets/images/delteFile1.png" width="20px"
+                                                (click)="delteFile(i)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Title : <span class="red">*</span></label>
+                                <input class="form-control col-md-9 float-right" placeholder="Title"
+                                    formControlName="title" id="title2" value="">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Property URL : <span class="red">*</span></label>
+                                <input class="form-control col-md-9 float-right" placeholder="Property URL"
+                                    formControlName="property_url" id="property_url2" value="">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Property Text : </label>
+                                <textarea rows="4" class="form-control col-md-9 float-right" placeholder="Property Text"
+                                    formControlName="property_text" id="property_text2"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Invite members : </label>
+                                <div class="col-md-9 float-right paddingAll0">
+                                    <!-- <div class="alert alert-success dispNone inviteSuccess"></div>
+                                <div class="alert alert-danger dispNone inviteDanger"></div> -->
+                                    <ng-select [items]="getAllMembersdata" placeholder="Select Members"
+                                        [multiple]="true" bindLabel="firstname" bindValue="_id"
+                                        [(ngModel)]="selectedUserIds" placeholder="Select Invite members"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                        class="radius50Per"
+                                                        src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        width="30px" height="30px">
+                                                    {{item.firstname}} {{item.lastname}}</a></span>
+                                            <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                                aria-hidden="true">×</span>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item">
+                                            <img class="radius50Per"
+                                                src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary pull-left" type="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+                <form class="ModalCloseClick search-my-portfolio-form display-none" [formGroup]="createMyPortfolio3"
+                    id="myPortfolioCreateFormTag3" (ngSubmit)="submitMyPortfolio3()">
+                    <div class="modal-body">
+                        <input type="text" class="property_head" readonly>
+                        <div class="row">
+                            <!-- <div class="form-group col-md-12">
+                                <label>Property Photos MY portfolio: </label>
+                                <div class="dropzone form-control col-md-9 float-right" id="fullImageBox">
+                                    <input type="file" #fileDropRef3 id="fileDropRef3" formControlName="property_photos"
+                                        (change)="onFileDropped($event.target.files)" style="float: right;" multiple
+                                        accept="image/png,image/jpeg,image/jpg">
+                                    <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                                    <p>Drag and drop files here</p>
+                                    <p>Or</p>
+                                    <button for="fileDropRef3">Browse for files</button>
+                                    <p class="onlyImgVideoRed">(Only Images in jpg/jpeg/png.)</p>
+                                </div>
+                                <div class="form-control col-md-9 float-right files-list">
+                                    <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                        <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                            width="45px">&nbsp;
+                                        <div class="info">
+                                            <p class="name">{{ file?.name}}</p>
+                                        </div>
+                                        <div class="float-right">
+                                            &nbsp;<img alt="Image is loading"
+                                                src="../../../assets/images/delteFile1.png" width="20px"
+                                                (click)="delteFile(i)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <input class="form-control col-md-9 float-right" placeholder="Title"
+                            formControlName="title" id="title" value=""> -->
+                            <div class="form-group col-md-12">
+                                <label>Title : <span class="red">*</span></label>
+                                <!-- <select name="" id="" class="form-control col-md-9 float-right" >
+                                <option *ngFor="let car of wePoAllListing" [value]="car._id">{{car.Tittle_Name}}</option>
+                            </select> -->
+                                <ng-select class="form-control col-md-9 float-right"
+                                    (change)="getSelectedWeCoOwnTitle(selectedWeCoOwnTitle)"
+                                    [(ngModel)]="selectedWeCoOwnTitle" [ngModelOptions]="{standalone: true}"
+                                    placeholder="Select Title" class="form-control col-md-9 float-right">
+                                    <ng-option *ngFor="let car of allMyCreatedPortfolio_Property"
+                                        [value]="car.Tittle_Name+'-'+car.name+'-'+car._id"><img class="borderRaduis5"
+                                            src="{{baseURLofAPi+car.property_photos[0].src}}" width="30px"
+                                            height="30px"> {{car.Tittle_Name}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Property URL : <span class="red">*</span></label>
+                                <input class="form-control col-md-9 float-right" placeholder="Property URL"
+                                    formControlName="property_url" id="property_url3" readonly
+                                    [(ngModel)]="property_url">
+                            </div>
+                            <!-- <div class="form-group col-md-12">
+                                <label>Property Text : </label>
+                                <textarea rows="4" class="form-control col-md-9 float-right" placeholder="Property Text"
+                                    formControlName="property_text" id="property_text3"></textarea>
+                            </div> -->
+                            <div class="form-group col-md-12">
+                                <label>Invite members : </label>
+                                <div class="col-md-9 float-right paddingAll0">
+                                    <div class="alert alert-success dispNone inviteSuccess"></div>
+                                    <div class="alert alert-danger dispNone inviteDanger"></div>
+                                    <ng-select [items]="getAllMembersdata" placeholder="Select Members"
+                                        [multiple]="true" bindLabel="firstname" bindValue="_id"
+                                        [(ngModel)]="selectedUserIds" [ngModelOptions]="{standalone: true}">
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                        class="radius50Per"
+                                                        src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        width="30px" height="30px">
+                                                    {{item.firstname}} {{item.lastname}}</a></span>
+                                            <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                                aria-hidden="true">×</span>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item">
+                                            <img class="radius50Per"
+                                                src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                            type="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+                <form class="ModalCloseClick search-my-listings-form" style="display: none;"
+                    id="myPortfolioCreateFormTag4" [formGroup]="createMyPortfolio4" (ngSubmit)="submitMyPortfolio4()">
+                    <div class="modal-body">
+                        <input type="text" class="property_head" readonly>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Title : <span class="red">*</span></label>
+                                <ng-select class="form-control col-md-9 float-right"
+                                    (change)="getSelectedWePoMyListingTitle(selectedMyListingTitle)"
+                                    [(ngModel)]="selectedMyListingTitle" [ngModelOptions]="{standalone: true}"
+                                    placeholder="Select Title" class="form-control col-md-9 float-right">
+                                    <ng-option *ngFor="let car of allMyListings_Property"
+                                        [value]="car.Tittle_Name+'-'+car.name+'-'+car._id">{{car.Tittle_Name}}
+                                    </ng-option>
+                                    <!-- <img src="../../../assets//images/no-image.jpg"> -->
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Property URL : <span class="red">*</span></label>
+                                <input class="form-control col-md-9 float-right" placeholder="Property URL"
+                                    formControlName="property_url" id="property_url4" readonly
+                                    [(ngModel)]="property_url">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Invite members : </label>
+                                <div class="col-md-9 float-right paddingAll0">
+                                    <div class="alert alert-success dispNone inviteSuccess"></div>
+                                    <div class="alert alert-danger dispNone inviteDanger"></div>
+                                    <ng-select [items]="getAllMembersdata" placeholder="Select Members"
+                                        [multiple]="true" bindLabel="firstname" bindValue="_id"
+                                        [(ngModel)]="selectedUserIds" [ngModelOptions]="{standalone: true}">
+                                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                            <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                        class="radius50Per"
+                                                        src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        width="30px" height="30px">
+                                                    {{item.firstname}} {{item.lastname}}</a></span>
+                                            <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                                aria-hidden="true">×</span>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item">
+                                            <img class="radius50Per"
+                                                src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                        </ng-template>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="chengePassSubmitForm4" class="btn btn-primary pull-left"
+                            type="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <!-- for upgrade button -->
+            <!-- Modal body -->
+            <div class="modal-body upgrade-professional display-none" style="display: none;">
+                <p>In premium membership you can only be admin of 3 properties. For more admin of properties please
+                    upgrade your membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer upgrade-professional display-none" style="display: none;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    data-target="#upgrade-membership-modal" data-toggle="modal">Upgrade
+                    Membership</button>
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="add-more-members-in-group-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add more Co-Owners</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+
+            <form class="ModalCloseClick alreadymembership display-none">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess1"></div>
+                    <div class="alert alert-danger dispNone bookdanger1"></div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Invite members : <span class="red">*</span></label>
+                            <div class="col-md-9 float-right paddingAll0">
+                                <div class="alert alert-success dispNone inviteSuccess"></div>
+                                <div class="alert alert-danger dispNone inviteDanger"></div>
+                                <ng-select [items]="getAllMembersdata" placeholder="Select Members" [multiple]="true"
+                                    bindLabel="firstname" bindValue="_id" [(ngModel)]="selectedUserIds"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                    class="radius50Per"
+                                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                    width="30px" height="30px">
+                                                {{item.firstname}} {{item.lastname}}</a></span>
+                                        <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                            aria-hidden="true">×</span>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <img class="radius50Per"
+                                            src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left"
+                        (click)="submitAddMoremember()">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="delete-members-in-group-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Co-Owners</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Purchase
+                    Membership</button> -->
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+
+            <form class="ModalCloseClick alreadymembership display-none">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess1"></div>
+                    <div class="alert alert-danger dispNone bookdanger1"></div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>All members : <span class="red">*</span></label>
+                            <div class="col-md-10 float-right delete-member-box">
+                                <div class="alert alert-success dispNone inviteSuccess"></div>
+                                <div class="alert alert-danger dispNone inviteDanger"></div>
+                                <div>
+                                    <!-- <span *ngIf="groupOwnerIdForDeleteArray">
+                                        <input type="checkbox" id="{{groupOwnerIdForDeleteArray._id}}"
+                                        (click)="DeleteSelectedArrayId(item.user_id._id)" class="">
+                                    <span class="selectedPadd"><a href="javascript:void(0);"><img
+                                                class="radius50Per"
+                                                src="{{ groupOwnerIdForDeleteArray.profile_pic.length != 0 ? (baseURLofAPi+groupOwnerIdForDeleteArray.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                width="30px" height="30px">
+                                            {{groupOwnerIdForDeleteArray.firstname}} {{groupOwnerIdForDeleteArray.lastname}}</a>
+                                    </span>
+                                    </span> -->
+                                    <span *ngFor="let item of getRecevierdataForDelete">
+                                        <span *ngIf="item.status == 'Accept'" class="spanForAllImageWithUsername">
+                                            <input type="checkbox" id="{{item.user_id._id}}"
+                                                (click)="DeleteSelectedArrayId(item.user_id._id)" class="">
+                                            <span class="selectedPadd"><a href="javascript:void(0);"><img
+                                                        class="radius50Per"
+                                                        src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                        width="30px" height="30px">
+                                                    {{item.user_id.firstname}} {{item.user_id.lastname}}</a>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left"
+                        (click)="submitRemoveMemberFromgroup()">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="delete-group-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Property Co-Owned Group</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body alreadymembership display-none">
+                <div class="alert alert-success postDelete-success dispNone"></div>
+                <div class="alert alert-danger postDelete-danger dispNone"></div>
+                <p class="">Are you sure you want to delete this Property Co-Owned Group?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer alreadymembership display-none">
+                <button type="button" class="btn btn-primary" (click)="confirmDeleteGroup()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="leave-group-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Leave Property Co-Owned Group</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Purchase
+                    Membership</button>
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body alreadymembership display-none">
+                <div class="alert alert-success postDelete-success dispNone"></div>
+                <div class="alert alert-danger postDelete-danger dispNone"></div>
+                <p class="">Are you sure you want to leave this Property Co-Owned Group?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer alreadymembership display-none">
+                <button type="button" class="btn btn-primary" (click)="confirmLeaveGroup()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="upgrade-membership-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Change Membership</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form class="ModalCloseClick" [formGroup]="upgradeMembership" (ngSubmit)="submitUpgradeMemberShip()">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess11"></div>
+                    <div class="alert alert-danger dispNone bookdanger11"></div>
+                    <label class="checkContainer">Professional Membership
+                        <input type="radio" checked="checked" name="radio" id="premier-check11" (click)="checkRadio(2)">
+                        <span class="checkmark"></span>&nbsp;&nbsp;
+                    </label>
+                    <!-- <label class="checkContainer">Professional Membership
+                    <input type="radio" name="radio" id="professional-check" (click)="checkRadio(2)">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                </label> -->
+                    <br><br>
+                    <p class="premierVal">Your professional membership $30 for a month. Your trial period for 3 days.
+                    </p>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Card Type : </label><br>
+                            <select class="form-control" formControlName="Card_Type">
+                                <option value="">Select Card Type</option>
+                                <option value="1">Visa</option>
+                                <option value="2">MasterCard</option>
+                                <option value="3">Amex</option>
+                                <option value="4">Discover</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Number : </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Number" maxlength="16"
+                                formControlName="Card_Number"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Card Holder Name: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="Card Holder Name"
+                                formControlName="card_holder_name" value="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>CVV: </label><br>
+                            <input class="form-control ChangePasswordCheckForm" placeholder="CVV" maxlength="3"
+                                formControlName="cvv" value=""
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Expiration : </label><br><br>
+                            <div class="disFlex marginTopMinus15">
+                                <select class="form-control" formControlName="exp_month">
+                                    <option value="">Select Month</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label class="slash">/</label>
+                                <select class="form-control" formControlName="exp_year">
+                                    <option value="">Select Year</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="list-of-request-make-admin-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">List of Users</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <div class="alert alert-danger expired_membership_msg dispNone bookdanger"></div>
+                <p>In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+                    must purchase the membership. Please
+                    purchase the membership.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+
+            <form class="ModalCloseClick alreadymembership display-none">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess1"></div>
+                    <div class="alert alert-danger dispNone bookdanger1"></div>
+                    <div>
+                        <span *ngFor="let innerItem of getItemForShowRequestForAdminList">
+                            <div *ngIf="getCurrentUser == innerItem.invited_by_user_id && innerItem.request_for_admin.status == 'Pending' && innerItem.request_for_admin.action == 'Yes'"
+                                class="CommonBorderRadiusBackGrey" data-dismiss="modal"
+                                (click)="openDialogAdminApproval(CurrentBoxOfAdminRequest,innerItem.user_id._id)"
+                                data-toggle="modal" data-target="#open-pbms-adminAprroveRequest-modal">
+                                <a class="colorBlack" href="javascript:void(0)">
+                                    <img alt="Image is loading" class="border-radious50 marginRight5"
+                                        src="{{ innerItem.user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="50px" height="50px">
+                                    <span class="">{{innerItem.user_id.firstname}} {{innerItem.user_id.lastname}} is
+                                        request
+                                        you to
+                                        become an admin for Property Co-Owners Group.
+                                    </span>
+                                </a>
+                            </div>
+                        </span>
+                    </div>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left"
+                        (click)="submitAddMoremember()">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,470 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Property Type: Horses & Live Stocks</h3>
+        <h5 class="createListing">Serial Number: HL{{getCurrentSerialNumber}}</h5>
+        <h5 class="updateListing dispNone">Serial Number: HL{{Form_Serial_Number}}</h5>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in
+                            mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400
+                                Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                 -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name" [(ngModel)]="Tittle_Name"
+                        formControlName="Tittle_Name">
+                    <label>Property Type:
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <input [(ngModel)]="Horses_Livestocks_type" readonly formControlName="Horses_Livestocks_type"
+                        class="form-control CheckForm" type="text">
+                    <label>Property Sub-type:
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="Horses_Livestocks_subtype"
+                        (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="Horses_Livestocks_subtype">
+                        <option value="">Select Horses & Live Stocks Sub-Type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose"
+                        (change)="getSelectedPurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="No Ready">Not Ready for Listing</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code+'||'+task.name}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates"
+                            value="{{task.country+'||'+task.isoCode+'||'+task.region}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+
+            <div class="row peroperty-fatcs raceHorses draftHorses showHorses cattle sheep otherLiveStocks">
+                <div class="col-md-12">
+                    <h4>Animal Facts:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price" id="price">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Breed:</label><br>
+                    <input [(ngModel)]="Breed" formControlName="Breed" class="form-control CheckForm" type="text"
+                        placeholder="Breed">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>State Bred:</label><br>
+                    <input [(ngModel)]="State_Breed" formControlName="State_Breed" class="form-control CheckForm"
+                        type="text" placeholder="State Bred">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Lineage:</label><br>
+                    <input [(ngModel)]="Lineage" formControlName="Lineage" class="form-control CheckForm" type="text"
+                        placeholder="Lineage">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Ship Semen:</label><br>
+                    <input [(ngModel)]="Ship_Semen" formControlName="Ship_Semen" class="form-control CheckForm"
+                        type="text" placeholder="Ship Semen">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Name:</label><br>
+                    <input [(ngModel)]="Horses_Name" formControlName="Horses_Name" class="form-control CheckForm"
+                        type="text" placeholder="Name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gender:</label><br>
+                    <input [(ngModel)]="Gender" formControlName="Gender" class="form-control CheckForm" type="text"
+                        placeholder="Gender">
+                </div>
+
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Foal Date:</label><br>
+                    <dp-date-picker class="form-control" [ngModel]="Foal_Date | date:'MM/dd/yyyy'"
+                        formControlName="Foal_Date" [config]="datePickerConfig" placeholder="mm/dd/yyyy">
+                    </dp-date-picker>
+                    <!-- <input [(ngModel)]="Foal_Date" formControlName="Foal_Date" class="form-control CheckForm" type="date"
+                        placeholder="Foal Date" data-date-format="dd/MM/yyyy" value="{{Foal_Date | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>In Foal:</label><br>
+                    <input [(ngModel)]="In_Foal" formControlName="In_Foal" class="form-control CheckForm" type="text"
+                        placeholder="In Foal">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Markings:</label><br>
+                    <input [(ngModel)]="Markings" formControlName="Markings" class="form-control CheckForm" type="text"
+                        placeholder="Markings">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Weight:</label><br>
+                    <input [(ngModel)]="Weight_lbs" formControlName="Weight_lbs" class="form-control CheckForm"
+                        type="text" placeholder="Weight">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Height:</label><br>
+                    <input [(ngModel)]="Height" formControlName="Height" class="form-control CheckForm" type="text"
+                        placeholder="Height">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Color:</label><br>
+                    <input [(ngModel)]="Colour" formControlName="Colour" class="form-control CheckForm" type="text"
+                        placeholder="Colour">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Registry:</label><br>
+                    <input [(ngModel)]="Registry" formControlName="Registry" class="form-control CheckForm" type="text"
+                        placeholder="Registry">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses sheep">
+                    <label>Registry Number:</label><br>
+                    <input [(ngModel)]="Registry_Number" formControlName="Registry_Number"
+                        class="form-control CheckForm" type="text" placeholder="Registry Number">
+                </div>
+                <div class="form-group col-md-4 cattle otherLiveStocks">
+                    <label>Registration Number:</label><br>
+                    <input [(ngModel)]="Registration_Number" formControlName="Registration_Number"
+                        class="form-control CheckForm" type="text" placeholder="Registration Number">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Temperament:</label><br>
+                    <input [(ngModel)]="Temperament" formControlName="Temperament" class="form-control CheckForm"
+                        type="text" placeholder="Temperament">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses">
+                    <label>Skills/Disciplines:</label><br>
+                    <input [(ngModel)]="Skill" formControlName="Skill" class="form-control CheckForm" type="text"
+                        placeholder="Skills/Disciplines">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Seller:</label><br>
+                    <input [(ngModel)]="Seller" formControlName="Seller" class="form-control CheckForm" type="text"
+                        placeholder="Seller">
+                </div>
+                <div class="form-group col-md-4 raceHorses draftHorses showHorses cattle sheep">
+                    <label>Age:</label><br>
+                    <input [(ngModel)]="Age" formControlName="Age" class="form-control CheckForm" type="text"
+                        placeholder="Age">
+                </div>
+                <div class="form-group col-md-4 cattle sheep otherLiveStocks">
+                    <label>Location:</label><br>
+                    <input [(ngModel)]="Location" formControlName="Location" class="form-control CheckForm" type="text"
+                        placeholder="Location">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Ship From:</label><br>
+                    <input [(ngModel)]="Ship_From" formControlName="Ship_From" class="form-control CheckForm"
+                        type="text" placeholder="Ship From">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Pasture/Feed:</label><br>
+                    <input [(ngModel)]="Pasture_Feed" formControlName="Pasture_Feed" class="form-control CheckForm"
+                        type="text" placeholder="Pasture/Feed">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Number for Sale:</label><br>
+                    <input [(ngModel)]="Number_for_Sale" formControlName="Number_for_Sale"
+                        class="form-control CheckForm" type="text" placeholder="Number for Sale">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Origin:</label><br>
+                    <input [(ngModel)]="Origin" formControlName="Origin" class="form-control CheckForm" type="text"
+                        placeholder="Origin">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Est. Weight:</label><br>
+                    <input [(ngModel)]="Est_Weight" formControlName="Est_Weight" class="form-control CheckForm"
+                        type="text" placeholder="Est. Weight">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Birth Weight:</label><br>
+                    <input [(ngModel)]="Birth_Weight" formControlName="Birth_Weight" class="form-control CheckForm"
+                        type="text" placeholder="Birth Weight">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Fertility:</label><br>
+                    <input [(ngModel)]="Fertility" formControlName="Fertility" class="form-control CheckForm"
+                        type="text" placeholder="Fertility">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Frame:</label><br>
+                    <input [(ngModel)]="Frame" formControlName="Frame" class="form-control CheckForm" type="text"
+                        placeholder="Frame">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Condition:</label><br>
+                    <input [(ngModel)]="Condition" formControlName="Condition" class="form-control CheckForm"
+                        type="text" placeholder="Condition">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Vaccination:</label><br>
+                    <input [(ngModel)]="Vaccination" formControlName="Vaccination" class="form-control CheckForm"
+                        type="text" placeholder="Vaccination">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Horns:</label><br>
+                    <input [(ngModel)]="Horns" formControlName="Horns" class="form-control CheckForm" type="text"
+                        placeholder="Horns">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Firm/Negotiable:</label><br>
+                    <input [(ngModel)]="Firm_Negotiable" formControlName="Firm_Negotiable"
+                        class="form-control CheckForm" type="text" placeholder="Firm/Negotiable">
+                </div>
+                <div class="form-group col-md-4 cattle">
+                    <label>Payment Terms:</label><br>
+                    <input [(ngModel)]="Payment_Terms" formControlName="Payment_Terms" class="form-control CheckForm"
+                        type="text" placeholder="Payment Terms">
+                </div>
+                <div class="form-group col-md-4 sheep">
+                    <label>Price Description:</label><br>
+                    <input [(ngModel)]="Price_Description" formControlName="Price_Description"
+                        class="form-control CheckForm" type="text" placeholder="Price Description">
+                </div>
+                <div class="form-group col-md-4 sheep">
+                    <label>Estimated Weight Variance:</label><br>
+                    <input [(ngModel)]="Estimated_Weight_Variance" formControlName="Estimated_Weight_Variance"
+                        class="form-control CheckForm" type="text" placeholder="Estimated Weight Variance">
+                </div>
+                <div class="form-group col-md-4 sheep otherLiveStocks">
+                    <label>Date of Birth:</label><br>
+                    <dp-date-picker class="form-control" [ngModel]="Date_of_Birth | date:'MM/dd/yyyy'"
+                        formControlName="Date_of_Birth" [config]="datePickerConfig" placeholder="mm/dd/yyyy">
+                    </dp-date-picker>
+                    <!-- <input [(ngModel)]="Date_of_Birth" formControlName="Date_of_Birth" class="form-control CheckForm" type="date"
+                        placeholder="Date of Birth" data-date-format="dd/MM/yyyy" value="{{Date_of_Birth | date : 'yyyy-MM-dd'}}"> -->
+                </div>
+                <div class="form-group col-md-4 sheep otherLiveStocks">
+                    <label>Description:</label><br>
+                    <input [(ngModel)]="Description_Horses" formControlName="Description_Horses"
+                        class="form-control CheckForm" type="text" placeholder="Description">
+                </div>
+                <div class="form-group col-md-4 sheep">
+                    <label>Crossbred/Purebred:</label><br>
+                    <input [(ngModel)]="Crossbred_Purebred" formControlName="Crossbred_Purebred"
+                        class="form-control CheckForm" type="text" placeholder="Crossbred/Purebred">
+                </div>
+                <div class="form-group col-md-4 sheep otherLiveStocks">
+                    <label>Head Count:</label><br>
+                    <input [(ngModel)]="Head_Count" formControlName="Head_Count" class="form-control CheckForm"
+                        type="text" placeholder="Head Count">
+                </div>
+                <div class="form-group col-md-4 sheep otherLiveStocks">
+                    <label>Price per Head:</label><br>
+                    <input [(ngModel)]="Price_per_head" formControlName="Price_per_head" class="form-control CheckForm"
+                        type="text" placeholder="Price per Head">
+                </div>
+                <div class="form-group col-md-4 sheep">
+                    <label>Average Weight:</label><br>
+                    <input [(ngModel)]="Average_Weight" formControlName="Average_Weight" class="form-control CheckForm"
+                        type="text" placeholder="Average Weight">
+                </div>
+                <div class="form-group col-md-4 sheep">
+                    <label>Total Weight:</label><br>
+                    <input [(ngModel)]="Total_Weight" formControlName="Total_Weight" class="form-control CheckForm"
+                        type="text" placeholder="Total Weight">
+                </div>
+
+
+            </div>
+
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share:</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>

@@ -1,0 +1,1453 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3 id="">Property Type: Real Estate</h3>
+        <h4 class="createListing">Serial Number: RE{{getCurrentSerialNumber}}</h4>
+        <h4 class="updateListing dispNone">Serial Number: RE{{Serial_Number}}</h4>
+        <!-- <input type="text" class="property_head" readonly> -->
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video : <span class="onlyImgVideoRed">(Only Images in jpg/jpeg/png & Videos in
+                            mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file) :</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>
+                    <!-- <label>Selling Price : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">     -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name :
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name" [(ngModel)]="Tittle_Name"
+                        formControlName="Tittle_Name">
+                    <label>Property Type :
+                    </label><br>
+                    <input [(ngModel)]="property_type" readonly formControlName="property_type"
+                        class="form-control CheckForm" type="text" placeholder="Property Type">
+                    <label>Property Sub-type :
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="property_subtype" (change)="changeSubCategory($event.target.value)"
+                        [(ngModel)]="property_subtype">
+                        <option value="">Select Property Sub-type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose : (Ex. For Sale/For Lease)
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose"
+                        (change)="changePurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link :
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates" value="{{task.country+'-'+task.isoCode}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Other Rooms:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Rooms : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Total Rooms"
+                        [(ngModel)]="Total_Rooms" formControlName="Total_Rooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Den Description : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Den Description"
+                        [(ngModel)]="Den_Description" formControlName="Den_Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Family Room Description : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Family Room Description"
+                        [(ngModel)]="Family_Room_Description" formControlName="Family_Room_Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Living Room Description : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Living Room Description"
+                        [(ngModel)]="Living_Room_Description" formControlName="Living_Room_Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Storage : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Storage" [(ngModel)]="Storage"
+                        formControlName="Storage">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Bedrooms :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bedrooms :
+                    </label><br>
+                    <input [(ngModel)]="Bedrooms" formControlName="Bedrooms" class="form-control CheckForm" type="text"
+                        placeholder="Bedrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bedroom 1 Description :
+                    </label><br>
+                    <input [(ngModel)]="Bedroom_1_Description" formControlName="Bedroom_1_Description"
+                        class="form-control CheckForm" type="text" placeholder="Bedroom 1 Description">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Kitchen and Dining :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Kitchen and Dining :
+                    </label><br>
+                    <input [(ngModel)]="Kitchen_and_Dining" formControlName="Kitchen_and_Dining"
+                        class="form-control CheckForm" type="text" placeholder="Kitchen and Dining">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Dining Room Description :
+                    </label><br>
+                    <input [(ngModel)]="Dining_Room_Description" formControlName="Dining_Room_Description"
+                        class="form-control CheckForm" type="text" placeholder="Dining Room Description">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Appliances :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Appliances :
+                    </label><br>
+                    <input [(ngModel)]="Appliances" formControlName="Appliances" class="form-control CheckForm"
+                        type="text" placeholder="Appliances">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Laundry Features :
+                    </label><br>
+                    <input [(ngModel)]="Laundry_Features" formControlName="Laundry_Features"
+                        class="form-control CheckForm" type="text" placeholder="Laundry Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Bathrooms :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Bathrooms : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Total Bathrooms"
+                        [(ngModel)]="Total_Bathrooms" formControlName="Total_Bathrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Full Bathrooms :
+                    </label><br>
+                    <input [(ngModel)]="Full_Bathrooms" formControlName="Full_Bathrooms" class="form-control CheckForm"
+                        type="text" placeholder="Full Bathrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Half Bathrooms :
+                    </label><br>
+                    <input [(ngModel)]="Half_Bathrooms" formControlName="Half_Bathrooms" class="form-control CheckForm"
+                        type="text" placeholder="Half Bathrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bathroom 1 Features:
+                    </label><br>
+                    <input [(ngModel)]="Bathroom_1_Features" formControlName="Bathroom_1_Features"
+                        class="form-control CheckForm" type="text" placeholder="Bathroom 1 Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Pool and Spa :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Pool Features :
+                    </label><br>
+                    <input [(ngModel)]="Pool_Features" formControlName="Pool_Features" class="form-control CheckForm"
+                        type="text" placeholder="Pool Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Spa Features :
+                    </label><br>
+                    <input [(ngModel)]="Spa_Features" formControlName="Spa_Features" class="form-control CheckForm"
+                        type="text" placeholder="Spa Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Interior Features :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Interior Features :
+                    </label><br>
+                    <input [(ngModel)]="Interior_Features" formControlName="Interior_Features"
+                        class="form-control CheckForm" type="text" placeholder="Interior Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Flooring:
+                    </label><br>
+                    <input [(ngModel)]="Flooring" formControlName="Flooring" class="form-control CheckForm" type="text"
+                        placeholder="Flooring">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Home Features :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>View :
+                    </label><br>
+                    <input [(ngModel)]="View" formControlName="View" class="form-control CheckForm" type="text"
+                        placeholder="View">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Homeowners Association :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association :
+                    </label><br>
+                    <input [(ngModel)]="Association" formControlName="Association" class="form-control CheckForm"
+                        type="text" placeholder="Association">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Fee :
+                    </label><br>
+                    <input [(ngModel)]="Association_Fee" formControlName="Association_Fee"
+                        class="form-control CheckForm" type="text" placeholder="Association Fee">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Fee Frequency :
+                    </label><br>
+                    <input [(ngModel)]="Association_Fee_Frequency" formControlName="Association_Fee_Frequency"
+                        class="form-control CheckForm" type="text" placeholder="Association Fee Frequency">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Fee Includes :
+                    </label><br>
+                    <input [(ngModel)]="Association_Fee_Includes" formControlName="Association_Fee_Includes"
+                        class="form-control CheckForm" type="text" placeholder="Association_Fee_Includes">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Amenities :
+                    </label><br>
+                    <input [(ngModel)]="Association_Amenities" formControlName="Association_Amenities"
+                        class="form-control CheckForm" type="text" placeholder="Association_Amenities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Name :
+                    </label><br>
+                    <input [(ngModel)]="Association_Name" formControlName="Association_Name"
+                        class="form-control CheckForm" type="text" placeholder="Association Name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Association Phone :
+                    </label><br>
+                    <input [(ngModel)]="Association_Phone" formControlName="Association_Phone"
+                        class="form-control CheckForm" type="text" placeholder="Association Phone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Calculated Total Monthly Association Fees :
+                    </label><br>
+                    <input [(ngModel)]="Calculated_Total_Monthly_Association_Fees"
+                        formControlName="Calculated_Total_Monthly_Association_Fees" class="form-control CheckForm"
+                        type="text" placeholder="Calculated Total Monthly Association Fees">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Multi-Unit Info :</h4>
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Number of Units :
+                    </label><br>
+                    <input [(ngModel)]="Number_of_Units" formControlName="Number_of_Units"
+                        class="form-control CheckForm" type="text" placeholder="Number of Units">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Other Property Info :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Source Listing Status :
+                    </label><br>
+                    <input [(ngModel)]="Source_Listing_Status" formControlName="Source_Listing_Status"
+                        class="form-control CheckForm" type="text" placeholder="Source Listing Status">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Disclaimer :
+                    </label><br>
+                    <input [(ngModel)]="Disclaimer" formControlName="Disclaimer" class="form-control CheckForm"
+                        type="text" placeholder="Disclaimer">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cross Street :
+                    </label><br>
+                    <input [(ngModel)]="Cross_Street" formControlName="Cross_Street" class="form-control CheckForm"
+                        type="text" placeholder="Cross Street">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Restrictions :
+                    </label><br>
+                    <input [(ngModel)]="Restrictions" formControlName="Restrictions" class="form-control CheckForm"
+                        type="text" placeholder="Restrictions">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Area :
+                    </label><br>
+                    <input [(ngModel)]="Area" formControlName="Area" class="form-control CheckForm" type="text"
+                        placeholder="Area">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Source Neighborhood :
+                    </label><br>
+                    <input [(ngModel)]="Source_Neighborhood" formControlName="Source_Neighborhood"
+                        class="form-control CheckForm" type="text" placeholder="Source Neighborhood">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Subdivision :
+                    </label><br>
+                    <input [(ngModel)]="Subdivision" formControlName="Subdivision" class="form-control CheckForm"
+                        type="text" placeholder="Subdivision">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>zoning :
+                    </label><br>
+                    <input [(ngModel)]="zoning" formControlName="zoning" class="form-control CheckForm" type="text"
+                        placeholder="zoning">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Source System Name :
+                    </label><br>
+                    <input [(ngModel)]="Source_System_Name" formControlName="Source_System_Name"
+                        class="form-control CheckForm" type="text" placeholder="Source System Name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Miscellaneous :
+                    </label><br>
+                    <input [(ngModel)]="Miscellaneous" formControlName="Miscellaneous" class="form-control CheckForm"
+                        type="text" placeholder="Miscellaneous">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Ownership Type :
+                    </label><br>
+                    <input [(ngModel)]="Ownership_Type" formControlName="Ownership_Type" class="form-control CheckForm"
+                        type="text" placeholder="Ownership Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Coming Soon Date :
+                    </label><br>
+                    <!-- <input [(ngModel)]="Coming_Soon_Date" formControlName="Coming_Soon_Date"
+                        class="form-control CheckForm" type="date" placeholder="Coming Soon Date"
+                        data-date-format="MM/dd/yyyy"> -->
+                        <dp-date-picker class="form-control"
+                        [(ngModel)]="Coming_Soon_Date" formControlName="Coming_Soon_Date"
+                        [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker>
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Building and Construction :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year Built :
+                    </label><br>
+                    <input [(ngModel)]="Year_Built" formControlName="Year_Built" class="form-control CheckForm"
+                        type="text" placeholder="Year Built">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Age :
+                    </label><br>
+                    <input [(ngModel)]="Property_Age" formControlName="Property_Age" class="form-control CheckForm"
+                        type="text" placeholder="Property Age">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>House Style :
+                    </label><br>
+                    <input [(ngModel)]="House_Style" formControlName="House_Style" class="form-control CheckForm"
+                        type="text" placeholder="House Style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Structure Type :
+                    </label><br>
+                    <input [(ngModel)]="Structure_Type" formControlName="Structure_Type" class="form-control CheckForm"
+                        type="text" placeholder="Structure Type">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Building Exterior Type :
+                    </label><br>
+                    <input [(ngModel)]="Building_Exterior_Type" formControlName="Building_Exterior_Type"
+                        class="form-control CheckForm" type="text" placeholder="Building Exterior Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Local Home Services :
+                    </label><br>
+                    <input [(ngModel)]="Local_Home_Services" formControlName="Local_Home_Services"
+                        class="form-control CheckForm" type="text" placeholder="Local Home Services">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Levels or Stories :
+                    </label><br>
+                    <input [(ngModel)]="Levels_or_Stories" formControlName="Levels_or_Stories"
+                        class="form-control CheckForm" type="text" placeholder="Levels or Stories">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Entry Level :
+                    </label><br>
+                    <input [(ngModel)]="Entry_Level" formControlName="Entry_Level" class="form-control CheckForm"
+                        type="text" placeholder="Entry Level">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Construction Materials :
+                    </label><br>
+                    <input [(ngModel)]="Construction_Materials" formControlName="Construction_Materials"
+                        class="form-control CheckForm" type="text" placeholder="Construction Materials">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Roof :
+                    </label><br>
+                    <input [(ngModel)]="Roof" formControlName="Roof" class="form-control CheckForm" type="text"
+                        placeholder="Roof">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Total Square Feet Living :
+                    </label><br>
+                    <input [(ngModel)]="Total_Square_Feet_Living" formControlName="Total_Square_Feet_Living"
+                        class="form-control CheckForm" type="text" placeholder="Total Square Feet Living">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Foundation Details :
+                    </label><br>
+                    <input [(ngModel)]="Foundation_Details" formControlName="Foundation_Details"
+                        class="form-control CheckForm" type="text" placeholder="Foundation Details">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Living Area Source :
+                    </label><br>
+                    <input [(ngModel)]="Living_Area_Source" formControlName="Living_Area_Source"
+                        class="form-control CheckForm" type="text" placeholder="Living Area Source">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Three Year Revenue :
+                    </label><br>
+                    <input [(ngModel)]="three_year_revenue" formControlName="three_year_revenue"
+                        class="form-control CheckForm" type="text" placeholder="Three Year Revenue">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Garage and Parking :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Garage Description :
+                    </label><br>
+                    <input [(ngModel)]="Garage_Description" formControlName="Garage_Description"
+                        class="form-control CheckForm" type="text" placeholder="Garage Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Driveway :
+                    </label><br>
+                    <input [(ngModel)]="Driveway" formControlName="Driveway" class="form-control CheckForm" type="text"
+                        placeholder="Driveway">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking Features :
+                    </label><br>
+                    <input [(ngModel)]="Parking_Features" formControlName="Parking_Features"
+                        class="form-control CheckForm" type="text" placeholder="Parking Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Accessibility Features :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Accessibility Features :
+                    </label><br>
+                    <input [(ngModel)]="Accessibility_Features" formControlName="Accessibility_Features"
+                        class="form-control CheckForm" type="text" placeholder="Accessibility Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Land Info :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Lot Description :
+                    </label><br>
+                    <input [(ngModel)]="Lot_Description" formControlName="Lot_Description"
+                        class="form-control CheckForm" type="text" placeholder="Lot Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Lot Dimensions :
+                    </label><br>
+                    <input [(ngModel)]="Lot_Dimensions" formControlName="Lot_Dimensions" class="form-control CheckForm"
+                        type="text" placeholder="Lot Dimensions">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Lot Size Acres :
+                    </label><br>
+                    <input [(ngModel)]="Lot_Size_Acres" formControlName="Lot_Size_Acres" class="form-control CheckForm"
+                        type="text" placeholder="Lot Size Acres">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Lot Size Square Feet :
+                    </label><br>
+                    <input [(ngModel)]="Lot_Size_Square_Feet" formControlName="Lot_Size_Square_Feet"
+                        class="form-control CheckForm" type="text" placeholder="Lot Size Square Feet">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Heating and Cooling :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fireplace Features :
+                    </label><br>
+                    <input [(ngModel)]="Fireplace_Features" formControlName="Fireplace_Features"
+                        class="form-control CheckForm" type="text" placeholder="Fireplace Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Number of Fireplaces :
+                    </label><br>
+                    <input [(ngModel)]="Number_of_Fireplaces" formControlName="Number_of_Fireplaces"
+                        class="form-control CheckForm" type="text" placeholder="Number of Fireplaces">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Heating Features :
+                    </label><br>
+                    <input [(ngModel)]="Heating_Features" formControlName="Heating_Features"
+                        class="form-control CheckForm" type="text" placeholder="Heating Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cooling Features :
+                    </label><br>
+                    <input [(ngModel)]="Cooling_Features" formControlName="Cooling_Features"
+                        class="form-control CheckForm" type="text" placeholder="Cooling Features">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Community Features & Amenities:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Community Features :
+                    </label><br>
+                    <input [(ngModel)]="Community_Features" formControlName="Community_Features"
+                        class="form-control CheckForm" type="text" placeholder="Community Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Amenities : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Amenities" [(ngModel)]="amenities"
+                        formControlName="amenities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Unit Amenities :
+                    </label><br>
+                    <input [(ngModel)]="unit_amenities" formControlName="unit_amenities" class="form-control CheckForm"
+                        type="text" placeholder="Unit Amenities">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>site amenities :
+                    </label><br>
+                    <input [(ngModel)]="site_amenities" formControlName="site_amenities" class="form-control CheckForm"
+                        type="text" placeholder="Site Amenities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Utilities :
+                    </label><br>
+                    <input [(ngModel)]="Utilities" formControlName="Utilities" class="form-control CheckForm"
+                        type="text" placeholder="Utilities">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Property Price & Tax:</h4>
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Price : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price" [(ngModel)]="price"
+                        formControlName="price">
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Price Per Unit : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Price Per Unit"
+                        [(ngModel)]="price_per_unit" formControlName="price_per_unit">
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Cap Rate : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Cap Rate" [(ngModel)]="cap_rate"
+                        formControlName="cap_rate">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gross Rent Multiplier : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Gross Rent Multiplier"
+                        [(ngModel)]="gross_rent_multiplier" formControlName="gross_rent_multiplier">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parcel Number : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Parcel Number"
+                        [(ngModel)]="Parcel_Number" formControlName="Parcel_Number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Land Assessment : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Land Assessment"
+                        [(ngModel)]="Land_Assessment" formControlName="Land_Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Improvements Assessment : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Improvements Assessment"
+                        [(ngModel)]="Improvements_Assessment" formControlName="Improvements_Assessment">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Assessment : </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Total Assessment"
+                        [(ngModel)]="Total_Assessment" formControlName="Total_Assessment">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Property Highlights:</h4>
+                </div>
+                <div class="form-group col-md-6 apartment castles churches estate-home ">
+                    <label>Investment Highlights :
+                    </label><br>
+                    <textarea [(ngModel)]="invesment_highlights" formControlName="invesment_highlights"
+                        class="form-control CheckForm" type="text" placeholder="Investment Summary" rows="6"
+                        id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-6 apartment">
+                    <label>Executive Summary :
+                    </label><br>
+                    <textarea [(ngModel)]="executive_summary" formControlName="executive_summary"
+                        class="form-control CheckForm" type="text" placeholder="Executive Summary" rows="6"
+                        id="firstname"></textarea>
+                </div>
+            </div>
+            <!-- fields for lease -->
+            <div class="row peroperty-fatcs fieldsForLease">
+                <div class="col-md-12">
+                    <h4>For Lease Property Features:</h4>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Overview :</label><br>
+                    <textarea [(ngModel)]="Overview" formControlName="Overview" class="form-control CheckForm"
+                        type="text" placeholder="Overview" rows="5"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Floor Plans :</label><br>
+                    <textarea [(ngModel)]="Floor_Plans" formControlName="Floor_Plans" class="form-control CheckForm"
+                        type="text" placeholder="Floor Plans" rows="5"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Community Features :</label><br>
+                    <textarea [(ngModel)]="Lease_Community_Features" formControlName="Lease_Community_Features"
+                        class="form-control CheckForm" type="text" placeholder="Community Features" rows="5"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Unit Features :</label><br>
+                    <textarea [(ngModel)]="Unit_Features" formControlName="Unit_Features" class="form-control CheckForm"
+                        type="text" placeholder="Unit Features" rows="5"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year Built :</label><br>
+                    <input [(ngModel)]="Lease_Year_Built" formControlName="Lease_Year_Built"
+                        class="form-control CheckForm" type="text" placeholder="Year Built">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Phone :</label><br>
+                    <input [(ngModel)]="phone" formControlName="phone" class="form-control CheckForm" type="text"
+                        placeholder="Phone"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Email Address :</label><br>
+                    <input [(ngModel)]="email" formControlName="email" class="form-control CheckForm" type="email"
+                        placeholder="Email Address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price From :</label><br>
+                    <input [(ngModel)]="price_from" formControlName="price_from" class="form-control CheckForm"
+                        type="text" placeholder="Price From"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price To :</label><br>
+                    <input [(ngModel)]="price_to" formControlName="price_to" class="form-control CheckForm" type="text"
+                        placeholder="Price To"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+
+            </div>
+            <!-- new fields added as per doc -->
+            <div class="row peroperty-fatcs fieldsForSale">
+                <div class="col-md-12">
+                    <h4>Apartment :</h4>
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Sale Conditions :</label><br>
+                    <input [(ngModel)]="Sale_Conditions" formControlName="Sale_Conditions"
+                        class="form-control CheckForm" type="text" placeholder="Sale Conditions">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Apartment Style :</label><br>
+                    <input [(ngModel)]="Apartment_Style" formControlName="Apartment_Style"
+                        class="form-control CheckForm" type="text" placeholder="Apartment Style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Building Class :</label><br>
+                    <input [(ngModel)]="building_class" formControlName="building_class" class="form-control CheckForm"
+                        type="text" placeholder="Building Class">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Building Size :</label><br>
+                    <input [(ngModel)]="building_size" formControlName="building_size" class="form-control CheckForm"
+                        type="text" placeholder="Building Size">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>No of Stories :</label><br>
+                    <input [(ngModel)]="No_of_Stories" formControlName="No_of_Stories" class="form-control CheckForm"
+                        type="text" placeholder="No of Stories">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking Ratio :</label><br>
+                    <input [(ngModel)]="Parking_Ratio" formControlName="Parking_Ratio" class="form-control CheckForm"
+                        type="text" placeholder="Parking Ratio">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Opportunity Zone :</label><br>
+                    <input [(ngModel)]="Opportunity_Zone" formControlName="Opportunity_Zone"
+                        class="form-control CheckForm" type="text" placeholder="Opportunity Zone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price Inclusive of Fees :</label><br>
+                    <input [(ngModel)]="Price_inclusive_of_fees" formControlName="Price_inclusive_of_fees"
+                        class="form-control CheckForm" type="text" placeholder="Price Inclusive of Fees">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Transportation :</label><br>
+                    <input [(ngModel)]="transportation" formControlName="transportation" class="form-control CheckForm"
+                        type="text" placeholder="Transportation">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Nearby Amenities :</label><br>
+                    <input [(ngModel)]="nearby_amenities" formControlName="nearby_amenities"
+                        class="form-control CheckForm" type="text" placeholder="Nearby Amenities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Annual Taxes :</label><br>
+                    <input [(ngModel)]="Annual_Taxes" formControlName="Annual_Taxes" class="form-control CheckForm"
+                        type="text" placeholder="Annual Taxes">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Tax Year :</label><br>
+                    <input [(ngModel)]="Tax_Year" formControlName="Tax_Year" class="form-control CheckForm" type="text"
+                        placeholder="Tax Year">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price Per SF :</label><br>
+                    <input [(ngModel)]="Price_Per_SF" formControlName="Price_Per_SF" class="form-control CheckForm"
+                        type="text" placeholder="Price Per SF">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Listing Status :</label><br>
+                    <input [(ngModel)]="Listing_Status" formControlName="Listing_Status" class="form-control CheckForm"
+                        type="text" placeholder="Listing Status">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>MLS :</label><br>
+                    <input [(ngModel)]="MLS" formControlName="MLS" class="form-control CheckForm" type="text"
+                        placeholder="MLS">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking Spaces :</label><br>
+                    <input [(ngModel)]="Parking_Spaces" formControlName="Parking_Spaces" class="form-control CheckForm"
+                        type="text" placeholder="Parking Spaces">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Architecture Style :</label><br>
+                    <input [(ngModel)]="Architecture_Style" formControlName="Architecture_Style"
+                        class="form-control CheckForm" type="text" placeholder="Architecture Style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Key Features :</label><br>
+                    <input [(ngModel)]="Key_features" formControlName="Key_features" class="form-control CheckForm"
+                        type="text" placeholder="Key Features">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Basement :</label><br>
+                    <input [(ngModel)]="Basement" formControlName="Basement" class="form-control CheckForm" type="text"
+                        placeholder="Basement">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Construction Type & Style :</label><br>
+                    <input [(ngModel)]="construction_type_and_style" formControlName="construction_type_and_style"
+                        class="form-control CheckForm" type="text" placeholder="Construction Type & Style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Material Information :</label><br>
+                    <input [(ngModel)]="Material_information" formControlName="Material_information"
+                        class="form-control CheckForm" type="text" placeholder="Material Information">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Notable Dates :</label><br>
+                    <input [(ngModel)]="Notable_dates" formControlName="Notable_dates" class="form-control CheckForm"
+                        type="text" placeholder="Notable Dates">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Community :</label><br>
+                    <input [(ngModel)]="Community" formControlName="Community" class="form-control CheckForm"
+                        type="text" placeholder="Community">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Utilitie Green Energy Details :</label><br>
+                    <input [(ngModel)]="Utilitie_Green_Energy_Details" formControlName="Utilitie_Green_Energy_Details"
+                        class="form-control CheckForm" type="text" placeholder="Utilitie Green Energy Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rentable Building Area :</label><br>
+                    <input [(ngModel)]="Rentable_Building_Area" formControlName="Rentable_Building_Area"
+                        class="form-control CheckForm" type="text" placeholder="Rentable Building Area">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Tenancy :</label><br>
+                    <input [(ngModel)]="Tenancy" formControlName="Tenancy" class="form-control CheckForm" type="text"
+                        placeholder="Tenancy">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Clear Ceiling Height :</label><br>
+                    <input [(ngModel)]="Clear_Ceiling_Height" formControlName="Clear_Ceiling_Height"
+                        class="form-control CheckForm" type="text" placeholder="Clear Ceiling Height">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>No of Dock High :</label><br>
+                    <input [(ngModel)]="No_of_Dock_High" formControlName="No_of_Dock_High"
+                        class="form-control CheckForm" type="text" placeholder="No of Dock High">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Tenant :</label><br>
+                    <input [(ngModel)]="Tenant" formControlName="Tenant" class="form-control CheckForm" type="text"
+                        placeholder="Tenant">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Industry :</label><br>
+                    <input [(ngModel)]="Industry" formControlName="Industry" class="form-control CheckForm" type="text"
+                        placeholder="Industry">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>SF Occupied :</label><br>
+                    <input [(ngModel)]="SF_Occupied" formControlName="SF_Occupied" class="form-control CheckForm"
+                        type="text" placeholder="SF Occupied">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Rent SF :</label><br>
+                    <input [(ngModel)]="Rent_SF" formControlName="Rent_SF" class="form-control CheckForm" type="text"
+                        placeholder="Rent SF">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Type of Ownership :</label><br>
+                    <input [(ngModel)]="Type_of_Ownership" formControlName="Type_of_Ownership"
+                        class="form-control CheckForm" type="text" placeholder="Type of Ownership">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Event Item :</label><br>
+                    <input [(ngModel)]="Event_Item" formControlName="Event_Item" class="form-control CheckForm"
+                        type="text" placeholder="Event Item">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Size :</label><br>
+                    <input [(ngModel)]="Size" formControlName="Size" class="form-control CheckForm" type="text"
+                        placeholder="Size">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Security :</label><br>
+                    <input [(ngModel)]="Security" formControlName="Security" class="form-control CheckForm" type="text"
+                        placeholder="Security">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>HOA :</label><br>
+                    <input [(ngModel)]="HOA" formControlName="HOA" class="form-control CheckForm" type="text"
+                        placeholder="HOA">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Other construction :</label><br>
+                    <input [(ngModel)]="Other_construction" formControlName="Other_construction"
+                        class="form-control CheckForm" type="text" placeholder="Other construction">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Other Property Information :</label><br>
+                    <input [(ngModel)]="Other_property_information" formControlName="Other_property_information"
+                        class="form-control CheckForm" type="text" placeholder="Other Property Information">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Other Financial Information :</label><br>
+                    <input [(ngModel)]="Other_financial_information" formControlName="Other_financial_information"
+                        class="form-control CheckForm" type="text" placeholder="Other Financial Information">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Location :</label><br>
+                    <input [(ngModel)]="Location" formControlName="Location" class="form-control CheckForm" type="text"
+                        placeholder="Location">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Inventory :</label><br>
+                    <input [(ngModel)]="Inventory" formControlName="Inventory" class="form-control CheckForm"
+                        type="text" placeholder="Inventory">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Building SF :</label><br>
+                    <input [(ngModel)]="Building_SF" formControlName="Building_SF" class="form-control CheckForm"
+                        type="text" placeholder="Building SF">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Employees :</label><br>
+                    <input [(ngModel)]="Employees" formControlName="Employees" class="form-control CheckForm"
+                        type="text" placeholder="Employees">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Facilities :</label><br>
+                    <input [(ngModel)]="Facilities" formControlName="Facilities" class="form-control CheckForm"
+                        type="text" placeholder="Facilities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Competition :</label><br>
+                    <input [(ngModel)]="Competition" formControlName="Competition" class="form-control CheckForm"
+                        type="text" placeholder="Competition">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Growth & Expansion :</label><br>
+                    <input [(ngModel)]="Growth_and_Expansion" formControlName="Growth_and_Expansion"
+                        class="form-control CheckForm" type="text" placeholder="Growth & Expansion">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Financing :</label><br>
+                    <input [(ngModel)]="Financing" formControlName="Financing" class="form-control CheckForm"
+                        type="text" placeholder="Financing">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Support & Training :</label><br>
+                    <input [(ngModel)]="Support_and_Training" formControlName="Support_and_Training"
+                        class="form-control CheckForm" type="text" placeholder="Support & Training">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Percent Leased :</label><br>
+                    <input [(ngModel)]="Percent_Leased" formControlName="Percent_Leased" class="form-control CheckForm"
+                        type="text" placeholder="Percent Leased">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Building Height :</label><br>
+                    <input [(ngModel)]="Building_Height" formControlName="Building_Height"
+                        class="form-control CheckForm" type="text" placeholder="Building Height">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Typical Floor Size :</label><br>
+                    <input [(ngModel)]="Typical_Floor_Size" formControlName="Typical_Floor_Size"
+                        class="form-control CheckForm" type="text" placeholder="Typical Floor Size">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Slab To Slab :</label><br>
+                    <input [(ngModel)]="Slab_To_Slab" formControlName="Slab_To_Slab" class="form-control CheckForm"
+                        type="text" placeholder="Slab To Slab">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Building FAR :</label><br>
+                    <input [(ngModel)]="Building_FAR" formControlName="Building_FAR" class="form-control CheckForm"
+                        type="text" placeholder="Building FAR">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Land Acres :</label><br>
+                    <input [(ngModel)]="Land_Acres" formControlName="Land_Acres" class="form-control CheckForm"
+                        type="text" placeholder="Land Acres">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Space :</label><br>
+                    <input [(ngModel)]="space" formControlName="space" class="form-control CheckForm" type="text"
+                        placeholder="Space">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Space Size :</label><br>
+                    <input [(ngModel)]="space_size" formControlName="space_size" class="form-control CheckForm"
+                        type="text" placeholder="Space Size">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Space Use :</label><br>
+                    <input [(ngModel)]="space_use" formControlName="space_use" class="form-control CheckForm"
+                        type="text" placeholder="Space Use">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Space Condition :</label><br>
+                    <input [(ngModel)]="space_condition" formControlName="space_condition"
+                        class="form-control CheckForm" type="text" placeholder="Space Condition">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Space Available :</label><br>
+                    <input [(ngModel)]="space_available" formControlName="space_available"
+                        class="form-control CheckForm" type="text" placeholder="Space Available">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Region :</label><br>
+                    <input [(ngModel)]="Region" formControlName="Region" class="form-control CheckForm" type="text"
+                        placeholder="Region">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Development :</label><br>
+                    <input [(ngModel)]="Development" formControlName="Development" class="form-control CheckForm"
+                        type="text" placeholder="Development">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Lifestyles :</label><br>
+                    <input [(ngModel)]="Lifestyles" formControlName="Lifestyles" class="form-control CheckForm"
+                        type="text" placeholder="Lifestyles">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Name :</label><br>
+                    <input [(ngModel)]="Property_Name" formControlName="Property_Name" class="form-control CheckForm"
+                        type="text" placeholder="Property Name">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Population :</label><br>
+                    <input [(ngModel)]="Population" formControlName="Population" class="form-control CheckForm"
+                        type="text" placeholder="Population">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Frontage :</label><br>
+                    <input [(ngModel)]="Frontage" formControlName="Frontage" class="form-control CheckForm" type="text"
+                        placeholder="Frontage">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Loading Docks :</label><br>
+                    <input [(ngModel)]="Loading_Docks" formControlName="Loading_Docks" class="form-control CheckForm"
+                        type="text" placeholder="Loading Docks">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>lease type :</label><br>
+                    <input [(ngModel)]="lease_type" formControlName="lease_type" class="form-control CheckForm"
+                        type="text" placeholder="lease Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Facts :</label><br>
+                    <input [(ngModel)]="property_facts" formControlName="property_facts" class="form-control CheckForm"
+                        type="text" placeholder="Property Facts">
+                </div>
+                <div class="form-group col-md-4 apartment">
+                    <label>Sale Type :</label><br>
+                    <input [(ngModel)]="sale_type" formControlName="sale_type" class="form-control CheckForm"
+                        type="text" placeholder="Sale Type">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>About :</label><br>
+                    <input [(ngModel)]="About" formControlName="About" class="form-control CheckForm" type="text"
+                        placeholder="About">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>About This Property :</label><br>
+                    <input [(ngModel)]="About_this_property" formControlName="About_this_property"
+                        class="form-control CheckForm" type="text" placeholder="About This Property">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Taxes :</label><br>
+                    <input [(ngModel)]="property_taxes" formControlName="property_taxes" class="form-control CheckForm"
+                        type="text" placeholder="Property Taxes">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bathrooms :</label><br>
+                    <input [(ngModel)]="Bathrooms" formControlName="Bathrooms" class="form-control CheckForm"
+                        type="text" placeholder="Bathrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Pool Spa :</label><br>
+                    <input [(ngModel)]="Pool_Spa" formControlName="Pool_Spa" class="form-control CheckForm" type="text"
+                        placeholder="Pool Spa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Homeowners Association :</label><br>
+                    <input [(ngModel)]="Homeowners_Association" formControlName="Homeowners_Association" class="form-control CheckForm" type="text"
+                        placeholder="Homeowners Association">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zoning Code :</label><br>
+                    <input [(ngModel)]="zoning_code" formControlName="zoning_code" class="form-control CheckForm" type="text"
+                        placeholder="Zoning Code">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Listed By Agent :</label><br>
+                    <input [(ngModel)]="Listed_By_Agent" formControlName="Listed_By_Agent" class="form-control CheckForm" type="text"
+                        placeholder="Listed By Agent">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>TAXES OPERATING_EXPENSES :</label><br>
+                    <input [(ngModel)]="TAXES_OPERATING_EXPENSES" formControlName="TAXES_OPERATING_EXPENSES" class="form-control CheckForm" type="text"
+                        placeholder="TAXES OPERATING EXPENSES">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Half Baths :</label><br>
+                    <input [(ngModel)]="Half_Baths" formControlName="Half_Baths" class="form-control CheckForm" type="text"
+                        placeholder="Half Baths">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Total Baths :</label><br>
+                    <input [(ngModel)]="Total_Baths" formControlName="Total_Baths" class="form-control CheckForm" type="text"
+                        placeholder="Total Baths">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Living Area :</label><br>
+                    <input [(ngModel)]="Living_Area" formControlName="Living_Area" class="form-control CheckForm" type="text"
+                        placeholder="Living Area">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Other Rooms :</label><br>
+                    <input [(ngModel)]="Other_rooms" formControlName="Other_rooms" class="form-control CheckForm" type="text"
+                        placeholder="Other Rooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Home Features :</label><br>
+                    <input [(ngModel)]="Home_Features" formControlName="Home_Features" class="form-control CheckForm" type="text"
+                        placeholder="Home Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Multi Unit Info :</label><br>
+                    <input [(ngModel)]="Multi_Unit_Info" formControlName="Multi_Unit_Info" class="form-control CheckForm" type="text"
+                        placeholder="Multi Unit Info">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Building Construction :</label><br>
+                    <input [(ngModel)]="building_construction" formControlName="building_construction" class="form-control CheckForm" type="text"
+                        placeholder="Building Construction">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Heating Cooling :</label><br>
+                    <input [(ngModel)]="Heating_Cooling" formControlName="Heating_Cooling" class="form-control CheckForm" type="text"
+                        placeholder="Heating Cooling">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Land Info :</label><br>
+                    <input [(ngModel)]="Land_Info" formControlName="Land_Info" class="form-control CheckForm" type="text"
+                        placeholder="Land Info">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Community Features Amenities :</label><br>
+                    <input [(ngModel)]="Community_Features_Amenities" formControlName="Community_Features_Amenities" class="form-control CheckForm" type="text"
+                        placeholder="Community Features Amenities">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Price Tax :</label><br>
+                    <input [(ngModel)]="Property_Price_Tax" formControlName="Property_Price_Tax" class="form-control CheckForm" type="text"
+                        placeholder="Property Price Tax">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bedrooms Bathrooms :</label><br>
+                    <input [(ngModel)]="Bedrooms_Bathrooms" formControlName="Bedrooms_Bathrooms" class="form-control CheckForm" type="text"
+                        placeholder="Bedrooms Bathrooms">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Type & Style :</label><br>
+                    <input [(ngModel)]="Type_and_style" formControlName="Type_and_style" class="form-control CheckForm" type="text"
+                        placeholder="Type & Style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Condition :</label><br>
+                    <input [(ngModel)]="Condition" formControlName="Condition" class="form-control CheckForm" type="text"
+                        placeholder="Condition">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Community & Neighborhood Details :</label><br>
+                    <input [(ngModel)]="Community_and_Neighborhood_Details" formControlName="Community_and_Neighborhood_Details" class="form-control CheckForm" type="text"
+                        placeholder="Community & Neighborhood Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Major Tenants :</label><br>
+                    <input [(ngModel)]="Major_Tenants" formControlName="Major_Tenants" class="form-control CheckForm" type="text"
+                        placeholder="Major Tenants">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Detailed Description :</label><br>
+                    <input [(ngModel)]="Detailed_Description" formControlName="Detailed_Description" class="form-control CheckForm" type="text"
+                        placeholder="Detailed Description">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Everything :</label><br>
+                    <input [(ngModel)]="Everything" formControlName="Everything" class="form-control CheckForm" type="text"
+                        placeholder="Everything">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Facts Features :</label><br>
+                    <input [(ngModel)]="Facts_features" formControlName="Facts_features" class="form-control CheckForm" type="text"
+                        placeholder="Facts Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Other Interior Features :</label><br>
+                    <input [(ngModel)]="other_interior_features" formControlName="other_interior_features" class="form-control CheckForm" type="text"
+                        placeholder="Other Interior Features">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Construction Details :</label><br>
+                    <input [(ngModel)]="construction_details" formControlName="construction_details" class="form-control CheckForm" type="text"
+                        placeholder="Construction Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Garage & Parking :</label><br>
+                    <input [(ngModel)]="Garage_and_Parking" formControlName="Garage_and_Parking" class="form-control CheckForm" type="text"
+                        placeholder="Garage & Parking">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Details :</label><br>
+                    <input [(ngModel)]="property_details" formControlName="property_details" class="form-control CheckForm" type="text"
+                        placeholder="Property Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Parking :</label><br>
+                    <input [(ngModel)]="Parking" formControlName="Parking" class="form-control CheckForm" type="text"
+                        placeholder="Parking">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Accessibility :</label><br>
+                    <input [(ngModel)]="Accessibility" formControlName="Accessibility" class="form-control CheckForm" type="text"
+                        placeholder="Accessibility">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property :</label><br>
+                    <input [(ngModel)]="Property" formControlName="Property" class="form-control CheckForm" type="text"
+                        placeholder="Property">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Other Property :</label><br>
+                    <input [(ngModel)]="Other_property" formControlName="Other_property" class="form-control CheckForm" type="text"
+                        placeholder="Other Property">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>HOA Financial Details :</label><br>
+                    <input [(ngModel)]="HOA_financial_details" formControlName="HOA_financial_details" class="form-control CheckForm" type="text"
+                        placeholder="HOA Financial Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Property Address :</label><br>
+                    <input [(ngModel)]="Property_Address" formControlName="Property_Address" class="form-control CheckForm" type="text"
+                        placeholder="Property Address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Interior Details :</label><br>
+                    <input [(ngModel)]="interior_details" formControlName="interior_details" class="form-control CheckForm" type="text"
+                        placeholder="Interior Details">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Year of Construction :</label><br>
+                    <input [(ngModel)]="Year_of_construction" formControlName="Year_of_construction" class="form-control CheckForm" type="text"
+                        placeholder="Year of Construction">
+                </div>
+            </div>
+        </form>
+        <!-- <div class="row peroperty-fatcs">
+            <div class="col-md-12">
+                <h4>Nearby Schools :</h4>
+            </div>
+            <div class="col-md-12">
+                <button type="button" (click)="addNewRow()" class="btn btn-primary">Add new Row</button><br>
+                <form [formGroup]="invoiceForm" class="table-responsive">
+                    <table class="table1" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>School_Name</th>
+                                <th>Grades</th>
+                                <th>Distance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="itemRows">                            
+                            <tr *ngFor="let itemrow of invoiceForm.controls['itemRows']; let i=index"
+                                [formGroupName]="i">                                
+                                <td><input formControlName="Rating" class="form-control" placeholder="Rating"></td>
+                                <td><input formControlName="School_Name" class="form-control "
+                                        placeholder="School_Name"></td>
+                                <td><input formControlName="Grades" class="form-control " placeholder="Grades"></td>
+                                <td><input formControlName="Distance" class="form-control " placeholder="Distance"></td>
+                         
+                                <td><button *ngIf="invoiceForm.controls['itemRows']"
+                                        (click)="deleteRow(i)" class="btn btn-danger"><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="form-group text-center col-md-12">
+                <button class="btn btn-primary " id="formSubmit" (click)="submit()">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="row peroperty-fatcs">
+            <div class="col-md-12">
+                <h4>Neighborhood :</h4>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Neighborhood : </label><br>
+                <input [(ngModel)]="Neighborhood" formControlName="Neighborhood" class="form-control CheckForm"
+                    type="text" placeholder="Neighborhood">
+            </div>
+        </div> -->
+
+    </section>
+    <br>
+</div> 

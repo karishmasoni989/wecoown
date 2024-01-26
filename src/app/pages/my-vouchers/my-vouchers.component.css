@@ -1,0 +1,16 @@
+.rowPadding{
+    color: black;
+}
+label{
+    float: inherit !important;
+}
+table{
+    color: black;
+}
+.fa{
+    color: white;
+    font-size: 25px;
+}
+.btn-danger{
+    background-color: red;
+}

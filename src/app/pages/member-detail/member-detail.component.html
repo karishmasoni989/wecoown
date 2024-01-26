@@ -1,0 +1,1192 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<section class="Section-color-grey">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 paddingTop20" *ngIf="getMemberData">
+            <div class="text-center">
+                <img alt="Image is loading" class="thumnail-img" *ngIf="getMemberData"
+                    src="{{ getMemberData.profile_pic.length != 0 ? (baseURLofAPi+getMemberData.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                    width="100%">
+                <h3>{{getMemberData.firstname}} {{getMemberData.lastname}}</h3>
+                <!-- <h5>Connect with</h5> -->
+                <div class="socialIcons">
+                    <a *ngIf="getMemberData.facebook_link !=''" href="{{getMemberData.facebook_link}}" target="_blank">
+                        <span class="fa fa-facebook-f facebook-social"></span>
+                    </a>
+                    <a *ngIf="getMemberData.twitter_link !=''" href="{{getMemberData.twitter_link}}" target="_blank">
+                        <span class="fa fa-twitter"></span>
+                    </a>
+                    <a *ngIf="getMemberData.linkedin_link !=''" href="{{getMemberData.linkedin_link}}" target="_blank">
+                        <span class="fa fa-linkedin"></span>
+                    </a>
+                    <a *ngIf="getMemberData.instagram_link !=''" href="{{getMemberData.instagram_link}}"
+                        target="_blank">
+                        <span class="fa fa-instagram"></span>
+                    </a>
+                </div>
+                <div class="alert alert-success dispNone cohortSuccess"></div>
+                <div class="alert alert-danger dispNone cohortDanger"></div>
+                <button *ngIf="NoCohort" class="btn btn-primary showAddCohortBtn" (click)="addUserToCohorts()">Add
+                    Cohort</button>
+                <button *ngIf="showCohortButton" class="btn btn-primary marginBottom5 marginRight5">Cohort</button>
+                <button *ngIf="showCohortButton" class="btn btn-primary marginBottom5"
+                    (click)="unfriendCohort()">Un-Cohort</button>
+                <div *ngIf="isentCohort" class="iSentRequestToCohorts">
+                    <!-- <div class="alert alert-success">Your request is pending.</div> -->
+                    <button class="btn btn-primary">Requested</button>
+                </div>
+                <div *ngIf="iacceptCohort" class="iAcceptRequestToCohorts">
+                    <p>{{getMemberData.firstname}} {{getMemberData.lastname}} sent you request for become a cohort.</p>
+                    <button class="btn btn-primary showAddCohortBtn marginRight5"
+                        (click)="sendResponseOfCohortRequest(1)">Accept</button>
+                    <button class="btn btn-primary showAddCohortBtn"
+                        (click)="sendResponseOfCohortRequest(2)">Decline</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 paddRight0">
+            <div class="row" *ngIf="getMemberData">
+                <div class="col-md-8 padding0 marginRight15">
+                    <img alt="Image is loading" class="banner-img" *ngIf="getMemberData"
+                        src="{{ getMemberData.cover_pic.length != 0 ? (baseURLofAPi+getMemberData.cover_pic[0].src) : '../../../assets/images/no-image.jpg' }}"
+                        width="100%">
+                    <div class="card">
+                        <div class="card-header">
+                            <!-- <a href="javascript:void(0);" style="color: black;" (click)="FindUserLoggedIn()"
+                                data-toggle="modal" data-target="#create-post-modal"><strong>Create Post</strong></a> -->
+                            <button class="btn btn-primary" (click)="FindUserLoggedIn()" data-toggle="modal"
+                                data-target="#show_modal">Chat With {{getMemberData.firstname}}
+                                {{getMemberData.lastname}}</button>
+                        </div>
+                    </div>
+                    <div class="card marginTop15 AllPost" id="third-div">
+                        <div class="card-header"><strong>Posts</strong></div>
+                        <div class="card-body">
+                            <h4 class="dispNone notFoundPost">No item found!</h4>
+                            <div class="borderPadding" *ngFor="let buyerData of getMyPostData">
+                                <h5>Category Name : {{buyerData.category}}</h5>
+                                <span *ngFor="let task of getPostMediaData | keyvalue; let i = index;">
+                                    <span *ngIf="task.key === buyerData._id">
+                                        <span *ngFor="let allPostImage of task.value; let L=count; let i = index">
+
+
+
+                                            <!-- <img alt="Image is loading" *ngIf="L == 1" class="like-comment-div" src="{{ baseURLofAPi+allPostImage.src }}"
+                                alt="No Image" width="100%" height="350px">
+                            <a *ngIf="L == 2" href="javascript:void(0);"
+                                (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                data-toggle="modal" data-target="#like-comment-property-photo-modal">
+                                <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                    height="250px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                    data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                            </a>
+                            <span *ngIf="L == 3">
+                                <a *ngIf="i <= 1" href="javascript:void(0);"
+                                    (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                    data-toggle="modal"
+                                    data-target="#like-comment-property-photo-modal">
+                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                </a>
+                                <a *ngIf="i == 2" href="javascript:void(0);"
+                                    (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                    data-toggle="modal"
+                                    data-target="#like-comment-property-photo-modal">
+                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="100%"
+                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                </a>
+                            </span>
+                <a *ngIf="L == 4" href="javascript:void(0);" (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)" data-toggle="modal" data-target="#like-comment-property-photo-modal">
+                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px" src="{{ baseURLofAPi+allPostImage.src }}" data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                </a>
+                <span *ngIf="L > 4">
+                                <a *ngIf="i <= 2" href="javascript:void(0);"
+                                    (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                    data-toggle="modal"
+                                    data-target="#like-comment-property-photo-modal">
+                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%"
+                                        height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                </a>
+                                <a href="javascript:void(0);" *ngIf="i == 3"
+                                    (click)="FindUserLoggedIn();getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                    data-toggle="modal"
+                                    data-target="#like-comment-property-photo-modal">
+                                    <img alt="Image is loading" class="like-comment-div hover-shadow cursor Fourth-image-opacity"
+                                        width="50%" height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                    <span class="More-Images-post">+{{L - (i + 1)}}</span>
+                </a>
+                </span> -->
+                                            <div class="one-posting-show" *ngIf="L == 1">
+                                                <img alt="Image is loading" class="like-comment-div"
+                                                    src="{{ baseURLofAPi+allPostImage.src }}" width="100%"
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png')"
+                                                    height="auto">
+                                                <img alt="Image is loading" class="like-comment-div"
+                                                    src="{{ baseURLofAPi+allPostImage.src }}" width="100%"
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg')"
+                                                    height="auto">
+                                                <img alt="Image is loading" class="like-comment-div"
+                                                    src="{{ baseURLofAPi+allPostImage.src }}" width="100%"
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg')"
+                                                    height="auto">
+                                                <video controls
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4')"
+                                                    autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                    onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                    width="100%" class="like-comment-div"
+                                                    [src]="baseURLofAPi+allPostImage.src" height="auto"></video>
+                                                <video controls
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm')"
+                                                    autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                    onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                    width="100%" class="like-comment-div"
+                                                    [src]="baseURLofAPi+allPostImage.src" height="auto"></video>
+                                                <video controls
+                                                    *ngIf="L == 1 && (allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov')"
+                                                    autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                    onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                    width="100%" class="like-comment-div"
+                                                    [src]="baseURLofAPi+allPostImage.src" height="auto"></video>
+                                            </div>
+                                            <div *ngIf="L == 2" class="four-posting-show">
+                                                <a href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <!-- <img alt="Image is loading" class="like-comment-div hover-shadow cursor"
+width="50%" height="250px" src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{i}}"> -->
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                </a>
+                                            </div>
+                                            <span *ngIf="L == 3">
+                                                <div *ngIf="i <= 1" class="four-posting-show">
+                                                    <a href="javascript:void(0);"
+                                                        (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                        data-toggle="modal"
+                                                        data-target="#like-comment-property-photo-modal">
+                                                        <!-- <img alt="Image is loading"
+class="like-comment-div hover-shadow cursor" width="50%"
+height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{i}}"> -->
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor "
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor "
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor "
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    </a>
+                                                </div>
+                                                <div *ngIf="i == 2" class="third-posting-full-width100">
+                                                    <a href="javascript:void(0);"
+                                                        (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                        data-toggle="modal"
+                                                        data-target="#like-comment-property-photo-modal">
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <img alt="Image is loading"
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            src="{{ baseURLofAPi+allPostImage.src }}"
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                        <video controls
+                                                            *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                            onloadedmetadata="this.muted = true" [muted]="true"
+                                                            playsinline
+                                                            class="like-comment-div img-fluid hover-shadow cursor"
+                                                            data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                            [src]="baseURLofAPi+allPostImage.src"></video>
+                                                        <!-- <img alt="Image is loading"
+class="like-comment-div hover-shadow cursor" width="100%"
+height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{i}}"> -->
+                                                    </a>
+                                                </div>
+                                            </span>
+                                            <div *ngIf="L == 4" class="four-posting-show">
+                                                <a href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div hover-shadow cursor img-fluid"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div hover-shadow cursor img-fluid"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div hover-shadow cursor img-fluid"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div hover-shadow cursor img-fluid "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div hover-shadow cursor img-fluid "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div hover-shadow cursor img-fluid "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <!-- <img alt="Image is loading" class="like-comment-div hover-shadow cursor"
+width="50%" height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{i}}"> -->
+                                                </a>
+                                            </div>
+                                            <div *ngIf="L > 4" class="four-posting-show">
+                                                <a *ngIf="i <= 2" href="javascript:void(0);"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <!-- <img alt="Image is loading"
+class="like-comment-div hover-shadow cursor" width="50%"
+height="200px" src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{i}}"> -->
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{i}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                </a>
+                                                <a href="javascript:void(0);" *ngIf="i == 3"
+                                                    (click)="getPostImageArrayy(task.value); getPostAndMediaData(buyerData._id, allPostImage._id)"
+                                                    data-toggle="modal"
+                                                    data-target="#like-comment-property-photo-modal">
+                                                    <!-- <img alt="Image is loading"
+class="like-comment-div hover-shadow cursor Fourth-image-opacity"
+width="50%" height="200px"
+src="{{ baseURLofAPi+allPostImage.src }}"
+data-target="#carousel-one-post" attr.data-slide-to="{{3}}"> -->
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'jpeg'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                                    <img alt="Image is loading"
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity"
+                                                        src="{{ baseURLofAPi+allPostImage.src }}"
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'png'"
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mp4'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'mov'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <video controls
+                                                        *ngIf="allPostImage.name.substring(allPostImage.name.lastIndexOf('.') + 1) == 'webm'"
+                                                        autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                                        onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                                        class="like-comment-div img-fluid hover-shadow cursor Fourth-image-opacity "
+                                                        data-target="#carousel-one-post" attr.data-slide-to="{{3}}"
+                                                        [src]="baseURLofAPi+allPostImage.src"></video>
+                                                    <span class="More-Images-post">+{{L - (i + 1)}}</span>
+                                                </a>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </span>
+                                <!-- <span *ngFor="let allPostImage of buyerData.property_photos; let L=count; let i = index">
+                                    <img alt="Image is loading" *ngIf="L == 1" class="like-comment-div" src="{{ allPostImage.src }}"
+                                        alt="No Image" width="100%" height="350px">
+                                    <a *ngIf="L == 2" href="javascript:void(0);"
+                                        (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                        data-target="#showOnePostPhotosModal">
+                                        <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="350px"
+                                            src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                            attr.data-slide-to="{{i}}">
+                                    </a>
+                                    <span *ngIf="L == 3">
+                                        <a *ngIf="i <= 1" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                                src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                                attr.data-slide-to="{{i}}">
+                                        </a>
+                                        <a *ngIf="i == 2" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="100%"
+                                                height="200px" src="{{ allPostImage.src }}"
+                                                data-target="#carousel-one-post" attr.data-slide-to="{{i}}">
+                                        </a>
+                                    </span>
+                                    <a *ngIf="L == 4" href="javascript:void(0);"
+                                        (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                        data-target="#showOnePostPhotosModal">
+                                        <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                            src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                            attr.data-slide-to="{{i}}">
+                                    </a>
+                                    <span *ngIf="L > 4">
+                                        <a *ngIf="i <= 2" href="javascript:void(0);"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor" width="50%" height="200px"
+                                                src="{{ allPostImage.src }}" data-target="#carousel-one-post"
+                                                attr.data-slide-to="{{i}}">
+                                        </a>
+                                        <a href="javascript:void(0);" *ngIf="i == 3"
+                                            (click)="getPostImageArrayy(buyerData.property_photos)" data-toggle="modal"
+                                            data-target="#showOnePostPhotosModal">
+                                            <img alt="Image is loading" class="like-comment-div hover-shadow cursor Fourth-image-opacity"
+                                                width="50%" height="200px" src="{{ allPostImage.src }}"
+                                                data-target="#carousel-one-post" attr.data-slide-to="{{3}}">
+                                            <span class="More-Images-post">+{{L - (i + 1)}}</span>
+                                        </a>
+                                    </span>
+                                </span> -->
+
+                                <div class="like-comment-div margin-bottom-0">
+                                    <button *ngIf="!checkProduct(buyerData._id, '1')"
+                                        class="btn width-Like UnlikeBtnn fa fa-thumbs-o-up"
+                                        (click)="toggleNamedColor($event,buyerData._id, 1);">
+                                        &nbsp;Like</button>
+                                    <button *ngIf="checkProduct(buyerData._id, '1')"
+                                        class="btn width-Like fb-btn-like likeBUtton fa fa-thumbs-up"
+                                        (click)="toggleNamedColor($event,buyerData._id, 1);">
+                                        &nbsp;Like</button>
+                                    <button class="btn width-comment" data-toggle="modal"
+                                        data-target="#like-comment-modal"
+                                        (click)="FindUserLoggedIn();getPostDataAndLike(buyerData._id)"><i
+                                            class="fa fa-comment-o"></i>&nbsp;Comment</button>
+                                    <button class="btn width-share" (click)="GoToSharePosting()"><i
+                                            class="fa fa-share"></i>&nbsp;Share</button>
+                                </div>
+
+                                <!-- <img alt="Image is loading" src="../../../assets/images/home3.jpg" width="100%" height="350px">  -->
+                                <h3 class="titleOfPosting">{{buyerData.title}}</h3>
+                                <p class="text-justify intro-brakr-spaces">{{buyerData.property_desciption}}</p>
+                                <p class="text-justify" *ngIf='buyerData.country && buyerData.country !=""'>Location :
+                                    {{buyerData.city}}, {{buyerData.state}}, {{buyerData.country}}</p>
+                                <p *ngIf='buyerData.url_property && buyerData.country !=""'>URL : <a
+                                        href="{{buyerData.url_property}}"
+                                        onclick="window.open(this.href, this.href); return false">{{buyerData.url_property}}</a>
+                                </p>
+                                <p *ngIf="buyerData.pdf_doc.length != 0">Document : <a
+                                        href="{{ baseURLofAPi+buyerData.pdf_doc[0].src }}" target="_blank">{{
+                                        buyerData.pdf_doc[0].orgName }}</a></p>
+                                <!-- <button class="btn btn-primary"
+                                    (click)="FindUserLoggedIn();saveInterestData(buyerData.user_id);"
+                                    data-toggle="modal" data-target="#show_modal">Show Interest</button> -->
+                                <button class="btn btn-primary"
+                                    (click)="FindUserLoggedIn();saveInterestData(buyerData.user_id, buyerData._id, buyerData.category);"
+                                    data-toggle="modal" data-target="#show_modal">Show Interest</button>
+                                <!-- <button class="btn btn-primary float-right"
+                                    (click)="goToBooking(buyerData._id, buyerData.user_id)">Book</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 padding0 marginTop15">
+                    <div class="card">
+                        <div class="card-header"><strong>Introduction</strong></div>
+                        <div class="card-body text-justify" *ngIf="getMemberData.bio">
+                            <p class="intro-brakr-spaces" *ngIf="getMemberData.intro_public === 'Yes'">
+                                {{getMemberData.bio}}</p>
+                            <p class="intro-brakr-spaces"
+                                *ngIf="getMemberData.intro_public === 'No' && showIntroIfLogin === 'Yes'">
+                                {{getMemberData.bio}}</p>
+                        </div>
+                    </div>
+                    <!-- getAllMyUserCohorts -->
+                    <div class="card marginTop15">
+                        <div class="card-header">
+                            <a class="colorBlack" href="javascript:void(0);" data-toggle="modal"
+                                data-target="#showUploadedPhotosModal"><strong>Photos</strong></a>
+                            <a href="javascript:void(0);" data-toggle="modal" class="float-right"
+                                data-target="#showUploadedPhotosModal"><strong>See All</strong></a>
+                        </div>
+                        <div class="card-body" data-toggle="modal" data-target="#showUploadedPhotosModal">
+                            <!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#showUploadedPhotos-modal" *ngFor='let ImgSrc of AllUploadedPhotos; let i = index'>
+                                <img alt="Image is loading" *ngIf='i < 4' class="padding3 hover-shadow cursor" width="50%" height="100px" src="{{baseURLofAPi+ImgSrc.src}}" data-target="#carouselExample" attr.data-slide-to="{{i}}">
+                            </a> -->
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#showUploadedPhotos-modal"
+                                *ngFor='let ImgSrc of AllUploadedPhotos; let i = index; let L = count;'>
+                                <img alt="Image is loading" *ngIf='i < 3' class="padding3 hover-shadow cursor"
+                                    width="50%" height="100px" src="{{baseURLofAPi+ImgSrc.src}}"
+                                    data-target="#carouselExample" attr.data-slide-to="{{i}}">
+                                <span *ngIf="i == 3">
+                                    <img alt="Image is loading" *ngIf='i < 4'
+                                        class="padding3 hover-shadow cursor Fourth-image-opacity" width="50%"
+                                        height="100px" src="{{baseURLofAPi+ImgSrc.src}}" data-target="#carouselExample"
+                                        attr.data-slide-to="{{i}}">
+                                    <span class="More-photo-section-Images">+{{L - (i + 1)}}</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card marginTop15">
+                        <div class="card-header">
+                            <a class="colorBlack" href="javascript:void(0);"><strong>Cohorts</strong></a>
+                            <a href="javascript:void(0);" class="float-right"
+                                (click)="goToOpenAllCohortPage()"><strong>See All</strong></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="width50percent" *ngFor='let allCohort of getAllMyUserCohorts; let i = index;'>
+                                <a href="javascript:void(0);" (click)="goToMemberPage(allCohort.user_id._id);"
+                                    *ngIf='i < 4'>
+                                    <img alt="Image is loading" class="padding3 hover-shadow cursor" width="100%"
+                                        height="100px"
+                                        src="{{ allCohort.user_id.profile_pic.length != 0 ? (baseURLofAPi+allCohort.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}">
+                                    <p class="marginBottom0">{{allCohort.user_id.firstname}}
+                                        {{allCohort.user_id.lastname}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+    </div>
+</section>
+
+<!-- the modal -->
+<div class="modal fade" id="showUploadedPhotosModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Photos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                        <span class="fa fa-angle-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="show_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thanks!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" *ngIf="getMemberData">
+                <p class="logged-in-user display-none">Would you like to start chat with {{getMemberData.firstname}}
+                    {{getMemberData.lastname}}?</p>
+                <p class="not-logged-in display-none">You are not logged in. You must first login for more information.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary not-logged-in display-none"
+                    onclick="window.location.href='/login'">Login</button>
+                <button type="button" class="btn btn-primary not-logged-in display-none"
+                    data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary logged-in-user display-none"
+                    (click)="submitSendMsgForm()">Chat</button>
+                <button type="button" class="btn btn-primary logged-in-user display-none" data-toggle="modal"
+                    data-target="#email_modal" data-dismiss="modal">Email</button>
+                <button type="button" class="btn btn-primary logged-in-user display-none"
+                    data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="chat_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Chat with Buyer.</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success dispNone chatSuccess"></div>
+            <div class="alert alert-danger dispNone chatDanger"></div>
+            <!-- Modal body -->
+            <form [formGroup]="sendMsgForm" (ngSubmit)="submitSendMsgForm()">
+                <div class="modal-body email-scroll">
+                    <div class="form-group">
+                        <label>Message : <span class="red">*</span> </label><br>
+                        <textarea class="form-control" type="text" rows="3" placeholder="Message"
+                            formControlName="chatmsg" id="chatmsg"></textarea>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" id="sendMsg" class="btn btn-primary pull-left">Send</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="book_modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thanks for Booking!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body not-logged-in">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>You are not logged in. You must first login for more information.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer not-logged-in">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            <div class="logged-in-user">
+                <!-- Modal body -->
+                <div class="modal-body alreadymembership display-none">
+                    <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                    <p *ngIf="memberShipTypePre">You are already have a {{memberShipTypePre}} membership from
+                        {{startdateMebershipPre | date : 'MM-dd-yyyy'}} to
+                        {{enddateMebershipPre | date : 'MM-dd-yyyy'}}.
+                    </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer alreadymembership display-none">
+                    <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+                </div>
+
+                <form class="ModalCloseClick notAlreadymembership display-none" [formGroup]="addMembershipForm"
+                    (ngSubmit)="submitMemberShip()">
+                    <div class="modal-body">
+                        <input type="text" class="property_head" readonly>
+                        <div class="alert alert-success dispNone booksuccess"></div>
+                        <div class="alert alert-danger dispNone bookdanger"></div>
+                        <label class="checkContainer">Premier Membership
+                            <input type="radio" checked="checked" name="radio" id="premier-check"
+                                (click)="checkRadio(1)">
+                            <span class="checkmark"></span>&nbsp;&nbsp;
+                        </label>
+                        <label class="checkContainer">Professional Membership
+                            <input type="radio" name="radio" id="professional-check" (click)="checkRadio(2)">
+                            <span class="checkmark"></span>&nbsp;&nbsp;
+                        </label><br><br>
+                        <p class="premierVal">Your premier membership $30 for a month. Your trial period for 3 days.</p>
+                        <p class="professionalVal dispNone">Your professional membership $50 for a month. Your trial
+                            period
+                            for 3 days.</p>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Card Type : </label><br>
+                                <select class="form-control" id="Card_Type" formControlName="Card_Type">
+                                    <option value="">Select Card Type</option>
+                                    <option value="1">Visa</option>
+                                    <option value="2">MasterCard</option>
+                                    <option value="3">Amex</option>
+                                    <option value="4">Discover</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Card Number : </label><br>
+                                <input class="form-control ChangePasswordCheckForm" placeholder="Card Number"
+                                    maxlength="16" formControlName="Card_Number" id="Card_Number" value=""
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Card Holder Name: </label><br>
+                                <input class="form-control ChangePasswordCheckForm" placeholder="Card Holder Name"
+                                    formControlName="card_holder_name" id="card_holder_name" value="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>CVV: </label><br>
+                                <input class="form-control ChangePasswordCheckForm" placeholder="CVV" maxlength="3"
+                                    formControlName="cvv" id="cvv" value=""
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Expiration : </label><br><br>
+                                <div class="disFlex marginTopMinus15">
+                                    <select class="form-control" id="exp_month" formControlName="exp_month">
+                                        <option value="">Select Month</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <label class="slash">/</label>
+                                    <select class="form-control" id="exp_year" formControlName="exp_year">
+                                        <option value="">Select Year</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                        <option value="33">33</option>
+                                        <option value="34">34</option>
+                                        <option value="35">35</option>
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
+                                        <option value="38">38</option>
+                                        <option value="39">39</option>
+                                        <option value="40">40</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                            type="submit">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="email_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Email to Buyer.</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone passwordValidSuccess">
+                <button type="button" class="close" data-dismiss="alert" [routerLink]="['/login']" >×</button>
+                <strong>Success!</strong> Password Successfull.
+            </div> -->
+            <div class="alert alert-success dispNone chatWithEmailSuccess"></div>
+            <div class="alert alert-danger dispNone chatWithEmailDanger"></div>
+            <!-- Modal body -->
+            <form class="ModalCloseClick" [formGroup]="showInterestForm" (ngSubmit)="submitShowInterestForm()">
+                <div class="modal-body email-scroll">
+                    <div class="form-group">
+                        <label>Name : <span class="red">*</span> </label><br>
+                        <input class="form-control ChangePasswordCheckForm" type="text" placeholder="Name"
+                            formControlName="name" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address : <span class="red">*</span></label><br>
+                        <input class="form-control ChangePasswordCheckForm" type="email" placeholder="Email Address"
+                            formControlName="email" [(ngModel)]="user_email" id="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Text : <span class="red">*</span></label><br>
+                        <textarea class="form-control ChangePasswordCheckForm" type="text" rows="3"
+                            placeholder="Email Text" formControlName="email_text" id="email_text"></textarea>
+                    </div>
+                    <input type="checkbox" id="sned_me_email" value="Yes">&nbsp;Send me copy of email?<br>
+                    <div class="form-group">
+                        <input type="checkbox" value="WePo property seller" id="accept-terms">&nbsp;<a href="#"
+                            data-toggle="modal" data-target="#terms-modal">I accept Terms
+                            of Use and the General Privacy Policy of WeCoOwn</a>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="showInterestSubmit" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="showOnePostPhotosModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Photos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="carousel-one-post" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-one-post" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-one-post" role="button" data-slide="next">
+                        <span class="fa fa-angle-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- The Modal -->
+<div class="modal" id="like-comment-modal">
+    <div class="modal-dialog modal-lg" *ngIf="getOnePostData">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!--user not logged in Modal body -->
+            <div class="modal-body not-logged-in display-none">
+                <p class="">You are not logged in. You must first login for more information.
+                </p>
+            </div>
+            <!--user not logged in Modal footer -->
+            <div class="modal-footer not-logged-in display-none">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+            <!-- <div class="alert alert-success dispNone send-comment-success"></div> -->
+            <div class="alert alert-danger dispNone send-comment-danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body logged-in-user">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="posting-full-image-in-center">
+                            <img alt="Image is loading" src="{{ baseURLofAPi+getOnePostData.cover_photo[0].src}}"
+                                class="show-comment-post-full-image">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                        <!-- <p class="text-justify">{{getOnePostData.property_desciption}}</p> -->
+                        <!-- <button class="btn width-Like  likeBtn2 display-none"
+                        (click)="removePostLikeShare(1, buyerData._id)"></button> -->
+
+                        <span data-toggle="modal" data-target="#like-of-post-user">
+                            <a href="javascript:void(0);"><i
+                                    class="fa fa-thumbs-up LikeInModal"></i></a>&nbsp;{{getLikeCount}}</span>
+                        <span class="fb-btn-like float-right">{{getCommentCount}} Comments</span><br>
+
+                        <div class="form-control comment-box maginTop10">
+                            <div id="comment-show-box">
+                                <div *ngFor="let commentText of getCommentPostData;">
+                                    <span class="spanCommentSection">
+                                        <img alt="Image is loading" class="border-radious50 float-left"
+                                            src="{{ commentText.user_id.profile_pic.length != 0 ? (baseURLofAPi+commentText.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px">
+                                        &nbsp;
+                                        <span class="divSender float-left">
+                                            <strong><a href="">{{ commentText.user_id.firstname }}&nbsp;{{
+                                                    commentText.user_id.lastname }}</a></strong>
+                                            {{commentText.comment_text}}
+                                        </span>
+                                    </span>
+                                </div>
+                                <div id="appendMessage" style="display: inline-flex;"></div>
+                            </div>
+                            <textarea class="form-control" id="send-comment-post" placeholder="write a comment"
+                                rows="3"></textarea>
+                            <button class="btn btn-primary send-comment"
+                                (click)="postLikeShare(2, getOnePostData._id)">Send</button>
+                        </div>
+                        <!-- <p *ngIf='getOnePostData.url_property !=""'>URL : 
+                            <a href="{{getOnePostData.url_property}}">{{getOnePostData.url_property}}</a>
+                        </p> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer logged-in-user">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-comment-property-photo-modal">
+    <div class="modal-dialog modal-lg" *ngIf="getOnePostData">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!--user not logged in Modal body -->
+            <div class="modal-body not-logged-in display-none">
+                <p class="">You are not logged in. You must first login for more information.
+                </p>
+            </div>
+            <!--user not logged in Modal footer -->
+            <div class="modal-footer not-logged-in display-none">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            <!-- <div class="alert alert-success dispNone send-comment-success"></div> -->
+            <div class="alert alert-danger dispNone send-comment-danger"></div>
+            <!-- Modal body data-ride="carousel"-->
+            <div class="modal-body logged-in-user">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div id="carousel-one-post" class="carousel slide" data-interval="false">
+                            <div class="posting-full-image-in-center">
+                                <div class="carousel-inner">
+
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carousel-one-post" role="button" data-slide="prev">
+                                <span class="fa fa-angle-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-one-post" role="button" data-slide="next">
+                                <span class="fa fa-angle-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="getOnePostData">
+                        <h4 class="modal-title">{{getOnePostData.category}}</h4>
+                        <!-- <p class="text-justify">{{getOnePostData.property_desciption}}</p> -->
+                        <button *ngIf="!checkProductMedia(getOnePostData._id,getCurrentMediaPhotoID, '1')"
+                            class="btn width-Like UnlikeBtnn fa fa-thumbs-o-up"
+                            (click)="toggledMediaColor($event,getOnePostData._id,getCurrentMediaPhotoID, 1);">
+                            &nbsp;Like</button>
+                        <button *ngIf="checkProductMedia(getOnePostData._id,getCurrentMediaPhotoID, '1')"
+                            class="btn width-Like fb-btn-like likeBUtton fa fa-thumbs-up"
+                            (click)="toggledMediaColor($event,getOnePostData._id,getCurrentMediaPhotoID, 1);">
+                            &nbsp;Like</button>
+                        <span class="" data-toggle="modal" data-target="#like-of-mediapost-user"><a
+                                href="javascript:void(0);"><i
+                                    class="fa fa-thumbs-up LikeInModal"></i></a>&nbsp;{{getMediaLikeCount}}</span>
+                        <span class="fb-btn-like float-right">{{getMediaCommentCount}} Comments</span><br>
+                        <div class="form-control comment-box maginTop10">
+                            <div id="comment-show-box">
+                                <div *ngFor="let commentText of getMediaCommentPostData;">
+                                    <span class="spanCommentSection">
+                                        <img alt="Image is loading" class="border-radious50 float-left"
+                                            src="{{ commentText.user_id.profile_pic.length != 0 ? (baseURLofAPi+commentText.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px">&nbsp;
+                                        <span class="divSender float-left">
+                                            <strong><a href="">{{ commentText.user_id.firstname }}&nbsp;{{
+                                                    commentText.user_id.lastname }}</a></strong>
+                                            {{commentText.comment_text}}
+                                        </span>
+                                    </span>
+                                </div>
+                                <div id="appendMessageMedia"></div>
+                            </div>
+                            <textarea class="form-control" id="send-media-comment-post" placeholder="write a comment"
+                                rows="3"></textarea>
+                            <button class="btn btn-primary send-comment"
+                                (click)="MediapostLikeShare(2, getOnePostData._id, getCurrentMediaPhotoID)">Send</button>
+                        </div>
+                        <!-- <p *ngIf='getOnePostData.url_property !=""'>URL : 
+                            <a href="{{getOnePostData.url_property}}">{{getOnePostData.url_property}}</a>
+                        </p> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer logged-in-user">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-of-mediapost-user" *ngIf="getMediaLikeCount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Like of Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div *ngFor="let lke of getMediaLikePostData">
+                    <img alt="Image is loading" class="border-radious50 float-left"
+                        src="{{ lke.user_id.profile_pic.length != 0 ? (baseURLofAPi+lke.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                        width="30px">&nbsp;
+                    <span class="divSender float-left">
+                        <strong>{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</strong>
+                        <!-- <strong><a href="">{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</a></strong> -->
+                    </span>
+                </div>
+                <!-- <div id="media-like-data-list"></div> -->
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="like-of-post-user" *ngIf="getLikeCount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Like of Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let lke of getLikePostData">
+                <img alt="Image is loading" class="border-radious50 float-left"
+                    src="{{ lke.user_id.profile_pic.length != 0 ? (baseURLofAPi+lke.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                    width="30px">&nbsp;
+                <span class="divSender float-left">
+                    <strong>{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</strong>
+                    <!-- <strong><a href="">{{ lke.user_id.firstname }}&nbsp;{{ lke.user_id.lastname }}</a></strong> -->
+                </span>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- for show login popup -->
+<!-- The Modal -->
+<div class="modal showModelBackgroundBlack" id="show-not-login-model">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Login!</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="closeLoginModel(2)">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p class="">You are not logged in. You must first login for more information.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="closeLoginModel(1)">Login</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="closeLoginModel(2)">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

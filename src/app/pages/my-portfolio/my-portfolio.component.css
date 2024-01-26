@@ -1,0 +1,154 @@
+.allPortfolio-box{
+    border: 1px solid #dae0e5;
+    border-radius: 0px 0px 5px 5px;
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+}
+.edit-pencil{
+    float: right;
+    right: 80px;
+    top: 353px;
+    position: absolute;
+}
+.widthOfInput {
+    width: 100px;
+    margin-top: 15px;
+}
+
+/* for dropdown clickable */
+.dropbtn {
+    background-color:#1c66a0;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #1c66a0;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-contentListt {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 217px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-contentListt a {
+    color: black;
+    padding: 8px 16px;
+    border-bottom: 1px solid #ccc;
+    text-decoration: none;
+    display: block;
+    font-size: 17px;
+  }
+  .show {display: block;}
+  #coverPicInput{
+    color: transparent;
+  }
+  .dropdown a:hover {background-color: #ddd;}
+
+  .img-divvv {
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .page {
+    color: black;
+  }
+  .height300 {
+    /* height: 300px; */
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+  }
+  .listing-card{
+    height: 300px;
+    overflow: hidden;
+  }
+  .bg-box-listing{
+    height: 130px;
+    overflow: hidden;
+    /* margin-bottom: 30px; */
+  }
+  .Padding-1rem{
+    padding: 1rem;
+  }
+  /* for show pupose in card */
+.showPUrposeCard {
+    margin-bottom: 0;
+    display: flow-root;
+  }
+  
+  .padding5 {
+    padding: 5px;
+  }
+  
+  .padding15 {
+    padding: 15px;
+  }
+  /* share button of listing */
+.btnShareListing {
+    background: #007bff;
+    color: white;
+    position: absolute;
+    right: 15px;
+    padding: 4px 8px;
+  }
+  .btnSoldOutListing{
+      left: 15px;
+      font-weight: 600;
+      background: red;
+      padding: 4px 8px;
+      color: white;
+      position: absolute;
+  }
+  /* .backGrey{
+    background-color: #f4f4f4;
+  } */
+  @media screen and (max-width: 495px) {
+    .img-divvv {
+      height: 300px;
+      overflow: hidden;
+    }
+  }
+  .my-portfolio-div{
+      padding: 20px;
+      background-color: white;
+  }
+  .portfolio-cover-img{
+    height: 400px;
+    overflow: hidden;
+    background: black;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .portfolio-cover-img img{
+    max-height: 100% !important;
+  }
+  .col-md-4{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .cover-pic-cropper-box {
+    width: -webkit-fill-available;
+  }
+  .cover-pic-result{
+    overflow-x: auto;
+    display: block;
+    border: 0;
+  }

@@ -1,0 +1,72 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>All Cohorts</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">All Cohorts</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 allCohortDiv">
+                <input class="form-control" id="search-user-input" placeholder="Search Cohort"
+                                            (keyup)="onSearch($event)">
+                <ul class="all-user-search-list">
+                    <div *ngFor="let item of getSearchMemberList">
+                        <li (click)="goToMemberPage(item._id)">
+                            <a href="javascript:void(0);">
+                                <img alt="Image is loading"
+                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../assets/images/user1.png' }}"
+                                    width="30px" height="30px">
+                            </a>&nbsp;
+                            <a class="link-blue" href="javascript:void(0);">{{item.firstname}}
+                                {{item.lastname}}</a>
+                        </li>
+                    </div>
+                    <div id="no-search-result" style="display: none;">
+                        <li>
+                            <a href="javascript:void(0);">No Result Found</a>
+                        </li>
+                    </div>
+                </ul>
+                <div class="alert alert-success dispNone cohortDanger"></div>
+                <div class="alert alert-danger dispNone cohortSuccess"></div>
+                <div class="width50percent" *ngFor='let allCohort of getAllMyUserCohorts; let i = index;'>
+                    <!-- <div class="divOfImage"> -->
+                        <a href="javascript:void(0);" (click)="goToMemberPage(allCohort.user_id._id);" *ngIf='i < 4'>
+                            <img alt="Image is loading" class="imgOfMember"
+                                src="{{ allCohort.user_id.profile_pic.length != 0 ? (baseURLofAPi+allCohort.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}">
+                            {{allCohort.user_id.firstname}} {{allCohort.user_id.lastname}}
+                        </a>
+                        <button *ngIf="allCohort.checkCohortOrNot == 'No'" class="btn btn-primary showAddCohortBtn" (click)="addUserToCohorts(allCohort.user_id._id)">Add
+                            Cohort</button>
+                        <button *ngIf="allCohort.checkCohortOrNot == 'Yes'" class="btn btn-primary marginBottom5" (click)="unfriendCohort(allCohort.user_id._id)">Un-Cohort</button>                
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+</div>

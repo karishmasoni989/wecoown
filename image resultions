@@ -1,0 +1,23 @@
+Wecoown & WePo -
+    1. Home page :-
+        a. Logo in header and footer --> width = height = 200px.
+        b. One Image at left side section --> width = 750px, height = 650px.
+    2. Category Page :-
+        a. Banner Image --> width = 935px, height = 470px.
+        b. Thumbnail Image --> width = height = 200px.
+        c. Upload Photos --> width = 470px, height = 350px.
+        d. Create posting image/video resolution --> width = 700px, height = 400px.
+    3. My Posting Page :-
+        a. Profile Image --> width = 265px, height = 200px.
+        b. Cover Image --> width =  735px. height = 300px.
+    4. My Portfolio :-
+        a. Cover image of my portfolio size --> width = 950px, height = 400px.
+    5. My Listing / Fractional Listing / My Portfolio 
+        a. create listing image size --> width = 920px, height = 400px.
+    6. PBMS :-
+        a. Third Party Form Image --> width = 470px, height = 350px.
+    7. Advertisement :-
+        a. Banner Ad --> width = 1420px, height = 150px.
+        a. Sidebar Ad --> width = 250px, height = 500px.
+        a. Poster Ad --> width = 670px, height = 300px.
+        a. Vendor Listing Ad --> width = 360px, height = 260px.

@@ -1,0 +1,1534 @@
+[{
+  "_id": {
+    "$oid": "5f250386291cd20c2c2bfd64"
+  },
+  "banner_image": {
+    "src": "uploads/3ae8da2f51cbbb97c874c8055f384c2b",
+    "orgName": "houses_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/d78bc043669ee8ca9f5ce748df23072b",
+    "orgName": "houses_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Estate Homes and Luxury Mansions",
+  "description": "Most modern houses have special areas or rooms for people to do the things that they need to live comfortably. A modern house has a place to cook food, a place to eat, place to sleep, and a place to wash. These things are usually done in separate rooms, which are called the kitchen, the sitting room, the bedrooms, the bathroom, the toilet (or lavatory). Many houses have a separate dining room for eating meals and a separate laundry. In some houses, the toilet is in the bathroom, and in other houses it is separate. Many houses may also have a \"study\" or computer room and a \"family room\" where the children can play games and watch television.",
+  "created_at": {
+    "$date": "2020-08-01T05:54:14.744Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f250493291cd20c2c2bfd65"
+  },
+  "banner_image": {
+    "src": "uploads/4496840a35dcf5a734f32ab4efac0090",
+    "orgName": "jets_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/f14711e99bed523ae31aacff40d5bdbf",
+    "orgName": "jets_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Jets & Planes",
+  "description": "An aircraft is a vehicle that is able to fly by gaining support from the air. It counters the force of gravity by using either static lift or by using the dynamic lift of an airfoil, or in a few cases the downward thrust from jet engines. Common examples of aircraft include airplanes, helicopters, airships (including blimps), gliders, paramotors, and hot air balloons.\n\nThe human activity that surrounds aircraft is called aviation. The science of aviation, including designing and building aircraft, is called aeronautics. Crewed aircraft are flown by an onboard pilot, but unmanned aerial vehicles may be remotely controlled or self-controlled by onboard computers. Aircraft may be classified by different criteria, such as lift type, aircraft propulsion, usage, and others.",
+  "created_at": {
+    "$date": "2020-08-01T05:58:43.285Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2504bc291cd20c2c2bfd66"
+  },
+  "banner_image": {
+    "src": "uploads/ba289b9edce596aa93b9c4fbea644763",
+    "orgName": "land_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/57fc95a8795e81f041366b2ee80cc93a",
+    "orgName": "land_Thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Land Parcels",
+  "description": "In real estate, a lot or plot is a tract or parcel of land owned or meant to be owned by some owner(s). A plot is essentially considered a parcel of real property in some countries or immovable property (meaning practically the same thing) in other countries. The Possible owner(s) of a plot can be one or more person(s) or another legal entity, such as a company/corporation, organization, government, or trust. A common form of ownership of a plot is called fee simple in some countries.\n\nA plot may also be defined as a small area of land that is empty except for a metalled road surface or similar improvement. An example would be a car park. This article covers plots as parcels of land meant to be owned as units by an owner(s).\n\nAs Like most other types of property, plots owned by private parties are subject to a periodic property tax payable by the owners to local governments such as a county or municipality. These real estate taxes are based on the assessed value of the real property; additional taxes usually apply to transfer of ownership and property sales. Other fees by the government are possible for improvements such as curbs and pavements or an impact fee for building a house on a vacant plot.",
+  "created_at": {
+    "$date": "2020-08-01T05:59:24.568Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f25058f291cd20c2c2bfd67"
+  },
+  "banner_image": {
+    "src": "uploads/a9e3989d1e54624ede1beb9cbdefb073",
+    "orgName": "car_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/e82d14f0381b6a11d38f2bc418981846",
+    "orgName": "car_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Luxury Cars & RVs",
+  "description": "A luxury vehicle provides increased levels of comfort, equipment, amenities, quality, performance, and status relative to regular cars for an increased price.\n\nThe term is subjective and reflects both the qualities of the car and the brand image of its manufacturer. Luxury brands rank above premium brands, though there is no fixed demarcation between the two.\n\nTraditionally, most luxury cars were large vehicles, though smaller sports-oriented models were always produced. “Compact“ luxury vehicles such as hatchbacks, and off-road capable sport utility vehicles, are relatively modern trends.\n\nA recreational vehicle, often abbreviated as RV, is a motor vehicle or trailer which includes living quarters designed for accommodation.Types of RVs include motorhomes, campervans, caravans (also known as travel trailers and camper trailers), fifth-wheel trailers, popup campers and truck campers.",
+  "created_at": {
+    "$date": "2020-08-01T06:02:55.633Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f250618291cd20c2c2bfd68"
+  },
+  "banner_image": {
+    "src": "uploads/1e4ac043eec70882382d5e57e1715607",
+    "orgName": "office_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/debd924055a50052a83e28011dfb5cb0",
+    "orgName": "office_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Office Buildings",
+  "description": "While offices can be built in almost any location and in almost any building, some modern requirements for offices make this more difficult. These requirements can be both legal (e.g., light levels must be sufficient) or technical (e.g., requirements for computer networking). Alongside, other requirements such as security and flexibility of layout has led to the creation of special buildings which are dedicated only or primarily for use as offices. An office building, also known as an office block or business center is a form of a commercial building that contains spaces mainly designed to be used for offices.\n\nThe primary purpose of an office building is to provide a workplace and working environment primarily for administrative and managerial workers. These workers usually occupy set areas within the office building and usually are provided with desks, PCs, and other equipment they may need within these areas.\n\nAn office building will be divided into sections for different companies or may be dedicated to one company. In either case, each company will typically have a reception area, one or several meeting rooms, singular or open-plan offices, as well as toilets.",
+  "created_at": {
+    "$date": "2020-08-01T06:05:12.347Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f25067a291cd20c2c2bfd69"
+  },
+  "banner_image": {
+    "src": "uploads/3ca60b193d69f589f92140203933316e",
+    "orgName": "other_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/92bf1dc692e00eb80a5e964136f9a713",
+    "orgName": "other_thumbnail.jpeg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Others",
+  "description": "Others",
+  "created_at": {
+    "$date": "2020-08-01T06:06:50.187Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2506a8291cd20c2c2bfd6a"
+  },
+  "banner_image": {
+    "src": "uploads/f59fd85cf5693ae284e40c7c39c2205e",
+    "orgName": "race_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/e119ccb1b82227caf54942e4021393f4",
+    "orgName": "race_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Race Horses",
+  "description": "Horse racing is an equestrian performance sport, typically involving two or more horses ridden by jockeys (or sometimes driven without riders) over a set distance, for competition. It is one of the most ancient of all sports, as its basic premise – to identify which of two or more horses is the fastest over a set course or distance – has been unchanged since at least classical antiquity.This sport is also very dangerous, with 700 to 800 horse deaths per year- an estimated amount of two breakdowns out of 1000.\n\nHorse races vary widely in format and many countries have developed their own particular traditions around the sport. Variations include restricting races to particular breeds, running over obstacles (cross-country), running over different distances (typically a mile, mile and a quarter, mile and an 8th, mile, and a 16th), running on different track surfaces, and running in different gaits.",
+  "created_at": {
+    "$date": "2020-08-01T06:07:36.457Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2506cf291cd20c2c2bfd6b"
+  },
+  "banner_image": {
+    "src": "uploads/815b47d9166705562e8d47fb5d4ad136",
+    "orgName": "single_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/21cdc1dc7432a28a1e49993043b7c285",
+    "orgName": "single_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": " ",
+  "description": "a single-family (home, house, or dwelling) means that the building is a structure maintained and used as a single dwelling unit. Even though a dwelling unit shares one or more walls with another dwelling unit, it is a single-family residence if it has direct access to a street or thoroughfare and does not share heating facilities, hot water equipment, nor any other essential facility or service with any other dwelling unit. In some jurisdictions, allowances are made for basement suites or mother-in-law suites without changing the description from \"single-family\". It does exclude, however, any short-term accommodation (hotel, motels, inns), large-scale rental accommodation (rooming or boarding houses, apartments), or condominiums.\nMost single-family homes are built on lots larger than the structure itself, adding an area surrounding the house, which is commonly called a yard in North American English or a garden in British English. Garages can also be found on most lots. Houses with an attached front entry garage that is closer to the street than any other part of the house are often derisively called a snout house.",
+  "created_at": {
+    "$date": "2020-08-01T06:08:15.088Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2506fe291cd20c2c2bfd6c"
+  },
+  "banner_image": {
+    "src": "uploads/3fe958396d1d39eb5315f24e2ea2d26b",
+    "orgName": "vacation_banner.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/770142ae2885b476af116d75addf7966",
+    "orgName": "vacation_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Vacation Homes & Timeshares",
+  "description": "A vacation home is a secondary dwelling, other than the owner's principal residence, and is used primarily for recreational purposes including vacations or holidays. Also known as a recreational or secondary property or residence, a vacation home is often situated in a different location from the owner's primary residence. Because vacation homes are only used at certain times of the year, many owners rent out these dwellings when they are not using them.\n\nThis type of property is often considered to be a second home. In most cases, it's in a different location than the owner's primary, principal residence. As noted above, the owner may use this property for recreational purposes including vacations, usually for a few days or weeks each year. Just like primary residences, vacation homes can take any form—the most popular being cottages and condos.",
+  "created_at": {
+    "$date": "2020-08-01T06:09:02.233Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f250725291cd20c2c2bfd6d"
+  },
+  "banner_image": {
+    "src": "uploads/53f993af9d4efbf992502eab409df68b",
+    "orgName": "wineyri_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/f872d5836a621465aa8a7582d16c960d",
+    "orgName": "winery_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Wineries & Vineyards",
+  "description": "A winery is a building or property that produces wine, or a business involved in the production of wine, such as a wine company. Some wine companies own many wineries. Besides winemaking equipment, larger wineries may also feature warehouses, bottling lines, laboratories, and large expanses of tanks known as tank farms. Wineries may have existed as long as 8,000 years ago.A vineyard is a plantation of grape-bearing vines, grown mainly for winemaking, but also raisins, table grapes, and non-alcoholic grape juice. The science, practice and study of vineyard production is known as viticulture.\n\nA vineyard is often characterized by its terroir, a French term loosely translating as \"a sense of place\" that refers to the specific geographical and geological characteristics of grapevine plantations, which may be imparted in the wine.",
+  "created_at": {
+    "$date": "2020-08-01T06:09:41.658Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f250744291cd20c2c2bfd6e"
+  },
+  "banner_image": {
+    "src": "uploads/cfb9126428839fbb444fba554a1827cb",
+    "orgName": "yachts_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/e19deb872a97a645b13a66258b2678a9",
+    "orgName": "yachts_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Yachts & Boats",
+  "description": "A yacht is a sail or power vessel used for pleasure, cruising, or racing. There is no standard definition, so the term applies to such vessels that have a cabin with amenities that accommodate overnight use. To be termed a yacht, as opposed to a boat, such a pleasure vessel is likely to be at least 33 feet (10 m) in length and have been judged to have good aesthetic qualities.\n\nA boat is a watercraft of a large range of types and sizes, but generally smaller than a ship, which is distinguished by its larger size, shape, cargo or passenger capacity, or its ability to carry boats.\n\nSmall boats are typically found on inland waterways such as rivers and lakes, or in protected coastal areas. However, some boats, such as the whaleboat, were intended for use in an offshore environment. In modern naval terms, a boat is a vessel small enough to be carried aboard a ship. Anomalous definitions exist, as lake freighters, 1,000 feet (300 m) long on the Great Lakes are called \"boats\".",
+  "created_at": {
+    "$date": "2020-08-01T06:10:12.197Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f250774291cd20c2c2bfd6f"
+  },
+  "banner_image": {
+    "src": "uploads/7b4e35c04616b82d5df3e15a82f9200b",
+    "orgName": "Castle_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/2a86f8ae948166a9060db77732588193",
+    "orgName": "castle_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Castles & Chateaux",
+  "description": "A castle is a type of fortified structure built during the Middle Ages predominantly by the nobility or royalty and by military orders. Scholars debate the scope of the word castle, but usually consider it to be the private fortified residence of a lord or noble. This is distinct from a palace, which is not fortified; from a fortress, which was not always a residence for royalty or nobility; and from a fortified settlement, which was a public defence – though there are many similarities among these types of construction.\n\nThe word château is a French word that has entered the English language, where its meaning is more specific than it is in French. The French word château denotes buildings as diverse as a medieval fortress, a Renaissance palace and a 19th-century country house. Care should therefore be taken when translating the French word château into English, noting the nature of the building in question. Most French châteaux are \"palaces\" or \"country houses\" rather than \"castles\", and for these the word \"château\" is appropriate in English. Sometimes the word \"palace\" is more appropriate. ",
+  "created_at": {
+    "$date": "2020-08-01T06:11:00.772Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2d552dc2165f158cae6f64"
+  },
+  "banner_image": {
+    "src": "uploads/091ac368f252fb294c2a5ef5db86a4ba",
+    "orgName": "village_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/2244b78ed28f481e5fe0f7067bc2ad48",
+    "orgName": "village_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Villages & Towns",
+  "description": "A village is a clustered human settlement or community, larger than a hamlet but smaller than a town (although the word is often used to describe both hamlets and smaller towns), with a population typically ranging from a few hundred to a few thousand. Though villages are often located in rural areas, the term urban village is also applied to certain urban neighborhoods.\n\nA town is a human settlement. Towns are generally larger than villages but smaller than cities, though the criteria to distinguish them vary considerably between different parts of the world.",
+  "created_at": {
+    "$date": "2020-08-07T13:20:45.340Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2e392a037e3c15e86cfe4f"
+  },
+  "banner_image": {
+    "src": "uploads/597421d8f04cdf3bcd8e0d030c0ab45a",
+    "orgName": "churche_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/43bb4f15bbaf0034004c61b78ba4189f",
+    "orgName": "church_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Churches & Temples",
+  "description": "Christian Church is a Protestant ecclesiological term referring to the church invisible comprising all Christians, used since the Protestant Reformation in the 16th century. In this understanding, \"Christian Church\" (or \"catholic church\") does not refer to a particular Christian denomination but to the \"body\" or \"group\" of believers, both defined in various ways. A prominent example of this is the branch theory maintained by some Anglicans.\n\nA temple (from the Latin word templum) is a building reserved for religious or spiritual rituals and activities such as prayer and sacrifice. It is typically used for such buildings belonging to all faiths where a more specific term such as church, mosque, or synagogue is not generally used in English. These include Hinduism, Buddhism, and Jainism among religions with many modern followers, as well as other ancient religions such as Ancient Egyptian religion.",
+  "created_at": {
+    "$date": "2020-08-08T05:33:30.496Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2e3cf8037e3c15e86cfe50"
+  },
+  "banner_image": {
+    "src": "uploads/6f63c55937f0a9f631b897c7eb0f9c9d",
+    "orgName": "vehicle_banner2.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/5379e2958585821c8ffbdd3a7bf09869",
+    "orgName": "vehicle_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Shared Vehicles",
+  "description": "Shared mobility refers to the shared use of a vehicle, bicycle, or other transportation modes. It is a transportation strategy that allows users to access transportation services on an as-needed basis. Shared mobility is an umbrella term that encompasses a variety of transportation modes including carsharing, bike-sharing, peer-to-peer ridesharing, on-demand ride services, microtransit, and other modes.",
+  "created_at": {
+    "$date": "2020-08-08T05:49:44.965Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f2e40d1037e3c15e86cfe51"
+  },
+  "banner_image": {
+    "src": "uploads/aabb498571190034f9daa73003612f74",
+    "orgName": "private_island_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/54e8eaf8da3af328f5a1f018bd4c1d53",
+    "orgName": "islands_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Private Islands",
+  "description": "A private island is a disconnected body of land wholly owned by a private citizen or corporation. Although this exclusivity gives the owner substantial control over the property, private islands remain under the jurisdiction of national and sometimes local governments.\n\nVirtually all islands in the world are claimed and governed by some national government. That nation's laws apply, and any attempt by the owner to claim sovereignty would generally be unrealistic. Nevertheless, some people still try to set up their own micronations on islands, like real-estate millionaire Michael Oliver's attempt at building a libertarian city-state called the Republic of Minerva in the southern Pacific Ocean.",
+  "created_at": {
+    "$date": "2020-08-08T06:06:09.512Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f30e85e7408e909ec17d551"
+  },
+  "banner_image": {
+    "src": "uploads/54a7dd4bf65c642bdb744d2ba6737579",
+    "orgName": "token_banner.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/0e69326866ec41911a14e8b075dc4be8",
+    "orgName": "token_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Tokenized Ownership & Crypto Assets",
+  "description": "Tokenization is also defined as the method to convert ownership rights in an asset into a digital token. Your apartment worth $200,000 can be converted into 200,000 tokens, where each token is equal to 0.0005% share of the apartment. Then, tokens are issued on any blockchain platform that can support smart contracts, for example, Ethereum. When a user buys one token, it means they buy 0.0005% of the asset’s owner. If someone buys 80,000 tokens, they own 40% of the asset. If they buy all 200,000 tokens, they become 100% the owner of that property. ",
+  "created_at": {
+    "$date": "2020-08-10T06:25:34.812Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f3255f2d4de5218c4fa9549"
+  },
+  "banner_image": {
+    "src": "uploads/e3e405d7369d060a6a2bdf81e4582b2c",
+    "orgName": "restaurants_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/4199a029eb77467d86b67d721ebf672a",
+    "orgName": "retaurants_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Restaurants, Bars & Clubs",
+  "description": "A restaurant or an eatery, is a business that prepares and serves food and drinks to customers. Meals are generally served and eaten on the premises, but many restaurants also offer take-out and food delivery services. Restaurants vary greatly in appearance and offerings, including a wide variety of cuisines and service models ranging from inexpensive fast-food restaurants and cafeterias to mid-priced family restaurants, to high-priced luxury establishments.\n\nA bar is a long raised narrow table or bench designed for dispensing beer or other alcoholic drinks. They were originally chested high, and a bar, often brass, ran the length of the table, just above floor height, for customers to rest a foot on, which gave the table its name. Over many years, heights of bars were lowered, and high stools added, and the brass bar remains today.\n\nA club is an association of people united by a common interest or goal. A service club, for example, exists for voluntary or charitable activities. There are clubs devoted to hobbies and sports, social activities clubs, political and religious clubs, and so forth.",
+  "created_at": {
+    "$date": "2020-08-11T08:25:22.458Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f3256aad4de5218c4fa954a"
+  },
+  "banner_image": {
+    "src": "uploads/bc9f8d0352346a5792f5aeaaf6518936",
+    "orgName": "hotels_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/c69000a0099ebc60afa78d638e64063c",
+    "orgName": "other_banner.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Hotels & Golf Resorts",
+  "description": "A resort hotel is a hotel that often contains full-sized luxury facilities with full-service accommodations and amenities. These hotels may attract both business conferences and vacationing tourists and offer more than a convenient place to stay. These hotels may be referred to as major conference center hotels, flagship hotels, destination hotels, and destination resorts. The market for conference and resort hotels is a subject for market analysis.\n\nThese hotels as destinations may be characterized by distinctive architecture, upscale lodgings, ballrooms, large conference facilities, restaurants, and recreation activities such as golf or skiing. They may be located in a variety of settings from major cities to remote locations.",
+  "created_at": {
+    "$date": "2020-08-11T08:28:26.344Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f325827d4de5218c4fa954b"
+  },
+  "banner_image": {
+    "src": "uploads/5d0d5de4d894b6b9307fe11e11d6a41d",
+    "orgName": "motel_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/26e9ebb75ed5dc5b36933a261e0bf4d9",
+    "orgName": "motels_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Motels, Hostels & B&Bs",
+  "description": "A motel or motor lodge is a hotel designed for motorists and usually has a parking area for motor vehicles. Entering dictionaries after World War II, the word motel, coined as a portmanteau contraction of \"motor hotel\", originates from the Milestone Mo-Tel of San Luis Obispo, California, which was built in 1925.\n\nA hostel is a form of low-cost, short-term shared sociable lodging where guests can rent a bed, usually a bunk bed in a dormitory, with shared use of a lounge and sometimes a kitchen. Rooms can be mixed or single-sex and have private or shared bathrooms.",
+  "created_at": {
+    "$date": "2020-08-11T08:34:47.397Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f325953d4de5218c4fa954c"
+  },
+  "banner_image": {
+    "src": "uploads/f03462c5730467632e9fbf0666a751ce",
+    "orgName": "ranches_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/989cd8b3740c23ae941bc05486bda2b6",
+    "orgName": "ranches_thumb.png"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Ranches and Farms",
+  "description": "Ranches generally consist of large areas but may be of nearly any size. In the western United States, many ranches are a combination of privately owned land supplemented by grazing leases on land under the control of the federal Bureau of Land Management or the United States Forest Service. If the ranch includes arable or irrigated land, the ranch may also engage in a limited amount of farming, raising crops for feeding the animals, such as hay and feed grains.",
+  "created_at": {
+    "$date": "2020-08-11T08:39:47.853Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f464cbca3c3400f68b60a91"
+  },
+  "banner_image": {
+    "src": "uploads/318994b10dcc5f27617de0411f653917",
+    "orgName": "mobile_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/43e05879e674ed8ba1d2b4009c31a564",
+    "orgName": "mobile_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Mobile Homes & RV Parks",
+  "description": "When considering the purchase of a mobile home park as compared to an RV park there are many factors to consider.  While mobile home parks and RV parks are often sold by the same brokers and are combined in one facility, they are not the same and both require different amounts and types of management.   The following comparisons are for Overnight/Destination RV parks as compared to the typical mobile home park in which the lots are rented out on a monthly basis.  In many cases, the seasonal or extended stay RV parks will have more of the qualities of the typical mobile home park rather than those of the Overnight/Destination type RV parks.",
+  "created_at": {
+    "$date": "2020-08-26T11:51:24.211Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f464e92a3c3400f68b60a92"
+  },
+  "banner_image": {
+    "src": "uploads/3f620ab0b3ea9e2b6d5d026fe8a04cec",
+    "orgName": "mall_banner.jpeg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/c392ab6e6ce140cc46d26489f2788fbe",
+    "orgName": "mall_thumbnail.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Retail Shopping Malls",
+  "description": "A shopping mall (or simply mall) is a North American term for a large indoor shopping center, usually anchored by department stores. The term \"mall\" originally meant a pedestrian promenade with shops along with it (that is, the term was used to refer to the walkway itself), but in the late 1960s, it began to be used as a generic term for the large enclosed shopping centers that were becoming commonplace at the time. In the U.K., such complexes are considered shopping centers (Commonwealth English: shopping center), though \"shopping center\" covers many more sizes and types of centers than the North American \"mall\". Other countries may follow U.S. usage and others follow U.K. usage.",
+  "created_at": {
+    "$date": "2020-08-26T11:59:14.354Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f46505ca3c3400f68b60a93"
+  },
+  "banner_image": {
+    "src": "uploads/62fff4e05adb3f8509beb3d72559ae23",
+    "orgName": "industry_thumb.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/fc71af92b96b5cd5e167cadc04a61f7c",
+    "orgName": "indus_banner.webp"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Industrial Plants & Warehouses",
+  "description": "A factory, manufacturing plant, or production plant is an industrial site, usually a complex consisting of several buildings filled with machinery, where workers manufacture items or operate machines that process each item into another. They are a critical part of modern economic production, with the majority of the world's goods being created or processed within factories.\n\nA warehouse is a building for storing goods. Warehouses are used by manufacturers, importers, exporters, wholesalers, transport businesses, customs, etc. They are usually large plain buildings in industrial parks on the outskirts of cities, towns, or villages.",
+  "created_at": {
+    "$date": "2020-08-26T12:06:52.758Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f465102a3c3400f68b60a94"
+  },
+  "banner_image": {
+    "src": "uploads/5c83c36095065562e8bcce3afa28ffc0",
+    "orgName": "gas_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/dbea9cc512d3e259793bb459a2e70351",
+    "orgName": "gas_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Gas Stations & C Stores",
+  "description": "A convenience store, convenience shop, or corner store is a small retail business that stocks a range of everyday items such as coffee, groceries, snack foods, confectionery, soft drinks, tobacco products, over-the-counter drugs, toiletries, newspapers, and magazines. In some jurisdictions, convenience stores are licensed to sell alcohol, although many such jurisdictions limit such beverages to those with relatively low alcoholic content such as beer and wine. Such stores may also offer money order and wire transfer services, along with the use of a fax machine or photocopier for a small per-copy cost. Some also offer to sell tickets or recharge a smart card, like the OPUS card in Montreal. They differ from general stores and village shops in that they are not in a rural location and are used as a convenient supplement to larger stores.",
+  "created_at": {
+    "$date": "2020-08-26T12:09:38.644Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f465171a3c3400f68b60a95"
+  },
+  "banner_image": {
+    "src": "uploads/0c6fa8082e40ae3fe56fdbead68ffe06",
+    "orgName": "carwsh_banner.webp"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/ea7c90b66a7bf1ab2cf36b0499cd02f1",
+    "orgName": "carwash_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Car Wash Facilities",
+  "description": "A car wash (also written as \"carwash\") or auto wash is a facility used to clean the exterior and, in some cases, the interior of motor vehicles. Car washes can be self-serve, fully automated, or full-service with attendants who wash the vehicle. It may also be an event where people pay to have their cars washed by volunteers as a method to raise money for some purpose.",
+  "created_at": {
+    "$date": "2020-08-26T12:11:29.604Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4651faa3c3400f68b60a96"
+  },
+  "banner_image": {
+    "src": "uploads/041b552bf7aae54518d89bd64a4b624b",
+    "orgName": "assistant_banner.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/ac74a262f6ff6dac6b07cd793bd64168",
+    "orgName": "assisteant_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Assisted Living & Nursing Homes",
+  "description": "Senior living communities come in many shapes and sizes, and there’s no universal approach for aging loved ones. Many people think of “senior living” and “nursing home” as synonymous, but over the past 30 years the terms have grown apart, and “nursing home” isn’t the senior care catch-all it used to be.\nAssisted living communities are a unique option for older adults who are mostly independent but require some assistance with day-to-day living. Nursing homes are generally designed for seniors who require 24-hour medical supervision due to physical or mental conditions that leave them unable to care for themselves.",
+  "created_at": {
+    "$date": "2020-08-26T12:13:46.072Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4652f7a3c3400f68b60a97"
+  },
+  "banner_image": {
+    "src": "uploads/7f69400c88ef8f5160e93ba230d6356b",
+    "orgName": "rehab_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/4f32c29ba50e0c0c143ad9e377a85e23",
+    "orgName": "rehab_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Rehab Centers",
+  "description": "The path to addiction treatment isn’t a straight line, and the process is as individual as the people who need help. Finding the right rehabilitation center can seem overwhelming, and that is why Rehab center  to help. Our growing network of top tier alcohol and drug rehabs, including executive treatment and luxury rehabilitation options, allows you to find help close to home, or as far away as you’d like for a clean break.",
+  "created_at": {
+    "$date": "2020-08-26T12:17:59.479Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f46536aa3c3400f68b60a98"
+  },
+  "banner_image": {
+    "src": "uploads/3384d1fce2e7bd1d9eb2ed80c52354a0",
+    "orgName": "parking_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/0696c38688a1e46dab3ca8e3e34b5c40",
+    "orgName": "parking_thumb.jpeg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Parking Lots",
+  "description": "Parking lots tend to be sources of water pollution because of their extensive impervious surfaces. Most existing lots have limited or no facilities to control runoff. Many areas today also require minimum landscaping in parking lots to provide shade and help mitigate the extent to which their paved surfaces contribute to heat islands. Many municipalities require a minimum number of parking spaces, depending on the floor area in a store or the number of bedrooms in an apartment complex. In the United States, each state's Department of Transportation sets the proper ratio for disabled spaces for private business and public parking lots. Various forms of technology are used to charge motorists for the use of a parking lot. Modern parking lots use a variety of technologies to help motorists find unoccupied parking spaces, retrieve their vehicles, and improve their experience.",
+  "created_at": {
+    "$date": "2020-08-26T12:19:54.915Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f46540fa3c3400f68b60a99"
+  },
+  "banner_image": {
+    "src": "uploads/af1a24c3bc3f04d2ddc812f58e10c7e2",
+    "orgName": "camp_th.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/57e4c864588190e84c5520360113f988",
+    "orgName": "camps_banner.png"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Camp Grounds",
+  "description": "The term camp comes from the Latin word campus, meaning \"field\". Therefore, a campground consists typically of open pieces of ground where a camper can pitch a tent or park camper. More specifically a campsite is a dedicated area set aside for camping and for which often a user fee is charged. Campsites typically feature a few (but sometimes no) improvements.",
+  "created_at": {
+    "$date": "2020-08-26T12:22:39.209Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f465ca3a3c3400f68b60a9a"
+  },
+  "banner_image": {
+    "src": "uploads/5f4745c4a1258ba086b020db7993f13c",
+    "orgName": "euast_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/24c638dc1f650a40a0b722388e9e1948",
+    "orgName": "euast_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Equestrian Centers",
+  "description": "An equestrian facility is created and maintained for the purpose of accommodating, training, or competing equids, especially horses. Based on their use, they may be known as a barn, stables, or riding hall and may include commercial operations described by terms such as a boarding stable, livery yard, or livery stable. Larger facilities may be called equestrian centers and co-located with complementary services such as a riding school, farriers, vets, tack shops, or equipment repair.",
+  "created_at": {
+    "$date": "2020-08-26T12:59:15.516Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f465d7fa3c3400f68b60a9b"
+  },
+  "banner_image": {
+    "src": "uploads/31e76a569c01cb505107239aa8da4514",
+    "orgName": "marin_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/517f9309bedd3636d2627a988f6eeb00",
+    "orgName": "marina_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Marinas",
+  "description": "A marina is a dock or basin with moorings and supplies for yachts and small boats. A marina differs from a port in that a marina does not handle large passenger ships or cargo from freighters.\n\nThe word marina may also refer to an inland wharf on a river or canal that is used exclusively by non-industrial pleasure craft such as canal narrowboats.",
+  "created_at": {
+    "$date": "2020-08-26T13:02:55.175Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f465ef4a3c3400f68b60a9c"
+  },
+  "banner_image": {
+    "src": "uploads/5f70f26e14d88c911c59f6862a98932b",
+    "orgName": "super_ban.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/fab7b2bbe0bd3a9bb2180bbd80fbf13e",
+    "orgName": "super_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Super Yachts",
+  "description": "A superyacht or megayacht is a large and luxurious pleasure vessel. There are no official or agreed-upon definitions for such yachts, but these terms are regularly used to describe professionally crewed motor or sailing yachts, ranging from 40 meters (130 ft) to more than 180 meters (590 ft) in length, and sometimes include yachts as small as 24 meters. ",
+  "created_at": {
+    "$date": "2020-08-26T13:09:08.425Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f46603aa3c3400f68b60a9d"
+  },
+  "banner_image": {
+    "src": "uploads/d09ffe8d65a62491103c0fc7fb00d4be",
+    "orgName": "sail_bann.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/7461a04795fa7464ddb8b039f9e4265c",
+    "orgName": "sail_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Sail Boats",
+  "description": "A sailboat or sailing boat is a boat propelled partly or entirely by sails and is smaller than a sailing ship. Distinctions in what constitutes a sailing boat and ship vary by region and maritime culture.",
+  "created_at": {
+    "$date": "2020-08-26T13:14:34.134Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4662eaa3c3400f68b60a9e"
+  },
+  "banner_image": {
+    "src": "uploads/9cdcc4235ee1d74018b3ddc94fabfabf",
+    "orgName": "fishing_banner.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/a512e36bdf6cfdee19f933f13b7099f3",
+    "orgName": "fishing_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Fishing Boats",
+  "description": "A fishing vessel is a boat or ship used to catch fish in the sea, or on a lake or river. Many different kinds of vessels are used in commercial, artisanal, and recreational fishing. The total number of fishing vessels in the world in 2016 was estimated to be about 4.6 million, unchanged from 2014. ",
+  "created_at": {
+    "$date": "2020-08-26T13:26:02.515Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4663d7a3c3400f68b60a9f"
+  },
+  "banner_image": {
+    "src": "uploads/26d5d450bc0023ba46ac041c50ea8ff0",
+    "orgName": "speed_bann.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/000dfbdf2a82935422c36a37e37d077d",
+    "orgName": "spped_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Speed Boats",
+  "description": "A motorboat, speedboat, or powerboat is a boat that is powered by an engine.\n\nSome motorboats are fitted with inboard engines, others have an outboard motor installed on the rear, containing the internal combustion engine, the gearbox, and the propeller in one portable unit. An inboard-outboard contains a hybrid of inboard and an outboard, where the internal combustion engine is installed inside the boat, and the gearbox and propeller are outside.",
+  "created_at": {
+    "$date": "2020-08-26T13:29:59.237Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f466613a3c3400f68b60aa0"
+  },
+  "banner_image": {
+    "src": "uploads/b8720538067cb6131dd2ddd15c7fc44b",
+    "orgName": "power_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/192c48c734796e76e67d114e716c94ac",
+    "orgName": "power_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Power Yachts",
+  "description": "Large power yachts were developed to a high degree, and long-distance cruising became a favorite pastime of the rich. The earliest power yachts were paddle-wheel boats, which then gave way to those powered by the completely submerged screw or propeller type of propulsion. As in the case of naval and merchant vessels, auxiliaries carrying both sail and power were the yacht fashion for a number of years. By the second half of the 20th century, many yachts were still auxiliaries, but the majority were exclusively power yachts containing gasoline or diesel engines.",
+  "created_at": {
+    "$date": "2020-08-26T13:39:31.204Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f466861a3c3400f68b60aa1"
+  },
+  "banner_image": {
+    "src": "uploads/a5eb30444b1427f99621854566e743b3",
+    "orgName": "carrr_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/3de1cadc5202884ddfc54dc65b0fe5ff",
+    "orgName": "carrrr_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Catamarans",
+  "description": "A catamaran is a multi-hulled watercraft featuring two parallel hulls of equal size. It is a geometry-stabilized craft, deriving its stability from its wide beam, rather than from a ballasted keel as with a monohull boat. Catamarans typically have less hull volume, smaller displacement, and shallower draft (draught) than monohulls of comparable length. The two hulls combined also often have a smaller hydrodynamic resistance than comparable monohulls, requiring less propulsive power from either sails or motors. The catamarans wider stance on the water can reduce both heeling and wave-induced motion, as compared with a monohull, and can give reduced wakes.",
+  "created_at": {
+    "$date": "2020-08-26T13:49:21.319Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f466b30a3c3400f68b60aa2"
+  },
+  "banner_image": {
+    "src": "uploads/3b63190526fe365b8cbc4790538f5071",
+    "orgName": "sub_thumb.jpeg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/9a235c4ddc57048081bae001292faf8a",
+    "orgName": "sub_ban.webp"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Submarines",
+  "description": "A submarine (or sub) is a watercraft capable of independent operation underwater. It differs from a submersible, which has the more limited underwater capability. It is also sometimes used historically or colloquially to refer to remotely operated vehicles and robots, as well as medium-sized or smaller vessels, such as the midget submarine and the wet sub. Submarines are referred to as \"boats\" rather than \"ships\" irrespective of their size.",
+  "created_at": {
+    "$date": "2020-08-26T14:01:20.037Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f466bb6a3c3400f68b60aa3"
+  },
+  "banner_image": {
+    "src": "uploads/b02f24dfce799100c926412253295a0b",
+    "orgName": "hydro_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/0545263983cdaa014af7f515703a82e9",
+    "orgName": "hydro_thum.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Hydroplanes",
+  "description": "A hydroplane (or hydro, or thunderboat) is a fast motorboat, where the hull shape is such that at speed, the weight of the boat is supported by planing forces, rather than simple buoyancy.\n\nA key aspect of hydroplanes is that they use the water they are on for lift rather than buoyancy, as well as for propulsion and steering: when traveling at high-speed water is forced downwards by the bottom of the boat's hull. The water, therefore, exerts an equal and opposite force upwards, lifting the vast majority of the hull out of the water. This process, happening at the surface of the water, is known as ‘planning’.",
+  "created_at": {
+    "$date": "2020-08-26T14:03:34.878Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f466c2da3c3400f68b60aa4"
+  },
+  "banner_image": {
+    "src": "uploads/5d8eb38bf35b5fed9f9cdda355ad588e",
+    "orgName": "comm_bann.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/88ecdceb597e201a75472feab5c8c859",
+    "orgName": "comm_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Commercial Ships",
+  "description": "A merchant's ship, merchant vessel, trading vessel, or merchantman is a watercraft that transports cargo or carries passengers for hire. This is in contrast to pleasure craft, which are used for personal recreation, and naval ships, which are used for military purposes.\n\nThey come in myriad sizes and shapes, from twenty-foot inflatable dive boats in Hawaii, to 5,000 passenger casino vessels on the Mississippi River, to tugboats plying New York Harbor, to 1,000-foot oil tankers and container ships at major ports, to passenger-carrying submarines in the Caribbean.",
+  "created_at": {
+    "$date": "2020-08-26T14:05:33.234Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4762c1a3c3400f68b60aa7"
+  },
+  "banner_image": {
+    "src": "uploads/e1bab2b8b255758ecc63750990426d32",
+    "orgName": "turnn_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/8e537e53e611369582c022b90f93d7ef",
+    "orgName": "turrr_thum.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Turboprop Aircraft",
+  "description": "Turboprop aircraft have one or more gas-turbine engines connected to a gearbox that turns the propeller(s), to move the aircraft on the ground and through the air.",
+  "created_at": {
+    "$date": "2020-08-27T07:37:37.510Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f47637da3c3400f68b60aa8"
+  },
+  "banner_image": {
+    "src": "uploads/b4048c76a79d941f21fc9dc20eeab926",
+    "orgName": "piston_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/6b38ef3de42642f53d3d4e1dd74104f2",
+    "orgName": "piston_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Piston Aircraft",
+  "description": "Piston airplanes have one or more piston-powered engines connected to the propeller(s), which provide thrust to move the aircraft on the ground and through the air. Piston-powered aircraft most commonly use 100 octanes low-leaded fuel and fly at altitudes below 15,000 feet. The inside of a typical piston aircraft seats 1-6 passengers is configured similar to the interior of a small car. Piston aircraft used for business typically fly relatively short missions of 300-400 miles, using very small general aviation airports that are often without air traffic control towers.",
+  "created_at": {
+    "$date": "2020-08-27T07:40:45.984Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f476444a3c3400f68b60aa9"
+  },
+  "banner_image": {
+    "src": "uploads/e4bf50d83362943705e65e96983f8574",
+    "orgName": "heli_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/362c3a00d8641ec7c432ef153c68de64",
+    "orgName": "helii_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Helicopters",
+  "description": "A helicopter is a type of rotorcraft in which lift and thrust are supplied by horizontally-spinning rotors. This allows the helicopter to take off and land vertically, to hover, and to fly forward, backward, and laterally. These attributes allow helicopters to be used in congested or isolated areas where fixed-wing aircraft and many forms of VTOL (Vertical TakeOff and Landing) aircraft cannot perform.",
+  "created_at": {
+    "$date": "2020-08-27T07:44:04.614Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4764c3a3c3400f68b60aaa"
+  },
+  "banner_image": {
+    "src": "uploads/f81b1f06e6d66e96ae6b6b54fe3b87f4",
+    "orgName": "pass_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/7c28e96ccea9c9cad9fba8ceda8a9b9a",
+    "orgName": "pass_thumb.jpeg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Passenger Drones",
+  "description": "A passenger drone (also known as a drone taxi, flying taxi, or pilotless helicopter) is a type of personal air vehicle (PAV). The first passenger drone was introduced at the Consumer Electronics Show (CES) 2016 by Chinese entrepreneurs and is called the Ehang 184.",
+  "created_at": {
+    "$date": "2020-08-27T07:46:11.371Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f476590a3c3400f68b60aab"
+  },
+  "banner_image": {
+    "src": "uploads/1f78988e4479a383bd7ffe7938181e6c",
+    "orgName": "fly_car.jpeg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/3843b46c1f24376bc9ae2a4c158444c9",
+    "orgName": "fly_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Flying Cars",
+  "description": "The Flying Cars was an attraction at Riverview Park in Chicago, Illinois.\n\nThe attraction consisted of a barrel with a track inside for cars to ride freewheeling. The cars were held onto the drum by a rail and floating clamp system. As the drum would spin, the single person cars would follow the track and eventually begin to go upside down. The drum steadily increased its speed and the cars would let it roll beneath their wheels as they followed the track. The cars' brakes were then applied to cause them to quickly accelerate up to the speed of the drum's surface, around 30 mph. The operator of Flying Cars would spin the drum for two minutes and then release the brakes causing the cars to come to a complete stop while the drum slowed to a halt. In 1966 the four-car ride overturned on the first embankment, seriously injuring several riders.The attraction was shut down due to safety concerns.",
+  "created_at": {
+    "$date": "2020-08-27T07:49:36.935Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4767479bab260f149c7111"
+  },
+  "banner_image": {
+    "src": "uploads/ae537b54cc599bc75c45e4993c26caa6",
+    "orgName": "suv_th.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/268e4a75c43644b8f520ae483bc7c0d4",
+    "orgName": "suv_ban.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Commuter Cars",
+  "description": "Commuter Cars was founded in Spokane, Washington by Rick Woodbury and his son Bryan Woodbury in 1998. Woodbury says his father came up with the original idea sometime in the early 1980s. Woodbury learned that 106 million U.S. commuters were driving to work alone. He decided to produce a single occupant fast electric car. Starting in the 1980s, Woodbury started researching hydrogen power leading to fuel cells. The weight of fuel cells led to the idea of a stable, narrow vehicle with a low center of gravity. ",
+  "created_at": {
+    "$date": "2020-08-27T07:56:55.387Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4768829bab260f149c7113"
+  },
+  "banner_image": {
+    "src": "uploads/2275abd956206cc362406fefb53fc4d2",
+    "orgName": "rv_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/406db016b5023598e8c4658b448c82d9",
+    "orgName": "rv_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Campers & RVs",
+  "description": "A recreational vehicle, often abbreviated as RV, is a motor vehicle or trailer which includes living quarters designed for accommodation.Types of RVs include motorhomes, campervans, caravans (also known as travel trailers and camper trailers), fifth-wheel trailers, popup campers, and truck campers.",
+  "created_at": {
+    "$date": "2020-08-27T08:02:10.209Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f47783c9bab260f149c7119"
+  },
+  "banner_image": {
+    "src": "uploads/74909d6cbb0956cb5f85681ee4c7b21b",
+    "orgName": "bus_bann.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/05207cd12424a6cf6939dca95d9f7933",
+    "orgName": "bus_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Commercial Buses",
+  "description": "Commercial bus means every motor vehicle designed or used for carrying passengers and their personal baggage and express for compensation",
+  "created_at": {
+    "$date": "2020-08-27T09:09:16.205Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4779299bab260f149c711a"
+  },
+  "banner_image": {
+    "src": "uploads/8f1cdb528ccd6943d74069fc0dbba3e4",
+    "orgName": "ev_thumb.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/32c256cd9e83cc527e06209b7d3d8b2e",
+    "orgName": "ev_ban.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "EVs & Hybrids",
+  "description": "An electric vehicle (EV) is a vehicle that uses one or more electric motors or traction motors for propulsion. An electric vehicle may be powered through a collector system by electricity from off-vehicle sources or maybe self-contained with a battery, solar panels, fuel cells, or an electric generator to convert fuel to electricity. EVs include, but are not limited to, road and rail vehicles, surface and underwater vessels, electric aircraft, and electric spacecraft.\n\nA hybrid electric vehicle (HEV) is a type of hybrid vehicle that combines a conventional internal combustion engine (ICE) system with an electric propulsion system (hybrid vehicle drivetrain).",
+  "created_at": {
+    "$date": "2020-08-27T09:13:13.232Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f477a4f9bab260f149c711b"
+  },
+  "banner_image": {
+    "src": "uploads/45edc3886332be8ce871bab95821ae44",
+    "orgName": "truck_bann.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/818a4b8e94f765942c2e84f6e9b613c3",
+    "orgName": "truck_ban.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Trucks",
+  "description": "A truck or lorry is a motor vehicle designed to transport cargo. Trucks vary greatly in size, power, and configuration. Smaller varieties may be mechanically similar to some automobiles.",
+  "created_at": {
+    "$date": "2020-08-27T09:18:07.458Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f477b319bab260f149c711c"
+  },
+  "banner_image": {
+    "src": "uploads/39d9d5556aaf650d491c3a105931dd26",
+    "orgName": "limo_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/e4b5c09368c033fbe349bdab03492622",
+    "orgName": "limo_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Vans & Limos",
+  "description": "Vans is an American manufacturer of skateboarding shoes and related apparel, based in Santa Ana, California, and owned by VF Corporation. The company also sponsors surf, snowboarding, BMX, and motocross teams. Since 1996, the company has been the primary sponsor of the annual Vans Warped Tour traveling rock festival.\n\nA limousine, or limo for short, is a large luxury vehicle driven by a chauffeur with a partition between the driver's compartment and the passenger's compartment. A very long-wheelbase luxury sedan driven by a professional driver is called a stretch limousine.",
+  "created_at": {
+    "$date": "2020-08-27T09:21:53.460Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f477cb1334f1a082ced820c"
+  },
+  "banner_image": {
+    "src": "uploads/fc3342c521d986fa6ad9693cf5698bdf",
+    "orgName": "wes_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/4b2751377b17dc40d3e09433f0f2f97c",
+    "orgName": "wes_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Western Paintings",
+  "description": "The history of Western painting represents a continuous, though disrupted, tradition from antiquity until the present time. Until the mid-19th century, it was primarily concerned with representational and Classical modes of production, after which time more modern, abstract, and conceptual forms gained favor.",
+  "created_at": {
+    "$date": "2020-08-27T09:28:17.191Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f477d28334f1a082ced820d"
+  },
+  "banner_image": {
+    "src": "uploads/90e2a90d291feaf4a0007d0ceebb3611",
+    "orgName": "ori_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/90982e67692fc1d9a4c73f592be84447",
+    "orgName": "ori_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Oriental Paintings",
+  "description": "Oriental art is often interchangeably used with the terms Eastern or Asian art and it refers to the historic and contemporary art originating from various Asian cultures and reflecting on the society in which it was produced.",
+  "created_at": {
+    "$date": "2020-08-27T09:30:16.370Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f477e29334f1a082ced820f"
+  },
+  "banner_image": {
+    "src": "uploads/48d139225bb3ca965a12eb87956b7c35",
+    "orgName": "sculp_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/1a79e46b60d3254f28d9c7355f081448",
+    "orgName": "sculp_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Sculptures",
+  "description": " The sculpture is the branch of the visual arts that operates in three dimensions. It is one of the plastic arts. Durable sculptural processes originally used carving and modeling, in stone, metal, ceramics, wood, and other materials but, since Modernism, there has been almost complete freedom of materials and process.",
+  "created_at": {
+    "$date": "2020-08-27T09:34:33.664Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4780c5334f1a082ced8216"
+  },
+  "banner_image": {
+    "src": "uploads/43901833c26052b6c012c63f47e8c700",
+    "orgName": "conte_banerrr.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/8b9f1189fab7637a3fc2133566c84bce",
+    "orgName": "contemp_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Contemporary Artworks",
+  "description": "Contemporary art is the art of today, produced in the second half of the 20th century or in the 21st century. Contemporary artists work in a globally influenced, culturally diverse, and technologically advancing world.",
+  "created_at": {
+    "$date": "2020-08-27T09:45:41.510Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478198334f1a082ced8217"
+  },
+  "banner_image": {
+    "src": "uploads/a23d42988a37de38c65361e413b4800c",
+    "orgName": "modr_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/c5ab791132b11433666f95d223d15897",
+    "orgName": "moder_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Modern Artworks",
+  "description": "Modern art includes artistic work produced during the period extending roughly from the 1860s to the 1970s and denotes the styles and philosophies of the art produced during that era. The term is usually associated with art in which the traditions of the past have been thrown aside in a spirit of experimentation.",
+  "created_at": {
+    "$date": "2020-08-27T09:49:12.481Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478272334f1a082ced8218"
+  },
+  "banner_image": {
+    "src": "uploads/db3704ca8dd94701581b6a3b963f1474",
+    "orgName": "disgi_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/14a9ae97160dc03420ee6885a9a1e238",
+    "orgName": "digi_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Digital Artworks",
+  "description": "Digital art is an artistic work or practice that uses digital technology as part of the creative or presentation process. Since the 1960s, various names have been used to describe the process, including computer art and multimedia art. Digital art is itself placed under the larger umbrella term new media art.",
+  "created_at": {
+    "$date": "2020-08-27T09:52:50.511Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4782f2334f1a082ced8219"
+  },
+  "banner_image": {
+    "src": "/uploads/0b3051d0bb0a2bb6f3b9a1b141703f18",
+    "orgName": "anti_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "/uploads/52cf85041c4498b27ede05fcccca0f37",
+    "orgName": "anti_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Antiques",
+  "description": "A true antique is an item perceived as having value because of its aesthetic or historical significance, and often defined as at least 100 years old, although the term is often used loosely to describe any object that is old.",
+  "created_at": {
+    "$date": "2020-08-27T09:54:58.205Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478402334f1a082ced821a"
+  },
+  "banner_image": {
+    "src": "uploads/4f73850751ee7d9fbfa4e48e931b3981",
+    "orgName": "collec_bnn.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/e7489418557bfae9a9884c51633b787a",
+    "orgName": "colle_ban.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Collectibles",
+  "description": "A collectible is any object regarded as being of value or interest to a collector. There are numerous types of collectibles and terms to denote those types. An antique is a collectible that is old. A curio is a small, usually fascinating or unusual item sought by collectors.",
+  "created_at": {
+    "$date": "2020-08-27T09:59:30.276Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478529334f1a082ced821b"
+  },
+  "banner_image": {
+    "src": "uploads/a82e427b0d40753a114e29d11449a23d",
+    "orgName": "draft_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/f2f1c174fe1a10f3fb6957cc9a4e202d",
+    "orgName": "draft_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Draft Horses",
+  "description": "A draft horse, draught horse, or dray horse, less often called a carthorse, workhorse or heavy horse, is a large horse bred to be a working animal doing hard tasks such as plowing and other farm labor.",
+  "created_at": {
+    "$date": "2020-08-27T10:04:25.320Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4785b3334f1a082ced821c"
+  },
+  "banner_image": {
+    "src": "uploads/5a7aaf6cc8c97aa0045ffca0773bd4f1",
+    "orgName": "showhorces_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/ab6c062fd69dcd856565b19da67dc63f",
+    "orgName": "showHorses_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Show Horses",
+  "description": "A horse show is a judged exhibition of horses and ponies. Many different horse breeds and equestrian disciplines hold competitions worldwide, from local to international levels. Most horse shows run from one to three days, sometimes longer for major, all-breed events or national and international championships in a given discipline or breed. Most shows consist of a series of different performances, called classes, wherein a group of horses with similar training or characteristics compete against one another for awards and, often, prize money.",
+  "created_at": {
+    "$date": "2020-08-27T10:06:43.915Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478629334f1a082ced821d"
+  },
+  "banner_image": {
+    "src": "uploads/cd60f25efb404bdb613411954cf73b2f",
+    "orgName": "cattle_thumb.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/a22bdf0e49647407e4853b71f4b844c3",
+    "orgName": "cattle_ban.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Cattle",
+  "description": "Cattle, or cows (female) and bulls (male), are the most common type of large domesticated ungulates. They are a prominent modern member of the subfamily Bovinae, are the most widespread species of the genus Bos, and are most commonly classified collectively as Bos taurus.",
+  "created_at": {
+    "$date": "2020-08-27T10:08:41.976Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4786d2334f1a082ced821e"
+  },
+  "banner_image": {
+    "src": "uploads/deef8b2e37d5856db73139ee972c622f",
+    "orgName": "sheep_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/9a39423c0766a628f9c291184c5a3574",
+    "orgName": "sheep_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Sheep",
+  "description": "Sheep (Ovis aries) are quadrupedal, ruminant mammals typically kept as livestock. Like most ruminants, sheep are members of the order Artiodactyla, the even-toed ungulates. Although the name sheep applies to many species in the genus Ovis, in everyday usage it almost always refers to Ovis aries. Numbering a little over one billion, domestic sheep are also the most numerous species of sheep. An adult female is referred to as a ewe, an intact male as a ram, occasionally a tup, a castrated male as a wether, and a young sheep as a lamb.",
+  "created_at": {
+    "$date": "2020-08-27T10:11:30.139Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f47883c334f1a082ced821f"
+  },
+  "banner_image": {
+    "src": "uploads/185fe0579a3c2326100e856b05661550",
+    "orgName": "live_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/23f35e70ff6eb0d286c377b5a44173f0",
+    "orgName": "live_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Other Live Stocks",
+  "description": "Livestock is commonly defined as domesticated animals raised in an agricultural setting to produce labor and commodities such as meat, eggs, milk, fur, leather, and wool.",
+  "created_at": {
+    "$date": "2020-08-27T10:17:32.574Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478928334f1a082ced8224"
+  },
+  "banner_image": {
+    "src": "uploads/58f09f700cf002183fe8957a5c6ac889",
+    "orgName": "real_estate_ban.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/6abb09d643165b892a1aae961fae8787",
+    "orgName": "real_thumb.png"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Real Estate Asset Tokens",
+  "description": "Tokenization is one way to securitize real assets. To securitize an asset means to divide it into shares that you can sell to investors. In the same way, to “tokenize” an asset is to divide it into shares, or “tokens”, that represent a predefined share of the underlying asset.",
+  "created_at": {
+    "$date": "2020-08-27T10:21:28.331Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478b2a334f1a082ced8225"
+  },
+  "banner_image": {
+    "src": "uploads/be7fd3a79e5f8643f3099d39e270df59",
+    "orgName": "comm_bannnn.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/61d98b8bc214187fde09cab111f2091c",
+    "orgName": "toke_thumb.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Commodity Asset Tokens",
+  "description": "A tokenized form of traditional commodities with established markets such as oil, gold, silver, natural gas, etc. The value proposition for this token is the digital equivalent of commodity futures: a futures contract in which the underlying is a commodity, primarily an agricultural product (coffee beans, wheat, corn, etc), metal (silver, gold, platinum, etc), or natural resource (oil, gas, etc). The first type of commodity futures is known as soft commodity futures, while the other is known as hard commodity futures.",
+  "created_at": {
+    "$date": "2020-08-27T10:30:02.596Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f478cb8334f1a082ced8226"
+  },
+  "banner_image": {
+    "src": "uploads/dc1c92af1739ff62b41cd259417da5f9",
+    "orgName": "utillity_thumb.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "/uploads/a7355ee74e815191413ab05633742b41",
+    "orgName": "utility_th.png"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Utility Tokens",
+  "description": "A digital token of cryptocurrency that is issued in order to fund the development of the cryptocurrency and that can be later used to purchase a good or service offered by the issuer of the cryptocurrency sold utility tokens as a method of fundraising for the start-up.",
+  "created_at": {
+    "$date": "2020-08-27T10:36:40.531Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f4f2f5053d76313b0240047"
+  },
+  "banner_image": {
+    "src": "uploads/1aadced816ff2af94b9581860ce48964",
+    "orgName": "nft.jpeg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/b93ac662cdabebb0c689a9bb2cbc8a39",
+    "orgName": "nft_thumbnail.webp"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "NFTs",
+  "description": "A non-fungible token (NFT), also known as a nifty, is a special type of cryptographic token which represents something unique; non-fungible tokens are thus not mutually interchangeable by their individual specification. This is in contrast to cryptocurrencies like Zcash, and many networks or utility tokens that are fungible in nature.",
+  "created_at": {
+    "$date": "2020-09-02T05:36:16.339Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f50c3a63d48bc072cab478e"
+  },
+  "banner_image": {
+    "src": "uploads/61deeb9677cce26ec2e51edd3bc8a46a",
+    "orgName": "aprt.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/8095d838d0efd874b2f6140d902ddd97",
+    "orgName": "arpt.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Apartment Buildings",
+  "description": "Residential real estate may contain either a single-family or multifamily structure that is available for occupation or for non-business purposes. Residences can be classified by and how they are connected to neighboring residences and land. Different types of housing tenure can be used for the same physical type. For example, connected residences might be owned by a single entity and leased out, or owned separately with an agreement covering the relationship between units and common areas and concerns.",
+  "created_at": {
+    "$date": "2020-09-03T10:21:26.009Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f61ea2eea528e0504726594"
+  },
+  "banner_image": {
+    "src": "uploads/95538fbd53402023f4a3d79462510f35",
+    "orgName": "420thu.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/373c085114e33ee6eadd47331fa4e6ac",
+    "orgName": "420.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Cannabis Properties",
+  "description": "Cannabis Property is the World’s Largest Cannabis & Hemp Real Estate Marketplace and the Leading Source for Cannabis & Hemp Real Estate & Business Listings, Financing, Insurance, Professional Services, and More. Legalized recreational cannabis is becoming more common across the United States, which has realized an influx of a new type of tenant and purchaser into retail, industrial, and land space. Cannabis cultivators have absorbed warehouse and land space, and dispensaries have occupied underutilized Class B & C space for retail purposes. Unique challenges to commercial real estate professionals and cannabis entrepreneurs have taken shape, partially because the cannabis industry is in its infancy and lacks federal support.",
+  "created_at": {
+    "$date": "2020-09-16T10:34:22.196Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f96a8e4ca4ee020980a4cfc"
+  },
+  "banner_image": {
+    "src": "uploads/7f00e5070e170150d1e47b010ab2064b",
+    "orgName": "real esate ban1.png"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/905c733fd8f3f5f488b9b820abfddafd",
+    "orgName": "real este 2.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Property Crowdfunding",
+  "description": "Property crowdfunding uses social media and the Internet to connect investors to property investments. Property crowdfunding is similar to equity investing since an investor can buy into a property and become a shareholder. Crowdfunding offers companies access to capital that they might never be able to raise. Crowdfunding offers investors the ability to become shareholders in a company or in a real estate property.",
+  "created_at": {
+    "$date": "2020-10-26T10:45:56.662Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f96b2c8ca4ee020980a4cfd"
+  },
+  "banner_image": {
+    "src": "uploads/c5bacece6e1a14abb894dd1c3e8bdf4a",
+    "orgName": "venture6.jpg"
+  },
+  "thumbnaill_image": {
+    "src": "uploads/6706d2464bbf84dc07439fbda4c5d791",
+    "orgName": "venturrrrr.jpg"
+  },
+  "created_by": null,
+  "updated_by": null,
+  "updated_at": null,
+  "category_name": "Equity Crowdfunding",
+  "description": "Equity crowdfunding is the online offering of private company securities to a group of people for investment and therefore it is a part of the capital markets. Because equity crowdfunding involves investment into a commercial enterprise, it is often subject to securities and financial regulation. Equity crowdfunding is also referred to as crowd-investing, investment crowdfunding, or crowd equity.",
+  "created_at": {
+    "$date": "2020-10-26T11:28:08.177Z"
+  },
+  "__v": 0
+}]

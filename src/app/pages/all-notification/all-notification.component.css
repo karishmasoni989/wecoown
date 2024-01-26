@@ -1,0 +1,16 @@
+.allCohortDiv {
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+    background: #f1f1f1;
+  }
+  .listOfNotify{
+    background: transparent !important;
+    color: black;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px !important;
+  }
+  .listOfNotify img{
+    margin-right: 5px !important;
+  }

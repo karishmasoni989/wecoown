@@ -1,0 +1,16 @@
+.slash{
+    width: 6%;
+    font-size: 30px;
+    margin-left: 6px;
+    margin-top: -6px;
+    margin-right: 6px;
+}
+.marginTopMinus15{
+    margin-top: -15px;
+}
+.selectedPadd{
+    font-weight: 600;
+    padding: 3px;
+    font-size: 16px;
+    border-radius: 5px;
+}

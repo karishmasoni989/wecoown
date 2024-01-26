@@ -1,0 +1,138 @@
+<!-- middle section -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<div class="row rowPadding bg-grey-light">
+    <div class="col-md-6 page-tittle">
+        <h1>Register</h1>
+    </div>
+    <div class="col-md-6 page-tittle">
+        <div aria-label="breadcrumb" class="breadDiv">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Register</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+                <br><br>
+                <h3>Sign Up</h3>
+                <br>
+                <p>Sign in With</p>
+                <div>
+                    <button class="btn btn-facebook"><span class="fa fa-facebook-f"></span>&nbsp;Facebook</button>&nbsp;
+                    <button class="btn btn-google"><span class="fa fa-google-plus"></span>&nbsp;Google</button>&nbsp;
+                    <button class="btn btn-twitter"><span class="fa fa-twitter"></span>&nbsp;Twitter</button>
+                </div>
+                <br>
+
+                <!-- <section class="checkbox-section">
+                  <mat-checkbox [(ngModel)]="bChecked" (change)="onCheckboxChagen($event, 'Blogs')">Blogs</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="wChecked" (change)="onCheckboxChagen($event, 'Web')">Web</mat-checkbox>
+                  <mat-checkbox [(ngModel)]="oChecked" (change)="onCheckboxChagen($event, 'Online News')">Online News</mat-checkbox>
+                  </section> -->
+
+                <h3>Interests Array</h3>
+                <ol>
+                    <li *ngFor="let interest of interests">{{interest}}</li>
+                </ol>
+
+                <!-- <div ng-controller="fetchCtrl" ng-app='myapp'>
+ 
+                    <ul ng-repeat='user in users'>
+                      <li><input type='checkbox' value='{{ user.name }}' ng-model='user.selected'> {{ user.name}}</li>
+                    </ul>
+                 
+                    <input type='button' ng-click='checkVal()' value='Click'>
+                    <br><br>
+                    Result : <span >{{ result }}</span>
+                  </div> -->
+                <form class="login-form" [formGroup]="registerForm" (ngSubmit)="register()">
+                    <p>Regestering as :<span class="red">*</span></p>
+             
+                    <!-- <ul class="checkbox-items">
+                        <li *ngFor="let item of checkboxesDataList">
+                          <input type="checkbox" value="item.isChecked" (change)="changeSelection()">{{item.label}}
+                        </li>
+                      </ul> -->
+                    <div class="checkbox form-group">
+                        <input [(ngModel)]="showMoreControls" [ngModelOptions]="{standalone: true}">
+                        <p><input type="checkbox" value="A WCO buye" id="role_1"
+                                (change)="onCheckboxChange(this.event, 'Blogs')">&nbsp;a buyer on WeCoOwn&nbsp;
+                            <input type="checkbox" value="WePo property seller" id="role_2" >&nbsp;a seller on
+                            WePropertyowners&nbsp;
+                            <input type="checkbox" value="A WeHo home owner" id="role_3">&nbsp;a community member on
+                            WeHomeowners&nbsp;
+                            <input type="checkbox" value="WeBo business owners" id="role_4">&nbsp;a community member on
+                            WeBusinessowners
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Username : <span class="red">*</span></label><br>
+                        <input class="form-control" type="text" placeholder="Username" formControlName="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address : <span class="red">*</span></label><br>
+                        <input class="form-control" type="email" placeholder="Email Address" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password : <span class="red">*</span></label><br>
+                        <input class="form-control" type="password" placeholder="Password" formControlName="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password : <span class="red">*</span></label><br>
+                        <input class="form-control" type="password" placeholder="Confirm Password"
+                            formControlName="confirm_password">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" value="WePo property seller" id="role_2">&nbsp;<a href="#">I accept Terms
+                            of Use, Privacy Policy & California Privacy</a>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Sign Up</button>
+                    </div>
+                    <div><label>Already have an account? <a href="/register"> Sign in</a></label></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <br>
+</div>
+
+<!-- Script -->
+<!-- <script>
+    var fetch = angular.module('myapp', []);
+  
+    fetch.controller('fetchCtrl', ['$scope', '$http', function ($scope, $http) {
+  
+      // Users list
+      $scope.users = [
+       { id: 1, name: "Yogesh singh"}, 
+       { id: 2, name: "Sonarika Bhadoria" }, 
+       { id: 3, name: "Vishal Sahu" }, 
+       { id: 4, name: "Anil singh" }
+      ];
+  
+      // Check checkboxes checked or not
+      $scope.checkVal = function(){
+   
+      var checkedUsers = '';
+      $scope.users.forEach(function(user) {
+  
+        if (user.selected) {
+          if(checkedUsers != ''){
+            checkedUsers += " , ";
+          }
+          checkedUsers += user.name;
+        }
+      });
+      $scope.result = checkedUsers;
+   
+     }
+   
+    }]);
+  
+    </script> -->

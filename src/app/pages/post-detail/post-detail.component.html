@@ -1,0 +1,2322 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>Listing Detail</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Listing Detail</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="page rowPadding">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success postDetailSuccess dispNone"></div>
+            <div class="alert alert-danger postDetailDanger dispNone"></div>
+            <button *ngIf="currentUSERR != undefined" class="btn btn-primary float-right margin20-5"
+                (click)="goTocreatePosting()">Share Listing on WeCoOwn</button>
+            <button *ngIf="currentUSERR == getData[0].user_id" class="btn btn-primary margin20-5 float-right"
+                data-toggle="modal" data-target="#delete-post-modal">Delete Listing</button>
+            <button *ngIf="currentUSERR == getData[0].user_id" class="btn btn-primary margin20-5 float-right"
+                (click)="editListing()">Edit Listing</button>
+            <button *ngIf="currentUSERR == getData[0].user_id" class="btn btn-primary margin20-5 float-right"
+                data-target="#mark-sold-out-modal" data-toggle="modal">Mark Sold Out</button>
+        </div>
+    </div>
+    <!--  -->
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 20px;">
+            <div class="bgGrey colorBlack Padding-1rem text-center">
+                <h2>{{getData[0].address_line1}} <span *ngIf="getData[0].address_line2">| {{getData[0].address_line2}}
+                    </span><span *ngIf="getData[0].landmark">| {{getData[0].landmark}}</span></h2>
+                <p> {{getData[0].zipcode}} | {{getData[0].city}} | {{getData[0].state | stateSplitNameShow}} | {{getData[0].country | countrySplitNameShow}} |
+                    {{getData[0].name}} | {{getData[0].purpose}} <span *ngIf="getData[0].purpose === 'Both'"> (For Sale
+                        & Lease)</span>
+                    <span *ngIf="getData[0].name === 'Jets & Aircraft'"> | JA{{getData[0].Form_Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Real Estate'"> | RE{{getData[0].Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Yachts & Ships'"> | YS{{getData[0].Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Crowdfunding Projects'"> | CP{{getData[0].Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Crypto-Assets'"> | CA{{getData[0].Form_Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Horses & Live Stocks'"> |
+                        HL{{getData[0].Form_Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Artworks & Antiques'"> |
+                        AW{{getData[0].Form_Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Cars & RVs'"> | CR{{getData[0].Form_Serial_Number}}</span>
+                    <span *ngIf="getData[0].name === 'Business Properties'"> |
+                        BP{{getData[0].Form_Serial_Number}}</span>
+                    <span class="red" *ngIf="getData[0].Sold_out === true"> (Sold)</span>
+                </p>
+            </div>
+            <div class="coverrr" id="only-one-photo">
+                <img *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpg'"
+                    src="{{baseURLofAPi+getData[0].property_photos[0].src}}" class="single-image-of-lisitng">
+                <img *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpeg'"
+                    src="{{baseURLofAPi+getData[0].property_photos[0].src}}" class="single-image-of-lisitng">
+                <img *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'png'"
+                    src="{{baseURLofAPi+getData[0].property_photos[0].src}}" class="single-image-of-lisitng">
+                <video controls
+                    *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'mp4'"
+                    autoplay="autoplay" loop="loop" preload="true" volume="0" onloadedmetadata="this.muted = true"
+                    [muted]="true" playsinline class="single-image-of-lisitng"
+                    [src]="baseURLofAPi+getData[0].property_photos[0].src"></video>
+                <video controls
+                    *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'mov'"
+                    autoplay="autoplay" loop="loop" preload="true" volume="0" onloadedmetadata="this.muted = true"
+                    [muted]="true" playsinline class="single-image-of-lisitng"
+                    [src]="baseURLofAPi+getData[0].property_photos[0].src"></video>
+                <video controls
+                    *ngIf="getData[0].property_photos[0].orgName.substring(getData[0].property_photos[0].orgName.lastIndexOf('.') + 1) == 'webm'"
+                    autoplay="autoplay" loop="loop" preload="true" volume="0" onloadedmetadata="this.muted = true"
+                    [muted]="true" playsinline class="single-image-of-lisitng"
+                    [src]="baseURLofAPi+getData[0].property_photos[0].src"></video>
+            </div>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let slide of getPhtosALL">
+                    <ng-template carouselSlide [id]="slide.id">
+                        <!-- <custom-video  [url]="baseURLofAPi+slide.src"></custom-video> -->
+                        <!-- <li >{{slide.orgName.indexOf() | json}}</li> -->
+                        <!-- <li >{{slide.orgName.lastIndexOf(mp4)}}</li> -->
+                        <img *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'jpg'"
+                            [src]="baseURLofAPi+slide.src" [alt]="slide.alt" [title]="slide.title" height="350px">
+                        <img *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'jpeg'"
+                            [src]="baseURLofAPi+slide.src" [alt]="slide.alt" [title]="slide.title" height="350px">
+                        <img *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'png'"
+                            [src]="baseURLofAPi+slide.src" [alt]="slide.alt" [title]="slide.title" height="350px">
+                        <video controls *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'mp4'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            [src]="baseURLofAPi+slide.src" [title]="slide.title" height="350px"></video>
+                        <video controls *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'mov'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            [src]="baseURLofAPi+slide.src" [title]="slide.title" height="350px"></video>
+                        <video controls *ngIf="slide.orgName.substring(slide.orgName.lastIndexOf('.') + 1) == 'webm'"
+                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                            onloadedmetadata="this.muted = true" [muted]="true" playsinline width="100%"
+                            [src]="baseURLofAPi+slide.src" [title]="slide.title" height="350px"></video>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+            <div *ngIf="getData[0].Tittle_Name" class="bgGrey colorBlack Padding-1rem text-center">
+                <h2>{{getData[0].Tittle_Name}}</h2>
+            </div>
+            <br>
+        </div>
+        <div class="col-md-12" *ngFor="let allBuyer of getData, let i= index">
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Real Estate'">
+                <div class="row">
+                    <div class="col-md-6" *ngIf="allBuyer.invesment_highlights">
+                        <h4 class="">Invesment Highlights</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.invesment_highlights}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.executive_summary">
+                        <h4 *ngIf="allBuyer.executive_summary">Executive Summary</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.executive_summary}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Overview">
+                        <h4 *ngIf="allBuyer.Overview">Overview</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Overview}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.About_this_property">
+                        <h4 *ngIf="allBuyer.About_this_property">About This Property</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.About_this_property}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.nearby_amenities">
+                        <h4 *ngIf="allBuyer.nearby_amenities">Nearby Amenities</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.nearby_amenities}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Utilitie_Green_Energy_Details">
+                        <h4 *ngIf="allBuyer.Utilitie_Green_Energy_Details">Utilitie Green Energy Details</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Utilitie_Green_Energy_Details}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.transportation">
+                        <h4 *ngIf="allBuyer.transportation">Transportation</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.transportation}}</p>
+                    </div>
+                </div>
+                <h4>Property Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.property_type"><label>Property Type</label>
+                        <strong>{{allBuyer.property_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.property_subtype"><label>Property Subtype</label>
+                        <strong>{{allBuyer.property_subtype}}</strong>
+                    </div>
+                </div>
+                <!-- unit_amenities -->
+                <h4>Property Facts and Features</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_inclusive_of_fees"><label>Price Inclusive of
+                            Fees</label>
+                        <strong>{{allBuyer.Price_inclusive_of_fees}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_Per_SF"><label>Price Per SF</label>
+                        <strong>{{allBuyer.Price_Per_SF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.price_per_unit"><label>Price Per Unit</label>
+                        <strong>{{allBuyer.price_per_unit}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.sale_type"><label>Sale Type</label>
+                        <strong>{{allBuyer.sale_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.cap_rate"><label>Cap Rate</label>
+                        <strong>{{allBuyer.cap_rate}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sale_Conditions"><label>Sale Conditions</label>
+                        <strong>{{allBuyer.Sale_Conditions}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Units"><label>Number of Units</label>
+                        <strong>{{allBuyer.Number_of_Units}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Type_PF"><label>Property Type</label>
+                        <strong>{{allBuyer.Property_Type_PF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Subtype_PF"><label>Property Subtype</label>
+                        <strong>{{allBuyer.Property_Subtype_PF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Apartment_Style"><label>Apartment Style</label>
+                        <strong>{{allBuyer.Apartment_Style}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.building_class"><label>Building Class</label>
+                        <strong>{{allBuyer.building_class}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Asset_Type"><label>Asset Type</label>
+                        <strong>{{allBuyer.Asset_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Primary_Property_Type"><label>Primary Property Type</label>
+                        <strong>{{allBuyer.Primary_Property_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Zoning_Designation"><label>Zoning Designation</label>
+                        <strong>{{allBuyer.Zoning_Designation}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Occupancy"><label>Occupancy</label>
+                        <strong>{{allBuyer.Occupancy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Type_of_Ownership"><label>Type of Ownership</label>
+                        <strong>{{allBuyer.Type_of_Ownership}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Event_Item"><label>Event Item</label>
+                        <strong>{{allBuyer.Event_Item}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Type"><label>Type</label>
+                        <strong>{{allBuyer.Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Parking"><label>Parking</label>
+                        <strong>{{allBuyer.Parking}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Accessibility"><label>Accessibility</label>
+                        <strong>{{allBuyer.Accessibility}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property"><label>Property</label>
+                        <strong>{{allBuyer.Property}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Other_property_information"><label>Other Property
+                            Information</label>
+                        <strong>{{allBuyer.Other_property_information}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Size"><label>Size</label>
+                        <strong>{{allBuyer.Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.HOA"><label>HOA</label>
+                        <strong>{{allBuyer.HOA}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Other_financial_information"><label>Other Financial
+                            Information</label>
+                        <strong>{{allBuyer.Other_financial_information}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.building_size"><label>Building Size</label>
+                        <strong>{{allBuyer.building_size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Rentable_Building_Area"><label>Rentable Building Area</label>
+                        <strong>{{allBuyer.Rentable_Building_Area}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_of_Stories"><label>Number of Stories</label>
+                        <strong>{{allBuyer.No_of_Stories}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year_Built"><label>Year Built/Renovated</label>
+                        <strong>{{allBuyer.Year_Built}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Tenancy"><label>Tenancy</label>
+                        <strong>{{allBuyer.Tenancy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Parking_Ratio"><label>Parking Ratio</label>
+                        <strong>{{allBuyer.Parking_Ratio}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Clear_Ceiling_Height"><label>Clear Ceiling Height</label>
+                        <strong>{{allBuyer.Clear_Ceiling_Height}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_of_Dock_High"><label>Number of Dock High</label>
+                        <strong>{{allBuyer.No_of_Dock_High}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Opportunity_Zone"><label>Opportunity Zone</label>
+                        <strong>{{allBuyer.Opportunity_Zone}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Listing_Status"><label>Listing Status</label>
+                        <strong>{{allBuyer.Listing_Status}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Half_Baths"><label>Half Baths</label>
+                        <strong>{{allBuyer.Half_Baths}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.MLS"><label>MLS</label>
+                        <strong>{{allBuyer.MLS}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Parking_Spaces"><label>Parking Spaces</label>
+                        <strong>{{allBuyer.Parking_Spaces}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.County"><label>County</label>
+                        <strong>{{allBuyer.County}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Bedrooms"><label>Bedrooms</label>
+                        <strong>{{allBuyer.Bedrooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Baths"><label>Total Baths</label>
+                        <strong>{{allBuyer.Total_Baths}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Architecture_Style"><label>Architecture Style</label>
+                        <strong>{{allBuyer.Architecture_Style}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Living_Area"><label>Living Area</label>
+                        <strong>{{allBuyer.Living_Area}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Listed_By_Agent"><label>Listed By Agent</label>
+                        <strong>{{allBuyer.Listed_By_Agent}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Brokerage_Company"><label>Brokerage Company</label>
+                        <strong>{{allBuyer.Brokerage_Company}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Location"><label>Location</label>
+                        <strong>{{allBuyer.Location}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Inventory"><label>Inventory</label>
+                        <strong>{{allBuyer.Inventory}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_SF"><label>Building SF</label>
+                        <strong>{{allBuyer.Building_SF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Employees"><label>Employees</label>
+                        <strong>{{allBuyer.Employees}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Facilities"><label>Facilities</label>
+                        <strong>{{allBuyer.Facilities}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Competition"><label>Competition</label>
+                        <strong>{{allBuyer.Competition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Growth_and_Expansion"><label>Growth & Expansion</label>
+                        <strong>{{allBuyer.Growth_and_Expansion}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Financing"><label>Financing</label>
+                        <strong>{{allBuyer.Financing}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Support_and_Training"><label>Support & Training</label>
+                        <strong>{{allBuyer.Support_and_Training}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Percent_Leased"><label>Percent Leased</label>
+                        <strong>{{allBuyer.Percent_Leased}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.zoning"><label>Zoning</label>
+                        <strong>{{allBuyer.zoning}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_Height"><label>Building Height</label>
+                        <strong>{{allBuyer.Building_Height}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Typical_Floor_Size"><label>Typical Floor Size</label>
+                        <strong>{{allBuyer.Typical_Floor_Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Slab_To_Slab"><label>Slab to Slab</label>
+                        <strong>{{allBuyer.Slab_To_Slab}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_FAR"><label>Building FAR</label>
+                        <strong>{{allBuyer.Building_FAR}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_Acres"><label>Land Acres</label>
+                        <strong>{{allBuyer.Land_Acres}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Name"><label>Property Name</label>
+                        <strong>{{allBuyer.Property_Name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Region"><label>Region</label>
+                        <strong>{{allBuyer.Region}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Development"><label>Development</label>
+                        <strong>{{allBuyer.Development}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Title"><label>Title</label>
+                        <strong>{{allBuyer.Title}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Frontage"><label>Frontage</label>
+                        <strong>{{allBuyer.Frontage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Loading_Docks"><label>Loading Docks</label>
+                        <strong>{{allBuyer.Loading_Docks}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Size"><label>Size</label>
+                        <strong>{{allBuyer.Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lifestyles"><label>Lifestyles</label>
+                        <strong>{{allBuyer.Lifestyles}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Population"><label>Population</label>
+                        <strong>{{allBuyer.Population}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year_of_construction"><label>Year of construction</label>
+                        <strong>{{allBuyer.Year_of_construction}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Parcel_Number || allBuyer.Land_Assessment || allBuyer.Improvements_Assessment || 
+                allBuyer.Total_Assessment || allBuyer.zoning_code || allBuyer.Annual_Taxes || allBuyer.Tax_Year">
+                    Property Taxs & Operating Expenses</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Parcel_Number"><label>Parcel Number</label>
+                        <strong>{{allBuyer.Parcel_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_Assessment"><label>Land Assessment</label>
+                        <strong>{{allBuyer.Land_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Improvements_Assessment"><label>Improvements
+                            Assessment</label>
+                        <strong>{{allBuyer.Improvements_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Assessment"><label>Total Assessment</label>
+                        <strong>{{allBuyer.Total_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.zoning_code"><label>Zoning Code</label>
+                        <strong>{{allBuyer.zoning_code}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Annual_Taxes"><label>Annual Taxes</label>
+                        <strong>{{allBuyer.Annual_Taxes}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Tax_Year"><label>Tax Year</label>
+                        <strong>{{allBuyer.Tax_Year}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.Bedrooms_Bathrooms || allBuyer.Basement || allBuyer.Heating|| allBuyer.Cooling || allBuyer.Appliances || allBuyer.other_interior_features">
+                    Interior Details</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Bedrooms_Bathrooms"><label>Bedrooms & Bathrooms</label>
+                        <strong>{{allBuyer.Bedrooms_Bathrooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Basement"><label>Basement</label>
+                        <strong>{{allBuyer.Basement}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Heating"><label>Heating</label>
+                        <strong>{{allBuyer.Heating}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cooling"><label>Cooling</label>
+                        <strong>{{allBuyer.Cooling}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Appliances"><label>Appliances</label>
+                        <strong>{{allBuyer.Appliances}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.other_interior_features"><label>Other Interior
+                            Features</label>
+                        <strong>{{allBuyer.other_interior_features}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.Type_and_style || allBuyer.Material_information || allBuyer.Condition || allBuyer.Notable_dates || allBuyer.Other_construction">
+                    Construction Details</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Type_and_style"><label>Type & Style</label>
+                        <strong>{{allBuyer.Type_and_style}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Material_information"><label>Material Information</label>
+                        <strong>{{allBuyer.Material_information}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Notable_dates"><label>Notable Dates</label>
+                        <strong>{{allBuyer.Notable_dates}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Other_construction"><label>Other Construction</label>
+                        <strong>{{allBuyer.Other_construction}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Security || allBuyer.Community">Community & Neighborhood Details: </h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Security"><label>Security</label>
+                        <strong>{{allBuyer.Security}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Community"><label>Community</label>
+                        <strong>{{allBuyer.Community}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.Tenant || allBuyer.Industry || allBuyer.SF_Occupied || allBuyer.Rent_SF || allBuyer.Lease_End ||allBuyer.lease_type">
+                    Major Tenants</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Tenant"><label>Tenant</label>
+                        <strong>{{allBuyer.Tenant}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Industry"><label>Industry</label>
+                        <strong>{{allBuyer.Industry}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.SF_Occupied"><label>SF Occupied</label>
+                        <strong>{{allBuyer.SF_Occupied}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Rent_SF"><label>Rent / SF</label>
+                        <strong>{{allBuyer.Rent_SF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lease_End"><label>Lease End</label>
+                        <strong>{{allBuyer.Lease_End}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.lease_type"><label>Lease Type</label>
+                        <strong>{{allBuyer.lease_type}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.space || allBuyer.Size || allBuyer.space_use || allBuyer.Condition || allBuyer.AVAILABLE">
+                    Space Availability</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.space"><label>Space</label>
+                        <strong>{{allBuyer.space}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Size"><label>Size</label>
+                        <strong>{{allBuyer.Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.space_use"><label>Space Use</label>
+                        <strong>{{allBuyer.space_use}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.AVAILABLE"><label>Available</label>
+                        <strong>{{allBuyer.AVAILABLE}}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Crowdfunding Projects'">
+                <div class="row">
+                    <div class="col-md-6" *ngIf="allBuyer.invesment_highlights">
+                        <h4 class="">Invesment Highlights</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.invesment_highlights}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Description">
+                        <h4 *ngIf="allBuyer.Description">Description</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Description}}</p>
+                    </div>
+                </div>
+                <h4>Crowdfunding Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.CrowdFunding_type"><label>Crowdfunding Type</label>
+                        <strong>{{allBuyer.CrowdFunding_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.CrowdFunding_subtype"><label>Crowdfunding Subtype</label>
+                        <strong>{{allBuyer.CrowdFunding_subtype}}</strong>
+                    </div>
+                </div>
+                <h4>General Info</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Minimum_Investment"><label>Minimum Investment</label>
+                        <strong>{{allBuyer.Minimum_Investment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Average_Annual_Return"><label>Average Annual Return</label>
+                        <strong>{{allBuyer.Average_Annual_Return}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Investment_Options"><label>Investment Options</label>
+                        <strong>{{allBuyer.Investment_Options}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Pros"><label>Pros</label>
+                        <strong>{{allBuyer.Pros}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cons"><label>Cons</label>
+                        <strong>{{allBuyer.Cons}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Early_Withdrawals"><label>Early Withdrawals</label>
+                        <strong>{{allBuyer.Early_Withdrawals}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Steep_Investment_Minimums"><label>Steep Investment
+                            Minimums</label>
+                        <strong>{{allBuyer.Steep_Investment_Minimums}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Historical_Annual_Returns"><label>Annual Returns</label>
+                        <strong>{{allBuyer.Historical_Annual_Returns}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Reinvestment_Opportunities"><label>Reinvestment
+                            Opportunities</label>
+                        <strong>{{allBuyer.Reinvestment_Opportunities}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Business_Bureau_Ratings"><label>Business Bureau
+                            Ratings</label>
+                        <strong>{{allBuyer.Business_Bureau_Ratings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Educational_Offerings"><label>Educational Offerings</label>
+                        <strong>{{allBuyer.Educational_Offerings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Targeted_Average_Cash_Yield"><label>Targeted Average Cash
+                            Yield</label>
+                        <strong>{{allBuyer.Targeted_Average_Cash_Yield}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Targeted_Investment_Period"><label>Targeted Investment
+                            Period</label>
+                        <strong>{{allBuyer.Targeted_Investment_Period}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Targeted_Equity_Multiple"><label>Targeted Equity
+                            Multiple</label>
+                        <strong>{{allBuyer.Targeted_Equity_Multiple}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Targeted_Investor_IRR"><label>Targeted Investor IRR</label>
+                        <strong>{{allBuyer.Targeted_Investor_IRR}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Preferred_Return"><label>Preferred Return</label>
+                        <strong>{{allBuyer.Preferred_Return}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Investment_Strategy"><label>Investment Strategy</label>
+                        <strong>{{allBuyer.Investment_Strategy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Type"><label>Property Type</label>
+                        <strong>{{allBuyer.Property_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Investment_Profile"><label>Investment Profile</label>
+                        <strong>{{allBuyer.Investment_Profile}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Holdings"><label>Number of Holdings</label>
+                        <strong>{{allBuyer.Number_of_Holdings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Footnotes">
+                        <label>Footnotes</label><strong>{{allBuyer.Footnotes}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Company_Term"><label>Company Term</label>
+                        <strong>{{allBuyer.Company_Term}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Next_Targeted_Close_Date"><label>Next Targeted Close
+                            Date</label>
+                        <strong>{{allBuyer.Next_Targeted_Close_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Offers_Due_Date"><label>Offers Due Date</label>
+                        <strong>{{allBuyer.Offers_Due_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Funds_Due_Date"><label>Funds Due Date</label>
+                        <strong>{{allBuyer.Funds_Due_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Distribution"><label>Distribution</label>
+                        <strong>{{allBuyer.Distribution}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Targeted_Distribution_Start_Date"><label>Targeted Distribution
+                            Start Date</label>
+                        <strong>{{allBuyer.Targeted_Distribution_Start_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Preferred_Return_Accrual_Date"><label>Preferred Return Accrual
+                            Date</label>
+                        <strong>{{allBuyer.Preferred_Return_Accrual_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.SD_IRA_Investments"><label>SD-IRA Investments</label>
+                        <strong>{{allBuyer.SD_IRA_Investments}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fund_Size"><label>Fund Size</label>
+                        <strong>{{allBuyer.Fund_Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sponser"><label>Sponser</label>
+                        <strong>{{allBuyer.Sponser}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Business_Plan"><label>Business Plan</label>
+                        <strong>{{allBuyer.Business_Plan}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Key_Deal_Points"><label>Key Deal Points</label>
+                        <strong>{{allBuyer.Key_Deal_Points}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Summary_of_Changes"><label>Summary of Changes</label>
+                        <strong>{{allBuyer.Summary_of_Changes}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Investor_Accreditation"><label>Investor Accreditation</label>
+                        <strong>{{allBuyer.Investor_Accreditation}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Tax"><label>Tax</label>
+                        <strong>{{allBuyer.Tax}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_Assessment"><label>Land Assessment</label>
+                        <strong>{{allBuyer.Land_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Reasons_to_Invest"><label>Reasons to Invest</label>
+                        <strong>{{allBuyer.Reasons_to_Invest}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Features"><label>Features</label>
+                        <strong>{{allBuyer.Features}}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Jets & Aircraft'">
+                <h4>General</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Aircraft_type"><label>Aircraft Type</label>
+                        <strong>{{allBuyer.Aircraft_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Aircraft_subtype"><label>Aircraft Sub-type</label>
+                        <strong>{{allBuyer.Aircraft_subtype}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Aircraft_Location"><label>Aircraft Location</label>
+                        <strong>{{allBuyer.Aircraft_Location}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year"><label>Year</label>
+                        <strong>{{allBuyer.Year}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Manufacturer"><label>Manufacturer</label>
+                        <strong>{{allBuyer.Manufacturer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Role"><label>Role</label>
+                        <strong>{{allBuyer.Role}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.First_flight"><label>First Flight</label>
+                        <strong>{{allBuyer.First_flight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Flying_Cars_Status"><label>Status</label>
+                        <strong>{{allBuyer.Flying_Cars_Status}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_built"><label>Number Built</label>
+                        <strong>{{allBuyer.Number_built}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Registration_number"><label>Registration Number</label>
+                        <strong>{{allBuyer.Registration_number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Time"><label>Total Time</label>
+                        <strong>{{allBuyer.Total_Time}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Seats"><label>Number of Seats</label>
+                        <strong>{{allBuyer.Number_of_Seats}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Description"><label>Description</label>
+                        <strong>{{allBuyer.Description}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Model"><label>Model</label>
+                        <strong>{{allBuyer.Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Serial_Number"><label>Serial Number</label>
+                        <strong>{{allBuyer.Serial_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuselage_length"><label>Fuselage Length</label>
+                        <strong>{{allBuyer.Fuselage_length}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Overall_height"><label>Overall Height</label>
+                        <strong>{{allBuyer.Overall_height}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Wingspan"><label>Wingspan</label>
+                        <strong>{{allBuyer.Wingspan}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Tip_to_tip_distance"><label>Tip-to-Tip Distance</label>
+                        <strong>{{allBuyer.Tip_to_tip_distance}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Empty_weight"><label>Empty Weight</label>
+                        <strong>{{allBuyer.Empty_weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Max_gross_takeoff_wt"><label>Max Gross Takeoff Weight</label>
+                        <strong>{{allBuyer.Max_gross_takeoff_wt}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Useful_Load"><label>Useful Load</label>
+                        <strong>{{allBuyer.Useful_Load}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.cruise_speed"><label>Cruise Speed</label>
+                        <strong>{{allBuyer.cruise_speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lift_Propulsors"><label>Lift Propulsors</label>
+                        <strong>{{allBuyer.Lift_Propulsors}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Motor_output"><label>Motor Output</label>
+                        <strong>{{allBuyer.Motor_output}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Power_type"><label>Power Type</label>
+                        <strong>{{allBuyer.Power_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Passenger_capacity"><label>Passenger Capacity</label>
+                        <strong>{{allBuyer.Passenger_capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.FlightRules"><label>Flight Rules
+                        </label><strong>{{allBuyer.FlightRules}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Address"><label>Address</label>
+                        <strong>{{allBuyer.Address}}</strong>
+                    </div>
+                </div>
+                <h4>Specifications</h4>
+                <h4 *ngIf="allBuyer.Capacity || allBuyer.Mass_Empty || allBuyer.Maximum_Take_Off_Weight || allBuyer.Maximum_baggage_load ||
+                allBuyer.Fuel_type || allBuyer.Fuel_capacity">Technical Specifications</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Capacity"><label>Capacity</label>
+                        <strong>{{allBuyer.Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mass_Empty"><label>Mass Empty</label>
+                        <strong>{{allBuyer.Mass_Empty}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_Take_Off_Weight"><label>Maximum Take-Off
+                            Weight</label>
+                        <strong>{{allBuyer.Maximum_Take_Off_Weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_baggage_load"><label>Maximum Baggage Load</label>
+                        <strong>{{allBuyer.Maximum_baggage_load}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel_type"><label>Fuel Type</label>
+                        <strong>{{allBuyer.Fuel_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel_capacity"><label>Fuel Capacity</label>
+                        <strong>{{allBuyer.Fuel_capacity}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.Max_speed || allBuyer.Top_speed_acceleration || allBuyer.Engine_power || allBuyer.Dimensions || allBuyer.Range">
+                    Drive Mode</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Max_speed"><label>Maximum Speed</label>
+                        <strong>{{allBuyer.Max_speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Top_speed_acceleration"><label>Top Speed Acceleration (0-100
+                            km/h)</label>
+                        <strong>{{allBuyer.Top_speed_acceleration}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_power"><label>Engine Power</label>
+                        <strong>{{allBuyer.Engine_power}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Dimensions"><label>Dimensions (L×W×H)</label>
+                        <strong>{{allBuyer.Dimensions}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Range"><label>Range</label>
+                        <strong>{{allBuyer.Range}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.Economic_cruise_speed || allBuyer.Maximum_Speed_flightmode || allBuyer.Engine_Power_flightmode || allBuyer.Rotor_diameter ||
+                allBuyer.Maximum_altitude || allBuyer.Take_off_distance || allBuyer.Landing_rol_distance || allBuyer.Dimension_flight_lwh || allBuyer.Seats">
+                    Flight Mode</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Economic_cruise_speed"><label>Economic Cruise Speed</label>
+                        <strong>{{allBuyer.Economic_cruise_speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_Speed_flightmode"><label>Maximum Speed</label>
+                        <strong>{{allBuyer.Maximum_Speed_flightmode}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_Power_flightmode"><label>Engine Power</label>
+                        <strong>{{allBuyer.Engine_Power_flightmode}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Rotor_diameter"><label>Rotor Diameter</label>
+                        <strong>{{allBuyer.Rotor_diameter}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_altitude"><label>Maximum Altitude</label>
+                        <strong>{{allBuyer.Maximum_altitude}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Range_flight"><label>Range</label>
+                        <strong>{{allBuyer.Range_flight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Take_off_distance"><label>Take-Off Distance</label>
+                        <strong>{{allBuyer.Take_off_distance}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Landing_rol_distance"><label>Landing Roll Distance</label>
+                        <strong>{{allBuyer.Landing_rol_distance}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Dimension_flight_lwh"><label>Dimensions (L×W×H)</label>
+                        <strong>{{allBuyer.Dimension_flight_lwh}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Seats"><label>Seats</label>
+                        <strong>{{allBuyer.Seats}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Airframe_Notes || allBuyer.Total_Landings || allBuyer.Complete_Logs">Airframe Notes
+                </h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Airframe_Notes"><label>Airframe Notes</label>
+                        <strong>{{allBuyer.Airframe_Notes}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Landings"><label>Total Landings</label>
+                        <strong>{{allBuyer.Total_Landings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Complete_Logs"><label>Complete Logs</label>
+                        <strong>{{allBuyer.Complete_Logs}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Hot_Section_Time || allBuyer.Engine_Time || allBuyer.Cycles_TBO || allBuyer.Engine_Maintenance_Program ||
+                allBuyer.Fuel_Capacity_Volume || allBuyer.Make_Model || allBuyer.Time">Engine</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Hot_Section_Time"><label>Hot Section Time</label>
+                        <strong>{{allBuyer.Hot_Section_Time}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_Time"><label>Engine Time</label>
+                        <strong>{{allBuyer.Engine_Time}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cycles_TBO"><label>Cycles TBO</label>
+                        <strong>{{allBuyer.Cycles_TBO}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_Maintenance_Program"><label>Engine Maintenance
+                            Program</label>
+                        <strong>{{allBuyer.Engine_Maintenance_Program}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel_Capacity_Volume"><label>Fuel Capacity Volume</label>
+                        <strong>{{allBuyer.Fuel_Capacity_Volume}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Make_Model"><label>Make/Model</label>
+                        <strong>{{allBuyer.Make_Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Time"><label>Time</label>
+                        <strong>{{allBuyer.Time}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Flight_Deck_Model || allBuyer.Flight_Deck_Manufacturer || allBuyer.Avionics_Radios || allBuyer.WAAS || allBuyer.LPV ||
+                allBuyer.SVT || allBuyer.ADSB_Equipped">Avionics</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Flight_Deck_Model"><label>Flight Deck Model</label>
+                        <strong>{{allBuyer.Flight_Deck_Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Flight_Deck_Manufacturer"><label>Flight Deck
+                            Manufacturer</label>
+                        <strong>{{allBuyer.Flight_Deck_Manufacturer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Avionics_Radios"><label>Avionics/Radios</label>
+                        <strong>{{allBuyer.Avionics_Radios}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.WAAS"><label>WAAS</label>
+                        <strong>{{allBuyer.WAAS}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.LPV"><label>LPV</label>
+                        <strong>{{allBuyer.LPV}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.SVT"><label>SVT</label>
+                        <strong>{{allBuyer.SVT}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.ADSB_Equipped"><label>ADS-B Equipped</label>
+                        <strong>{{allBuyer.ADSB_Equipped}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Exterior_Notes">Additional Equipment</h4>
+                <h4 *ngIf="allBuyer.Exterior_Notes">Exterior Notes</h4>
+                <div class="row font18" *ngIf="allBuyer.Exterior_Notes">
+                    <div class="col-md-6"><label>Exterior Notes</label>
+                        <strong>{{allBuyer.Exterior_Notes}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Number_of_Seats || allBuyer.Configuration || allBuyer.Galley || allBuyer.Lavatory || allBuyer.Lavatory_Configuration || 
+                allBuyer.Interior_Notes">Interior Notes</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Seats"><label>Number of Seats</label>
+                        <strong>{{allBuyer.Number_of_Seats}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Configuration"><label>Configuration</label>
+                        <strong>{{allBuyer.Configuration}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Galley"><label>Galley</label>
+                        <strong>{{allBuyer.Galley}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Galley_Configuration"><label>Galley Configuration</label>
+                        <strong>{{allBuyer.Galley_Configuration}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lavatory"><label>Lavatory</label>
+                        <strong>{{allBuyer.Lavatory}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lavatory_Configuration"><label>Lavatory Configuration</label>
+                        <strong>{{allBuyer.Lavatory_Configuration}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interior_Notes"><label>Interior Notes</label>
+                        <strong>{{allBuyer.Interior_Notes}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Flight_Ready || allBuyer.Airworthy || allBuyer.Inspection_Status">
+                    Modifications/Conversions</h4>
+                <h4 *ngIf="allBuyer.Flight_Ready || allBuyer.Airworthy || allBuyer.Inspection_Status">Inspection Status
+                </h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Flight_Ready"><label>Flight Ready</label>
+                        <strong>{{allBuyer.Flight_Ready}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Airworthy"><label>Airworthy</label>
+                        <strong>{{allBuyer.Airworthy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Inspection_Status"><label>Inspection Status</label>
+                        <strong>{{allBuyer.Inspection_Status}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Service_Logs || allBuyer.Flight_Ready || allBuyer.Overhaul_Time">Service Logs</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Service_Logs"><label>Service Logs</label>
+                        <strong>{{allBuyer.Service_Logs}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Flight_Ready"><label>Flight Ready</label>
+                        <strong>{{allBuyer.Flight_Ready}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Overhaul_Time"><label>Overhaul Time</label>
+                        <strong>{{allBuyer.Overhaul_Time}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Brochure">Brochure</h4>
+                <div class="row font18" *ngIf="allBuyer.Brochure">
+                    <div class="col-md-6"><label>Brochure</label>
+                        <strong>{{allBuyer.Brochure}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.APU_Time || allBuyer.APU_Maintenance_Program || allBuyer.APU_Notes">Auxiliary Power
+                    Unit</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.APU_Time"><label>APU Time</label>
+                        <strong>{{allBuyer.APU_Time}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.APU_Maintenance_Program"><label>APU Maintenance
+                            Program</label>
+                        <strong>{{allBuyer.APU_Maintenance_Program}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.APU_Notes"><label>APU Notes</label>
+                        <strong>{{allBuyer.APU_Notes}}</strong>
+                    </div>
+                </div>
+                <h4
+                    *ngIf="allBuyer.No_Blades || allBuyer.Manufacturer_Model || allBuyer.Overhaul_Time || allBuyer.Prop_Notes">
+                    Props</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.No_Blades">
+                        <label>Number of Blades</label>
+                        <strong>{{allBuyer.No_Blades}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Manufacturer_Model">
+                        <label>Manufacturer/Model</label>
+                        <strong>{{allBuyer.Manufacturer_Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Overhaul_Time">
+                        <label>Overhaul Time</label>
+                        <strong>{{allBuyer.Overhaul_Time}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Prop_Notes"><label>Prop Notes</label>
+                        <strong>{{allBuyer.Prop_Notes}}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Yachts & Ships'">
+                <h4>Property Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.yachts_type"><label>Property Type</label>
+                        <strong>{{allBuyer.yachts_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.yachts_subtype"><label>Property Subtype</label>
+                        <strong>{{allBuyer.yachts_subtype}}</strong>
+                    </div>
+                    <div class="col-md-12" *ngIf="allBuyer.Description">
+                        <h4 class="">Description</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Description}}</p>
+                    </div>
+                </div>
+                <h4>General</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Length"><label>Length</label>
+                        <strong>{{allBuyer.Length}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Beam"><label>Draft</label>
+                        <strong>{{allBuyer.Beam}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.draft"><label>Draft</label>
+                        <strong>{{allBuyer.draft}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Staterooms"><label>Staterooms</label>
+                        <strong>{{allBuyer.Staterooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Overview"><label>Overview</label>
+                        <strong>{{allBuyer.Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Length_Overall"><label>Length Overall</label>
+                        <strong>{{allBuyer.Length_Overall}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Name"><label>Name</label>
+                        <strong>{{allBuyer.Name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Build_Year"><label>Build Year</label>
+                        <strong>{{allBuyer.Build_Year}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mainly_Used_For"><label>Mainly Used For</label>
+                        <strong>{{allBuyer.Mainly_Used_For}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Manufacturer"><label>Manufacturer</label>
+                        <strong>{{allBuyer.Manufacturer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mooring_Country"><label>Mooring Country</label>
+                        <strong>{{allBuyer.Mooring_Country}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Autonomy"><label>Autonomy</label>
+                        <strong>{{allBuyer.Autonomy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.guest_cabin"><label>Guest Cabin</label>
+                        <strong>{{allBuyer.guest_cabin}}</strong>
+                    </div>
+                </div>
+            
+                <h4>Specifications</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Cruising_Speed"><label>Cruising Speed</label>
+                        <strong>{{allBuyer.Cruising_Speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fresh_Water"><label>Fresh Water</label>
+                        <strong>{{allBuyer.Fresh_Water}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cabins"><label>Cabins</label>
+                        <strong>{{allBuyer.Cabins}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_Speed"><label>Maximum Speed</label>
+                        <strong>{{allBuyer.Maximum_Speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hull_Material"><label>Hull Material</label>
+                        <strong>{{allBuyer.Hull_Material}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel_Tanks"><label>Fuel Tanks</label>
+                        <strong>{{allBuyer.Fuel_Tanks}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Holding"><label>Holding</label>
+                        <strong>{{allBuyer.Holding}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Heads"><label>Heads</label>
+                        <strong>{{allBuyer.Heads}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Refitted"><label>Refitted</label>
+                        <strong>{{allBuyer.Refitted}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Vessel_name"><label>Vessel Name</label>
+                        <strong>{{allBuyer.Vessel_name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Vessel_type"><label>Vessel Type</label>
+                        <strong>{{allBuyer.Vessel_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Constructed"><label>Constructed</label>
+                        <strong>{{allBuyer.Constructed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_of_engines"><label>Number of Engines</label>
+                        <strong>{{allBuyer.No_of_engines}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_model"><label>Engine Model</label>
+                        <strong>{{allBuyer.Engine_model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_power"><label>Engine Power</label>
+                        <strong>{{allBuyer.Engine_power}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hull"><label>Hull</label>
+                        <strong>{{allBuyer.Hull}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Licence"><label>Licence</label>
+                        <strong>{{allBuyer.Licence}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engines"><label>Engines</label>
+                        <strong>{{allBuyer.Engines}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hydraulics"><label>Hydraulics</label>
+                        <strong>{{allBuyer.Hydraulics}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Electronics"><label>Electronics</label>
+                        <strong>{{allBuyer.Electronics}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Power"><label>Power</label>
+                        <strong>{{allBuyer.Power}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hours"><label>Hours</label>
+                        <strong>{{allBuyer.Hours}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Displacement"><label>Displacement</label>
+                        <strong>{{allBuyer.Displacement}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Single_Berths"><label>Single Berths</label>
+                        <strong>{{allBuyer.Single_Berths}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Max_Passengers"><label>Maximum Passengers</label>
+                        <strong>{{allBuyer.Max_Passengers}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Generators_and_Electricity"><label>Generators and
+                            Electricity</label>
+                        <strong>{{allBuyer.Generators_and_Electricity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Rigger"><label>Rigger</label>
+                        <strong>{{allBuyer.Rigger}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mast_material"><label>Mast Material</label>
+                        <strong>{{allBuyer.Mast_material}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mast_heights_over_deck"><label>Mast Heights Over Deck</label>
+                        <strong>{{allBuyer.Mast_heights_over_deck}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sails"><label>Sails</label>
+                        <strong>{{allBuyer.Sails}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Asymmetric_balloon"><label>Asymmetric Balloon</label>
+                        <strong>{{allBuyer.Asymmetric_balloon}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Genoa_sail"><label>Genoa Sail</label>
+                        <strong>{{allBuyer.Genoa_sail}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Stay_sail"><label>Stay Sail</label>
+                        <strong>{{allBuyer.Stay_sail}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Main_sail"><label>Main Sail</label>
+                        <strong>{{allBuyer.Main_sail}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Owner_and_Guest"><label>Owner and Guest</label>
+                        <strong>{{allBuyer.Owner_and_Guest}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.General"><label>General</label>
+                        <strong>{{allBuyer.General}}</strong>
+                    </div>
+            
+                    <div class="col-md-6" *ngIf="allBuyer.Deck_Area"><label>Deck Area</label>
+                        <strong>{{allBuyer.Deck_Area}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Crew"><label>Crew</label>
+                        <strong>{{allBuyer.Crew}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Winter_Maintenance_10_Year_Abs_Details"><label>Winter
+                            Maintenance / 10 Year Abs Details</label>
+                        <strong>{{allBuyer.Winter_Maintenance_10_Year_Abs_Details}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Passengers"><label>Passengers</label>
+                        <strong>{{allBuyer.Passengers}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Operating_Depth"><label>Operating Depth</label>
+                        <strong>{{allBuyer.Operating_Depth}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Size"><label>Size</label>
+                        <strong>{{allBuyer.Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Emergency_Endurance"><label>Emergency Endurance</label>
+                        <strong>{{allBuyer.Emergency_Endurance}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Class"><label>Class</label>
+                        <strong>{{allBuyer.Class}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Support"><label>Support</label>
+                        <strong>{{allBuyer.Support}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Categories"><label>Category</label>
+                        <strong>{{allBuyer.Categories}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Builder"><label>Builder</label>
+                        <strong>{{allBuyer.Builder}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Naval_Architect"><label>Naval Architect</label>
+                        <strong>{{allBuyer.Naval_Architect}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Exterior_Designer"><label>Exterior Designer</label>
+                        <strong>{{allBuyer.Exterior_Designer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interior_Designer"><label>Interior Designer</label>
+                        <strong>{{allBuyer.Interior_Designer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.top_speed"><label>Top Speed</label>
+                        <strong>{{allBuyer.top_speed}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Make || allBuyer.Model || allBuyer.Fuel || allBuyer.Type || allBuyer.Drive_Type">
+                    Engine(s)</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Make"><label>Make</label>
+                        <strong>{{allBuyer.Make}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Model"><label>Model</label>
+                        <strong>{{allBuyer.Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel"><label>Fuel</label>
+                        <strong>{{allBuyer.Fuel}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Type"><label>Type</label>
+                        <strong>{{allBuyer.Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Drive_Type"><label>Drive Type</label>
+                        <strong>{{allBuyer.Drive_Type}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Main_Deck || allBuyer.starboard_hull || allBuyer.port_hull">Interior Layout</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Main_Deck"><label>Main Deck</label>
+                        <strong>{{allBuyer.Main_Deck}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.starboard_hull"><label>Starboard Hull</label>
+                        <strong>{{allBuyer.starboard_hull}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.port_hull"><label>Port Hull</label>
+                        <strong>{{allBuyer.port_hull}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Upgrades_and_Features || allBuyer.Detailed_Specification || allBuyer.Electronics_Navigation_AV_Equipment ||
+                    allBuyer.Interior_Accommodations_Layout || allBuyer.His_and_Her_Master_Bath || allBuyer.Main_Salon || allBuyer.Dining_Area ||
+                    allBuyer.Main_Foyer || allBuyer.Galley || allBuyer.Mechanical_Equipment">Walk Through</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Upgrades_and_Features"><label>Upgrades and Features</label>
+                        <strong>{{allBuyer.Upgrades_and_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Detailed_Specification"><label>Detailed
+                            Specification</label>
+                        <strong>{{allBuyer.Detailed_Specification}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Electronics_Navigation_AV_Equipment"><label>Electronics,
+                            Navigation & A/V Equipment</label>
+                        <strong>{{allBuyer.Electronics_Navigation_AV_Equipment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interior_Accommodations_Layout"><label>Interior
+                            Accommodations & Layout</label>
+                        <strong>{{allBuyer.Interior_Accommodations_Layout}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.His_and_Her_Master_Bath"><label>His & Her Master
+                            Bath</label>
+                        <strong>{{allBuyer.His_and_Her_Master_Bath}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Main_Salon"><label>Main Salon</label>
+                        <strong>{{allBuyer.Main_Salon}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Dining_Area"><label>Dining Area</label>
+                        <strong>{{allBuyer.Dining_Area}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Main_Foyer"><label>Main Foyer</label>
+                        <strong>{{allBuyer.Main_Foyer}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Galley"><label>Galley</label>
+                        <strong>{{allBuyer.Galley}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mechanical_Equipment"><label>Mechanical Equipment</label>
+                        <strong>{{allBuyer.Mechanical_Equipment}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Length_at_Waterline || allBuyer.Max_Draught || allBuyer.Gross_Tonnage || allBuyer.Displacement_Tonnage">Dimensions</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Length_at_Waterline"><label>Length at Waterline</label>
+                        <strong>{{allBuyer.Length_at_Waterline}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Max_Draught"><label>Maximum Draught</label>
+                        <strong>{{allBuyer.Max_Draught}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Gross_Tonnage"><label>Gross Tonnage</label>
+                        <strong>{{allBuyer.Gross_Tonnage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Displacement_Tonnage"><label>Displacement Tonnage</label>
+                        <strong>{{allBuyer.Displacement_Tonnage}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Builder || allBuyer.Hull_Number || allBuyer.Hull_Type || allBuyer.Number_of_Decks || allBuyer.MCA_Compliant">
+                    Construction</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Builder"><label>Builder</label>
+                        <strong>{{allBuyer.Builder}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hull_Number"><label>Hull Number</label>
+                        <strong>{{allBuyer.Hull_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Hull_Type"><label>Hull Type</label>
+                        <strong>{{allBuyer.Hull_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Decks"><label>Number of Decks</label>
+                        <strong>{{allBuyer.Number_of_Decks}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.MCA_Compliant"><label>MCA Compliant</label>
+                        <strong>{{allBuyer.MCA_Compliant}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Maximum_Speed || allBuyer.Fuel_Capacity || allBuyer.Water_Capacity || allBuyer.range">
+                    Performance & Capacities</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Maximum_Speed"><label>Maximum Speed</label>
+                        <strong>{{allBuyer.Maximum_Speed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fuel_Capacity"><label>Fuel Capacity</label>
+                        <strong>{{allBuyer.Fuel_Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Water_Capacity"><label>Water Capacity</label>
+                        <strong>{{allBuyer.Water_Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.range"><label>Range</label>
+                        <strong>{{allBuyer.range}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Superstructure || allBuyer.Deck">Materials</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Superstructure"><label>Superstructure</label>
+                        <strong>{{allBuyer.Superstructure}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Deck"><label>Deck</label>
+                        <strong>{{allBuyer.Deck}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Guests || allBuyer.Passenger_Rooms || allBuyer.Master_Rooms || allBuyer.Twin_Rooms || allBuyer.VIP_Rooms">
+                    Accommodation</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Guests"><label>Guests</label>
+                        <strong>{{allBuyer.Guests}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Passenger_Rooms"><label>Passenger Rooms</label>
+                        <strong>{{allBuyer.Passenger_Rooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Master_Rooms"><label>Master Rooms</label>
+                        <strong>{{allBuyer.Master_Rooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Twin_Rooms"><label>Twin Rooms</label>
+                        <strong>{{allBuyer.Twin_Rooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.VIP_Rooms"><label>VIP Rooms</label>
+                        <strong>{{allBuyer.VIP_Rooms}}</strong>
+                    </div>
+                </div>
+            
+                <div class="row" *ngIf="allBuyer.Construction || allBuyer.Concept_And_Design || allBuyer.Exterior_Layout || allBuyer.Rigging_And_Sails || allBuyer.Entertainment_And_Electronics">
+                    <div class="col-md-6" *ngIf="allBuyer.Construction">
+                        <h4 class="">Construction</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Construction}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Concept_And_Design">
+                        <h4 class="">Concept and Design</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Concept_And_Design}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Exterior_Layout">
+                        <h4 class="">Exterior Layout</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Exterior_Layout}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Rigging_And_Sails">
+                        <h4 class="">Rigging and Sails</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Rigging_And_Sails}}</p>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Entertainment_And_Electronics">
+                        <h4 class="">Entertainment and Electronics</h4>
+                        <p class="whitePacess text-justify">{{allBuyer.Entertainment_And_Electronics}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Crypto-Assets'">
+                <h4>Crypto-Assets Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Crypto_Assets_type"><label>Crypto-Assets Type</label>
+                        <strong>{{allBuyer.Crypto_Assets_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Crypto_Assets_subtype"><label>Crypto-Assets Subtype</label>
+                        <strong>{{allBuyer.Crypto_Assets_subtype}}</strong>
+                    </div>
+                </div>
+                <h4>Token Facts</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Investment_Type"><label>Investment Type</label>
+                        <strong>{{allBuyer.Investment_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Properties"><label>Number of Properties</label>
+                        <strong>{{allBuyer.No_Properties}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.NOI"><label>NOI</label>
+                        <strong>{{allBuyer.NOI}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Max_Investment"><label>Maximum Investment</label>
+                        <strong>{{allBuyer.Max_Investment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Soft_Cap"><label>Soft Cap.</label>
+                        <strong>{{allBuyer.Cap_Rate}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Category"><label>Category</label>
+                        <strong>{{allBuyer.Category}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cap_Rate"><label>Cap. Rate</label>
+                        <strong>{{allBuyer.Cap_Rate}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.AVG_Occupancy"><label>AVG. Occupancy</label>
+                        <strong>{{allBuyer.AVG_Occupancy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Min_Investment"><label>Minimum Investment</label>
+                        <strong>{{allBuyer.Min_Investment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Currencies_Accepted"><label>Currencies Accepted</label>
+                        <strong>{{allBuyer.Currencies_Accepted}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interests_Offered"><label>Interests Offered</label>
+                        <strong>{{allBuyer.Interests_Offered}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Start_Date"><label>Start Date</label>
+                        <strong>{{allBuyer.Start_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.End_Date"><label>End Date</label>
+                        <strong>{{allBuyer.End_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Target_yearly_IRR"><label>Target Yearly IRR</label>
+                        <strong>{{allBuyer.Target_yearly_IRR}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sale"><label>Sale</label>
+                        <strong>{{allBuyer.Sale}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Token_Name"><label>Token Name</label>
+                        <strong>{{allBuyer.Token_Name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.CoC_Yield"><label>CoC Yield</label>
+                        <strong>{{allBuyer.CoC_Yield}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Buy"><label>Buy</label>
+                        <strong>{{allBuyer.Buy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sell"><label>Sell</label>
+                        <strong>{{allBuyer.Sell}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Spread"><label>Spread</label>
+                        <strong>{{allBuyer.Spread}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Daily_Change"><label>Daily Change</label>
+                        <strong>{{allBuyer.Daily_Change}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Trader_Sentiment"><label>Trader Sentiment</label>
+                        <strong>{{allBuyer.Trader_Sentiment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Min_Traded_Quantity"><label>Min. Traded Quantity</label>
+                        <strong>{{allBuyer.Min_Traded_Quantity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Full_Name"><label>Full Name</label>
+                        <strong>{{allBuyer.Full_Name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Currency"><label>Currency</label>
+                        <strong>{{allBuyer.Currency}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Margin"><label>Margin</label>
+                        <strong>{{allBuyer.Margin}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Long_Position_Overnight_Fee"><label>Long Position Overnight Fee</label>
+                        <strong>{{allBuyer.Long_Position_Overnight_Fee}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Short_Position_Overnight_Fee"><label>Short Position Overnight Fee</label>
+                        <strong>{{allBuyer.Short_Position_Overnight_Fee}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_Chart"><label>Price Chart</label>
+                        <strong>{{allBuyer.Price_Chart}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Commodity_Overview"><label>Commodity Overview</label>
+                        <strong>{{allBuyer.Commodity_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Last_Price"><label>Last Price</label>
+                        <strong>{{allBuyer.Last_Price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Two4_Change"><label>24h Change</label>
+                        <strong>{{allBuyer.Two4_Change}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Two4_Low"><label>24h Low</label>
+                        <strong>{{allBuyer.Two4_Low}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Two4_High"><label>24h High</label>
+                        <strong>{{allBuyer.Two4_High}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Two4_Volume"><label>24h Volume</label>
+                        <strong>{{allBuyer.Two4_Volume}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Quantity"><label>Quantity</label>
+                        <strong>{{allBuyer.Quantity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Liquidity"><label>Total Liquidity</label>
+                        <strong>{{allBuyer.Total_Liquidity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Transactions"><label>Transactions</label>
+                        <strong>{{allBuyer.Transactions}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Current_Price"><label>Current Price</label>
+                        <strong>{{allBuyer.Current_Price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Owner"><label>Owner</label>
+                        <strong>{{allBuyer.Owner}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_History"><label>Price History</label>
+                        <strong>{{allBuyer.Price_History}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Listings"><label>Listings</label>
+                        <strong>{{allBuyer.Listings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Offers"><label>Offers</label>
+                        <strong>{{allBuyer.Offers}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Trading_History"><label>Trading History</label>
+                        <strong>{{allBuyer.Trading_History}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.NFT_Overview"><label>NFT Overview</label>
+                        <strong>{{allBuyer.NFT_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Properties"><label>Properties</label>
+                        <strong>{{allBuyer.Properties}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Stats"><label>Stats</label>
+                        <strong>{{allBuyer.Stats}}</strong>
+                    </div>
+                </div>
+                
+                <h4 *ngIf="allBuyer.Investment_Highlight || allBuyer.Property_Overview || allBuyer.Market_Analysis || allBuyer.Financials || allBuyer.Management || allBuyer.Dividends_Overview || allBuyer.Team_and_Partners">Highlights & Overview</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Investment_Highlight"><label>Investment Highlight</label>
+                        <strong>{{allBuyer.Investment_Highlight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Overview"><label>Property Overview</label>
+                        <strong>{{allBuyer.Property_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Market_Analysis"><label>Market Analysis</label>
+                        <strong>{{allBuyer.Market_Analysis}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Financials"><label>Financials</label>
+                        <strong>{{allBuyer.Financials}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Management"><label>Management</label>
+                        <strong>{{allBuyer.Management}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Dividends_Overview"><label>Dividends Overview</label>
+                        <strong>{{allBuyer.Dividends_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Team_and_Partners"><label>Team and Partners</label>
+                        <strong>{{allBuyer.Team_and_Partners}}</strong>
+                    </div>
+                    
+                </div>
+            
+            
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Horses & Live Stocks'">
+                <h4>Horses & Live Stocks Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Horses_Livestocks_type"><label>Horses & Live Stocks
+                            Type</label>
+                        <strong>{{allBuyer.Horses_Livestocks_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Horses_Livestocks_subtype"><label>Horses & Live Stocks
+                            Subtype</label>
+                        <strong>{{allBuyer.Horses_Livestocks_subtype}}</strong>
+                    </div>
+                </div>
+                <h4>Animal Facts</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Breed"><label>Breed</label>
+                        <strong>{{allBuyer.Breed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.State_Breed"><label>State Bred</label>
+                        <strong>{{allBuyer.State_Breed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lineage"><label>Lineage</label>
+                        <strong>{{allBuyer.Lineage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Ship_Semen"><label>Ship Semen</label>
+                        <strong>{{allBuyer.Ship_Semen}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Horses_Name"><label>Name</label>
+                        <strong>{{allBuyer.Horses_Name}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Gender"><label>Gender</label>
+                        <strong>{{allBuyer.Gender}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Registration_Number"><label>Registration Number</label>
+                        <strong>{{allBuyer.Registration_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Foal_Date"><label>Foal Date</label>
+                        <strong>{{allBuyer.Foal_Date | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.In_Foal"><label>In Foal</label>
+                        <strong>{{allBuyer.In_Foal}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Markings"><label>Markings</label>
+                        <strong>{{allBuyer.Markings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Weight_lbs"><label>Weight</label>
+                        <strong>{{allBuyer.Weight_lbs}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Height"><label>Height</label>
+                        <strong>{{allBuyer.Height}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Colour"><label>Color</label>
+                        <strong>{{allBuyer.Colour}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Registry"><label>Registry</label>
+                        <strong>{{allBuyer.Registry}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Registry_Number"><label>Registry Number</label>
+                        <strong>{{allBuyer.Registry_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Temperament"><label>Temperament</label>
+                        <strong>{{allBuyer.Temperament}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Skill"><label>Skills/Disciplines</label>
+                        <strong>{{allBuyer.Skill}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Seller"><label>Seller</label>
+                        <strong>{{allBuyer.Seller}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Age"><label>Age</label>
+                        <strong>{{allBuyer.Age}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Location"><label>Location</label>
+                        <strong>{{allBuyer.Location}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Ship_From"><label>Ship From</label>
+                        <strong>{{allBuyer.Ship_From}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Pasture_Feed"><label>Pasture/Feed</label>
+                        <strong>{{allBuyer.Pasture_Feed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_for_Sale"><label>Number for Sale</label>
+                        <strong>{{allBuyer.Number_for_Sale}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Origin"><label>Origin</label>
+                        <strong>{{allBuyer.Origin}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Est_Weight"><label>Est. Weight</label>
+                        <strong>{{allBuyer.Est_Weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Birth_Weight"><label>Birth Weight</label>
+                        <strong>{{allBuyer.Birth_Weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Fertility"><label>Fertility</label>
+                        <strong>{{allBuyer.Fertility}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Frame"><label>Frame</label>
+                        <strong>{{allBuyer.Frame}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Vaccination"><label>Vaccination</label>
+                        <strong>{{allBuyer.Vaccination}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Horns"><label>Horns</label>
+                        <strong>{{allBuyer.Horns}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Firm_Negotiable"><label>Firm/Negotiable</label>
+                        <strong>{{allBuyer.Firm_Negotiable}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Payment_Terms"><label>Payment Terms</label>
+                        <strong>{{allBuyer.Payment_Terms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_Description"><label>Price Description</label>
+                        <strong>{{allBuyer.Price_Description}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Estimated_Weight_Variance"><label>Estimated Weight Variance</label>
+                        <strong>{{allBuyer.Estimated_Weight_Variance}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Date_of_Birth"><label>Date of Birth</label>
+                        <strong>{{allBuyer.Date_of_Birth | date : "MM/dd/yyyy"}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Description_Horses"><label>Description</label>
+                        <strong>{{allBuyer.Description_Horses}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Crossbred_Purebred"><label>Crossbred/Purebred</label>
+                        <strong>{{allBuyer.Crossbred_Purebred}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Head_Count"><label>Head Count</label>
+                        <strong>{{allBuyer.Head_Count}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_per_head"><label>Price per Head</label>
+                        <strong>{{allBuyer.Price_per_head}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Average_Weight"><label>Average Weight</label>
+                        <strong>{{allBuyer.Average_Weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Weight"><label>Total Weight</label>
+                        <strong>{{allBuyer.Total_Weight}}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Artworks & Antiques'">
+                <h4>Artworks & Antiques Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Artwork_type"><label>Artworks & Antiques Type</label>
+                        <strong>{{allBuyer.Artwork_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Artwork_subtype"><label>Artworks & Antiques Subtype</label>
+                        <strong>{{allBuyer.Artwork_subtype}}</strong>
+                    </div>
+                </div>
+                <h4>Collectible Facts</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Title"><label>Title</label>
+                        <strong>{{allBuyer.Title}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Artist"><label>Artist</label>
+                        <strong>{{allBuyer.Artist}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Artist_History"><label>Artist History</label>
+                        <strong>{{allBuyer.Artist_History}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Size"><label>Size</label>
+                        <strong>{{allBuyer.Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Period"><label>Period</label>
+                        <strong>{{allBuyer.Period}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Origin"><label>Origin</label>
+                        <strong>{{allBuyer.Origin}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Current_Location"><label>Current Location</label>
+                        <strong>{{allBuyer.Current_Location}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Painting_Overview"><label>Painting Overview</label>
+                        <strong>{{allBuyer.Painting_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sculpture_Overview"><label>Sculpture Overview</label>
+                        <strong>{{allBuyer.Sculpture_Overview}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.History_of_Item"><label>History of Item</label>
+                        <strong>{{allBuyer.History_of_Item}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year_Built_Made"><label>Year Built/Made</label>
+                        <strong>{{allBuyer.Year_Built_Made}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Artwork_Serial_Number"><label>Serial Number</label>
+                        <strong>{{allBuyer.Artwork_Serial_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Maker"><label>Maker</label>
+                        <strong>{{allBuyer.Maker}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Style"><label>Style</label>
+                        <strong>{{allBuyer.Style}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Artwork_Description"><label>Description</label>
+                        <strong>{{allBuyer.Artwork_Description}}</strong>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Cars & RVs'">
+                <h4>Cars & RVs Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Cars_Rv_type"><label>Cars & RVs Type</label>
+                        <strong>{{allBuyer.Cars_Rv_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cars_Rv_subtype"><label>Cars & RVs Subtype</label>
+                        <strong>{{allBuyer.Cars_Rv_subtype}}</strong>
+                    </div>
+                </div>
+                <h4>Car Facts</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Condition"><label>Condition</label>
+                        <strong>{{allBuyer.Condition}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.year_purchased"><label>Year</label>
+                        <strong>{{allBuyer.year_purchased}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Body_Make"><label>Body Make</label>
+                        <strong>{{allBuyer.Body_Make}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Body_Model"><label>Body Model</label>
+                        <strong>{{allBuyer.Body_Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mileage"><label>Mileage</label>
+                        <strong>{{allBuyer.Mileage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Type_of_fuel"><label>Fuel Type</label>
+                        <strong>{{allBuyer.Type_of_fuel}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Exterior_Color"><label>Exterior Color</label>
+                        <strong>{{allBuyer.Exterior_Color}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interior_Color"><label>Interior Color</label>
+                        <strong>{{allBuyer.Interior_Color}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_Size"><label>Engine Size</label>
+                        <strong>{{allBuyer.Engine_Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.DRIVETRAIN"><label>Drivetrain</label>
+                        <strong>{{allBuyer.DRIVETRAIN}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Transmission_Type"><label>Transmission Type</label>
+                        <strong>{{allBuyer.Transmission_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.MPGe"><label>MPG</label>
+                        <strong>{{allBuyer.MPGe}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.VIN_Number"><label>VIN Number</label>
+                        <strong>{{allBuyer.VIN_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Owners"><label>Number of Owners</label>
+                        <strong>{{allBuyer.No_Owners}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.RV_CLASS"><label>Class</label>
+                        <strong>{{allBuyer.RV_CLASS}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Gross_Vehicle_Weight"><label>Gross Vehicle Weight</label>
+                        <strong>{{allBuyer.Gross_Vehicle_Weight}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sleeping_Capacity"><label>Sleeping Capacity</label>
+                        <strong>{{allBuyer.Sleeping_Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sleep_Options"><label>Sleep Options</label>
+                        <strong>{{allBuyer.Sleep_Options}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Awnings"><label>Awnings</label>
+                        <strong>{{allBuyer.Awnings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.SLIDE_OUTS"><label>Slide Outs</label>
+                        <strong>{{allBuyer.SLIDE_OUTS}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Length"><label>Length</label>
+                        <strong>{{allBuyer.Length}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Leveling_Jacks"><label>Leveling Jacks</label>
+                        <strong>{{allBuyer.Leveling_Jacks}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Air_Conditioners"><label>Air Conditioners</label>
+                        <strong>{{allBuyer.Air_Conditioners}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Water_Capacity"><label>Water Capacity</label>
+                        <strong>{{allBuyer.Water_Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Self_Contained"><label>Self Contained</label>
+                        <strong>{{allBuyer.Self_Contained}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Chasis_Make"><label>Chasis Make</label>
+                        <strong>{{allBuyer.Chasis_Make}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Chasis_Model"><label>Chasis Model</label>
+                        <strong>{{allBuyer.Chasis_Model}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Passengers"><label>Number of Passengers</label>
+                        <strong>{{allBuyer.Number_of_Passengers}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Seating_Style"><label>Seating Style</label>
+                        <strong>{{allBuyer.Seating_Style}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Wheelchair_Lift"><label>Wheelchair Lift</label>
+                        <strong>{{allBuyer.Wheelchair_Lift}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Wheelchair_Positions"><label>Wheelchair Positions</label>
+                        <strong>{{allBuyer.Wheelchair_Positions}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Luggage_Type"><label>Luggage Type</label>
+                        <strong>{{allBuyer.Luggage_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Television"><label>Television</label>
+                        <strong>{{allBuyer.Television}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Engine_Type"><label>Engine Type</label>
+                        <strong>{{allBuyer.Engine_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mile_Range"><label>Mile Range</label>
+                        <strong>{{allBuyer.Mile_Range}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Bed_Length"><label>Bed Length</label>
+                        <strong>{{allBuyer.Bed_Length}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Towing_Capacity"><label>Towing Capacity</label>
+                        <strong>{{allBuyer.Towing_Capacity}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.BODY_STYLE"><label>Body Style</label>
+                        <strong>{{allBuyer.BODY_STYLE}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.YEAR_OEM_BUILT"><label>Year OEM Built</label>
+                        <strong>{{allBuyer.YEAR_OEM_BUILT}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year_Coach_Build"><label>Year Coach Built</label>
+                        <strong>{{allBuyer.Year_Coach_Build}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Customer_Capacity"><label>Customer Capacity</label>
+                        <strong>{{allBuyer.Customer_Capacity}}</strong>
+                    </div> 
+                    <div class="col-md-6" *ngIf="allBuyer.Installed_Options"><label>Installed Options</label>
+                        <strong>{{allBuyer.Installed_Options}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Maintenance_History || allBuyer.Accident_History || allBuyer.Exterior_Features || allBuyer.Interior_Features ||
+                allBuyer.Safety_Features || allBuyer.Mechanical_Features || allBuyer.Technological_Features || allBuyer.Original_Warranty ||
+                allBuyer.Vehicle_Location">History & Features</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Maintenance_History"><label>Maintenance History</label>
+                        <strong>{{allBuyer.Maintenance_History}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Accident_History"><label>Accident History</label>
+                        <strong>{{allBuyer.Accident_History}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Exterior_Features"><label>Exterior Features</label>
+                        <strong>{{allBuyer.Exterior_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Interior_Features"><label>Interior Features</label>
+                        <strong>{{allBuyer.Interior_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Safety_Features"><label>Safety Features</label>
+                        <strong>{{allBuyer.Safety_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Mechanical_Features"><label>Mechanical Features</label>
+                        <strong>{{allBuyer.Mechanical_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Technological_Features"><label>Technological Features</label>
+                        <strong>{{allBuyer.Technological_Features}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Original_Warranty"><label>Original Warranty</label>
+                        <strong>{{allBuyer.Original_Warranty}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Vehicle_Location"><label>Vehicle Location</label>
+                        <strong>{{allBuyer.Vehicle_Location}}</strong>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="colorBlack" *ngIf="MemberNameURL == 'Business Properties'">
+                <h4>Business Properties Type</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Business_type"><label>Business Properties Type</label>
+                        <strong>{{allBuyer.Business_type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Business_subtype"><label>Business Properties Subtype</label>
+                        <strong>{{allBuyer.Business_subtype}}</strong>
+                    </div>
+                </div>
+            
+                <h4>Property Facts</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.price"><label>Price</label>
+                        <strong>{{allBuyer.price}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_Per_SF"><label>Price per sq. ft/acreage</label>
+                        <strong>{{allBuyer.Price_Per_SF}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_per_acreage"><label>Price per acreage</label>
+                        <strong>{{allBuyer.Price_per_acreage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_per_Bed"><label>Price per Bed</label>
+                        <strong>{{allBuyer.Price_per_Bed}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sale_Type"><label>Sale Type</label>
+                        <strong>{{allBuyer.Sale_Type}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sale_Conditions"><label>Sale Conditions</label>
+                        <strong>{{allBuyer.Sale_Conditions}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Type_CW"><label>Property Type</label>
+                        <strong>{{allBuyer.Property_Type_CW}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Property_Subtype_CW"><label>Property Subtype</label>
+                        <strong>{{allBuyer.Property_Subtype_CW}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_Class"><label>Building Class</label>
+                        <strong>{{allBuyer.Building_Class}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Lot_Size"><label>Lot Size</label>
+                        <strong>{{allBuyer.Lot_Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_Size"><label>Building Size</label>
+                        <strong>{{allBuyer.Building_Size}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Beds"><label>Number of Beds</label>
+                        <strong>{{allBuyer.Beds}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Stories"><label>Number of Stories</label>
+                        <strong>{{allBuyer.No_Stories}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Years_build_Renovated"><label>Year Built</label>
+                        <strong>{{allBuyer.Years_build_Renovated}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Tenancy"><label>Tenancy</label>
+                        <strong>{{allBuyer.Tenancy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Opportunity_Zone"><label>Opportunity Zone</label>
+                        <strong>{{allBuyer.Opportunity_Zone}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Parking"><label>Parking</label>
+                        <strong>{{allBuyer.Parking}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Parking_Ratio"><label>Parking Ratio</label>
+                        <strong>{{allBuyer.Parking_Ratio}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Average_Daily_Rate"><label>Average Daily Rate</label>
+                        <strong>{{allBuyer.Average_Daily_Rate}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.number_of_rooms"><label>Number of Rooms</label>
+                        <strong>{{allBuyer.number_of_rooms}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Room_Mix_Info"><label>Room Mix Information</label>
+                        <strong>{{allBuyer.Room_Mix_Info}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.corridor"><label>Corridor</label>
+                        <strong>{{allBuyer.corridor}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Frontage"><label>Frontage</label>
+                        <strong>{{allBuyer.Frontage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Cap_Rate"><label>Cap. Rate</label>
+                        <strong>{{allBuyer.Cap_Rate}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.NOI"><label>NOI</label>
+                        <strong>{{allBuyer.NOI}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_Height"><label>Building Height</label>
+                        <strong>{{allBuyer.Building_Height}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Slab_to_Slab"><label>Slab to Slab</label>
+                        <strong>{{allBuyer.Slab_to_Slab}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Building_FAR"><label>Building FAR</label>
+                        <strong>{{allBuyer.Building_FAR}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_acres"><label>Land Acres</label>
+                        <strong>{{allBuyer.Land_acres}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Occupancy"><label>Occupancy</label>
+                        <strong>{{allBuyer.Occupancy}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Lots"><label>Number of Lots</label>
+                        <strong>{{allBuyer.Number_of_Lots}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Price_per_lot"><label>Price per Lot</label>
+                        <strong>{{allBuyer.Price_per_lot}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Acres_per_lot"><label>Acres per Lot</label>
+                        <strong>{{allBuyer.Acres_per_lot}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_Licenses"><label>Number of Licenses</label>
+                        <strong>{{allBuyer.Number_Licenses}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.License_Mix_Info"><label>License Mix Info.</label>
+                        <strong>{{allBuyer.License_Mix_Info}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_Buildings"><label>Number of Buildings</label>
+                        <strong>{{allBuyer.Number_Buildings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Sq_ft_per_building"><label>Square ft. per Building</label>
+                        <strong>{{allBuyer.Sq_ft_per_building}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Acres"><label>Number of Acres</label>
+                        <strong>{{allBuyer.No_Acres}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Year_Built"><label>Year Built</label>
+                        <strong>{{allBuyer.Year_Built}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Number_of_Drive_In_Grade_Level_Doors"><label>Number of Drive In/Grade Level Doors</label>
+                        <strong>{{allBuyer.Number_of_Drive_In_Grade_Level_Doors}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Operating_Schedule"><label>Operating Schedule</label>
+                        <strong>{{allBuyer.Operating_Schedule}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Barns"><label>Number of Barns</label>
+                        <strong>{{allBuyer.No_Barns}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Stables_per_barn"><label>Stables per Barn</label>
+                        <strong>{{allBuyer.Stables_per_barn}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Stables"><label>Total Stables</label>
+                        <strong>{{allBuyer.Total_Stables}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Slip_Mix_Info"><label>Slip Mix Info.</label>
+                        <strong>{{allBuyer.Slip_Mix_Info}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Sites"><label>Number of Sites</label>
+                        <strong>{{allBuyer.No_Sites}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Site_Mix_Info"><label>Site Mix Info.</label>
+                        <strong>{{allBuyer.Site_Mix_Info}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Water_Frontage"><label>Water Frontage</label>
+                        <strong>{{allBuyer.Water_Frontage}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Buildings"><label>Number of Buildings</label>
+                        <strong>{{allBuyer.No_Buildings}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.sqFeetPerBuilding"><label>Sq. Feet per Building</label>
+                        <strong>{{allBuyer.sqFeetPerBuilding}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.No_Slips"><label>Number of Slips</label>
+                        <strong>{{allBuyer.No_Slips}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_Type"><label>Land Type</label>
+                        <strong>{{allBuyer.Land_Type}}</strong>
+                    </div>
+                </div>
+            
+                <h4 *ngIf="allBuyer.Investement_Highlights || allBuyer.Executive_Summary || allBuyer.Transportation || allBuyer.Zoning || allBuyer.Financial_Summary || allBuyer.Demographics ||
+                            allBuyer.Nearby_Amenities || allBuyer.Major_Tenants || allBuyer.Amenities">Summary</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Investement_Highlights"><label>Investment Highlights</label>
+                        <strong>{{allBuyer.Investement_Highlights}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Executive_Summary"><label>Executive Summary</label>
+                        <strong>{{allBuyer.Executive_Summary}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Transportation"><label>Transportation</label>
+                        <strong>{{allBuyer.Transportation}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Zoning"><label>Zoning</label>
+                        <strong>{{allBuyer.Zoning}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Financial_Summary"><label>Financial Summary</label>
+                        <strong>{{allBuyer.Financial_Summary}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Demographics"><label>Demographics</label>
+                        <strong>{{allBuyer.Demographics}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Nearby_Amenities"><label>Nearby Amenities</label>
+                        <strong>{{allBuyer.Nearby_Amenities}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Major_Tenants"><label>Major Tenants</label>
+                        <strong>{{allBuyer.Major_Tenants}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Amenities"><label>Amenities</label>
+                        <strong>{{allBuyer.Amenities}}</strong>
+                    </div>
+                    
+                </div>
+            
+                <h4
+                    *ngIf="allBuyer.Parcel_Number || allBuyer.Land_Assessment || allBuyer.Improvements_Assessment || allBuyer.Total_Assessment">
+                    Property Taxes</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.Parcel_Number"><label>Parcel Number</label>
+                        <strong>{{allBuyer.Parcel_Number}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Land_Assessment"><label>Land Assessment</label>
+                        <strong>{{allBuyer.Land_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Improvements_Assessment"><label>Improvements Assessment</label>
+                        <strong>{{allBuyer.Improvements_Assessment}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.Total_Assessment"><label>Total Assessment</label>
+                        <strong>{{allBuyer.Total_Assessment}}</strong>
+                    </div>
+                </div>
+                <h4 *ngIf="allBuyer.Sale_Flyer.length != 0">Sale Flyer Document</h4>
+                <p *ngIf="allBuyer.Sale_Flyer.length != 0"><a href="{{ baseURLofAPi+allBuyer.Sale_Flyer[0].src }}"
+                        target="_blank">{{ allBuyer.Sale_Flyer[0].orgName }}</a></p>
+            </div>
+
+            <!-- show fractional fields -->
+            <div>
+                <h4 *ngIf="allBuyer.links">Links</h4>
+                <p><a href="{{allBuyer.links}}"
+                        onclick="window.open(this.href, this.href); return false">{{allBuyer.links}}</a></p>
+                <h4 *ngIf="allBuyer.pdf_doc.length != 0">Document</h4>
+                <p *ngIf="allBuyer.pdf_doc.length != 0"><a href="{{ baseURLofAPi+allBuyer.pdf_doc[0].src }}"
+                        target="_blank">{{ allBuyer.pdf_doc[0].orgName }}</a></p>
+            </div>
+            <div class="colorBlack"
+                *ngIf="allBuyer.fractional_share_choice_percentage_or_unit || allBuyer.offering_Price_fractional_ownership">
+                <h4>Fractional Share</h4>
+                <div class="row font18">
+                    <div class="col-md-6" *ngIf="allBuyer.fractional_share_choice_percentage_or_unit">
+                        <label>Fractional
+                            Share</label>
+                        <strong>{{allBuyer.fractional_share_choice_percentage_or_unit}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.fractional_share_text_percentage_or_unit">
+                        <label>Fractional
+                            Share {{allBuyer.fractional_share_choice_percentage_or_unit}}</label>
+                        <strong>{{allBuyer.fractional_share_text_percentage_or_unit}}</strong>
+                    </div>
+                    <div class="col-md-6" *ngIf="allBuyer.offering_Price_fractional_ownership"><label>Offering
+                            Price</label>
+                        <strong>{{allBuyer.offering_Price_fractional_ownership}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+    </div>
+</section>
+<!-- <a href="javascript:void(0);" (click)="goToCategoryName(allBuyer.category_name)" ><img alt="Image is loading" class="borderRadius10" src="{{ baseURLofAPi+allBuyer.banner_image.src }}" alt="No Image" width="100%" height="270px"></a>  -->
+<!-- <div *ngFor="let photos of allBuyer.property_photos; let i = index">            
+         <img alt="Image is loading" *ngIf="allBuyer.property_photos == []" alt="No Image" width="100%" src="../../../assets/images/default.jpg" height="200px">  
+         <img alt="Image is loading" *ngIf="i == 0" alt="No Image" width="100%" src="../../../assets/images/no image.png" height="200px">  
+     </div> -->
+
+<!-- <img alt="Image is loading" routerLink="/categories/{{draftperfdata}}" class="img" 
+     src="{{(prod.images[0] != undefined ? prod.images[0].src : 'assets/icon/error.jpg') || 'assets/icon/error.jpg'}}"> -->
+
+<!-- The Modal -->
+<div class="modal" id="delete-post-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Listing</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-success postDelete-success dispNone"></div>
+                <p class="">Are you sure you want to delete this listing?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="confirmDeletePost()">Yes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="mark-sold-out-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Mark Sold Out</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="alert alert-success ad-Success dispNone"></div>
+            <div class="alert alert-danger ad-danger dispNone"></div>
+            <form [formGroup]="updateMarkSoldOutForm" (ngSubmit)="submitMarkSoldOut()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Selling Price : </label><br>
+                        <input class="form-control" placeholder="Selling Price" type="number"
+                            formControlName="selling_price" [(ngModel)]="selling_price">
+                    </div>
+                    <div class="form-group">
+                        <label>Selling Date : </label><br>
+                        <dp-date-picker class="form-control"
+                            [ngModel]="mark_sold_out_date | date : 'MM/dd/yyyy'" formControlName="selling_date"
+                            [config]="datePickerConfig" placeholder="mm/dd/yyyy"></dp-date-picker> 
+                        <!-- <input class="form-control" type="date" formControlName="selling_date"
+                            data-date-format="dd-MM-yyyy" value="{{mark_sold_out_date | date : 'yyyy-MM-dd'}}"
+                            [(ngModel)]="mark_sold_out_date"> -->
+                    </div>
+                    <div class="form-group dis-flex">
+                        <input type="checkbox" class="maginTop5" id="mark-sold-out-checkbox"
+                            [checked]="getData[0].Sold_out == true">
+                        <label>&nbsp;Sold Out</label>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-left" type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

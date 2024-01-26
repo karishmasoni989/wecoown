@@ -1,0 +1,53 @@
+.allCohortDiv {
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.imgOfMember {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  height: 80px;
+  width: 80px;
+}
+
+.divOfImage {
+  height: 130px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.all-user-search-list {
+  position: absolute;
+  background-color: #f9f9f9;
+  width: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  font-weight: 700;
+  margin-top: -17px;
+  max-height: 200px;
+  border-radius: 5px;
+  overflow-y: auto;
+  margin-left: 0px;
+}
+
+.all-user-search-list div {
+  float: none;
+  color: #0b3655 !important;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin: 5px;
+}
+.all-user-search-list img {
+    border-radius: 5px;
+}
+.width50percent button{
+    float: right;
+    margin-top: 28px;
+    margin-right: 6px;
+}

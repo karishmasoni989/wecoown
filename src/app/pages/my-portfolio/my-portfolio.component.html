@@ -1,0 +1,320 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<!-- middle section -->
+<section class="bg-grey-light">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" style="padding: 0 5%;">
+            <div class="portfolio-cover-img">
+                <img alt="Image is loading" class="img-fluid" *ngIf="getMemberData"
+                    src="{{ getMemberData.length != 0 ? (baseURLofAPi+getMemberData[0].src) : '../../../assets/images/my-portfolio-1.jpg' }}"
+                    >
+                <button class="btn btn-secondary edit-pencil" data-toggle="modal"
+                    data-target="#update-cover-pic-modal"><i class="fa fa-camera"></i>&nbsp;Edit Portfolio
+                    Photo</button>
+                <!-- <img src="../../../assets/images/my-portfolio-1.jpg" width="100%"> -->
+            </div>
+            <!-- <div class="allPortfolio-box" style="display: none;">
+                <div class="card marginBottom10">
+                    <div class="card-header">
+                        <h2 class="margin-bottom-0">My Portfolio
+                            <button class="btn btn-primary float-right" (click)="checkmembership()"
+                                data-keyboard="false" data-backdrop="static" data-target="#my-portfolio-modal"
+                                data-toggle="modal">Create Property/Assets</button>
+                        </h2>
+                    </div>
+                    <div class="card-body" *ngFor="let item of getMyAllPortfolioData">
+                        <a href="javascript:void(0);" (click)="goToMemberPage(item.sender_id._id)">
+                            <img alt="Image is loading" class="border-radious50 marginRight5"
+                                src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                width="40px" height="40px">
+                            <span><strong>{{item.sender_id.firstname}} {{item.sender_id.lastname}}</strong></span>
+                        </a>
+                        <span> created the property
+                            <strong>{{item.title}}.</strong> You are <span
+                                *ngIf="item.sender_id._id == getCurrentUser">admin</span>
+                            <span *ngIf="item.sender_id._id != getCurrentUser">member</span> of the property.
+                        </span>
+                        <h6>Property Url : <a href="{{item.property_url}}" target="_blank">{{item.property_url}}</a>
+                        </h6>
+                        <h6>Members : {{1+item.recevier_id.length}}</h6>
+                        <div class="about-portfolio">
+                            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)"
+                                    (click)="goToMemberPage(item.sender_id._id)"><img alt="Image is loading"
+                                        class="border-radious50"
+                                        src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">
+                                    {{item.sender_id.firstname}}
+                                    {{item.sender_id.lastname}}</a></span>
+                            <span class="spanForAllImageWithUsername" *ngFor="let member of item.recevier_id"><a
+                                    href="javascript:void(0)" (click)="goToMemberPage(member.user_id._id)"><img
+                                        alt="Image is loading" class="border-radious50"
+                                        src="{{ member.user_id.profile_pic.length != 0 ? (baseURLofAPi+member.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                        width="30px" height="30px">
+                                    {{member.user_id.firstname}} {{member.user_id.lastname}}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+    <div class="allPortfolio-box">
+        <div class="card marginBottom10">
+            <div class="card-header">
+                <h2 class="margin-bottom-0">My Portfolio
+                    <!-- <button class="btn btn-primary float-right" (click)="checkmembership()" data-keyboard="false"
+                        data-backdrop="static" data-target="#my-portfolio-modal" data-toggle="modal">Create
+                        Property/Assets</button> -->
+                    <div class="dropdown float-right ">
+                        <button (click)="openDropdownList()" class="dropbtn">Create A Property / Assets</button>
+                        <div id="myDropdown" class="dropdown-contentListt">
+                            <a (click)="goTocatrgpyList('/listing-real-estate')">Real Estate</a>
+                            <a (click)="goTocatrgpyList('/listing-business')">Business Properties</a>
+                            <a (click)="goTocatrgpyList('/listing-yachts')">Yachts & Ships</a>
+                            <a (click)="goTocatrgpyList('/listing-aircraft')">Jets & Aircraft</a>
+                            <a (click)="goTocatrgpyList('/listing-cars-rv')">Cars & RVs</a>
+                            <a (click)="goTocatrgpyList('/listing-artworks')">Artworks & Antiques</a>
+                            <a (click)="goTocatrgpyList('/listing-horses-livestocks')">Horses & Live Stocks</a>
+                            <a (click)="goTocatrgpyList('/listing-crypto-asset')">Crypto-Assets</a>
+                            <a (click)="goTocatrgpyList('/listing-crowdfunding')">Crowdfunding Projects</a>
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="dispNone notFoundPost">No item found!</h4>
+                    <div class="col-md-4 marginBottom10" *ngFor="let allBuyer of allPostdata, let i= index">
+                        <div class="colorBlack borderRadius10 hoverRed"
+                            routerLink="/listing-detail/{{allBuyer._id}}||{{allBuyer.name}}">
+                            <!-- <div class="bg-grey-light colorBlack Padding-1rem ">                
+                                <p>{{allBuyer.address_line1}} {{allBuyer.address_line2}}  {{allBuyer.landmark}},</p>
+                                <p> {{allBuyer.zipcode}}  {{allBuyer.city}}  {{allBuyer.state}}  {{allBuyer.country}}  {{allBuyer.name}} For Sale</p>
+                                 </div>       -->
+                            <div class="bg-grey-light ShowPurposeDiv Padding-1rem topBorderRadius10">
+                                <p class="red marginBottom0">
+                                    <!-- <span *ngIf="allBuyer.name === 'Yachts & Ships';else loggedOut">
+                                       <span *ngIf="allBuyer.purpose != 'No Ready'">Price: {{allBuyer.Current_Price}}</span>
+                                    </span>
+                                    <ng-template #loggedOut>
+                                        <span *ngIf="allBuyer.purpose != 'No Ready'">Price: {{allBuyer.price}}</span>
+                                    </ng-template> -->
+                                    <span *ngIf="allBuyer.purpose != 'No Ready'">Price: {{allBuyer.price}}</span>
+                                </p>
+                                <p class="showPUrposeCard">
+                                    <span
+                                        *ngIf="allBuyer.name === 'Jets & Aircraft'">JA{{allBuyer.Form_Serial_Number}}</span>
+                                    <span *ngIf="allBuyer.name === 'Real Estate'">RE{{allBuyer.Serial_Number}}</span>
+                                    <span *ngIf="allBuyer.name === 'Yachts & Ships'">YS{{allBuyer.Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Crowdfunding Projects'">CP{{allBuyer.Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Crypto-Assets'">CA{{allBuyer.Form_Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Horses & Live Stocks'">HL{{allBuyer.Form_Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Artworks & Antiques'">AW{{allBuyer.Form_Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Cars & RVs'">CR{{allBuyer.Form_Serial_Number}}</span>
+                                    <span
+                                        *ngIf="allBuyer.name === 'Business Properties'">BP{{allBuyer.Form_Serial_Number}}</span>
+                                    <span *ngIf="allBuyer.purpose === 'Both'" class="float-right red">Both (For Sale &
+                                        Lease)</span>
+                                    <span *ngIf="allBuyer.purpose === 'For Sale'"
+                                        class="float-right colorOrange">{{allBuyer.purpose}}</span>
+                                    <span *ngIf="allBuyer.purpose === 'For Lease'"
+                                        class="float-right colorBlue">{{allBuyer.purpose}}</span>
+                                </p>
+                            </div>
+                            <div class="img-divvv">
+                                <button *ngIf="allBuyer.Sold_out === true" class="btn btnSoldOutListing">Sold</button>
+                                <button class="btn btnShareListing"><i class="fa fa-share"></i></button>
+                                <div class="listing-card">
+                                    <a href="javascript:void(0);">
+                                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpg'"
+                                            class="height300" alt="Image is loading"
+                                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'jpeg'"
+                                            class="height300" alt="Image is loading"
+                                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                                        <img *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'png'"
+                                            class="height300" alt="Image is loading"
+                                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}">
+                                        <video controls
+                                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'mp4'"
+                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                            onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                                        <video controls
+                                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'mov'"
+                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                            onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                                        <video controls
+                                            *ngIf="allBuyer.property_photos[0].orgName.substring(allBuyer.property_photos[0].orgName.lastIndexOf('.') + 1) == 'webm'"
+                                            autoplay="autoplay" loop="loop" preload="true" volume="0"
+                                            onloadedmetadata="this.muted = true" [muted]="true" playsinline
+                                            class="height300" [src]="baseURLofAPi+allBuyer.property_photos[0].src"></video>
+                                        <!-- <video controls autoplay="autoplay" loop="loop" preload="true" volume="0" onloadedmetadata="this.muted = true" [muted]="true"
+                                        playsinline width="100%" class="height300" src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}"></video> -->
+                                        <!-- <img class="height300" alt="Image is loading"
+                                            src="{{ allBuyer.property_photos[0] != undefined ? baseURLofAPi+allBuyer.property_photos[0].src : 'assets/images/no image.jpg' }}"
+                                             width="100%"> -->
+                                        <!-- <img alt="Image is loading"  alt="No Image" width="100%" height="200px"> -->
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="bg-grey-light bg-box-listing Padding-1rem bottomBorderRadius10">
+                                <p style="margin-bottom: 0;"><strong>Property Type: {{allBuyer.name}}</strong> </p>
+                                <p><strong>Address: {{allBuyer.address_line1}}
+                                        <span *ngIf="allBuyer.address_line2">, {{allBuyer.address_line2}} </span>
+                                        <span *ngIf="allBuyer.landmark">, {{allBuyer.landmark}}</span>,
+                                        {{allBuyer.city}},
+                                        {{allBuyer.state | stateSplitNameShow}}, {{allBuyer.country | countrySplitNameShow}}, {{allBuyer.zipcode}}</strong> </p>
+                            </div>
+                            <!-- <a href="javascript:void(0);" (click)="goToCategoryName(allBuyer.category_name)" ><img alt="Image is loading" class="borderRadius10" src="{{ baseURLofAPi+allBuyer.banner_image.src }}" alt="No Image" width="100%" height="270px"></a>  -->
+                            <!-- <div *ngFor="let photos of allBuyer.property_photos; let i = index">            
+                                 <img alt="Image is loading" *ngIf="allBuyer.property_photos == []" alt="No Image" width="100%" src="../../../assets/images/default.jpg" height="200px">  
+                                 <img alt="Image is loading" *ngIf="i == 0" alt="No Image" width="100%" src="../../../assets/images/no image.png" height="200px">  
+                             </div> -->
+
+                            <!-- <img alt="Image is loading" routerLink="/categories/{{draftperfdata}}" class="img" 
+                             src="{{(prod.images[0] != undefined ? prod.images[0].src : 'assets/icon/error.jpg') || 'assets/icon/error.jpg'}}"> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Modal -->
+<div class="modal" id="my-portfolio-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create a Portfolio</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body notAlreadymembership display-none">
+                <!-- <p class=" ">Would you like to start chat with Buyer?</p> -->
+                <p>You don't have any membership. Please purchase a membership for more infomation.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer notAlreadymembership display-none">
+                <button type="button" class="btn btn-primary" onclick='window.location.href="/pbms"'>Purchase
+                    Membership</button>
+                <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Close</button>
+            </div>
+
+            <form class="ModalCloseClick alreadymembership display-none" [formGroup]="createMyPortfolio"
+                id="myPortfolioCreateFormTag" (ngSubmit)="submitMyPortfolio()">
+                <div class="modal-body">
+                    <input type="text" class="property_head" readonly>
+                    <div class="alert alert-success dispNone booksuccess"></div>
+                    <div class="alert alert-danger dispNone bookdanger"></div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Property url : <span class="red">*</span></label>
+                            <input class="form-control col-md-9 float-right" placeholder="Property url"
+                                formControlName="property_url" id="property_url" value="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Title : <span class="red">*</span></label>
+                            <input class="form-control col-md-9 float-right" placeholder="Title" formControlName="title"
+                                id="title" value="">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Invite members : <span class="red">*</span></label>
+                            <div class="col-md-9 float-right paddingAll0">
+                                <div class="alert alert-success dispNone inviteSuccess"></div>
+                                <div class="alert alert-danger dispNone inviteDanger"></div>
+                                <ng-select [items]="getAllMembersdata" [multiple]="true" bindLabel="firstname"
+                                    bindValue="_id" [(ngModel)]="selectedUserIds" [ngModelOptions]="{standalone: true}">
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label selectedPadd"><a href="javascript:void(0);"><img
+                                                    class="radius50Per"
+                                                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                                    width="30px" height="30px">
+                                                {{item.firstname}} {{item.lastname}}</a></span>
+                                        <span class="ng-value-icon right selectedPadd" (click)="clear(item)"
+                                            aria-hidden="true">×</span>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <img class="radius50Per"
+                                            src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                                            width="30px" height="30px"> {{item.firstname}} {{item.lastname}}
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="chengePassSubmitForm" class="btn btn-primary pull-left"
+                        type="submit">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="update-cover-pic-modal" *ngIf="getMemberData">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Portfolio Picture</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <input type="text" class="property_head" readonly>
+            <div class="alert alert-success dispNone cover-pic-success"></div>
+            <div class="alert alert-danger dispNone cover-pic-Danger"></div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- <p class="red">(Minimum Dimensions of image: 750 x 400)</p> -->
+                <img alt="Image is loading" class="" *ngIf="getMemberData"
+                    src="{{ getMemberData.length != 0 ? (baseURLofAPi+getMemberData[0].src) : '../../../assets/images/my-portfolio-1.jpg' }}"
+                    width="100%" height="300px">
+                <p class="onlyImgVideoRed marginBottom0">(Only Images in jpg/jpeg/png & Videos in mp4/mov/webm.)</p>
+                <p class="onlyImgVideoRed marginBottom0">(Minimum size of image should be 950 x 400 Pixel.)</p>
+                <!-- <p class="text-center"><input type="file" id="coverPicInput" class="marginTop15 widthOfInput"
+                        (change)="coverPhotosDropped($event.target.files)" single title="" value=""></p> -->
+                <!-- <p class="text-center">{{coverPhotoName}}</p>                 -->
+                <!-- <p>{{ErrorImagesFiles}}</p> -->
+                <br>
+                <div class="cover-pic-cropper-box">
+                    <img-cropper [image]="cover_pic_cropper_data" [settings]="cropperSettings1"
+                        (onCrop)="cropped($event)"></img-cropper>
+                    <br>
+                    <div class="cover-pic-result" *ngIf="cover_pic_cropper_data.image">
+                        <img [src]="cover_pic_cropper_data.image" [width]="cropperSettings1.croppedWidth"
+                            [height]="cropperSettings1.croppedHeight">
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="submitCoverPic()">Submit</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

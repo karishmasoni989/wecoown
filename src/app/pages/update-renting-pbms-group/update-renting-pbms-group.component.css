@@ -1,0 +1,90 @@
+.slash {
+  width: 6%;
+  font-size: 30px;
+  margin-left: 6px;
+  margin-top: -6px;
+  margin-right: 6px;
+}
+
+.marginTopMinus15 {
+  margin-top: -15px;
+}
+
+.selectedPadd {
+  font-weight: 600;
+  padding: 3px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.peroperty-fatcs {
+  padding: 20px 10px;
+  border-radius: 5px;
+  margin: 0px;
+  border: 1px solid #ced4da;
+  margin-bottom: 10px;
+}
+
+.orangeColor {
+  font-weight: 600;
+  color: orange;
+}
+
+.inputOutline0 input, dp-date-picker, dp-date-picker input {
+  border-bottom: solid 2px black !important;
+  border: 0;
+  outline: 0;
+  width: auto;
+  border-radius: 0;
+}
+dp-date-picker{
+  margin-bottom: 0;
+  padding: 0;
+}
+dp-date-picker input {
+  padding: 0 !important;
+}
+
+.inputOutline0 h5 {
+  line-height: 40px;
+  margin-bottom: 40px;
+  font-size: 19px;
+  text-align: justify;
+}
+
+/* input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      background: transparent;
+      bottom: 0;
+      color: transparent;
+      cursor: pointer;
+      height: 20px;
+      left: 0;
+      position: absolute;
+      right: 0px;
+      top: 145px;
+      width: 100%;
+    } */
+@media screen and (max-width: 460px) {
+  .inputOutline0 h5 {
+    line-height: 30px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    text-align: justify;
+  }
+
+  span {
+    display: block;
+  }
+
+  .marginLeft23 {
+    margin-left: 23px;
+  }
+
+  .mobileViewDisplayNone {
+    display: none;
+  }
+}

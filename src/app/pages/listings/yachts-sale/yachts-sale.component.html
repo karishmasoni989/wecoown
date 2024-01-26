@@ -1,0 +1,835 @@
+<!-- middle section -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1 class="createListing">Create Listings</h1>
+            <h1 class="updateListing dispNone">Edit Listings</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active createListing" aria-current="page">Create Listings</li>
+                    <li class="breadcrumb-item active updateListing dispNone" aria-current="page">Edit Listings</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <br>
+        <h3>Property Type: Yachts & Ships</h3>
+        <h5 class="createListing">Serial Number: YS{{getCurrentSerialNumber}}</h5>
+        <h5 class="updateListing dispNone">Serial Number: YS{{Serial_Number}}</h5>
+        <br>
+        <div class="alert alert-success BuyerSuccess dispNone"></div>
+        <div class="alert alert-danger BuyerDanger dispNone"></div>
+        <form class="login-form" [formGroup]="createPostingForm" (ngSubmit)="submit()" id="simpleForm">
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Yachts & Ships Details:</h4>
+                </div>
+                <div class="col-md-6">
+                    <label>Image / Video: <span class="onlyImgVideoRed">(Only images in jpg/jpeg/png & videos in
+                            mp4/mov/webm)</span><span class="red">*</span></label><br>
+                    <div class="form-group">
+                        <div class="dropzone form-control float-right" id="fullImageBox">
+                            <input type="file" #fileDropRef id="fileDropRef"
+                                (change)="onFileDropped($event.target.files)" style="float: right;" single
+                                accept="image/png,image/jpeg,image/jpg,video/mp4,video/mov,video/webm," multiple>
+                            <img alt="Image is loading" src="../../../assets/images/upload1.png" width="50px">
+                            <p>Drag and drop files here</p>
+                            <p>Or</p>
+                            <button for="fileDropRef">Browse for files</button>
+                            <p class="onlyImgVideoRed marginBottom0">(Minimum size of image / video should be 920 x 400
+                                Pixel.)</p>
+                        </div>
+                        <div class="form-control float-right files-list">
+                            <div class="single-files disFlex" *ngFor='let file of getPhtosALL; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.orgName}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="deltePreviousFile(i)">
+                                </div>
+                            </div>
+                            <div class="single-files disFlex" *ngFor='let file of files; let i = index'>
+                                <img alt="Image is loading" src="../../../assets/images/saveFile.png"
+                                    width="45px">&nbsp;
+                                <div class="info">
+                                    <p class="name">{{ file?.name}}</p>
+                                </div>
+                                <div class="float-right">
+                                    &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png"
+                                        width="20px" (click)="delteFile(i)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Document (Only PDF file):</label>
+                    <input type="file" class="form-control" accept="application/pdf" id="doc_pdf_file"
+                        (change)="PdfFileDropped($event.target.files)" single title="">
+                    <div class="single-files disFlex" *ngFor='let file of prevuiousPdf; let i = index'>
+                        <img alt="Image is loading" src="../../../assets/images/saveFile.png" width="45px">&nbsp;
+                        <div class="info">
+                            <p class="name">{{ file?.orgName}}</p>
+                        </div>
+                        <div class="float-right">
+                            &nbsp;<img alt="Image is loading" src="../../../assets/images/delteFile1.png" width="20px"
+                                (click)="deletePreviousPdf(i)">
+                        </div>
+                    </div>
+                    <!-- <label>Selling Price: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Selling Price"
+                        [(ngModel)]="selling_price" formControlName="selling_price">                      -->
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Title Name:
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Title Name" [(ngModel)]="Tittle_Name"
+                        formControlName="Tittle_Name">
+                    <label>Yachts & Ships Type:</label><br>
+                    <input [(ngModel)]="yachts_type" readonly formControlName="yachts_type"
+                        class="form-control CheckForm" type="text">
+                    <label>Yachts & Ships Sub-type:</label><br>
+                    <select class="form-control CheckForm" formControlName="yachts_subtype"
+                        (change)="changeSubCategory($event.target.value)" id="all-sub-category"
+                        [(ngModel)]="yachts_subtype">
+                        <option value="">Select Yachts & Ships Sub-type</option>
+                        <option *ngFor="let task of subpropertyType" value="{{task.property_subtype}}">
+                            {{task.property_subtype}}
+                        </option>
+                    </select>
+                    <label>Purpose: (Ex. For Sale/For Lease)
+                        <!-- <span class="red">*</span> -->
+                    </label><br>
+                    <select class="form-control CheckForm" formControlName="purpose" [(ngModel)]="purpose"
+                        (change)="getSelectedPurpose($event.target.value)">
+                        <option value="">Select Purpose</option>
+                        <option value="No Ready">Not Ready for Listing</option>
+                        <option value="For Sale">For Sale</option>
+                        <option value="For Lease">For Lease</option>
+                        <option value="Both">Both (For Sale & Lease)</option>
+                    </select>
+                    <label>Link:</label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Link" [(ngModel)]="links"
+                        formControlName="links">
+                </div>
+            </div>
+            <div class="row peroperty-fatcs">
+                <div class="col-md-12">
+                    <h4>Property Address:</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 1:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 1"
+                        [(ngModel)]="address_line1" formControlName="address_line1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Address Line 2:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Address Line 2"
+                        [(ngModel)]="address_line2" formControlName="address_line2">
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>Country: </label>
+                    <select class="form-control CheckForm" formControlName="country" [(ngModel)]="country"
+                        (change)="changeCoutry($event.target.value)">
+                        <option value="">All Countries</option>
+                        <option *ngFor="let task of getAllCountry" value="{{task.code+'||'+task.name}}">
+                            {{task.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>State: </label>
+                    <select class="form-control CheckForm" formControlName="state" [(ngModel)]="state"
+                        (change)="changeState($event.target.value)">
+                        <option value="">All States</option>
+                        <option *ngFor="let task of getAllStates"
+                            value="{{task.country+'||'+task.isoCode+'||'+task.region}}">
+                            {{task.region}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grou col-md-4">
+                    <label>City: </label>
+                    <select class="form-control CheckForm" formControlName="city" [(ngModel)]="city">
+                        <option value="">All Cities</option>
+                        <option *ngFor="let task of getAllCities" value="{{task.city}}">
+                            {{task.city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Zipcode:
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Zipcode" [(ngModel)]="zipcode"
+                        formControlName="zipcode">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Landmark: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Landmark" [(ngModel)]="landmark"
+                        formControlName="landmark">
+                </div>
+            </div>
+
+            <!-- General -->
+            <div
+                class="row peroperty-fatcs catamarans commercialShips fishingBoats hydroplanes powerYachts sailboats speedBoats submarines superYachts">
+                <div class="col-md-12">
+                    <h4>General</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Price:</label><br>
+                    <input [(ngModel)]="price" formControlName="price" class="form-control CheckForm" type="text"
+                        placeholder="Price" id="price">
+                </div>
+                <div class="form-group col-md-4 catamarans fishingBoats hydroplanes powerYachts sailboats speedBoats">
+                    <label>Length:</label><br>
+                    <input [(ngModel)]="Length" formControlName="Length" class="form-control CheckForm" type="text"
+                        placeholder="Length">
+                </div>
+                <div
+                    class="form-group col-md-4 catamarans commercialShips fishingBoats hydroplanes powerYachts sailboats superYachts">
+                    <label>Beam: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Beam" [(ngModel)]="Beam"
+                        formControlName="Beam">
+                </div>
+                <div
+                    class="form-group col-md-4 catamarans commercialShips fishingBoats powerYachts sailboats speedBoats">
+                    <label>Draft:</label><br>
+                    <input [(ngModel)]="draft" formControlName="draft" class="form-control CheckForm" type="text"
+                        placeholder="Draft">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats">
+                    <label>Staterooms:</label><br>
+                    <input [(ngModel)]="Staterooms" formControlName="Staterooms" class="form-control CheckForm"
+                        type="text" placeholder="Staterooms">
+                </div>
+                <div class="form-group col-md-4 catamarans commercialShips hydroplanes sailboats speedBoats submarines">
+                    <label>Overview:</label>
+                    <input [(ngModel)]="Overview" formControlName="Overview" class="form-control CheckForm" type="text"
+                        placeholder="Overview">
+                </div>
+                <div
+                    class="form-group col-md-4 catamarans commercialShips hydroplanes powerYachts sailboats speedBoats submarines superYachts">
+                    <label>Description:</label><br>
+                    <textarea [(ngModel)]="Description" formControlName="Description" class="form-control  CheckForm"
+                        type="text" placeholder="Description" rows="1" id="firstname"></textarea>
+                </div>
+                <div class="form-group col-md-4 commercialShips superYachts">
+                    <label>Length Overall:</label><br>
+                    <input [(ngModel)]="Length_Overall" formControlName="Length_Overall" class="form-control CheckForm"
+                        type="text" placeholder="Length Overall">
+                </div>
+                <div class="form-group col-md-4 fishingBoats submarines superYachts">
+                    <label>Name:</label><br>
+                    <input [(ngModel)]="Name" formControlName="Name" class="form-control CheckForm" type="text"
+                        placeholder="Name">
+                </div>
+                <div class="form-group col-md-4 fishingBoats hydroplanes speedBoats superYachts">
+                    <label>Build Year:</label><br>
+                    <input [(ngModel)]="Build_Year" formControlName="Build_Year" class="form-control CheckForm"
+                        type="text" placeholder="Build Year">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Mainly Used For:</label><br>
+                    <input [(ngModel)]="Mainly_Used_For" formControlName="Mainly_Used_For"
+                        class="form-control CheckForm" type="text" placeholder="Mainly Used For">
+                </div>
+                <div class="form-group col-md-4 speedBoats">
+                    <label>Manufacturer:</label><br>
+                    <input [(ngModel)]="Manufacturer" formControlName="Manufacturer" class="form-control CheckForm"
+                        type="text" placeholder="Manufacturer">
+                </div>
+                <div class="form-group col-md-4 speedBoats">
+                    <label>Mooring Country:</label><br>
+                    <input [(ngModel)]="Mooring_Country" formControlName="Mooring_Country"
+                        class="form-control CheckForm" type="text" placeholder="Mooring Country">
+                </div>
+                <div class="form-group col-md-4 speedBoats">
+                    <label>Condition:</label><br>
+                    <input [(ngModel)]="Condition" formControlName="Condition" class="form-control CheckForm"
+                        type="text" placeholder="Condition">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Autonomy:</label><br>
+                    <input [(ngModel)]="Autonomy" formControlName="Autonomy" class="form-control CheckForm" type="text"
+                        placeholder="Autonomy">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Guest Cabin:</label><br>
+                    <input [(ngModel)]="guest_cabin" formControlName="guest_cabin" class="form-control CheckForm"
+                        type="text" placeholder="Guest Cabin">
+                </div>
+            </div>
+
+            <!-- Specifications -->
+            <div
+                class="row peroperty-fatcs catamarans commercialShips fishingBoats hydroplanes powerYachts sailboats speedBoats submarines superYachts">
+                <div class="col-md-12">
+                    <h4>Specifications</h4>
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats submarines superYachts">
+                    <label>Cruising Speed: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Cruising Speed"
+                        [(ngModel)]="Cruising_Speed" formControlName="Cruising_Speed">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats">
+                    <label>Fresh Water:</label><br>
+                    <input [(ngModel)]="Fresh_Water" formControlName="Fresh_Water" class="form-control CheckForm"
+                        type="text" placeholder="Fresh Water">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats">
+                    <label>Cabins:</label><br>
+                    <input [(ngModel)]="Cabins" formControlName="Cabins" class="form-control CheckForm" type="text"
+                        placeholder="Cabins">
+                </div>
+                <div class="form-group col-md-4 catamarans hydroplanes powerYachts sailboats speedBoats">
+                    <label>Maximum Speed: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Maximum Speed"
+                        [(ngModel)]="Maximum_Speed" formControlName="Maximum_Speed">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats superYachts">
+                    <label>Hull Material: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Hull Material"
+                        [(ngModel)]="Hull_Material" formControlName="Hull_Material">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats">
+                    <label>Fuel Tank:</label><br>
+                    <input [(ngModel)]="Fuel_Tanks" formControlName="Fuel_Tanks" class="form-control CheckForm"
+                        type="text" placeholder="Fuel Tank">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts">
+                    <label>Holding:</label><br>
+                    <input [(ngModel)]="Holding" formControlName="Holding" class="form-control CheckForm" type="text"
+                        placeholder="Holding">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats">
+                    <label>Heads:</label><br>
+                    <input [(ngModel)]="Heads" formControlName="Heads" class="form-control CheckForm" type="text"
+                        placeholder="Heads">
+                </div>
+                <div class="form-group col-md-4 catamarans commercialShips">
+                    <label>Refitted:</label><br>
+                    <input [(ngModel)]="Refitted" formControlName="Refitted" class="form-control CheckForm" type="text"
+                        placeholder="Refitted">
+                </div>
+                <div class="form-group col-md-4 commercialShips">
+                    <label>Vessel Name:</label><br>
+                    <input [(ngModel)]="Vessel_name" formControlName="Vessel_name" class="form-control CheckForm"
+                        type="text" placeholder="Vessel Name">
+                </div>
+                <div class="form-group col-md-4 commercialShips">
+                    <label>Vessel Type:</label><br>
+                    <input [(ngModel)]="Vessel_type" formControlName="Vessel_type" class="form-control CheckForm"
+                        type="text" placeholder="Vessel Type">
+                </div>
+                <div class="form-group col-md-4 commercialShips">
+                    <label>Constructed:</label><br>
+                    <input [(ngModel)]="Constructed" formControlName="Constructed" class="form-control CheckForm"
+                        type="text" placeholder="Constructed">
+                </div>
+                <div class="form-group col-md-4 commercialShips">
+                    <label>Number of Engines:</label><br>
+                    <input [(ngModel)]="No_of_engines" formControlName="No_of_engines" class="form-control CheckForm"
+                        type="text" placeholder="Number of Engines">
+                </div>
+                <div class="form-group col-md-4 commercialShips hydroplanes speedBoats">
+                    <label>Engine Model:</label><br>
+                    <input [(ngModel)]="Engine_model" formControlName="Engine_model" class="form-control CheckForm"
+                        type="text" placeholder="Engine Model">
+                </div>
+                <div class="form-group col-md-4 commercialShips hydroplanes">
+                    <label>Engine Power:</label><br>
+                    <input [(ngModel)]="Engine_power" formControlName="Engine_power" class="form-control CheckForm"
+                        type="text" placeholder="Engine Power">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Hull:</label><br>
+                    <input [(ngModel)]="Hull" formControlName="Hull" class="form-control CheckForm" type="text"
+                        placeholder="Hull">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Licence:</label><br>
+                    <input [(ngModel)]="Licence" formControlName="Licence" class="form-control CheckForm" type="text"
+                        placeholder="Licence">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Engines:</label><br>
+                    <input [(ngModel)]="Engines" formControlName="Engines" class="form-control CheckForm" type="text"
+                        placeholder="Engines">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Hydraulics:</label><br>
+                    <input [(ngModel)]="Hydraulics" formControlName="Hydraulics" class="form-control CheckForm"
+                        type="text" placeholder="Hydraulics">
+                </div>
+                <div class="form-group col-md-4 fishingBoats">
+                    <label>Electronics:</label><br>
+                    <input [(ngModel)]="Electronics" formControlName="Electronics" class="form-control CheckForm"
+                        type="text" placeholder="Electronics">
+                </div>
+                <div class="form-group col-md-4 hydroplanes superYachts">
+                    <label>Power:</label><br>
+                    <input [(ngModel)]="Power" formControlName="Power" class="form-control CheckForm" type="text"
+                        placeholder="Power">
+                </div>
+                <div class="form-group col-md-4 hydroplanes">
+                    <label>Hours:</label><br>
+                    <input [(ngModel)]="Hours" formControlName="Hours" class="form-control CheckForm" type="text"
+                        placeholder="Hours">
+                </div>
+                <div class="form-group col-md-4 powerYachts superYachts">
+                    <label>Displacement:</label><br>
+                    <input [(ngModel)]="Displacement" formControlName="Displacement" class="form-control CheckForm"
+                        type="text" placeholder="Displacement">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Single Berths:</label><br>
+                    <input [(ngModel)]="Single_Berths" formControlName="Single_Berths" class="form-control CheckForm"
+                        type="text" placeholder="Single Berths">
+                </div>
+                <div class="form-group col-md-4 sailboats speedBoats submarines">
+                    <label>Maximum Passengers:</label><br>
+                    <input [(ngModel)]="Max_Passengers" formControlName="Max_Passengers" class="form-control CheckForm"
+                        type="text" placeholder="Maximum Passengers">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Generators and Electricity:</label><br>
+                    <input [(ngModel)]="Generators_and_Electricity" formControlName="Generators_and_Electricity"
+                        class="form-control CheckForm" type="text" placeholder="Generators and Electricity">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Rigger:</label><br>
+                    <input [(ngModel)]="Rigger" formControlName="Rigger" class="form-control CheckForm" type="text"
+                        placeholder="Rigger">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Mast Material:</label><br>
+                    <input [(ngModel)]="Mast_material" formControlName="Mast_material" class="form-control CheckForm"
+                        type="text" placeholder="Mast Material">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Mast Heights Over Deck:</label><br>
+                    <input [(ngModel)]="Mast_heights_over_deck" formControlName="Mast_heights_over_deck"
+                        class="form-control CheckForm" type="text" placeholder="Mast Heights Over Deck">
+                </div>
+                <div class="form-group col-md-4 catamarans sailboats">
+                    <label>Sails:</label><br>
+                    <input [(ngModel)]="Sails" formControlName="Sails" class="form-control CheckForm" type="text"
+                        placeholder="Sails">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Asymmetric Balloon:</label><br>
+                    <input [(ngModel)]="Asymmetric_balloon" formControlName="Asymmetric_balloon"
+                        class="form-control CheckForm" type="text" placeholder="Asymmetric Balloon">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Genoa Sail:</label><br>
+                    <input [(ngModel)]="Genoa_sail" formControlName="Genoa_sail" class="form-control CheckForm"
+                        type="text" placeholder="Genoa Sail">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Stay Sail:</label><br>
+                    <input [(ngModel)]="Stay_sail" formControlName="Stay_sail" class="form-control CheckForm"
+                        type="text" placeholder="Stay Sail">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Main Sail:</label><br>
+                    <input [(ngModel)]="Main_sail" formControlName="Main_sail" class="form-control CheckForm"
+                        type="text" placeholder="Main Sail">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Owner and Guest:</label><br>
+                    <input [(ngModel)]="Owner_and_Guest" formControlName="Owner_and_Guest"
+                        class="form-control CheckForm" type="text" placeholder="Owner and Guest">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Deck Area:</label><br>
+                    <input [(ngModel)]="Deck_Area" formControlName="Deck_Area" class="form-control CheckForm"
+                        type="text" placeholder="Deck Area">
+                </div>
+                <div class="form-group col-md-4 sailboats superYachts">
+                    <label>Crew:</label><br>
+                    <input [(ngModel)]="Crew" formControlName="Crew" class="form-control CheckForm" type="text"
+                        placeholder="Crew">
+                </div>
+                <div class="form-group col-md-4 sailboats">
+                    <label>Winter Maintenance / 10 Year Abs Details:</label><br>
+                    <input [(ngModel)]="Winter_Maintenance_10_Year_Abs_Details"
+                        formControlName="Winter_Maintenance_10_Year_Abs_Details" class="form-control CheckForm"
+                        type="text" placeholder="Winter Maintenance /10 Year Abs Details">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Operating Depth:</label><br>
+                    <input [(ngModel)]="Operating_Depth" formControlName="Operating_Depth"
+                        class="form-control CheckForm" type="text" placeholder="Operating Depth">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Size:</label><br>
+                    <input [(ngModel)]="Size" formControlName="Size" class="form-control CheckForm" type="text"
+                        placeholder="Size">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Emergency Endurance:</label><br>
+                    <input [(ngModel)]="Emergency_Endurance" formControlName="Emergency_Endurance"
+                        class="form-control CheckForm" type="text" placeholder="Emergency Endurance">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Class:</label><br>
+                    <input [(ngModel)]="Class" formControlName="Class" class="form-control CheckForm" type="text"
+                        placeholder="Class">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Support:</label><br>
+                    <input [(ngModel)]="Support" formControlName="Support" class="form-control CheckForm" type="text"
+                        placeholder="Support">
+                </div>
+                <div class="form-group col-md-4 submarines">
+                    <label>Categories:</label><br>
+                    <input [(ngModel)]="Categories" formControlName="Categories" class="form-control CheckForm"
+                        type="text" placeholder="Categories">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Builder: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Builder" [(ngModel)]="Builder"
+                        formControlName="Builder">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Naval Architect:</label><br>
+                    <input [(ngModel)]="Naval_Architect" formControlName="Naval_Architect"
+                        class="form-control CheckForm" type="text" placeholder="Naval Architect">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Exterior Designer:</label><br>
+                    <input [(ngModel)]="Exterior_Designer" formControlName="Exterior_Designer"
+                        class="form-control CheckForm" type="text" placeholder="Exterior Designer">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Interior Designer:</label><br>
+                    <input [(ngModel)]="Interior_Designer" formControlName="Interior_Designer"
+                        class="form-control CheckForm" type="text" placeholder="Interior Designer">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Top Speed:</label><br>
+                    <input [(ngModel)]="top_speed" formControlName="top_speed" class="form-control CheckForm"
+                        type="text" placeholder="Top Speed">
+                </div>
+            </div>
+
+            <!-- Engine  Interior-Layout   Walk-Through  Dimensions  Construction   Performance & Capacities    Materials   Accommodation-->
+            <div class="row peroperty-fatcs catamarans powerYachts sailboats speedBoats superYachts">
+                <div class="col-md-12 catamarans powerYachts sailboats speedBoats superYachts">
+                    <h4>Engine(s)</h4>
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats superYachts">
+                    <label>Make:</label><br>
+                    <input [(ngModel)]="Make" formControlName="Make" class="form-control CheckForm" type="text"
+                        placeholder="Make">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats superYachts">
+                    <label>Model:</label><br>
+                    <input [(ngModel)]="Model" formControlName="Model" class="form-control CheckForm" type="text"
+                        placeholder="Model">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats">
+                    <label>Fuel:</label><br>
+                    <input [(ngModel)]="Fuel" formControlName="Fuel" class="form-control CheckForm" type="text"
+                        placeholder="Fuel">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats">
+                    <label>Type:</label><br>
+                    <input [(ngModel)]="Type" formControlName="Type" class="form-control CheckForm" type="text"
+                        placeholder="Type">
+                </div>
+                <div class="form-group col-md-4 catamarans powerYachts sailboats speedBoats">
+                    <label>Drive Type:</label><br>
+                    <input [(ngModel)]="Drive_Type" formControlName="Drive_Type" class="form-control CheckForm"
+                        type="text" placeholder="Drive Type">
+                </div>
+
+                <div class="col-md-12 catamarans">
+                    <h4>Interior Layout</h4>
+                </div>
+                <div class="form-group col-md-4 catamarans">
+                    <label>Main Deck:</label><br>
+                    <input [(ngModel)]="Main_Deck" formControlName="Main_Deck" class="form-control CheckForm"
+                        type="text" placeholder="Main Deck">
+                </div>
+                <div class="form-group col-md-4 catamarans">
+                    <label>Starboard Hull:</label><br>
+                    <input [(ngModel)]="starboard_hull" formControlName="starboard_hull" class="form-control CheckForm"
+                        type="text" placeholder="Starboard Hull">
+                </div>
+                <div class="form-group col-md-4 catamarans">
+                    <label>Port Hull:</label><br>
+                    <input [(ngModel)]="port_hull" formControlName="port_hull" class="form-control CheckForm"
+                        type="text" placeholder="Port Hull">
+                </div>
+
+                <div class="col-md-12 powerYachts">
+                    <h4>Walk Through</h4>
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Upgrades and Features:</label><br>
+                    <input [(ngModel)]="Upgrades_and_Features" formControlName="Upgrades_and_Features"
+                        class="form-control CheckForm" type="text" placeholder="Upgrades and Features">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Detailed Specification:</label><br>
+                    <input [(ngModel)]="Detailed_Specification" formControlName="Detailed_Specification"
+                        class="form-control CheckForm" type="text" placeholder="Detailed Specification">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Electronics, Navigation & A/V Equipment:</label><br>
+                    <input [(ngModel)]="Electronics_Navigation_AV_Equipment"
+                        formControlName="Electronics_Navigation_AV_Equipment" class="form-control CheckForm" type="text"
+                        placeholder="Electronics, Navigation & A/V Equipment">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Interior Accommodations & Layout:</label><br>
+                    <input [(ngModel)]="Interior_Accommodations_Layout" formControlName="Interior_Accommodations_Layout"
+                        class="form-control CheckForm" type="text" placeholder="Interior Accommodations & Layout">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>His & Her Master Bath:</label><br>
+                    <input [(ngModel)]="His_and_Her_Master_Bath" formControlName="His_and_Her_Master_Bath"
+                        class="form-control CheckForm" type="text" placeholder="His & Her Master Bath">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Main Salon:</label><br>
+                    <input [(ngModel)]="Main_Salon" formControlName="Main_Salon" class="form-control CheckForm"
+                        type="text" placeholder="Main Salon">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Dining Area:</label><br>
+                    <input [(ngModel)]="Dining_Area" formControlName="Dining_Area" class="form-control CheckForm"
+                        type="text" placeholder="Dining Area">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Main Foyer:</label><br>
+                    <input [(ngModel)]="Main_Foyer" formControlName="Main_Foyer" class="form-control CheckForm"
+                        type="text" placeholder="Main Foyer">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Galley:</label><br>
+                    <input [(ngModel)]="Galley" formControlName="Galley" class="form-control CheckForm" type="text"
+                        placeholder="Galley">
+                </div>
+                <div class="form-group col-md-4 powerYachts">
+                    <label>Mechanical Equipment:</label><br>
+                    <input [(ngModel)]="Mechanical_Equipment" formControlName="Mechanical_Equipment"
+                        class="form-control CheckForm" type="text" placeholder="Mechanical Equipment">
+                </div>
+
+                <div class="col-md-12 superYachts">
+                    <h4>Dimensions</h4>
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Length at Waterline:</label><br>
+                    <input [(ngModel)]="Length_at_Waterline" formControlName="Length_at_Waterline"
+                        class="form-control CheckForm" type="text" placeholder="Length at Waterline">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Maximum Draught:</label><br>
+                    <input [(ngModel)]="Max_Draught" formControlName="Max_Draught" class="form-control CheckForm"
+                        type="text" placeholder="Maximum Draught">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Gross Tonnage:</label><br>
+                    <input [(ngModel)]="Gross_Tonnage" formControlName="Gross_Tonnage" class="form-control CheckForm"
+                        type="text" placeholder="Gross Tonnage">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Displacement Tonnage:</label><br>
+                    <input [(ngModel)]="Displacement_Tonnage" formControlName="Displacement_Tonnage"
+                        class="form-control CheckForm" type="text" placeholder="Displacement Tonnage">
+                </div>
+
+                <div class="col-md-12 superYachts">
+                    <h4>Construction:</h4>
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Builder: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Builder" [(ngModel)]="Builder"
+                        formControlName="Builder">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Hull Number:</label><br>
+                    <input [(ngModel)]="Hull_Number" formControlName="Hull_Number" class="form-control CheckForm"
+                        type="text" placeholder="Hull Number">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Hull Type:</label><br>
+                    <input [(ngModel)]="Hull_Type" formControlName="Hull_Type" class="form-control CheckForm"
+                        type="text" placeholder="Hull Type">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Number of Decks:</label><br>
+                    <input [(ngModel)]="Number_of_Decks" formControlName="Number_of_Decks"
+                        class="form-control CheckForm" type="text" placeholder="Number of Decks">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>MCA Compliant:</label><br>
+                    <input [(ngModel)]="MCA_Compliant" formControlName="MCA_Compliant" class="form-control CheckForm"
+                        type="text" placeholder="MCA Compliant">
+                </div>
+
+                <div class="col-md-12 superYachts">
+                    <h4>Performance & Capacities</h4>
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Maximum Speed: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Maximum Speed"
+                        [(ngModel)]="Maximum_Speed" formControlName="Maximum_Speed">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Fuel Capacity: </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Fuel Capacity"
+                        [(ngModel)]="Fuel_Capacity" formControlName="Fuel_Capacity">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Water Capacity:</label><br>
+                    <input [(ngModel)]="Water_Capacity" formControlName="Water_Capacity" class="form-control CheckForm"
+                        type="text" placeholder="Water Capacity">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Range:</label><br>
+                    <input [(ngModel)]="range" formControlName="range" class="form-control CheckForm" type="text"
+                        placeholder="Range">
+                </div>
+
+                <div class="col-md-12 superYachts">
+                    <h4>Materials</h4>
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Superstructure:</label><br>
+                    <input [(ngModel)]="Superstructure" formControlName="Superstructure" class="form-control CheckForm"
+                        type="text" placeholder="Superstructure">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Deck:</label><br>
+                    <input [(ngModel)]="Deck" formControlName="Deck" class="form-control CheckForm" type="text"
+                        placeholder="Deck">
+                </div>
+
+                <div class="col-md-12 superYachts">
+                    <h4>Accommodation</h4>
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Guests:</label><br>
+                    <input [(ngModel)]="Guests" formControlName="Guests" class="form-control CheckForm" type="text"
+                        placeholder="Guests">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Passenger Rooms:</label><br>
+                    <input [(ngModel)]="Passenger_Rooms" formControlName="Passenger_Rooms"
+                        class="form-control CheckForm" type="text" placeholder="Passenger Rooms">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Master Rooms:</label><br>
+                    <input [(ngModel)]="Master_Rooms" formControlName="Master_Rooms" class="form-control CheckForm"
+                        type="text" placeholder="Master Rooms">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>Twin Rooms:</label><br>
+                    <input [(ngModel)]="Twin_Rooms" formControlName="Twin_Rooms" class="form-control CheckForm"
+                        type="text" placeholder="Twin Rooms">
+                </div>
+                <div class="form-group col-md-4 superYachts">
+                    <label>VIP Rooms:</label><br>
+                    <input [(ngModel)]="VIP_Rooms" formControlName="VIP_Rooms" class="form-control CheckForm"
+                        type="text" placeholder="VIP Rooms">
+                </div>
+            </div>
+
+            <div class="row peroperty-fatcs catamarans speedBoats">
+                <div class="form-group col-md-4 catamarans speedBoats">
+                    <label>
+                        <h4>Construction:</h4>
+                    </label><br>
+                    <input class="form-control CheckForm" type="text" placeholder="Construction"
+                        [(ngModel)]="Construction" formControlName="Construction">
+                </div>
+                <div class="form-group col-md-4 catamarans speedBoats">
+                    <h4>Concept and Design:</h4>
+                    <input [(ngModel)]="Concept_And_Design" formControlName="Concept_And_Design"
+                        class="form-control CheckForm" type="text" placeholder="Concept and Design">
+                </div>
+                <div class="form-group col-md-4 catamarans speedBoats">
+                    <h4>Exterior Layout:</h4>
+                    <input [(ngModel)]="Exterior_Layout" formControlName="Exterior_Layout"
+                        class="form-control CheckForm" type="text" placeholder="Exterior Layout">
+                </div>
+                <div class="form-group col-md-4 catamarans">
+                    <h4>Rigging and Sails:</h4>
+                    <input [(ngModel)]="Rigging_And_Sails" formControlName="Rigging_And_Sails"
+                        class="form-control CheckForm" type="text" placeholder="Rigging and Sails">
+                </div>
+                <div class="form-group col-md-4 catamarans">
+                    <h4>Entertainment and Electronics:</h4>
+                    <input [(ngModel)]="Entertainment_And_Electronics" formControlName="Entertainment_And_Electronics"
+                        class="form-control CheckForm" type="text" placeholder="Entertainment and Electronics">
+                </div>
+            </div>
+
+            <!-- add fraction fields show when user have membership -->
+            <div class="row peroperty-fatcs fractional_share_box ">
+                <div class="col-md-12">
+                    <h4>Fractional Share :</h4>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Fractional Share :</label><br>
+                    <select class="form-control CheckForm" (change)="getSelectedFractionalShare($event.target.value)"
+                        formControlName="fractional_share_choice_percentage_or_unit"
+                        [(ngModel)]="fractional_share_choice_percentage_or_unit">
+                        <option value="">Select Fractional Share</option>
+                        <option value="Percentage">Percentage</option>
+                        <option value="Units">Units</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 display-none fractional_text">
+                    <label class="fractional_text_label"></label><br>
+                    <input [(ngModel)]="fractional_share_text_percentage_or_unit"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="fractional_share_text_percentage_or_unit" maxlength="3"
+                        class="form-control CheckForm fractional_text_input" type="text"
+                        placeholder="Fractional Share Percentage or Units">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Offering Price:</label><br>
+                    <input [(ngModel)]="offering_Price_fractional_ownership"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                        formControlName="offering_Price_fractional_ownership" class="form-control CheckForm" type="text"
+                        placeholder="Offering Price">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group text-center col-md-12">
+                    <button class="btn btn-primary " id="formSubmit" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <br>
+</div>

@@ -1,0 +1,1290 @@
+<!-- ks -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="../assets/css/font-awesome.min.css"> -->
+<!-- <link rel="stylesheet" href="../assets/css/style.css">  -->
+<!-- Owl Stylesheets -->
+<!-- <link rel="stylesheet" href="../assets/css/owl.carousel.min.css"> -->
+<!-- <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css"> -->
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+  <div class="showbox">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+      </svg>
+    </div>
+  </div>
+</div>
+<!-- ./Loader -->
+
+<div class="masthead inline-header" role="banner">
+  <div class="top-bar bg-back-blue top-bar-line-hide">
+    <!-- <div id="allow_notify">Please allow browser notification to get notified</div> -->
+    <div class="top-bar-bg"></div>
+    <section class="section-header width100Per">
+      <div id="mySidenav" class="sidenav" style="display: none;">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <!-- <button onclick="window.location.href='/'">Home</button> -->
+        <button class="dispNone" id="forumButtonShow" onclick="window.location.href='/forum'">Forum</button>
+        <button class="dispNone" id="messageButton" onclick="window.location.href='/chat-message'">Messages</button>
+        <button class="dispNone" id="myCohortButtonShow" (click)="goToMyCohorts()">My Cohorts</button>
+        <button class="dispNone" id="portfolioButtonShow" onclick="window.location.href='/my-portfolio'">My
+          Portfolio</button>
+        <button class="dispNone" id="EditButtonShow" onclick="window.location.href='/user-profile'">My Postings</button>
+        <button style="display: none;" id="my-posting1" (click)="goToMyListing()">My Listings</button>
+        <button class="dispNone" id="myVouchersButtonShow" onclick="window.location.href='/my-vouchers'">My
+          Vouchers</button>
+        <button class="dispNone" id="settingButtonShow" onclick="window.location.href='/account-settings'">Account
+          Settings</button>
+        <button style="display: none;" id="user-sigup-report1" onclick="window.location.href='/user-signup-report'">User
+          Signup Report
+        </button>
+        <button class="dispNone" id="createAdButtonShow" onclick="window.location.href='/create-ads'">Create
+          Ads</button>
+        <button class="dispNone" id="manageAdButtonShow" onclick="window.location.href='/manage-ads'">Manage
+          Ads</button>
+        <!-- <button class="accordion">About Us</button>
+        <div class="panel">
+          <a href="/contact-us">Contact Us</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-conditions">Terms &amp; Conditions</a>
+        </div> -->
+        <!-- <button onclick="window.open('https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49','https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49'); return false">Blog</button> -->
+        <button class="accordion">How It Works</button>
+        <div class="panel">
+          <a href="/our-services">Our Services</a>
+          <a href="/membership">Membership</a>
+          <!-- <a href='' id="pmbs2" style="display: none;">PBMS</a> -->
+        </div>
+        <button (click)="goToWePo()">Search on WePropertyowners</button>
+        <button onclick="window.location.href='/fractional-shares-listing'">Fractional Shares Listings</button>
+        <button onclick="window.location.href='/pbms'">PBMS</button>
+        <!-- <button class="accordion">PBMS</button> -->
+        <!-- <div class="panel">
+          <a href="/pbms">Property Booking & Management System (PBMS)</a>
+        </div> -->
+        <button href="https://www.wecoownrewards.com/" onclick="window.open(this.href, this.href); return false">WeCoOwn
+          Rewards</button>
+        <!-- <button onclick="window.location.href='/vendor-list'">Vendor Resources</button> -->
+        <!-- <div class="panel">
+          <a href="">Real Estate</a>
+          <a href="">Yacht</a>
+          <a href="">Aircraft</a>
+          <a href="">Automobile</a>
+          <a href="">Others</a>
+        </div>      -->
+        <!-- <div class="panel">
+          <a href="">Insurance Quotes</a>
+        </div> -->
+        <!-- <button onclick="window.location.href='/contact-us'">WeCoOwn Community Blog</button> -->
+        <button onclick="window.location.href='/login'" class="dashboardNoneLog" id="login1">Login</button>
+        <button onclick="window.location.href='/register'" class="dashboardNoneLog" id="register1">Register</button>
+        <!-- <button onclick="window.location.href='/dashboard'" class="dispNone" id="dashboard1">Dashboard</button> -->
+        <!-- <button class="dispNone" id="profileMobileView"><img src="../assets/images/user1.png" style="width: 40px; height: 28px; border-radius: 50%;"></button> -->
+        <button class="accordion">Real Estate</button>
+        <div class="panel">
+          <a href="/category-by-name/Apartment%20Buildings">Apartment Buildings</a>
+          <a href="/category-by-name/Estate%20Homes%20and%20Luxury%20Mansions">Estate Homes and Luxury Mansions</a>
+          <a href="/category-by-name/Single%20Family%20Homes%20&%20Condos">Single Family Homes & Condos</a>
+          <a href="/category-by-name/Vacation%20Homes%20&%20Timeshares">Vacation Homes & Timeshares</a>
+          <a href="/category-by-name/Mobile%20Homes%20&%20RV%20Parks">Mobile Homes & RV Parks</a>
+          <a href="/category-by-name/Castles%20&%20Chateaux">Castles & Chateaux</a>
+          <a href="/category-by-name/Churches%20&%20Temples">Churches & Temples</a>
+          <a href="/category-by-name/Office%20Buildings">Office Buildings</a>
+          <a href="/category-by-name/Private%20Islands">Private Islands</a>
+          <a href="/category-by-name/Villages%20&%20Towns">Villages & Towns</a>
+          <a href="/category-by-name/Land%20Parcels">Land Parcels</a>
+          <a href="/category-by-name/Retail%20Shopping%20Malls">Retail Shopping Malls</a>
+          <a href="/category-by-name/Industrial%20Plants%20&%20Warehouses">Industrial Plants & Warehouses</a>
+        </div>
+        <button class="accordion">Business Properties</button>
+        <div class="panel">
+          <a href="/category-by-name/Hotels%20&%20Golf%20Resorts">Hotels & Golf Resorts</a>
+          <a href="/category-by-name/Motels,%20Hostels%20&%20B&Bs">Motels, Hostels & B&Bs</a>
+          <a href="/category-by-name/Restaurants,%20Bars%20&%20Clubs">Restaurants, Bars & Clubs</a>
+          <a href="/category-by-name/Ranches%20and%20Farms">Ranches & Farms</a>
+          <a href="/category-by-name/Cannabis%20Properties">Cannabis Properties</a>
+          <a href="/category-by-name/Wineries%20&%20Vineyards">Wineries &amp; Vineyards</a>
+          <a href="/category-by-name/Gas%20Stations%20&%20C%20Stores">Gas Stations & C Stores</a>
+          <a href="/category-by-name/Car%20Wash%20Facilities">Car Wash Facilities</a>
+          <a href="/category-by-name/Assisted%20Living%20&%20Nursing%20Homes">Assisted Living & Nursing Homes</a>
+          <a href="/category-by-name/Rehab%20Centers">Rehab Centers</a>
+          <a href="/category-by-name/Parking%20Lots">Parking Lots</a>
+          <a href="/category-by-name/Camp%20Grounds">Camp Grounds</a>
+          <a href="/category-by-name/Equestrian%20Centers">Equestrian Centers</a>
+          <a href="/category-by-name/Marinas">Marinas</a>
+        </div>
+        <button class="accordion">Yachts & Ships</button>
+        <div class="panel">
+          <a href="/category-by-name/Super%20Yachts">Super Yachts</a>
+          <a href="/category-by-name/Sail%20Boats">Sail Boats</a>
+          <a href="/category-by-name/Fishing%20Boats">Fishing Boats</a>
+          <a href="/category-by-name/Speed%20Boats">Speed Boats</a>
+          <a href="/category-by-name/Power%20Yachts">Power Yachts</a>
+          <a href="/category-by-name/Catamarans">Catamarans</a>
+          <a href="/category-by-name/Submarines">Submarines</a>
+          <a href="/category-by-name/Hydroplanes">Hydroplanes</a>
+          <a href="/category-by-name/Commercial%20Ships">Commercial Ships</a>
+        </div>
+        <button class="accordion">Jets & Aircraft</button>
+        <div class="panel">
+          <a href="/category-by-name/Jets%20&%20Planes">Jets</a>
+          <a href="/category-by-name/Turboprop%20Aircraft">Turboprop Aircraft</a>
+          <a href="/category-by-name/Piston%20Aircraft">Piston Aircraft</a>
+          <a href="/category-by-name/Helicopters">Helicopters</a>
+          <a href="/category-by-name/Passenger%20Drones">Passenger Drones</a>
+          <a href="/category-by-name/Flying%20Cars">Flying Cars</a>
+        </div>
+        <button class="accordion">Cars & RVs</button>
+        <div class="panel">
+          <a href="/category-by-name/Luxury%20Cars%20&%20RVs">Luxury Cars & SUVs</a>
+          <a href="/category-by-name/Commuter%20Cars">Commuter Cars & SUVs</a>
+          <a href="/category-by-name/Campers%20&%20RVs">Campers & RVs</a>
+          <a href="/category-by-name/Commercial%20Buses">Commercial Buses</a>
+          <a href="/category-by-name/EVs%20&%20Hybrids">EVs & Hybrids</a>
+          <a href="/category-by-name/Trucks">Trucks</a>
+          <a href="/category-by-name/Vans%20&%20Limos">Vans & Limos</a>
+        </div>
+        <button class="accordion">Artworks & Antiques</button>
+        <div class="panel">
+          <a href="/category-by-name/Western%20Paintings">Western Paintings</a>
+          <a href="/category-by-name/Oriental%20Paintings">Oriental Paintings</a>
+          <a href="/category-by-name/Sculptures">Sculptures</a>
+          <a href="/category-by-name/Contemporary%20Artworks">Contemporary Artworks</a>
+          <a href="/category-by-name/Modern%20Artworks">Modern Artworks</a>
+          <a href="/category-by-name/Digital%20Artworks">Digital Artworks</a>
+          <a href="/category-by-name/Antiques">Antiques</a>
+          <a href="/category-by-name/Collectibles">Collectibles</a>
+        </div>
+        <button class="accordion">Horses & Live Stocks</button>
+        <div class="panel">
+          <a href="/category-by-name/Race%20Horses">Race Horses</a>
+          <a href="/category-by-name/Draft%20Horses">Draft Horses</a>
+          <a href="/category-by-name/Show%20Horses">Show Horses</a>
+          <a href="/category-by-name/Cattle">Cattle</a>
+          <a href="/category-by-name/Sheep">Sheep</a>
+          <a href="/category-by-name/Other%20Live%20Stocks">Other Live Stocks</a>
+        </div>
+        <button class="accordion">Crypto-Assets</button>
+        <div class="panel">
+          <a href="/category-by-name/Real%20Estate%20Asset%20Tokens">Real Estate Asset Tokens</a>
+          <a href="/category-by-name/Commodity%20Asset%20Tokens">Commodity Asset Tokens</a>
+          <a href="/category-by-name/Utility%20Tokens">Utility Tokens</a>
+          <a href="/category-by-name/NFTs">NFTs</a>
+        </div>
+        <button class="accordion">Crowdfunding Projects</button>
+        <div class="panel">
+          <a href="/category-by-name/Property%20Crowdfunding">Property Crowdfunding</a>
+          <a href="/category-by-name/Equity%20Crowdfunding">Equity Crowdfunding</a>
+        </div>
+        <!-- <button class="accordion">Others</button>
+        <div class="panel">
+          <a href="/category-by-name/Others">Others</a>
+        </div> -->
+        <button class="dispNone" id="SignoutButtonShow" (click)="signOut();">SignOut</button>
+      </div>
+      <div class="row ColorWhite width100Per">
+        <!-- <div class="col-md-2 disFlex"> -->
+        <!-- City name link -->
+        <div id="loc_city_link" class="toggle_handler primary_location col-md-1" data-location="location_aslink">
+          <span class="" id="SpanMenu" style="display: none;" (click)="openNav($event)">&#9776; Menu</span>
+          <span class="marginLeftLoc">
+            <li class="notificationBell" style="display: none;" id="userNofication2" routerLink="/all-notication">
+              <a routerLink="/all-notication" id="userNotifyIcon"><i class="fa fa-bell font-size20 ColorWhite"
+                  id="userNotifyICC"></i></a>
+              <span id="UnreadNotify">{{NotificationUnreadCount}}</span>
+            </li>
+            <li class="notificationBell" style="display: none;" id="userMessage2" routerLink="/chat-message"><a
+                routerLink="/chat-message"><i class="fa fa-comment font-size20 ColorWhite"></i></a>
+              <span id="UnreadMsgCC">{{MessageUnreadCount}}</span>
+            </li>
+            <!-- <i class="fa fa-map-marker" style="margin-top:10px"></i>&nbsp; -->
+            <a href="javascript:void(0);" class="ColorWhite" id="language-click-open-dropp" data-toggle="collapse"
+              data-target="#language-drop">Language
+              <i class="fa fa-angle-down" id="language-click-open-dropp" data-toggle="collapse"
+                data-target="#language-drop"></i>
+            </a>
+            <div id="language-drop" class="collapse">
+              <ul>
+                <li (click)="ChangeLanguageGlo('zh-TW')"><a>{{'Chinese' | translateString | async}} <img src="../assets/images/china.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('fr')"><a>{{'French' | translateString | async}} <img src="../assets/images/france.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('de')"><a>{{'German' | translateString | async}} <img src="../assets/images/germany.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('ko')"><a>{{'Korean' | translateString | async}} <img src="../assets/images/korea.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('ru')"><a>{{'Russian' | translateString | async}} <img src="../assets/images/russia.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('es')"><a>{{'Spanish' | translateString | async}} <img src="../assets/images/spain.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('sv')"><a>{{'Swedish' | translateString | async}} <img src="../assets/images/sweden.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('th')"><a>{{'Thai' | translateString | async}} <img src="../assets/images/thailand.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('ja')"><a>{{'Japanese' | translateString | async}} <img src="../assets/images/japan.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('pt')"><a>{{'Portuguese' | translateString | async}} <img src="../assets/images/portgual.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('vi')"><a>{{'Vietnamese' | translateString | async}} <img src="../assets/images/vietnam.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+                <li (click)="ChangeLanguageGlo('en')"><a>{{'English' | translateString | async}} <img src="../assets/images/USA.png"
+                            style="width: 40px; height: 28px; float:right;"></a></li>
+              </ul>
+            </div>
+          </span>
+        </div>
+        <div class="col-md-3" id="search-col-3">
+          <input type="text" id="search-input-bar" (keyup)="onSearch($event)" class="search-input"
+            placeholder="Search Members"><i class="fa fa-search forSearch"></i>
+          <ul class="all-search-list">
+            <div *ngFor="let item of getSearchMember">
+              <li (click)="goToMemberPage(item._id)">
+                <a href="javascript:void(0);">
+                  <img alt="Image is loading"
+                    src="{{ item.profile_pic.length != 0 ? (baseURLofAPi+item.profile_pic[0].src) : '../assets/images/user1.png' }}"
+                    width="30px">
+                </a>&nbsp;
+                <a class="link-blue" href="javascript:void(0);">{{item.firstname}} {{item.lastname}}</a>
+              </li>
+            </div>
+            <div id="no-search-result" style="display: none;">
+              <li>
+                <a href="javascript:void(0);">No Result Found</a>
+              </li>
+            </div>
+          </ul>
+        </div>
+
+        <!-- Primary Navigation Menu Start -->
+        <div id="menu-primary" class="menu-container fb-iconL col-md-8">
+          <nav role="navigation" class="wrap float-right">
+            <!-- #menu-primary-title -->
+            <div class="menu">
+              <ul id="menu-primary-items" class="primary_menu clearfix">
+                <!-- <li class="dropdown">
+                  <a href="/" aria-current="page" class="">Home</a>
+                </li> -->
+                <li style="display: none;" id="forum-list">
+                  <a href="/forum" class="">Forum</a>
+                </li>
+                <!-- <li class="dropdown">
+                  <a class="">About Us</a>
+                  <div class="dropdown-content font-weight-bold">
+                    <a routerLink="/contact-us">Contact Us</a>
+                    <a routerLink="/privacy-policy">Privacy Policy</a>
+                    <a routerLink="/terms-conditions">Terms &amp; Conditions</a>
+                  </div>
+                </li>
+                <li>
+                  <a href="https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49"
+                  onclick="window.open(this.href, this.href); return false">Blog</a>
+                </li> -->
+                <li class="dropdown">
+                  <a class="">How It Works</a>
+                  <div class="dropdown-content font-weight-bold">
+                    <a routerLink="/our-services">Our Services</a>
+                    <a [routerLink]="['/membership']">Membership</a>
+                  </div>
+                </li>
+                <!-- <li class="dropdown">
+                    <a href="" class="">Managing
+                      Co-ownership</a>
+                    <div class="dropdown-content font-weight-bold">
+                      <a href="">Farjho</a>
+                      <a href="">Farjao</a>
+                    </div>
+                  </li> -->
+
+                <!-- <li class="dropdown">
+                  <a href="/vendor-list" class="">Vendor Resources</a>
+                </li> -->
+                <li>
+                  <a href="javascript:void(0);" (click)="goToWePo()">Search on WePropertyowners</a>
+                  <!-- <div class="dropdown-content font-weight-bold">
+                    <a href="">Real Estate</a>
+                    <a href="">Yacht</a>
+                    <a href="">Aircraft</a>
+                    <a href="">Automobile</a>
+                    <a href="">Others</a>
+                  </div> -->
+                </li>
+                <li class="dropdown">
+                  <a [routerLink]="['/fractional-shares-listing']">Fractional Shares Listings</a>
+                </li>
+                <!-- <li class="dropdown">
+                    <a href="" class="">Submit
+                      Co-ownership Request</a>
+                    <div class="dropdown-content font-weight-bold">
+                      <a href="">Submit Postings for
+                        Artworks</a>
+                      <a href="">Submit Postings for Race
+                        Horses</a>
+                      <a href="">Submit Postings for
+                        Luxury Cars &amp; RVs</a>
+                      <a href="">Submit Postings for Jets
+                        &amp; Planes</a>
+                      <a href="">Submit Postings for
+                        Yachts &amp; Boats</a>
+                      <a href="">Submit
+                        Postings for Real Estate Properties</a>
+                      <a href="">Submit Classified</a>
+                      <a href="">Submit Deals</a>
+                      <a href="">Submit Event</a>
+                    </div>
+                  </li> -->
+                <li class="btn-orange">
+                  <a class="" routerLink="/pbms">PBMS</a>
+                </li>
+                <li>
+                  <a href="https://www.wecoownrewards.com/"
+                    onclick="window.open(this.href, this.href); return false">WeCoOwn Rewards</a>
+                </li>
+                <li class="dashboardNoneLog" id="login2"><a data-reveal-id="" routerLink="/login">Login</a></li>
+                <li class="dashboardNoneLog" id="register2"><a data-reveal-id="" routerLink="/register">Register</a>
+                </li>
+                <li class="notificationBell" style="display: none;" id="userNofication1"
+                  (click)="OpenNotificationindow()">
+                  <a (click)="OpenNotificationindow()" id="userNotifyIcon"><i class="fa fa-bell font-size20"
+                      id="userNotifyICC"></i></a>
+                  <span>{{NotificationUnreadCount}}</span>
+                </li>
+                <li class="notificationBell" style="display: none;" id="userMessage1" routerLink="/chat-message"><a
+                    routerLink="/chat-message"><i class="fa fa-comment font-size20"></i></a>
+                  <span>{{MessageUnreadCount}}</span>
+                </li>
+                <div id="notication-content" class="collapseContent" style="display: none;">
+                  <ul>
+                    <h4 *ngIf="showNoNotification" class="paddingTextInvitaion">No Notifications</h4>
+                    <h4 *ngIf="!showNoNotification" class="paddingTextInvitaion">Notifications<a
+                        class="float-right color-light-blue" routerLink="/all-notication">See all</a></h4>
+                    <div *ngFor="let item of getCohortRequest; let i = index">
+                      <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Cohorts</h4>
+                      <li class="listOfNotify">
+                        <a class="colorBlack" (click)="goToMemberPage(item.sender_id._id)">
+                          <img alt="Image is loading" class="border-radious50 float-left"
+                            src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                            width="50px" height="50px">
+                          <span>{{item.sender_id.firstname}} {{item.sender_id.lastname}}
+                            sent you request for become a cohort.
+                          </span>
+                        </a><br>
+                        <button class="btn btn-primary marginRight5"
+                          (click)="sendResponseOfCohortRequest(1, item._id, item.sender_id._id)">Accept</button>
+                        <button class="btn btn-primary"
+                          (click)="sendResponseOfCohortRequest(2, item._id, item.sender_id._id)">Decline</button>
+                      </li>
+                    </div>
+                    <div *ngFor="let item of getRequestForProperty; let i = index">
+                      <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Book Property</h4>
+                      <!-- <span *ngFor="let innerItem of item.recevier_id"> -->
+                      <li class="listOfNotify"
+                        (click)="goToBooking(item.pbms_group_id._id, item.pbms_group_id.title, item.pbms_group_id.all_admins)">
+                        <a class="colorBlack">
+                          <img alt="Image is loading" class="border-radious50 float-left"
+                            src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                            width="50px" height="50px">
+                          <span>{{item.user_id.firstname}} {{item.user_id.lastname}} wants to book
+                            {{item.pbms_group_id.title}} property from {{item.start_date | date : "MM/dd/yyyy"}} to
+                            {{item.end_date | date : "MM/dd/yyyy"}}.
+                          </span>
+                        </a>
+                      </li>
+                      <!-- </span> -->
+                    </div>
+                    <div *ngFor="let item of getRequestForAdminApprovalData; let i = index">
+                      <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Admin Approval</h4>
+                      <span *ngFor="let innerItem of item.recevier_id">
+                        <li
+                          *ngIf="currentLocalUserData.id == innerItem.invited_by_user_id && innerItem.request_for_admin.status == 'Pending' && innerItem.request_for_admin.action == 'Yes'"
+                          class="listOfNotify" (click)="openDialogAdminApproval(item._id,innerItem.user_id._id)"
+                          data-toggle="modal" data-target="#open-pbms-adminAprroveRequest-modal1">
+                          <a class="colorBlack">
+                            <img alt="Image is loading" class="border-radious50 float-left"
+                              src="{{ innerItem.user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                              width="50px" height="50px">
+                            <span>{{innerItem.user_id.firstname}} {{innerItem.user_id.lastname}} is request you to
+                              become a admin for Property Co-Owners Group {{item.title}}.
+                            </span>
+                          </a>
+                        </li>
+                      </span>
+                    </div>
+                    <div *ngFor="let item of getNotificationData; let i = index">
+                      <h4 *ngIf="i == 0" class="paddingTextInvitaion">Invitations</h4>
+                      <span *ngFor="let innerItem of item.recevier_id">
+                        <li *ngIf="currentLocalUserData.id == innerItem.user_id._id" class="listOfNotify"
+                          (click)="openPortfolioPopup(item._id)" data-toggle="modal"
+                          data-target="#portfolio-data-modal">
+                          <a class="colorBlack">
+                            <img alt="Image is loading" class="border-radious50 float-left"
+                              src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                              width="50px" height="50px">
+                            <span>{{innerItem.invited_by_user_id.firstname}} {{innerItem.invited_by_user_id.lastname}}
+                              invites you for Property Co-Owners group {{item.title}} as a Co-Owner.
+                            </span>
+                          </a>
+                        </li>
+                      </span>
+                    </div>
+                  </ul>
+                </div>
+                <li class="dropdown" style="display: none;padding: 3px;background: transparent" id="userProfileImg">
+                  <img alt="Image is loading"
+                    src="{{ imgageOfUser != '' ? baseURLofAPi+imgageOfUser : '../assets/images/user44.png' }}"
+                    style="width: 40px; height: 28px; border-radius: 50%;">
+                  <div class="dropdown-content font-weight-bold">
+                    <a href="/forum">Forum</a>
+                    <a routerLink="/chat-message">Messages</a>
+                    <a href="javascript:void(0);" (click)="goToMyCohorts()">My Cohorts</a>
+                    <a href="/my-portfolio">My Portfolio</a>
+                    <a href="/user-profile">My Postings</a>
+                    <!-- <a href="https://wepropertyowners.com/my-listing" target="_blank" id="my-posting2"
+                      style="display: none;">My Listings</a> -->
+                    <a href="javascript:void(0);" (click)="goToMyListing()" id="my-posting2" style="display: none;">My
+                      Listings</a>
+                    <a href="/my-vouchers">My Vouchers</a>
+                    <a href="/account-settings">Account Settings</a>
+                    <!-- <a href="/user-profile">My Portfolio</a> -->
+                    <a style="display: none;" id="user-sigup-report2" class="dispNone" href="/user-signup-report">User
+                      Signup Report</a>
+                    <div class="dropdown submenu-technical">
+                      <a class="dropdown-toggle" data-toggle="dropdown" id="ads-of-sub"
+                        style="display: flex">Advertisement
+                        &nbsp;<i class="fa fa-caret-down"
+                          style="margin-top: 3px; margin-left: 3px"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                      <div class="dropdown-content12 font-weight-bold">
+                        <a href="/create-ads">Create Ads</a>
+                        <a href="/manage-ads">Manage Ads</a>
+                      </div>
+                    </div>
+                    <a href="javascript:void(0);" (click)="signOut()">Sign Out</a>
+                  </div>
+                </li>
+
+                <!-- <li class="dispNone" id="dashboard2"><a href="/dashboard">Dashboard</a></li> -->
+                <!-- <li class="dropdown" style="display: none;padding: 3px;background: transparent" id="userProfileImg">
+                  <img src="{{ imgageOfUser != '' ? imgageOfUser : '../assets/images/user44.png' }}"
+                    style="width: 40px; height: 28px; border-radius: 50%;">
+                  <div class="dropdown-content font-weight-bold">
+                    <a href="/user-profile">My Postings</a>
+                    <a href="/account-settings">Profile Settings</a>            
+                    <a href="/chat-message">Messages</a>
+                    <a href="/" (click)="signOut()">Sign Out</a>
+                  </div>
+                </li> -->
+
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Primary Navigation Menu End -->
+      </div>
+    </section>
+  </div>
+  <header class="header-bar">
+    <nav class="nav-bar">
+      <div class="row">
+        <div class="col-md-12 disFlex imgResponsive paddingR0">
+          <a href="/">
+            <img alt="Image is loading" src="../assets/images/Original-1.png" width="110px">
+          </a>
+          <div class="topnav fb-iconL" id="myTopnav">
+            <h5 class="maginTop5">Buyers are looking for Co-Owners in these properties:</h5>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Real Estate</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Apartment%20Buildings">Apartment Buildings</a>
+                <a href="/category-by-name/Estate%20Homes%20and%20Luxury%20Mansions">Estate Homes and Luxury
+                  Mansions</a>
+                <a href="/category-by-name/Single%20Family%20Homes%20&%20Condos">Single Family Homes & Condos</a>
+                <a href="/category-by-name/Vacation%20Homes%20&%20Timeshares">Vacation Homes & Timeshares</a>
+                <a href="/category-by-name/Mobile%20Homes%20&%20RV%20Parks">Mobile Homes & RV Parks</a>
+                <a href="/category-by-name/Castles%20&%20Chateaux">Castles & Chateaux</a>
+                <a href="/category-by-name/Churches%20&%20Temples">Churches & Temples</a>
+                <a href="/category-by-name/Office%20Buildings">Office Buildings</a>
+                <a href="/category-by-name/Private%20Islands">Private Islands</a>
+                <a href="/category-by-name/Villages%20&%20Towns">Villages & Towns</a>
+                <a href="/category-by-name/Land%20Parcels">Land Parcels</a>
+                <a href="/category-by-name/Retail%20Shopping%20Malls">Retail Shopping Malls</a>
+                <a href="/category-by-name/Industrial%20Plants%20&%20Warehouses">Industrial Plants & Warehouses</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Business Properties</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Hotels%20&%20Golf%20Resorts">Hotels & Golf Resorts</a>
+                <a href="/category-by-name/Motels,%20Hostels%20&%20B&Bs">Motels, Hostels & B&Bs</a>
+                <a href="/category-by-name/Restaurants,%20Bars%20&%20Clubs">Restaurants, Bars & Clubs</a>
+                <a href="/category-by-name/Ranches%20and%20Farms">Ranches and Farms</a>
+                <a href="/category-by-name/Cannabis%20Properties">Cannabis Properties</a>
+                <a href="/category-by-name/Wineries%20&%20Vineyards">Wineries & Vineyards</a>
+                <a href="/category-by-name/Gas%20Stations%20&%20C%20Stores">Gas Stations & C Stores</a>
+                <a href="/category-by-name/Car%20Wash%20Facilities">Car Wash Facilities</a>
+                <a href="/category-by-name/Assisted%20Living%20&%20Nursing%20Homes">Assisted Living & Nursing Homes</a>
+                <a href="/category-by-name/Rehab%20Centers">Rehab Centers</a>
+                <a href="/category-by-name/Parking%20Lots">Parking Lots</a>
+                <a href="/category-by-name/Camp%20Grounds">Camp Grounds</a>
+                <a href="/category-by-name/Equestrian%20Centers">Equestrian Centers</a>
+                <a href="/category-by-name/Marinas">Marinas</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Yachts & Ships</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Super%20Yachts">Super Yachts</a>
+                <a href="/category-by-name/Sail%20Boats">Sail Boats</a>
+                <a href="/category-by-name/Fishing%20Boats">Fishing Boats</a>
+                <a href="/category-by-name/Speed%20Boats">Speed Boats</a>
+                <a href="/category-by-name/Power%20Yachts">Power Yachts</a>
+                <a href="/category-by-name/Catamarans">Catamarans</a>
+                <a href="/category-by-name/Submarines">Submarines</a>
+                <a href="/category-by-name/Hydroplanes">Hydroplanes</a>
+                <a href="/category-by-name/Commercial%20Ships">Commercial Ships</a>
+                <!-- <a href="/category-by-name/Yachts%20&%20Boats">Yachts & Boats</a> -->
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Jets & Aircraft</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Jets%20&%20Planes">Jets</a>
+                <a href="/category-by-name/Turboprop%20Aircraft">Turboprop Aircraft</a>
+                <a href="/category-by-name/Piston%20Aircraft">Piston Aircraft</a>
+                <a href="/category-by-name/Helicopters">Helicopters</a>
+                <a href="/category-by-name/Passenger%20Drones">Passenger Drones</a>
+                <a href="/category-by-name/Flying%20Cars">Flying Cars</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Cars & RVs</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Luxury%20Cars%20&%20RVs">Luxury Cars & SUVs</a>
+                <a href="/category-by-name/Commuter%20Cars">Commuter Cars & SUVs</a>
+                <a href="/category-by-name/Campers%20&%20RVs">Campers & RVs</a>
+                <a href="/category-by-name/Commercial%20Buses">Commercial Buses</a>
+                <a href="/category-by-name/EVs%20&%20Hybrids">EVs & Hybrids</a>
+                <a href="/category-by-name/Trucks">Trucks</a>
+                <a href="/category-by-name/Vans%20&%20Limos">Vans & Limos</a>
+                <!-- <a href="/category-by-name/Shared%20Vehicles">Shared Vehicles</a> -->
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Artworks & Antiques</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Western%20Paintings">Western Paintings</a>
+                <a href="/category-by-name/Oriental%20Paintings">Oriental Paintings</a>
+                <a href="/category-by-name/Sculptures">Sculptures</a>
+                <a href="/category-by-name/Contemporary%20Artworks">Contemporary Artworks</a>
+                <a href="/category-by-name/Modern%20Artworks">Modern Artworks</a>
+                <a href="/category-by-name/Digital%20Artworks">Digital Artworks</a>
+                <a href="/category-by-name/Antiques">Antiques</a>
+                <a href="/category-by-name/Collectibles">Collectibles</a>
+                <!-- <a href="/category-by-name/Arts%20&%20Antiques">Arts & Antiques</a> -->
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Horses & Live Stocks</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Race%20Horses">Race Horses</a>
+                <a href="/category-by-name/Draft%20Horses">Draft Horses</a>
+                <a href="/category-by-name/Show%20Horses">Show Horses</a>
+                <a href="/category-by-name/Cattle">Cattle</a>
+                <a href="/category-by-name/Sheep">Sheep</a>
+                <a href="/category-by-name/Other%20Live%20Stocks">Other Live Stocks</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Crypto-Assets</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <!-- <a href="/category-by-name/Tokenized%20Ownership%20&%20Crypto%20Assets">Tokenized Ownership & Crypto
+                  Assets</a> -->
+                <a href="/category-by-name/Real%20Estate%20Asset%20Tokens">Real Estate Asset Tokens</a>
+                <a href="/category-by-name/Commodity%20Asset%20Tokens">Commodity Asset Tokens</a>
+                <a href="/category-by-name/Utility%20Tokens">Utility Tokens</a>
+                <a href="/category-by-name/NFTs">NFTs</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="dropbtn"><strong>Crowdfunding Projects</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+                <a href="/category-by-name/Property%20Crowdfunding">Property Crowdfunding</a>
+                <a href="/category-by-name/Equity%20Crowdfunding">Equity Crowdfunding</a>
+              </div>
+            </div>
+            <!-- <div class="dropdown">
+              <button class="dropbtn"><strong>Others</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <div class="dropdown-content font-weight-bold">
+              
+                <a href="/category-by-name/Others">Others</a>
+
+              </div>
+            </div> -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+<!-- {{baseURLofAPi}} -->
+<router-outlet></router-outlet>
+
+<footer class="ColorWhite bg-back-blue">
+  <div class="footer-main">
+    <div class="container-footer">
+      <div class="row">
+        <div id="contact1" class="col-md-3">
+          <aside class="ftco-box">
+            <h4>&nbsp;</h4>
+            <h4 class="" style="color: white !important;">Contact Info:</h4>
+            <div class="">
+              <ul class="footer-menu spanPaddingLeft">
+                <li><i class="fa fa-map-marker"></i>&nbsp;<strong>Administrations:</strong><br>
+                  <p>WeCoOwn, Inc.<br>2901 W Coast Hwy, #200,<br>
+                    Newport Beach, CA 92663, USA
+                  </p>
+                  <strong>&nbsp;&nbsp;&nbsp;Global Headquarters:</strong><br>
+                  <p>WeCoOwn Technologies Ltd<br>30A Brookwood Crescent, Artane,<br>
+                    D05 EV29, Dublin 5, Ireland
+                  </p>
+                </li>
+                <!-- <li>
+                  <i class="fa fa-phone"></i>&nbsp;
+                  <strong>Phone:</strong><br>
+                  <p><a class="ColorWhite" href="tel://8884568881">+1-888-456-8881</a></p>
+                </li> -->
+                <li>
+                  <i class="fa fa-envelope"></i>&nbsp;
+                  <strong>Email:</strong><br>
+                  <p><a class="ColorWhite" href="mailto:info@wecoown.com">info@wecoown.com</a></p>
+                </li>
+                <li>
+                  <i class="fa fa-clock-o"></i>&nbsp;
+                  <strong>Website:</strong><br>
+                  <p>
+                    <a class="ColorWhite" href="https://www.wecoown.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwn.com</a><br>
+                    <a class="ColorWhite" href="https://www.wecoownrewards.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnRewards.com</a><br>
+                    <a class="ColorWhite" href="https://www.wecoownnft.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnNFT.com</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+        <div class="col-md-6">
+          <h4>&nbsp;</h4>
+          <a style="font-size: 19px;font-weight: 700;">Sellers, please enter your property listings here:</a>
+          <div class="row" style="margin-top: 10px;">
+            <div class="col-md-6">
+              <aside class="ftco-box aside-course">
+                <div class="coursesUlList">
+                  <ul class="footer-menu">
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot1">&nbsp;Real Estate</a></li>
+                    <div id="foot1" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Apartment Buildings')">Apartment
+                        Buildings</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Estate Homes and Luxury Mansions')">Estate
+                        Homes and Luxury Mansions</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Single Family Homes & Condos')">Single
+                        Family Homes & Condos</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Vacation Homes & Timeshares')">Vacation
+                        Homes & Timeshares</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Mobile Homes & RV Parks')">Mobile Homes & RV
+                        Parks</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Castles & Chateaux')">Castles & Chateaux</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Churches & Temples')">Churches & Temples</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Office Buildings')">Office Buildings</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Private Islands')">Private Islands</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Villages & Towns')">Villages & Towns</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Land Parcels')">Land Parcels</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Retail Shopping Malls')">Retail Shopping
+                        Malls</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Real Estate','Industrial Plants & Warehouses')">Industrial
+                        Plants & Warehouses</a><br>
+                      <!-- <i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="{{WePoLink}}category-listing/Real%20Estate%7C%7CApartment%20Buildings"
+                        target="_blank">Apartment Buildings</a><br> -->
+                    </div>
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot2">&nbsp;Business Properties</a></li>
+                    <div id="foot2" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Hotels & Golf Resorts')">Hotels & Golf
+                        Resorts</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Motels, Hostels & B&Bs')">Motels, Hostels &
+                        B&Bs</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Restaurants, Bars & Clubs')">Restaurants, Bars &
+                        Clubs</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Ranches & Farms')">Ranches & Farms</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Cannabis Properties')">Cannabis
+                        Properties</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Wineries & Vineyards')">Wineries &
+                        Vineyards</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Gas Stations & C Stores')">Gas Stations & C
+                        Stores</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Car Wash Facilities')">Car Wash
+                        Facilities</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Assisted Living & Nursing Homes')">Assisted
+                        Living & Nursing Homes</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Rehab Centers')">Rehab Centers</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Parking Lots')">Parking Lots</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Camp Grounds')">Camp Grounds</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Equestrian Centers')">Equestrian Centers</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Business Properties','Marinas')">Marinas</a><br>
+                    </div>
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot3">&nbsp;Yachts & Ships</a></li>
+                    <div id="foot3" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Super Yachts')">Super
+                        Yachts</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Sail Boats')">Sail
+                        Boats</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Fishing Boats')">Fishing Boats</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Speed Boats')">Speed
+                        Boats</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Power Yachts')">Power
+                        Yachts</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Catamarans')">Catamarans</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Submarines')">Submarines</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Hydroplanes')">Hydroplanes</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Yachts & Ships','Commercial Ships')">Commercial Ships</a><br>
+                      <!-- <a href="Yachts%20&%20Boats">Yachts & Boats</a> -->
+                      <!-- <i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="{{WePoLink}}category-listing/Yachts%20&%20Ships%7C%7CSuper%20Yachts" target="_blank">Super
+                        Yachts</a><br> -->
+                    </div>
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot4">&nbsp;Jets & Aircraft</a></li>
+                    <div id="foot4" class="collapse">
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Jets')">Jets</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Turboprop Aircraft')">Turboprop
+                        Aircraft</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Piston Aircraft')">Piston Aircraft</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Helicopters')">Helicopters</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Passenger Drones')">Passenger Drones</a><br>
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Jets & Aircraft','Flying Cars')">Flying Cars</a><br>
+                      <!-- <i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="{{WePoLink}}category-listing/Jets%20&%20Aircraft%7C%7CTurboprop Aircraft"
+                        target="_blank">Turboprop Aircraft</a><br> -->
+                    </div>
+                    <li class="">
+                      <i class="fa fa-plus"></i>
+                      <a class="ColorWhite" href="/artificial" data-toggle="collapse"
+                        data-target="#foot9">&nbsp;Crowdfunding Projects</a>
+                    </li>
+                    <div id="foot9" class="collapse">
+                      <i class="fa fa-angle-right"></i> <a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crowdfunding Projects','Property Crowdfunding')">Property
+                        Crowdfunding</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crowdfunding Projects','Equity Crowdfunding')">Equity
+                        Crowdfunding</a><br>
+                      <!-- <i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="{{WePoLink}}category-listing/Crowdfunding%20Projects%7C%7CProperty%20Crowdfunding"
+                        target="_blank">Property Crowdfunding</a><br> -->
+                    </div>
+                    <!-- <li class="dashboardNoneLog" id="login3"><i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="/login">
+                        Login</a> -->
+                  </ul>
+                </div>
+              </aside>
+            </div>
+            <div class="col-md-6 marignTopMinus15Inmobile">
+              <aside class="ftco-box">
+                <div class="coursesUlList">
+                  <ul class="footer-menu">
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot5">&nbsp;Cars & RVs</a></li>
+                    <div id="foot5" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Luxury Cars & SUVs')">Luxury Cars & SUVs</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Commuter Cars & SUVs')">Commuter Cars & SUVs</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Campers & RVs')">Campers & RVs</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Commercial Buses')">Commercial Buses</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','EVs & Hybrids')">EVs & Hybrids</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Trucks')">Trucks</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Cars & RVs','Vans & Limos')">Vans & Limos</a><br>
+                    </div>
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot6">&nbsp;Artworks & Antiques</a></li>
+                    <div id="foot6" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Western Paintings')">Western Paintings</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Oriental Paintings')">Oriental Paintings</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Sculptures')">Sculptures</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Contemporary Artworks')">Contemporary
+                        Artworks</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Modern Artworks')">Modern Artworks</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Digital Artworks')">Digital Artworks</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Antiques')">Antiques</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Artworks & Antiques','Collectibles')">Collectibles</a><br>
+                    </div>
+
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot7">&nbsp;Horses & Live Stocks</a></li>
+                    <div id="foot7" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Race Horses')">Race Horses</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Draft Horses')">Draft Horses</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Show Horses')">Show Horses</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Cattle')">Cattle</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Sheep')">Sheep</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Horses & Live Stocks','Other Live Stocks')">Other Live Stocks</a><br>
+                    </div>
+
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/artificial"
+                        data-toggle="collapse" data-target="#foot8">&nbsp;Crypto-Assets</a></li>
+                    <div id="foot8" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crypto-Assets','Real Estate Asset Tokens')">Real Estate Asset
+                        Tokens</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crypto-Assets','Commodity Asset Tokens')">Commodity Asset
+                        Tokens</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crypto-Assets','Utility Tokens')">Utility Tokens</a><br>
+                      <i class="fa fa-angle-right"></i><a href="javascript:void(0);" class="ColorWhite"
+                        (click)="goTocatrgpyList('Crypto-Assets','NFTs')">NFTs</a><br>
+                    </div>
+                    <!-- <li class="dashboardNoneLog" id="register3"><i class="fa fa-angle-right"></i><a class="ColorWhite"
+                        href="/register">
+                        Register</a>
+                    </li> -->
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </div>
+          <a style="font-size: 19px;font-weight: 700;">Quick Links:</a>
+          <div class="row" style="margin-top: 10px;">
+            <div class="col-md-6">
+              <aside class="ftco-box aside-course">
+                <div class="coursesUlList">
+                  <ul class="footer-menu">
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/">&nbsp;Home</a></li>
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="javascript:void(0);"
+                        data-toggle="collapse" data-target="#footer-about-us">&nbsp;About Us</a></li>
+                    <div id="footer-about-us" class="collapse">
+                      <i class="fa fa-angle-right"></i><a href="/contact-us" class="ColorWhite">Contact Us</a><br>
+                      <i class="fa fa-angle-right"></i><a href="/privacy-policy" class="ColorWhite">Privacy
+                        Policy</a><br>
+                      <i class="fa fa-angle-right"></i><a href="/terms-conditions" class="ColorWhite">Terms &amp;
+                        Conditions</a><br>
+                    </div>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+            <div class="col-md-6 marignTopMinus15Inmobile">
+              <aside class="ftco-box">
+                <div class="coursesUlList">
+                  <ul class="footer-menu">
+                    <li class=""><i class="fa fa-plus"></i><a class="ColorWhite" href="/vendor-list">&nbsp;Vendor
+                        Resources</a></li>
+                    <li class=""><i class="fa fa-plus"></i>
+                      <a class="ColorWhite"
+                        href="https://medium.com/wecoown/welcome-to-the-wecoown-platform-to-meet-other-like-minded-potential-co-owners-12f0d40f2d49"
+                        onclick="window.open(this.href, this.href); return false">&nbsp;Blog</a>
+                    </li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <div id="contact2" class="col-md-3" style="display: none;">
+          <aside class="ftco-box">
+            <h4>&nbsp;</h4>
+            <h4 class="" style="color: white !important;">Contact Info:</h4>
+            <div class="">
+              <ul class="footer-menu spanPaddingLeft">
+                <li><i class="fa fa-map-marker"></i>&nbsp;<strong>Administrations:</strong><br>
+                  <p>WeCoOwn, Inc.<br>2901 W Coast Hwy, #200,<br>
+                    Newport Beach, CA 92663, USA
+                  </p>
+                  <strong>&nbsp;&nbsp;&nbsp;Global Headquarters:</strong><br>
+                  <p>WeCoOwn Technologies Ltd<br>30A Brookwood Crescent, Artane,<br>
+                    D05 EV29, Dublin 5, Ireland
+                  </p>
+                </li>
+                <!-- <li>
+                  <i class="fa fa-phone"></i>&nbsp;
+                  <strong>Phone:</strong><br>
+                  <p><a class="ColorWhite" href="tel://8884568881">+1-888-456-8881</a></p>
+                </li> -->
+                <li>
+                  <i class="fa fa-envelope"></i>&nbsp;
+                  <strong>Email:</strong><br>
+                  <p><a class="ColorWhite" href="mailto:info@wecoown.com">info@wecoown.com</a></p>
+                </li>
+                <li>
+                  <i class="fa fa-clock-o"></i>&nbsp;
+                  <strong>Website:</strong><br>
+                  <p>
+                    <a class="ColorWhite" href="https://www.wecoown.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwn.com</a><br>
+                    <a class="ColorWhite" href="https://www.wecoownrewards.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnRewards.com</a><br>
+                    <a class="ColorWhite" href="https://www.wecoownnft.com/"
+                      onclick="window.open(this.href, this.href); return false">https://www.WeCoOwnNFT.com</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+        <div class="col-md-3">
+          <aside id="contact-info-widget-2" class="ftco-box">
+            <h4 class="widget-title">Newsletter Subscription</h4>
+            <div class="contact-info contact-info-block">
+              <p>Please subscribe to our latest news!</p>
+              <div class="alert alert-success news-success dispNone"></div>
+              <div class="alert alert-danger news-danger dispNone"></div>
+              <form [formGroup]="newsSubscribeForm" (ngSubmit)="newsSubscribeSubmit()" id="newsForm">
+                <div class="form-group">
+                  <input class="form-control CheckFormNews" type="text" placeholder="Name" formControlName="name"
+                    id="newsName">
+                </div>
+                <div class="form-group">
+                  <input class="form-control CheckFormNews" type="email" placeholder="Email Address"
+                    formControlName="email" id="newsEmail">
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" id="NewsformSubmit" type="submit">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/">
+          <img alt="Image is loading" src="../assets/images/Original-1.png" width="110px">
+        </a>
+      </div>
+      <div class="col-md-5">
+
+      </div>
+      <div class="col-md-4 imgAllRound">
+        <a href="https://www.facebook.com/wecoown" onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-facebook-f"></span>
+          <!-- <img src="../assets/images/fb-white.jpg" width="50px"> -->
+        </a>
+        <!-- <a>
+          <span class="fa fa-google-plus"></span>
+        </a> -->
+        <a href="https://www.instagram.com/wecoown/" onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-instagram"></span>
+        </a>
+        <a href="https://www.linkedin.com/company/wecoown/" onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-linkedin"></span>
+        </a>
+        <a href="https://twitter.com/WeCoOwn" onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-twitter"></span>
+        </a>
+        <a href="https://www.youtube.com/channel/UCOwKKGKaK2DWkiZJi9-CfQA"
+          onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-youtube"></span>
+        </a>
+        <a href="https://medium.com/wecoown" onclick="window.open(this.href, this.href); return false">
+          <span class="fa fa-medium"></span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <ul class="disFlex">
+          <li style="padding: 15px 0px;"><a class="ColorWhite" href="/terms-conditions">Terms &amp; Conditions</a></li>
+          <li class="privacyLi" style="padding: 15px;"><a class="ColorWhite" href="/privacy-policy">Privacy Policy</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4 ">
+        <div class="">©2020 WeCoOwn Technologies Ltd. All rights reserved.
+          <a href="" style="color:#fff!important">&nbsp;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-container col-md-6">
+  <p>
+    We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also
+    disclose information about your use of our site with our social media, advertising and analytics partners.
+    Additional details are available in our
+    <a href="/privacy-policy">privacy policy</a> and <a href="#">cookie policy</a>.
+  </p>
+
+  <button class="cookie-btn-accept">
+    <i class="fa fa-check"></i>&nbsp;Accept Cookies
+  </button>&nbsp;
+  <button class="cookie-btn-decline">
+    <i class="fa fa-times"></i>&nbsp;Decline Cookies
+  </button>
+</div>
+<!-- The Modal -->
+<div class="modal" id="portfolio-data-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" *ngIf="getOnePortfolioData">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Property Co-Owners Group Name : {{getOnePortfolioData.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success dispNone sent-request-become-admin-success"></div>
+        <div class="alert alert-danger dispNone sent-request-become-admin-danger"></div>
+        <div class="alert alert-danger dispNone purchaseMembershipText">
+          In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+          must purchase the membership. Please purchase the membership.
+        </div>
+        <div *ngFor="let memberRec of getOnePortfolioData.recevier_id">
+          <div class="poertfolio-div-accept"
+            *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.status == 'Pending' && memberRec.request_for_admin.action == 'No'">
+            <a href="javascript:void(0)" (click)="goToMemberPage11( getOnePortfolioData.group_creater_id._id)"
+              target="_blank"><img alt="Image is loading" class="border-radious50 float-left marginRight5"
+                src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                width="50px" height="50px"></a>
+            <h4>{{getOnePortfolioData.group_creater_id.firstname}} {{getOnePortfolioData.group_creater_id.lastname}}
+              invites you for Property Co-Owners group {{getOnePortfolioData.title}} as a Co-Owner.
+            </h4>
+            <button class="btn btn-orange marginRight5" (click)="goToReuestForAdmin(getOnePortfolioData._id)">Join
+              Co-Owners Group as Admin</button>
+            <button class="btn btn-orange marginRight5"
+              (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">Join
+              Co-Owners Group as Member</button>
+            <button class="btn btn-primary" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline
+              Invitation</button>
+          </div>
+          <div class="poertfolio-div-accept"
+            *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.request_for_admin.status == 'Pending' && memberRec.request_for_admin.action == 'Yes'">
+            <h4 class="text-success">Your Request is pending for approval of become a admin. <button
+                class="btn btn-primary float-right" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline
+                Invitation</button></h4>
+          </div>
+        </div>
+        <!-- <div class="poertfolio-div-accept" *ngIf="Accept_Reject_Check">
+          <span *ngFor="let innerItem of getOnePortfolioData.recevier_id">
+            <span *ngIf="currentLocalUserData.id == innerItem.user_id._id">
+              <a href="javascript:void(0)" (click)="goToMemberPage11( innerItem.invited_by_user_id._id)" target="_blank"><img alt="Image is loading" class="border-radious50 float-left marginRight5"
+              src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+              width="50px" height="50px"></a>
+              <h4>{{innerItem.invited_by_user_id.firstname}} {{innerItem.invited_by_user_id.lastname}}  invites you for Property Co-Owners group {{getOnePortfolioData.title}} as a Co-Owner.</h4>
+                <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'Yes')">Join
+                  Co-Owners Group as Admin</button>
+                  <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">Join
+                      Co-Owners Group as Member</button>
+                <button class="btn btn-primary" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline Invitation</button>
+            </span>
+            </span>
+          </div> -->
+        <div class="about-portfolio">
+          <h4>About</h4>
+          <h6>Title : <a href="{{getOnePortfolioData.property_url}}" target="_blank">{{getOnePortfolioData.title}}</a>
+          </h6>
+          <h6>Members : {{getOnePortfolioData.TotalMember}}</h6>
+          <div class="about-portfolio" id="about-member-portfolio-id">
+            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                (click)="goToMemberPage11(getOnePortfolioData.group_creater_id._id)"><img alt="Image is loading"
+                  class="border-radious50"
+                  src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{getOnePortfolioData.group_creater_id.firstname}} {{getOnePortfolioData.group_creater_id.lastname}}
+                (Admin)</a></span>
+            <span class="spanForAllImageWithUsername" *ngFor="let item of PortfolioMemberData"><a
+                href="javascript:void(0)" target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img
+                  alt="Image is loading" class="border-radious50"
+                  src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                  *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="open-pbms-adminAprroveRequest-modal1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" *ngIf="getAdminOnePbmsData">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Property Co-Owners Group : {{getAdminOnePbmsData.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success dispNone response-become-admin-success"></div>
+        <div class="alert alert-danger dispNone response-become-admin-danger"></div>
+        <div class="poertfolio-div-accept">
+          <span class="font18weight500" *ngFor="let item of getAdminOnePbmsData.recevier_id">
+            <a *ngIf="recevierUserIdWantsAdmin == item.user_id._id" href="javascript:void(0)" target="_blank"
+              (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading" class="border-radious50"
+                src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                width="40px" height="40px">
+              {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          <h6>Are you sure you want to make this person to be an admin of the Property Co-Owners Group?</h6>
+          <button class="btn btn-primary marginRight5"
+            (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,1)">Join as an
+            Admin</button>
+          <button class="btn btn-primary"
+            (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,2)">Join as a
+            Member</button>
+          <!-- <div class="red">*Yes = The invited person will become the admin of Property Co-Owners Group.<br>*No = The invited person will become the member of Property Co-Owners Group.</div> -->
+        </div>
+        <div class="about-portfolio">
+          <h4>About</h4>
+          <h6>Title : <a href="{{getAdminOnePbmsData.property_url}}" target="_blank">{{getAdminOnePbmsData.title}}</a>
+          </h6>
+          <h6>Members : {{getAdminOnePbmsData.TotalMember}}</h6>
+          <div class="about-portfolio" id="about-member-portfolio-id">
+            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                (click)="goToMemberPage11(getAdminOnePbmsData.group_creater_id._id)"><img alt="Image is loading"
+                  class="border-radious50"
+                  src="{{ getAdminOnePbmsData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getAdminOnePbmsData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{getAdminOnePbmsData.group_creater_id.firstname}} {{getAdminOnePbmsData.group_creater_id.lastname}}
+                (Admin)</a></span>
+            <span class="spanForAllImageWithUsername" *ngFor="let item of getAdminApproveProfileMemberData"><a
+                href="javascript:void(0)" target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img
+                  alt="Image is loading" class="border-radious50"
+                  src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                  *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //   for body container
+  jQuery(document).ready(function ($) {
+      function containerRemove(params) {
+          var ww = document.body.clientWidth;
+          if (ww <= 991) {
+              $('#body-contee').removeClass('container container-body');
+              $('#loc_city_link').removeClass('col-md-1');
+          } else if (ww >= 992) {
+              $('#body-contee').addClass('container container-body');
+              $('#loc_city_link').addClass('col-md-1');
+          };
+      }
+      $(window).resize(function () {
+          containerRemove();
+      })
+      containerRemove();
+  });
+</script>

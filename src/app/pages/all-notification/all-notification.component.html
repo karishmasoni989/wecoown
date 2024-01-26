@@ -1,0 +1,258 @@
+<!-- Loader -->
+<div class="loader-overlay" *ngIf="loading">
+    <div class="showbox">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="30" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- ./Loader -->
+<!-- middle section -->
+<div class="rowPadding bg-grey-light">
+    <div class="row">
+        <div class="col-md-6 page-tittle page-tittle-h1">
+            <h1>All Notifications</h1>
+        </div>
+        <div class="col-md-6 page-tittle">
+            <div aria-label="breadcrumb" class="breadDiv">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">All Notifications</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-color-blue rowPadding">
+    <section class="">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 allCohortDiv">
+              <div *ngFor="let item of getCohortRequest; let i = index">
+                <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Cohorts</h4>
+                <li class="listOfNotify">
+                  <a class="colorBlack" (click)="goToMemberPage(item.sender_id._id)">
+                    <img alt="Image is loading" class="border-radious50 float-left"
+                      src="{{ item.sender_id.profile_pic.length != 0 ? (baseURLofAPi+item.sender_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                      width="50px" height="50px">
+                    <span>{{item.sender_id.firstname}} {{item.sender_id.lastname}}
+                      sent you request for become a cohort.
+                    </span>
+                  </a><br>
+                  <button class="btn btn-primary marginRight5"
+                    (click)="sendResponseOfCohortRequest(1, item._id, item.sender_id._id)">Accept</button>
+                  <button class="btn btn-primary"
+                    (click)="sendResponseOfCohortRequest(2, item._id, item.sender_id._id)">Decline</button>
+                </li>
+              </div>
+              <div *ngFor="let item of getRequestForProperty; let i = index">
+                <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Book Property</h4>
+                <!-- <span *ngFor="let innerItem of item.recevier_id"> -->
+                <li class="listOfNotify"
+                  (click)="goToBooking(item.pbms_group_id._id, item.pbms_group_id.title, item.pbms_group_id.all_admins)">
+                  <a class="colorBlack">
+                    <img alt="Image is loading" class="border-radious50 float-left"
+                      src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                      width="50px" height="50px">
+                    <span>{{item.user_id.firstname}} {{item.user_id.lastname}} wants to book
+                      {{item.pbms_group_id.title}} property from {{item.start_date | date : "MM/dd/yyyy"}} to
+                      {{item.end_date | date : "MM/dd/yyyy"}}.
+                    </span>
+                  </a>
+                </li>
+                <!-- </span> -->
+              </div>
+              <div *ngFor="let item of getRequestForAdminApprovalData; let i = index">
+                <h4 *ngIf="i == 0" class="paddingTextInvitaion">Request for Admin Approval</h4>
+                <span *ngFor="let innerItem of item.recevier_id">
+                  <li
+                    *ngIf="currentLocalUserData.id == innerItem.invited_by_user_id && innerItem.request_for_admin.status == 'Pending' && innerItem.request_for_admin.action == 'Yes'"
+                    class="listOfNotify" (click)="openDialogAdminApproval(item._id,innerItem.user_id._id)"
+                    data-toggle="modal" data-target="#open-pbms-adminAprroveRequest-modal1">
+                    <a class="colorBlack">
+                      <img alt="Image is loading" class="border-radious50 float-left"
+                        src="{{ innerItem.user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                        width="50px" height="50px">
+                      <span>{{innerItem.user_id.firstname}} {{innerItem.user_id.lastname}} is request you to
+                        become a admin for Property Co-Owners Group {{item.title}}.
+                      </span>
+                    </a>
+                  </li>
+                </span>
+              </div>
+              <div *ngFor="let item of getNotificationData; let i = index">
+                <h4 *ngIf="i == 0" class="paddingTextInvitaion">Invitations</h4>
+                <span *ngFor="let innerItem of item.recevier_id">
+                  <li *ngIf="currentLocalUserData.id == innerItem.user_id._id" class="listOfNotify"
+                    (click)="openPortfolioPopup(item._id)" data-toggle="modal"
+                    data-target="#portfolio-data-modal">
+                    <a class="colorBlack">
+                      <img alt="Image is loading" class="border-radious50 float-left"
+                        src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                        width="50px" height="50px">
+                      <span>{{innerItem.invited_by_user_id.firstname}} {{innerItem.invited_by_user_id.lastname}}
+                        invites you for Property Co-Owners group {{item.title}} as a Co-Owner.
+                      </span>
+                    </a>
+                  </li>
+                </span>
+              </div>
+            </div>
+        </div>
+    </section>
+    <br>
+</div>
+
+<div class="modal" id="open-pbms-adminAprroveRequest-modal1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" *ngIf="getAdminOnePbmsData">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Property Co-Owners Group : {{getAdminOnePbmsData.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success dispNone response-become-admin-success"></div>
+        <div class="alert alert-danger dispNone response-become-admin-danger"></div>
+        <div class="poertfolio-div-accept">
+          <span class="font18weight500" *ngFor="let item of getAdminOnePbmsData.recevier_id">
+            <a *ngIf="recevierUserIdWantsAdmin == item.user_id._id" href="javascript:void(0)" target="_blank"
+              (click)="goToMemberPage11(item.user_id._id)"><img alt="Image is loading" class="border-radious50"
+                src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                width="40px" height="40px">
+              {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          <h6>Are you sure you want to make this person to be an admin of the Property Co-Owners Group?</h6>
+          <button class="btn btn-primary marginRight5"
+            (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,1)">Join as an
+            Admin</button>
+          <button class="btn btn-primary"
+            (click)="sendResponseForBecomeAdmin(getAdminOnePbmsData._id,recevierUserIdWantsAdmin,2)">Join as a
+            Member</button>
+          <!-- <div class="red">*Yes = The invited person will become the admin of Property Co-Owners Group.<br>*No = The invited person will become the member of Property Co-Owners Group.</div> -->
+        </div>
+        <div class="about-portfolio">
+          <h4>About</h4>
+          <h6>Title : <a href="{{getAdminOnePbmsData.property_url}}" target="_blank">{{getAdminOnePbmsData.title}}</a>
+          </h6>
+          <h6>Members : {{getAdminOnePbmsData.TotalMember}}</h6>
+          <div class="about-portfolio" id="about-member-portfolio-id">
+            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                (click)="goToMemberPage11(getAdminOnePbmsData.group_creater_id._id)"><img alt="Image is loading"
+                  class="border-radious50"
+                  src="{{ getAdminOnePbmsData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getAdminOnePbmsData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{getAdminOnePbmsData.group_creater_id.firstname}} {{getAdminOnePbmsData.group_creater_id.lastname}}
+                (Admin)</a></span>
+            <span class="spanForAllImageWithUsername" *ngFor="let item of getAdminApproveProfileMemberData"><a
+                href="javascript:void(0)" target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img
+                  alt="Image is loading" class="border-radious50"
+                  src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                  *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="portfolio-data-modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" *ngIf="getOnePortfolioData">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Property Co-Owners Group Name : {{getOnePortfolioData.title}}</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="alert alert-success dispNone sent-request-become-admin-success"></div>
+        <div class="alert alert-danger dispNone sent-request-become-admin-danger"></div>
+        <div class="alert alert-danger dispNone purchaseMembershipText">
+          In order to create a New Co-Owned Property or become Admin of a New Co-Owned Property you
+          must purchase the membership. Please purchase the membership.
+        </div>
+        <div *ngFor="let memberRec of getOnePortfolioData.recevier_id">
+          <div class="poertfolio-div-accept"
+            *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.status == 'Pending' && memberRec.request_for_admin.action == 'No'">
+            <a href="javascript:void(0)" (click)="goToMemberPage11( getOnePortfolioData.group_creater_id._id)"
+              target="_blank"><img alt="Image is loading" class="border-radious50 float-left marginRight5"
+                src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                width="50px" height="50px"></a>
+            <h4>{{getOnePortfolioData.group_creater_id.firstname}} {{getOnePortfolioData.group_creater_id.lastname}}
+              invites you for Property Co-Owners group {{getOnePortfolioData.title}} as a Co-Owner.
+            </h4>
+            <button class="btn btn-orange marginRight5" (click)="goToReuestForAdmin(getOnePortfolioData._id)">Join
+              Co-Owners Group as Admin</button>
+            <button class="btn btn-orange marginRight5"
+              (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">Join
+              Co-Owners Group as Member</button>
+            <button class="btn btn-primary" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline
+              Invitation</button>
+          </div>
+          <div class="poertfolio-div-accept"
+            *ngIf="memberRec.user_id._id == currentLocalUserData.id && memberRec.request_for_admin.status == 'Pending' && memberRec.request_for_admin.action == 'Yes'">
+            <h4 class="text-success">Your Request is pending for approval of become a admin. <button
+                class="btn btn-primary float-right" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline
+                Invitation</button></h4>
+          </div>
+        </div>
+        <!-- <div class="poertfolio-div-accept" *ngIf="Accept_Reject_Check">
+          <span *ngFor="let innerItem of getOnePortfolioData.recevier_id">
+            <span *ngIf="currentLocalUserData.id == innerItem.user_id._id">
+              <a href="javascript:void(0)" (click)="goToMemberPage11( innerItem.invited_by_user_id._id)" target="_blank"><img alt="Image is loading" class="border-radious50 float-left marginRight5"
+              src="{{ innerItem.invited_by_user_id.profile_pic.length != 0 ? (baseURLofAPi+innerItem.invited_by_user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+              width="50px" height="50px"></a>
+              <h4>{{innerItem.invited_by_user_id.firstname}} {{innerItem.invited_by_user_id.lastname}}  invites you for Property Co-Owners group {{getOnePortfolioData.title}} as a Co-Owner.</h4>
+                <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'Yes')">Join
+                  Co-Owners Group as Admin</button>
+                  <button class="btn btn-orange marginRight5" (click)="goToUpdateStatus(getOnePortfolioData._id, 1, 'No')">Join
+                      Co-Owners Group as Member</button>
+                <button class="btn btn-primary" (click)="goToUpdateStatus(getOnePortfolioData._id, 2, 'No')">Decline Invitation</button>
+            </span>
+            </span>
+          </div> -->
+        <div class="about-portfolio">
+          <h4>About</h4>
+          <h6>Title : <a href="{{getOnePortfolioData.property_url}}" target="_blank">{{getOnePortfolioData.title}}</a>
+          </h6>
+          <h6>Members : {{getOnePortfolioData.TotalMember}}</h6>
+          <div class="about-portfolio" id="about-member-portfolio-id">
+            <span class="spanForAllImageWithUsername"><a href="javascript:void(0)" target="_blank"
+                (click)="goToMemberPage11(getOnePortfolioData.group_creater_id._id)"><img alt="Image is loading"
+                  class="border-radious50"
+                  src="{{ getOnePortfolioData.group_creater_id.profile_pic.length != 0 ? (baseURLofAPi+getOnePortfolioData.group_creater_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{getOnePortfolioData.group_creater_id.firstname}} {{getOnePortfolioData.group_creater_id.lastname}}
+                (Admin)</a></span>
+            <span class="spanForAllImageWithUsername" *ngFor="let item of PortfolioMemberData"><a
+                href="javascript:void(0)" target="_blank" (click)="goToMemberPage11(item.user_id._id)"><img
+                  alt="Image is loading" class="border-radious50"
+                  src="{{ item.user_id.profile_pic.length != 0 ? (baseURLofAPi+item.user_id.profile_pic[0].src) : '../../../assets/images/user1.png' }}"
+                  width="30px" height="30px">
+                {{item.user_id.firstname}} {{item.user_id.lastname}} <span
+                  *ngIf="item.is_admin == true">(Admin)</span></a></span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
